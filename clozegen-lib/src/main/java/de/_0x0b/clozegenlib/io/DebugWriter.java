@@ -25,25 +25,23 @@ import org.apache.uima.util.Level;
 import org.uimafit.component.JCasConsumer_ImplBase;
 
 /**
+ * Logs a document by displaying its token's types, names
+ * and values.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class DebugWriter extends JCasConsumer_ImplBase {
 
-    public static final String LF = System.getProperty("line.separator");
-
     @Override
     public void process(JCas jcas) throws AnalysisEngineProcessException {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(jcas.getDocumentText());
-        sb.append(LF);
+        sb.append(String.format("%s%n", jcas.getDocumentText()));
 
         for (Iterator<Annotation> i = jcas.getAnnotationIndex().iterator(); i.hasNext();) {
             Annotation a = i.next();
-            sb.append(String.format("[%s] (%s,%s) %s", a.getType().getShortName(),
+            sb.append(String.format("[%s] (%s,%s) %s%n", a.getType().getShortName(),
                     a.getBegin(), a.getEnd(), a.getCoveredText()));
-            sb.append(LF);
         }
         getContext().getLogger().log(Level.INFO, sb.toString());
     }
