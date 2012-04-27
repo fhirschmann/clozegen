@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -33,6 +34,7 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
+@ToString(callSuper = true, includeFieldNames = true)
 public class Pipeline {
     private @Getter ArrayList<AnalysisEngineDescription> pipeline = new ArrayList<AnalysisEngineDescription>();
     private @Getter @Setter CollectionReader reader;
