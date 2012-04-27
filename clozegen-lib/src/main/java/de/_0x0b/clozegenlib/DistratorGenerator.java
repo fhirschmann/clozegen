@@ -19,15 +19,24 @@ package de._0x0b.clozegenlib;
 
 import de._0x0b.clozegenlib.api.Distractor;
 import de._0x0b.clozegenlib.api.Selector;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.jcas.JCas;
+import org.uimafit.component.JCasConsumer_ImplBase;
 
 /**
- * A SelectorDistractorPair is a pair of a Selector and a
- * Distractor.
+ * This components creates distractors by first determining keys (words
+ * which will be deleted) and then finding distractors.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-@Data public class SelectorDistractorPair {
-    private Distractor distractor;
-    private Selector selector;
+public class DistratorGenerator extends JCasConsumer_ImplBase {
+    private @Getter @Setter Distractor distractor;
+    private @Getter @Setter Selector selector;
+
+    @Override
+    public void process(JCas jcas) throws AnalysisEngineProcessException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
