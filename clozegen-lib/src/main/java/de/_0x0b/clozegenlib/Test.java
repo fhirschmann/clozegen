@@ -24,9 +24,6 @@ package de._0x0b.clozegenlib;
 public class Test {
     public static void main(String[] args) throws Exception {
         ClozeTestGenerator g = new ClozeTestGenerator();
-        g.generateTestClozeTest();
-        System.out.println(g.toString());
-
+        g.run();
     }
-
 }
