@@ -47,7 +47,10 @@ public class Pipeline {
         addPipelineStep((AnalysisEngineDescription)createPrimitiveDescription(step));
     }
 
-    public void run() throws UIMAException, IOException {
+    public void run() throws UIMAException, IOException, ClozegenException {
+        if (reader == null) {
+            throw new ClozegenException("No reader set! Pipeline can't be executed.");
+        }
         runPipeline(reader, (AnalysisEngineDescription[])pipeline.toArray(
                 new AnalysisEngineDescription[0]));
     }

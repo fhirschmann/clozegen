@@ -35,7 +35,8 @@ public class ClozeTestGenerator {
         org.apache.log4j.BasicConfigurator.configure();
     }
 
-    public void run() throws ResourceInitializationException, UIMAException, IOException {
+    public void run() throws ResourceInitializationException, UIMAException,
+            IOException, ClozegenException {
         pipeline.addPipelineStep(getSegmenter());
         pipeline.addPipelineStep(getTagger());
 
@@ -45,7 +46,7 @@ public class ClozeTestGenerator {
                 TextReader.PARAM_LANGUAGE, "en",
                 TextReader.PARAM_PATTERNS, new String[]{"[+]*.txt"});
 
-        pipeline.setReader(cr);
+        //pipeline.setReader(cr);
         AnalysisEngineDescription bar = createPrimitiveDescription(DebugWriter.class);
         pipeline.addPipelineStep(bar);
         pipeline.run();
