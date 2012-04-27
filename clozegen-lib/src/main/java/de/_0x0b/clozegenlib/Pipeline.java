@@ -49,6 +49,6 @@ public class Pipeline {
 
     public void run() throws UIMAException, IOException {
         runPipeline(reader, (AnalysisEngineDescription[])pipeline.toArray(
-                new AnalysisEngineDescription[pipeline.size()]));
+                new AnalysisEngineDescription[0]));
     }
 }
