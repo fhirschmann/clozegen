@@ -19,8 +19,6 @@ package de._0x0b.clozegenlib;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_component.AnalysisComponent;
@@ -36,11 +34,11 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
  */
 @ToString(callSuper = true, includeFieldNames = true)
 public class Pipeline {
-    private @Getter ArrayList<AnalysisEngineDescription> pipeline = new ArrayList<AnalysisEngineDescription>();
-    private @Getter @Setter CollectionReader reader;
+    private ArrayList<AnalysisEngineDescription> pipeline = new ArrayList<AnalysisEngineDescription>();
+    private CollectionReader reader;
 
     public void addStep(AnalysisEngineDescription step) {
-        pipeline.add(step);
+        getPipeline().add(step);
     }
 
     public void addStep(Class<? extends AnalysisComponent> step)
@@ -50,10 +48,31 @@ public class Pipeline {
     }
 
     public void run() throws UIMAException, IOException, ClozegenException {
-        if (reader == null) {
+        if (getReader() == null) {
             throw new ClozegenException("No reader set! Pipeline can't be executed.");
         }
-        runPipeline(reader, (AnalysisEngineDescription[])pipeline.toArray(
+        runPipeline(getReader(), (AnalysisEngineDescription[])getPipeline().toArray(
                 new AnalysisEngineDescription[0]));
+    }
+
+    /**
+     * @return the pipeline
+     */
+    public ArrayList<AnalysisEngineDescription> getPipeline() {
+        return pipeline;
+    }
+
+    /**
+     * @return the reader
+     */
+    public CollectionReader getReader() {
+        return reader;
+    }
+
+    /**
+     * @param reader the reader to set
+     */
+    public void setReader(CollectionReader reader) {
+        this.reader = reader;
     }
 }
