@@ -10,9 +10,13 @@ import java.io.IOException;
 import lombok.ToString;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_component.AnalysisComponent;
+import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.uimafit.factory.AnalysisEngineFactory;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 /**
  *
@@ -42,8 +46,8 @@ public class ClozeTestGenerator {
                 TextReader.PARAM_PATTERNS, new String[]{"[+]*.txt"});
 
         getPipeline().setReader(cr);
+        getPipeline().addStep(DistractorAnnotator.class);
         getPipeline().addStep(DebugWriter.class);
-        getPipeline().addStep(PrepositionBaselineDistractorGenerator.class);
         getPipeline().run();
     }
 
