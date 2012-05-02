@@ -1,4 +1,4 @@
-package de._0x0b.clozegenlib;
+package com.github.fhirschmann.clozegenlib;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

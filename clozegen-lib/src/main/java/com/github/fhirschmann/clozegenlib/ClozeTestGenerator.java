@@ -1,7 +1,8 @@
-package de._0x0b.clozegenlib;
+package com.github.fhirschmann.clozegenlib;
 
-import de._0x0b.clozegenlib.distractor.DistractorGenerator;
-import de._0x0b.clozegenlib.io.DebugWriter;
+import com.github.fhirschmann.clozegenlib.distractor.DistractorGenerator;
+import com.github.fhirschmann.clozegenlib.distractor.PrepositionBaselineDistractorGenerator;
+import com.github.fhirschmann.clozegenlib.io.DebugWriter;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
@@ -42,7 +43,7 @@ public class ClozeTestGenerator {
 
         getPipeline().setReader(cr);
         getPipeline().addStep(DebugWriter.class);
-        getPipeline().addStep(DistractorGenerator.class);
+        getPipeline().addStep(PrepositionBaselineDistractorGenerator.class);
         getPipeline().run();
     }
 

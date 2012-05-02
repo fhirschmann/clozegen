@@ -15,15 +15,21 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package de._0x0b.clozegenlib;
+package com.github.fhirschmann.clozegenlib;
+
+import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.jcas.JCas;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class Test {
-    public static void main(String[] args) throws Exception {
-        ClozeTestGenerator g = new ClozeTestGenerator();
-        g.run();
+public class DistractorAnnotator extends JCasAnnotator_ImplBase {
+
+    @Override
+    public void process(JCas jcas) throws AnalysisEngineProcessException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
+
 }

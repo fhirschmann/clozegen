@@ -15,19 +15,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package de._0x0b.clozegenlib.distractor;
-
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.jcas.JCas;
+package com.github.fhirschmann.clozegenlib;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionBaselineDistractorGenerator extends DistractorGenerator {
+public class ClozegenException extends Exception {
+    public ClozegenException() {
+        super();
+    }
 
-    @Override
-    public void process(JCas jcas) throws AnalysisEngineProcessException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public ClozegenException(String s) {
+        super(s);
     }
 }

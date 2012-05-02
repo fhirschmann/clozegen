@@ -15,15 +15,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package de._0x0b.clozegenlib.distractor;
+package com.github.fhirschmann.clozegenlib.distractor;
 
-import org.uimafit.component.JCasConsumer_ImplBase;
+import clozegen.Distractor;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.StringArrayFS;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.NonEmptyStringList;
+import org.uimafit.util.FSCollectionFactory;
 
 /**
- * This components creates distractors by first determining keys (words
- * which will be deleted) and then finding distractors.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public abstract class DistractorGenerator extends JCasConsumer_ImplBase {
+public class PrepositionBaselineDistractorGenerator extends DistractorGenerator {
+
+    @Override
+    public void process(JCas jcas) throws AnalysisEngineProcessException {
+        List<String> x = new ArrayList<String>();
+        x.add("foo");
+        x.add("bar");
+        StringArrayFS st = FSCollectionFactory.createStringArray(jcas, x);
+        Distractor annotation = new Distractor(jcas);
+
+    }
 }

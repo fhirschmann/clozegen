@@ -1,4 +1,4 @@
-package de._0x0b.clozegencli;
+package com.github.fhirschmann.clozegencli;
 
 /**
  * Hello world!
