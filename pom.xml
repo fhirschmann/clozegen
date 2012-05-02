@@ -6,11 +6,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>clozegen</name>
-    <modules>
-        <module>clozegen-lib</module>
-        <module>clozegen-cli</module>
-        <module>clozegen-gui</module>
-    </modules>
+    <modules></modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
