@@ -17,13 +17,12 @@
  */
 package com.github.fhirschmann.clozegenlib.distractor;
 
-import clozegen.Distractor;
+import com.github.fhirschmann.clozegenlib.type.Distractor;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.StringArrayFS;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.cas.NonEmptyStringList;
 import org.uimafit.util.FSCollectionFactory;
 
 /**
@@ -34,11 +33,6 @@ public class PrepositionBaselineDistractorGenerator extends DistractorGenerator 
 
     @Override
     public void process(JCas jcas) throws AnalysisEngineProcessException {
-        List<String> x = new ArrayList<String>();
-        x.add("foo");
-        x.add("bar");
-        StringArrayFS st = FSCollectionFactory.createStringArray(jcas, x);
         Distractor annotation = new Distractor(jcas);
-
     }
 }

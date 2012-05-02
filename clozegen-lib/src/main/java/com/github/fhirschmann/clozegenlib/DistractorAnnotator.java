@@ -17,9 +17,10 @@
  */
 package com.github.fhirschmann.clozegenlib;
 
-import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
+import com.github.fhirschmann.clozegenlib.type.Distractor;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
+import org.uimafit.component.JCasAnnotator_ImplBase;
 
 /**
  *
@@ -29,7 +30,7 @@ public class DistractorAnnotator extends JCasAnnotator_ImplBase {
 
     @Override
     public void process(JCas jcas) throws AnalysisEngineProcessException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Distractor an = new Distractor(jcas);
     }
 
 }
