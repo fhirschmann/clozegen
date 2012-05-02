@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Wed May 02 23:03:20 CEST 2012
+ * Updated by JCasGen Wed May 02 23:10:31 CEST 2012
  * @generated */
 public class Distractor_Type extends Annotation_Type {
   /** @generated */
@@ -45,20 +45,20 @@ public class Distractor_Type extends Annotation_Type {
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("com.github.fhirschmann.clozegen.lib.type.Distractor");
  
   /** @generated */
-  final Feature casFeat_test;
+  final Feature casFeat_distractors;
   /** @generated */
-  final int     casFeatCode_test;
+  final int     casFeatCode_distractors;
   /** @generated */ 
-  public String getTest(int addr) {
-        if (featOkTst && casFeat_test == null)
-      jcas.throwFeatMissing("test", "com.github.fhirschmann.clozegen.lib.type.Distractor");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_test);
+  public int getDistractors(int addr) {
+        if (featOkTst && casFeat_distractors == null)
+      jcas.throwFeatMissing("distractors", "com.github.fhirschmann.clozegen.lib.type.Distractor");
+    return ll_cas.ll_getRefValue(addr, casFeatCode_distractors);
   }
   /** @generated */    
-  public void setTest(int addr, String v) {
-        if (featOkTst && casFeat_test == null)
-      jcas.throwFeatMissing("test", "com.github.fhirschmann.clozegen.lib.type.Distractor");
-    ll_cas.ll_setStringValue(addr, casFeatCode_test, v);}
+  public void setDistractors(int addr, int v) {
+        if (featOkTst && casFeat_distractors == null)
+      jcas.throwFeatMissing("distractors", "com.github.fhirschmann.clozegen.lib.type.Distractor");
+    ll_cas.ll_setRefValue(addr, casFeatCode_distractors, v);}
     
   
 
@@ -71,8 +71,8 @@ public class Distractor_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_test = jcas.getRequiredFeatureDE(casType, "test", "uima.cas.String", featOkTst);
-    casFeatCode_test  = (null == casFeat_test) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_test).getCode();
+    casFeat_distractors = jcas.getRequiredFeatureDE(casType, "distractors", "uima.cas.NonEmptyStringList", featOkTst);
+    casFeatCode_distractors  = (null == casFeat_distractors) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_distractors).getCode();
 
   }
 }

@@ -11,9 +11,9 @@
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
-          <name>test</name>
+          <name>distractors</name>
           <description/>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
+          <rangeTypeName>uima.cas.NonEmptyStringList</rangeTypeName>
         </featureDescription>
       </features>
     </typeDescription>

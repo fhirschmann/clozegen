@@ -7,11 +7,12 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.cas.TOP_Type;
 
+import org.apache.uima.jcas.cas.NonEmptyStringList;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Wed May 02 23:03:20 CEST 2012
+ * Updated by JCasGen Wed May 02 23:10:31 CEST 2012
  * XML source: /home/fabian/dev/clozegen/lib/src/main/resources/desc/type/Distractor.xml
  * @generated */
 public class Distractor extends Annotation {
@@ -63,21 +64,21 @@ public class Distractor extends Annotation {
  
     
   //*--------------*
-  //* Feature: test
+  //* Feature: distractors
 
-  /** getter for test - gets 
+  /** getter for distractors - gets 
    * @generated */
-  public String getTest() {
-    if (Distractor_Type.featOkTst && ((Distractor_Type)jcasType).casFeat_test == null)
-      jcasType.jcas.throwFeatMissing("test", "com.github.fhirschmann.clozegen.lib.type.Distractor");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((Distractor_Type)jcasType).casFeatCode_test);}
+  public NonEmptyStringList getDistractors() {
+    if (Distractor_Type.featOkTst && ((Distractor_Type)jcasType).casFeat_distractors == null)
+      jcasType.jcas.throwFeatMissing("distractors", "com.github.fhirschmann.clozegen.lib.type.Distractor");
+    return (NonEmptyStringList)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Distractor_Type)jcasType).casFeatCode_distractors)));}
     
-  /** setter for test - sets  
+  /** setter for distractors - sets  
    * @generated */
-  public void setTest(String v) {
-    if (Distractor_Type.featOkTst && ((Distractor_Type)jcasType).casFeat_test == null)
-      jcasType.jcas.throwFeatMissing("test", "com.github.fhirschmann.clozegen.lib.type.Distractor");
-    jcasType.ll_cas.ll_setStringValue(addr, ((Distractor_Type)jcasType).casFeatCode_test, v);}    
+  public void setDistractors(NonEmptyStringList v) {
+    if (Distractor_Type.featOkTst && ((Distractor_Type)jcasType).casFeat_distractors == null)
+      jcasType.jcas.throwFeatMissing("distractors", "com.github.fhirschmann.clozegen.lib.type.Distractor");
+    jcasType.ll_cas.ll_setRefValue(addr, ((Distractor_Type)jcasType).casFeatCode_distractors, jcasType.ll_cas.ll_getFSRef(v));}    
   }
 
     
