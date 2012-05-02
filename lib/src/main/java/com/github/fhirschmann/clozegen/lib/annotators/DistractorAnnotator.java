@@ -27,11 +27,5 @@ import org.uimafit.component.JCasAnnotator_ImplBase;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class DistractorAnnotator extends JCasAnnotator_ImplBase {
-
-    @Override
-    public void process(JCas jcas) throws AnalysisEngineProcessException {
-        Distractor an = new Distractor(jcas);
-    }
-
+public abstract class DistractorAnnotator extends JCasAnnotator_ImplBase {
 }

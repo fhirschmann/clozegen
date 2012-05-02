@@ -1,8 +1,7 @@
 package com.github.fhirschmann.clozegen.lib;
 
 import com.github.fhirschmann.clozegen.lib.annotators.DistractorAnnotator;
-import com.github.fhirschmann.clozegen.lib.distractor.DistractorGenerator;
-import com.github.fhirschmann.clozegen.lib.distractor.PrepositionBaselineDistractorGenerator;
+import com.github.fhirschmann.clozegen.lib.annotators.PrepositionDistractorAnnotator;
 import com.github.fhirschmann.clozegen.lib.io.DebugWriter;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
@@ -48,7 +47,7 @@ public class ClozeTestGenerator {
                 TextReader.PARAM_PATTERNS, new String[]{"[+]*.txt"});
 
         getPipeline().setReader(cr);
-        getPipeline().addStep(DistractorAnnotator.class);
+        getPipeline().addStep(PrepositionDistractorAnnotator.class);
         getPipeline().addStep(DebugWriter.class);
         getPipeline().run();
     }
