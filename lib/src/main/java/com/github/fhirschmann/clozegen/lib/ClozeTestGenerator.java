@@ -1,5 +1,6 @@
 package com.github.fhirschmann.clozegen.lib;
 
+import com.github.fhirschmann.clozegen.lib.annotators.DistractorAnnotator;
 import com.github.fhirschmann.clozegen.lib.distractor.DistractorGenerator;
 import com.github.fhirschmann.clozegen.lib.distractor.PrepositionBaselineDistractorGenerator;
 import com.github.fhirschmann.clozegen.lib.io.DebugWriter;
