@@ -18,14 +18,40 @@
 package com.github.fhirschmann.clozegen.lib.annotators;
 
 import com.github.fhirschmann.clozegen.lib.type.Distractor;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.NonEmptyStringList;
 import org.uimafit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.jcas.tcas.Annotation;
+import org.uimafit.util.FSCollectionFactory;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public abstract class DistractorAnnotator extends JCasAnnotator_ImplBase {
+    public abstract int getType();
+    public abstract List<String> generate(Annotation subject);
+
+    @Override
+    public void process(JCas jcas) throws AnalysisEngineProcessException {
+        for (Iterator<Annotation> i = jcas.getAnnotationIndex(getType()).iterator(); i.hasNext();) {
+            Annotation subject = i.next();
+            Distractor distractor = new Distractor(jcas);
+
+            distractor.setBegin(subject.getBegin());
+            distractor.setEnd(subject.getEnd());
+
+            Collection<String> distractors = generate(subject);
+            NonEmptyStringList l = (NonEmptyStringList)FSCollectionFactory.createStringList(jcas, distractors);
+
+            distractor.setDistractors(l);
+            distractor.addToIndexes();
+
+        }
+    }
 }
