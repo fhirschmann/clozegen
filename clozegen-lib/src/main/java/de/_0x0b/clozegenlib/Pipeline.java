@@ -39,14 +39,14 @@ public class Pipeline {
     private @Getter ArrayList<AnalysisEngineDescription> pipeline = new ArrayList<AnalysisEngineDescription>();
     private @Getter @Setter CollectionReader reader;
 
-    public void addPipelineStep(AnalysisEngineDescription step) {
+    public void addStep(AnalysisEngineDescription step) {
         pipeline.add(step);
     }
 
-    public void addPipelineStep(Class<? extends AnalysisComponent> step)
+    public void addStep(Class<? extends AnalysisComponent> step)
             throws ResourceInitializationException {
 
-        addPipelineStep((AnalysisEngineDescription)createPrimitiveDescription(step));
+        addStep((AnalysisEngineDescription)createPrimitiveDescription(step));
     }
 
     public void run() throws UIMAException, IOException, ClozegenException {

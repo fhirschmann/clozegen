@@ -38,8 +38,8 @@ public class ClozeTestGenerator {
 
     public void run() throws ResourceInitializationException, UIMAException,
             IOException, ClozegenException {
-        pipeline.addPipelineStep(getSegmenter());
-        pipeline.addPipelineStep(getTagger());
+        pipeline.addStep(getSegmenter());
+        pipeline.addStep(getTagger());
 
         CollectionReader cr = createCollectionReader(
                 TextReader.class,
@@ -48,8 +48,8 @@ public class ClozeTestGenerator {
                 TextReader.PARAM_PATTERNS, new String[]{"[+]*.txt"});
 
         pipeline.setReader(cr);
-        pipeline.addPipelineStep(DebugWriter.class);
-        pipeline.addPipelineStep(DistractorGenerator.class);
+        pipeline.addStep(DebugWriter.class);
+        pipeline.addStep(DistractorGenerator.class);
         pipeline.run();
     }
 
