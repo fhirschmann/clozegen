@@ -15,16 +15,19 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package de._0x0b.clozegenlib.api;
+package de._0x0b.clozegenlib.distractor;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.jcas.JCas;
 
 /**
- * A Selector selects a key (a word) from a sentence
- * which should be deleted in order to generate a gap.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public abstract class Selector {
-    abstract public int select(Sentence sentence);
+public class PrepositionBaselineDistractorGenerator extends DistractorGenerator {
+
+    @Override
+    public void process(JCas jcas) throws AnalysisEngineProcessException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

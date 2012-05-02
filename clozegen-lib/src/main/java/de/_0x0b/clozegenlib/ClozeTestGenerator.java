@@ -1,5 +1,6 @@
 package de._0x0b.clozegenlib;
 
+import de._0x0b.clozegenlib.distractor.DistractorGenerator;
 import de._0x0b.clozegenlib.io.DebugWriter;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
@@ -46,9 +47,9 @@ public class ClozeTestGenerator {
                 TextReader.PARAM_LANGUAGE, "en",
                 TextReader.PARAM_PATTERNS, new String[]{"[+]*.txt"});
 
-        //pipeline.setReader(cr);
-        AnalysisEngineDescription bar = createPrimitiveDescription(DebugWriter.class);
-        pipeline.addPipelineStep(bar);
+        pipeline.setReader(cr);
+        pipeline.addPipelineStep(DebugWriter.class);
+        pipeline.addPipelineStep(DistractorGenerator.class);
         pipeline.run();
     }
 
