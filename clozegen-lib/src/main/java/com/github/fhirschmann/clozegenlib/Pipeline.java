@@ -19,12 +19,13 @@ package com.github.fhirschmann.clozegenlib;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import lombok.ToString;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_component.AnalysisComponent;
+import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.uimafit.factory.AnalysisEngineFactory;
 import static org.uimafit.pipeline.SimplePipeline.runPipeline;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
@@ -32,33 +33,44 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-@ToString(callSuper = true, includeFieldNames = true)
 public class Pipeline {
-    private ArrayList<AnalysisEngineDescription> pipeline = new ArrayList<AnalysisEngineDescription>();
+
+    private ArrayList<AnalysisEngine> pipeline = new ArrayList<AnalysisEngine>();
     private CollectionReader reader;
 
-    public void addStep(AnalysisEngineDescription step) {
+    public void addStep(AnalysisEngine step) {
         getPipeline().add(step);
+    }
+
+    public void addStep(AnalysisEngineDescription step) throws ResourceInitializationException {
+        AnalysisEngine en;
+        if (step.isPrimitive()) {
+            en = AnalysisEngineFactory.createPrimitive(step);
+        } else {
+            en = AnalysisEngineFactory.createAggregate(step);
+        }
+
+        getPipeline().add(en);
     }
 
     public void addStep(Class<? extends AnalysisComponent> step)
             throws ResourceInitializationException {
 
-        addStep((AnalysisEngineDescription)createPrimitiveDescription(step));
+        addStep((AnalysisEngineDescription) createPrimitiveDescription(step));
     }
 
     public void run() throws UIMAException, IOException, ClozegenException {
         if (getReader() == null) {
             throw new ClozegenException("No reader set! Pipeline can't be executed.");
         }
-        runPipeline(getReader(), (AnalysisEngineDescription[])getPipeline().toArray(
-                new AnalysisEngineDescription[0]));
+        runPipeline(getReader(), (AnalysisEngine[]) getPipeline().toArray(
+                new AnalysisEngine[0]));
     }
 
     /**
      * @return the pipeline
      */
-    public ArrayList<AnalysisEngineDescription> getPipeline() {
+    public ArrayList<AnalysisEngine> getPipeline() {
         return pipeline;
     }
 
