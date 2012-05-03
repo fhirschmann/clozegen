@@ -18,8 +18,8 @@
 package com.github.fhirschmann.clozegen.lib.annotators;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
@@ -29,8 +29,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 public class PrepositionDistractorAnnotator extends DistractorAnnotator {
 
     @Override
-    public List<String> generate(Annotation subject) {
-        List<String> distractors = new ArrayList<String>();
+    public Set<String> generate(Annotation subject) {
+        Set<String> distractors = new HashSet<String>();
         distractors.add("test1");
         distractors.add("test2");
 

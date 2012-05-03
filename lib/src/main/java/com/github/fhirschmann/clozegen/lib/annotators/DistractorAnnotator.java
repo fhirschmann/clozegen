@@ -20,7 +20,7 @@ package com.github.fhirschmann.clozegen.lib.annotators;
 import com.github.fhirschmann.clozegen.lib.type.Distractor;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
@@ -35,7 +35,7 @@ import org.uimafit.util.FSCollectionFactory;
  */
 public abstract class DistractorAnnotator extends JCasAnnotator_ImplBase {
     public abstract int getType();
-    public abstract List<String> generate(Annotation subject);
+    public abstract Set<String> generate(Annotation subject);
 
     @Override
     public void process(JCas jcas) throws AnalysisEngineProcessException {
