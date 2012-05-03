@@ -33,9 +33,10 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
 /**
  * A pipeline is a chain of AnalysisEngines arranged so that each step will
  * be run sequentially with all pipeline steps working on the same CAS.
- *
+ * <p>
  * This class provides convenience methods to add pipeline steps from
  * engines, engine descriptions and engine components dynamically.
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
