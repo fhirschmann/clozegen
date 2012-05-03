@@ -17,8 +17,6 @@
  */
 package com.github.fhirschmann.clozegen.lib;
 
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.apache.uima.UIMAException;
@@ -33,6 +31,11 @@ import static org.uimafit.pipeline.SimplePipeline.runPipeline;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 /**
+ * A pipeline is a chain of AnalysisEngines arranged so that each step will
+ * be run sequentially with all pipeline steps working on the same CAS.
+ *
+ * This class provides convenience methods to add pipeline steps from
+ * engines, engine descriptions and engine components dynamically.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -105,6 +108,5 @@ public class Pipeline {
     public void run(CollectionReader reader) throws UIMAException, IOException {
         runPipeline(reader, (AnalysisEngine[]) pipeline.toArray(
                 new AnalysisEngine[0]));
-
     }
 }
