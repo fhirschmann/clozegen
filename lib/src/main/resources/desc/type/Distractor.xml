@@ -15,6 +15,11 @@
           <description/>
           <rangeTypeName>uima.cas.NonEmptyStringList</rangeTypeName>
         </featureDescription>
+        <featureDescription>
+          <name>acceptables</name>
+          <description/>
+          <rangeTypeName>uima.cas.NonEmptyStringList</rangeTypeName>
+        </featureDescription>
       </features>
     </typeDescription>
   </types>

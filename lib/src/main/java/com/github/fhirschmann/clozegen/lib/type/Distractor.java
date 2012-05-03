@@ -12,7 +12,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Wed May 02 23:10:31 CEST 2012
+ * Updated by JCasGen Thu May 03 20:13:34 CEST 2012
  * XML source: /home/fabian/dev/clozegen/lib/src/main/resources/desc/type/Distractor.xml
  * @generated */
 public class Distractor extends Annotation {
@@ -79,6 +79,24 @@ public class Distractor extends Annotation {
     if (Distractor_Type.featOkTst && ((Distractor_Type)jcasType).casFeat_distractors == null)
       jcasType.jcas.throwFeatMissing("distractors", "com.github.fhirschmann.clozegen.lib.type.Distractor");
     jcasType.ll_cas.ll_setRefValue(addr, ((Distractor_Type)jcasType).casFeatCode_distractors, jcasType.ll_cas.ll_getFSRef(v));}    
+   
+    
+  //*--------------*
+  //* Feature: acceptables
+
+  /** getter for acceptables - gets 
+   * @generated */
+  public NonEmptyStringList getAcceptables() {
+    if (Distractor_Type.featOkTst && ((Distractor_Type)jcasType).casFeat_acceptables == null)
+      jcasType.jcas.throwFeatMissing("acceptables", "com.github.fhirschmann.clozegen.lib.type.Distractor");
+    return (NonEmptyStringList)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Distractor_Type)jcasType).casFeatCode_acceptables)));}
+    
+  /** setter for acceptables - sets  
+   * @generated */
+  public void setAcceptables(NonEmptyStringList v) {
+    if (Distractor_Type.featOkTst && ((Distractor_Type)jcasType).casFeat_acceptables == null)
+      jcasType.jcas.throwFeatMissing("acceptables", "com.github.fhirschmann.clozegen.lib.type.Distractor");
+    jcasType.ll_cas.ll_setRefValue(addr, ((Distractor_Type)jcasType).casFeatCode_acceptables, jcasType.ll_cas.ll_getFSRef(v));}    
   }
 
     

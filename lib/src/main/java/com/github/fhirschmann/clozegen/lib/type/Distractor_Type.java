@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Wed May 02 23:10:31 CEST 2012
+ * Updated by JCasGen Thu May 03 20:13:34 CEST 2012
  * @generated */
 public class Distractor_Type extends Annotation_Type {
   /** @generated */
@@ -61,6 +61,24 @@ public class Distractor_Type extends Annotation_Type {
     ll_cas.ll_setRefValue(addr, casFeatCode_distractors, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_acceptables;
+  /** @generated */
+  final int     casFeatCode_acceptables;
+  /** @generated */ 
+  public int getAcceptables(int addr) {
+        if (featOkTst && casFeat_acceptables == null)
+      jcas.throwFeatMissing("acceptables", "com.github.fhirschmann.clozegen.lib.type.Distractor");
+    return ll_cas.ll_getRefValue(addr, casFeatCode_acceptables);
+  }
+  /** @generated */    
+  public void setAcceptables(int addr, int v) {
+        if (featOkTst && casFeat_acceptables == null)
+      jcas.throwFeatMissing("acceptables", "com.github.fhirschmann.clozegen.lib.type.Distractor");
+    ll_cas.ll_setRefValue(addr, casFeatCode_acceptables, v);}
+    
+  
 
 
 
@@ -73,6 +91,10 @@ public class Distractor_Type extends Annotation_Type {
  
     casFeat_distractors = jcas.getRequiredFeatureDE(casType, "distractors", "uima.cas.NonEmptyStringList", featOkTst);
     casFeatCode_distractors  = (null == casFeat_distractors) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_distractors).getCode();
+
+ 
+    casFeat_acceptables = jcas.getRequiredFeatureDE(casType, "acceptables", "uima.cas.NonEmptyStringList", featOkTst);
+    casFeatCode_acceptables  = (null == casFeat_acceptables) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_acceptables).getCode();
 
   }
 }
