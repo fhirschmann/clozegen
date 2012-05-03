@@ -39,8 +39,6 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
 public class Pipeline {
 
     private ArrayList<AnalysisEngine> pipeline = new ArrayList<AnalysisEngine>();
-    private Class<? extends AnalysisComponent> segmenter = StanfordSegmenter.class;
-    private Class<? extends AnalysisComponent> tagger = TreeTaggerPosLemmaTT4J.class;
 
     /**
      * Adds a step to the pipeline.
@@ -108,19 +106,5 @@ public class Pipeline {
         runPipeline(reader, (AnalysisEngine[]) pipeline.toArray(
                 new AnalysisEngine[0]));
 
-    }
-
-    /**
-     * @param segmenter the segmenter to set
-     */
-    public void setSegmenter(Class<? extends AnalysisComponent> segmenter) {
-        this.segmenter = segmenter;
-    }
-
-    /**
-     * @param tagger the tagger to set
-     */
-    public void setTagger(Class<? extends AnalysisComponent> tagger) {
-        this.tagger = tagger;
     }
 }
