@@ -24,6 +24,7 @@ import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.factory.AnalysisEngineFactory;
 import static org.uimafit.pipeline.SimplePipeline.runPipeline;
@@ -36,7 +37,6 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
 public class Pipeline {
 
     private ArrayList<AnalysisEngine> pipeline = new ArrayList<AnalysisEngine>();
-    private CollectionReader reader;
 
     public void addStep(AnalysisEngine step) {
         getPipeline().add(step);
@@ -59,12 +59,15 @@ public class Pipeline {
         addStep((AnalysisEngineDescription) createPrimitiveDescription(step));
     }
 
-    public void run() throws UIMAException, IOException, ClozegenException {
-        if (getReader() == null) {
-            throw new ClozegenException("No reader set! Pipeline can't be executed.");
-        }
-        runPipeline(getReader(), (AnalysisEngine[]) getPipeline().toArray(
+    public void run(JCas jCas) throws UIMAException, IOException, ClozegenException {
+        runPipeline(jCas, (AnalysisEngine[]) getPipeline().toArray(
                 new AnalysisEngine[0]));
+    }
+
+    public void run(CollectionReader reader) throws UIMAException, IOException {
+        runPipeline(reader, (AnalysisEngine[]) getPipeline().toArray(
+                new AnalysisEngine[0]));
+
     }
 
     /**
@@ -72,19 +75,5 @@ public class Pipeline {
      */
     public ArrayList<AnalysisEngine> getPipeline() {
         return pipeline;
-    }
-
-    /**
-     * @return the reader
-     */
-    public CollectionReader getReader() {
-        return reader;
-    }
-
-    /**
-     * @param reader the reader to set
-     */
-    public void setReader(CollectionReader reader) {
-        this.reader = reader;
     }
 }
