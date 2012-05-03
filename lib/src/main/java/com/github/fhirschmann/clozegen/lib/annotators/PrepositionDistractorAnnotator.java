@@ -38,6 +38,7 @@ public class PrepositionDistractorAnnotator extends DistractorAnnotator {
         return distractors;
     }
 
+    @Override
     public int getType() {
         return PP.type;
     }
