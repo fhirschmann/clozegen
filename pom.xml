@@ -81,7 +81,7 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-            <id>ukp-oss</id>
+            <id>ukp-oss-releases</id>
             <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases/</url>
         </repository>
     </repositories>
