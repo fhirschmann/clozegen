@@ -34,8 +34,10 @@ import org.uimafit.util.FSCollectionFactory;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public abstract class DistractorAnnotator extends JCasAnnotator_ImplBase {
+
     public abstract int getType();
-    public abstract Set<String> generate(Annotation subject);
+
+    public abstract DistractorsAcceptablesPair generate(Annotation subject);
 
     @Override
     public void process(JCas jcas) throws AnalysisEngineProcessException {
@@ -46,12 +48,12 @@ public abstract class DistractorAnnotator extends JCasAnnotator_ImplBase {
             distractor.setBegin(subject.getBegin());
             distractor.setEnd(subject.getEnd());
 
-            Collection<String> distractors = generate(subject);
-            NonEmptyStringList l = (NonEmptyStringList)FSCollectionFactory.createStringList(jcas, distractors);
-
-            distractor.setDistractors(l);
+            DistractorsAcceptablesPair pair = generate(subject);
+            NonEmptyStringList d = (NonEmptyStringList) FSCollectionFactory.createStringList(jcas, pair.getDistractors());
+            distractor.setDistractors(d);
+            NonEmptyStringList a = (NonEmptyStringList) FSCollectionFactory.createStringList(jcas, pair.getAcceptables());
+            distractor.setAcceptables(a);
             distractor.addToIndexes();
-
         }
     }
 }

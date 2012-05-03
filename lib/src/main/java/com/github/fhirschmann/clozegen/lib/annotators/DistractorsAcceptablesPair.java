@@ -17,28 +17,42 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import java.util.HashSet;
 import java.util.Set;
-import org.apache.uima.jcas.tcas.Annotation;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionDistractorAnnotator extends DistractorAnnotator {
+public class DistractorsAcceptablesPair {
+    private Set<String> distractors = new HashSet<String>();
+    private Set<String> acceptables = new HashSet<String>();
 
-    @Override
-    public DistractorsAcceptablesPair generate(Annotation subject) {
-        DistractorsAcceptablesPair pair = new DistractorsAcceptablesPair();
-        pair.getAcceptables().add(subject.getCoveredText());
-        pair.getDistractors().add(subject.getCoveredText());
-
-        return pair;
+    /**
+     * @return the distractors
+     */
+    public Set<String> getDistractors() {
+        return distractors;
     }
 
-    @Override
-    public int getType() {
-        return PP.type;
+    /**
+     * @param distractors the distractors to set
+     */
+    public void setDistractors(Set<String> distractors) {
+        this.distractors = distractors;
+    }
+
+    /**
+     * @return the acceptables
+     */
+    public Set<String> getAcceptables() {
+        return acceptables;
+    }
+
+    /**
+     * @param acceptables the acceptables to set
+     */
+    public void setAcceptables(Set<String> acceptables) {
+        this.acceptables = acceptables;
     }
 }
