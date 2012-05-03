@@ -17,6 +17,8 @@
  */
 package com.github.fhirschmann.clozegen.lib;
 
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.apache.uima.UIMAException;
@@ -37,11 +39,24 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
 public class Pipeline {
 
     private ArrayList<AnalysisEngine> pipeline = new ArrayList<AnalysisEngine>();
+    private Class<? extends AnalysisComponent> segmenter = StanfordSegmenter.class;
+    private Class<? extends AnalysisComponent> tagger = TreeTaggerPosLemmaTT4J.class;
 
+    /**
+     * Adds a step to the pipeline.
+     *
+     * @param step
+     */
     public void addStep(AnalysisEngine step) {
         getPipeline().add(step);
     }
 
+    /**
+     * Adds a step to the pipeline.
+     *
+     * @param step
+     * @throws ResourceInitializationException
+     */
     public void addStep(AnalysisEngineDescription step) throws ResourceInitializationException {
         AnalysisEngine en;
         if (step.isPrimitive()) {
@@ -53,17 +68,42 @@ public class Pipeline {
         getPipeline().add(en);
     }
 
+    /**
+     * Adds a step to the pipeline.
+     *
+     * @param step
+     * @throws ResourceInitializationException
+     */
     public void addStep(Class<? extends AnalysisComponent> step)
             throws ResourceInitializationException {
 
         addStep((AnalysisEngineDescription) createPrimitiveDescription(step));
     }
 
+    /**
+     * Runs the pipeline.
+     *
+     * The pipeline will start at the given CAS.
+     *
+     * @param jCas
+     * @throws UIMAException
+     * @throws IOException
+     * @throws ClozegenException
+     */
     public void run(JCas jCas) throws UIMAException, IOException, ClozegenException {
         runPipeline(jCas, (AnalysisEngine[]) getPipeline().toArray(
                 new AnalysisEngine[0]));
     }
 
+    /**
+     * Runs the pipeline.
+     *
+     * The pipeline will start at the given CollectionReader.
+     *
+     * @param reader
+     * @throws UIMAException
+     * @throws IOException
+     */
     public void run(CollectionReader reader) throws UIMAException, IOException {
         runPipeline(reader, (AnalysisEngine[]) getPipeline().toArray(
                 new AnalysisEngine[0]));
@@ -75,5 +115,19 @@ public class Pipeline {
      */
     public ArrayList<AnalysisEngine> getPipeline() {
         return pipeline;
+    }
+
+    /**
+     * @param segmenter the segmenter to set
+     */
+    public void setSegmenter(Class<? extends AnalysisComponent> segmenter) {
+        this.segmenter = segmenter;
+    }
+
+    /**
+     * @param tagger the tagger to set
+     */
+    public void setTagger(Class<? extends AnalysisComponent> tagger) {
+        this.tagger = tagger;
     }
 }
