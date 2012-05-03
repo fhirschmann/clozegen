@@ -48,7 +48,7 @@ public class Pipeline {
      * @param step
      */
     public void addStep(AnalysisEngine step) {
-        getPipeline().add(step);
+        pipeline.add(step);
     }
 
     /**
@@ -65,7 +65,7 @@ public class Pipeline {
             en = AnalysisEngineFactory.createAggregate(step);
         }
 
-        getPipeline().add(en);
+        pipeline.add(en);
     }
 
     /**
@@ -91,7 +91,7 @@ public class Pipeline {
      * @throws ClozegenException
      */
     public void run(JCas jCas) throws UIMAException, IOException, ClozegenException {
-        runPipeline(jCas, (AnalysisEngine[]) getPipeline().toArray(
+        runPipeline(jCas, (AnalysisEngine[]) pipeline.toArray(
                 new AnalysisEngine[0]));
     }
 
@@ -105,16 +105,9 @@ public class Pipeline {
      * @throws IOException
      */
     public void run(CollectionReader reader) throws UIMAException, IOException {
-        runPipeline(reader, (AnalysisEngine[]) getPipeline().toArray(
+        runPipeline(reader, (AnalysisEngine[]) pipeline.toArray(
                 new AnalysisEngine[0]));
 
-    }
-
-    /**
-     * @return the pipeline
-     */
-    public ArrayList<AnalysisEngine> getPipeline() {
-        return pipeline;
     }
 
     /**
