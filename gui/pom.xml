@@ -8,7 +8,6 @@
     <packaging>jar</packaging>
 
     <name>clozegen-gui</name>
-    <url>http://maven.apache.org</url>
 
     <parent>
         <groupId>com.github.fhirschmann</groupId>
