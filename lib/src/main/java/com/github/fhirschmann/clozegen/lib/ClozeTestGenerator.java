@@ -1,23 +1,21 @@
 package com.github.fhirschmann.clozegen.lib;
 
-import com.github.fhirschmann.clozegen.lib.annotators.DistractorAnnotator;
 import com.github.fhirschmann.clozegen.lib.annotators.PrepositionDistractorAnnotator;
 import com.github.fhirschmann.clozegen.lib.io.DebugWriter;
+import com.github.fhirschmann.clozegen.lib.io.InputReader;
 
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
+import java.io.File;
 import java.io.IOException;
 import lombok.ToString;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_component.AnalysisComponent;
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.factory.AnalysisEngineFactory;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import org.uimafit.factory.JCasFactory;
 
 /**
  *
@@ -26,7 +24,6 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
 @ToString(callSuper = true, includeFieldNames = true)
 public class ClozeTestGenerator {
 
-    private CollectionReader reader;
     private Class<? extends AnalysisComponent> segmenter = StanfordSegmenter.class;
     private Class<? extends AnalysisComponent> tagger = TreeTaggerPosLemmaTT4J.class;
     private Pipeline pipeline = new Pipeline();
@@ -37,37 +34,17 @@ public class ClozeTestGenerator {
 
     public void run() throws ResourceInitializationException, UIMAException,
             IOException, ClozegenException {
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentText("Hello, this is just for testing purposes.");
+        jcas.setDocumentLanguage("en");
+
         getPipeline().addStep(getSegmenter());
         getPipeline().addStep(getTagger());
 
-        CollectionReader cr = createCollectionReader(
-                TextReader.class,
-                TextReader.PARAM_PATH, "src/test/resources",
-                TextReader.PARAM_LANGUAGE, "en",
-                TextReader.PARAM_PATTERNS, new String[]{"[+]*.txt"});
 
-        getPipeline().setReader(cr);
         getPipeline().addStep(PrepositionDistractorAnnotator.class);
         getPipeline().addStep(DebugWriter.class);
-        getPipeline().run();
-    }
-
-    public void generateClozeTest(String inputfile, String outputfile) throws
-            ResourceInitializationException, UIMAException, IOException {
-    }
-
-    /**
-     * @return the reader
-     */
-    public CollectionReader getReader() {
-        return reader;
-    }
-
-    /**
-     * @param reader the reader to set
-     */
-    public void setReader(CollectionReader reader) {
-        this.reader = reader;
+        getPipeline().run(jcas);
     }
 
     /**
