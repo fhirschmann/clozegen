@@ -29,7 +29,7 @@ public class DistractorsAcceptablesPair {
     private Set<String> acceptables = new HashSet<String>();
 
     /**
-     * Returns the union of the distractor and acceptables set.
+     * Returns the union of the distractors and acceptables set.
      *
      * @return distractors and acceptables
      */
