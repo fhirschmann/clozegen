@@ -29,6 +29,18 @@ public class DistractorsAcceptablesPair {
     private Set<String> acceptables = new HashSet<String>();
 
     /**
+     * Returns the union of the distractor and acceptables set.
+     *
+     * @return distractors and acceptables
+     */
+    public Set<String> getAll() {
+        Set<String> all = new HashSet<String>();
+        all.addAll(distractors);
+        all.addAll(acceptables);
+        return all;
+    }
+
+    /**
      * @return the distractors
      */
     public Set<String> getDistractors() {
