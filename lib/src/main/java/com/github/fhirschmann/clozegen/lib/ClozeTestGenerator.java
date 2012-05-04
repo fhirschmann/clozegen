@@ -1,5 +1,6 @@
 package com.github.fhirschmann.clozegen.lib;
 
+import com.github.fhirschmann.clozegen.lib.annotators.ArticleDistractorAnnotator;
 import com.github.fhirschmann.clozegen.lib.annotators.PrepositionDistractorAnnotator;
 import com.github.fhirschmann.clozegen.lib.io.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.io.InputReader;
@@ -35,7 +36,7 @@ public class ClozeTestGenerator {
     public void run() throws ResourceInitializationException, UIMAException,
             IOException, ClozegenException {
         JCas jcas = JCasFactory.createJCas();
-        jcas.setDocumentText("Hello, this is just for testing purposes.");
+        jcas.setDocumentText("I'd like a chicken!");
         jcas.setDocumentLanguage("en");
 
         getPipeline().addStep(getSegmenter());
@@ -43,6 +44,7 @@ public class ClozeTestGenerator {
 
 
         getPipeline().addStep(PrepositionDistractorAnnotator.class);
+        getPipeline().addStep(ArticleDistractorAnnotator.class);
         getPipeline().addStep(DebugWriter.class);
         getPipeline().run(jcas);
     }
