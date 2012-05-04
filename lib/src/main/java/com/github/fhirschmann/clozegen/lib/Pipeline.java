@@ -53,6 +53,7 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
  */
 public class Pipeline {
 
+    /* the list of pipeline elements */
     private ArrayList<AnalysisEngine> pipeline = new ArrayList<AnalysisEngine>();
 
     /**
@@ -60,7 +61,7 @@ public class Pipeline {
      *
      * @param step the pipeline step to be added
      */
-    public void addStep(AnalysisEngine step) {
+    public final void addStep(final AnalysisEngine step) {
         pipeline.add(step);
     }
 
@@ -70,7 +71,8 @@ public class Pipeline {
      * @param step the pipeline step to be added
      * @throws ResourceInitializationException
      */
-    public void addStep(AnalysisEngineDescription step) throws ResourceInitializationException {
+    public final void addStep(final AnalysisEngineDescription step)
+            throws ResourceInitializationException {
         AnalysisEngine en;
         if (step.isPrimitive()) {
             en = AnalysisEngineFactory.createPrimitive(step);
@@ -87,7 +89,7 @@ public class Pipeline {
      * @param step the pipeline step to be added
      * @throws ResourceInitializationException
      */
-    public void addStep(Class<? extends AnalysisComponent> step)
+    public final void addStep(final Class<? extends AnalysisComponent> step)
             throws ResourceInitializationException {
 
         addStep((AnalysisEngineDescription) createPrimitiveDescription(step));
@@ -103,7 +105,8 @@ public class Pipeline {
      * @throws IOException
      * @throws ClozegenException
      */
-    public void run(JCas jCas) throws UIMAException, IOException, ClozegenException {
+    public final void run(final JCas jCas)
+            throws UIMAException, IOException, ClozegenException {
         runPipeline(jCas, (AnalysisEngine[]) pipeline.toArray(
                 new AnalysisEngine[0]));
     }
@@ -114,10 +117,11 @@ public class Pipeline {
      * The pipeline will start at the given CollectionReader.
      *
      * @param reader the Collection Reader to start the pipeline off with
-     * @throws UIMAException
-     * @throws IOException
+     * @throws UIMAException when UIMA errors occur
+     * @throws IOException when errors occur while reading from a file
      */
-    public void run(CollectionReader reader) throws UIMAException, IOException {
+    public final void run(final CollectionReader reader)
+            throws UIMAException, IOException {
         runPipeline(reader, (AnalysisEngine[]) pipeline.toArray(
                 new AnalysisEngine[0]));
     }
