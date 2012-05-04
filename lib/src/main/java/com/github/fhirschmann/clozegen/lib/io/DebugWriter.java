@@ -17,16 +17,18 @@
  */
 package com.github.fhirschmann.clozegen.lib.io;
 
+import com.github.fhirschmann.clozegen.lib.type.Distractor;
 import java.util.Iterator;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.util.Level;
 import org.uimafit.component.JCasConsumer_ImplBase;
+import org.uimafit.util.FSCollectionFactory;
 
 /**
- * Logs a document by displaying its token's types, names
- * and values.
+ * Logs a document by displaying its token's types, names, the text
+ * covered, and in case of Distractors, the Acceptables and Distractors.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -40,8 +42,16 @@ public class DebugWriter extends JCasConsumer_ImplBase {
 
         for (Iterator<Annotation> i = jcas.getAnnotationIndex().iterator(); i.hasNext();) {
             Annotation a = i.next();
-            sb.append(String.format("[%s] (%s,%s) %s%n", a.getType().getShortName(),
+            sb.append(String.format("[%s] (%s,%s) %s", a.getType().getShortName(),
                     a.getBegin(), a.getEnd(), a.getCoveredText()));
+            if (a.getTypeIndexID() == Distractor.type) {
+                Distractor d = (Distractor)a;
+                sb.append(String.format(" {%s|%s}%n",
+                        FSCollectionFactory.create(d.getAcceptables()).toString(),
+                        FSCollectionFactory.create(d.getDistractors()).toString()));
+            } else {
+                sb.append(String.format("%n"));
+            }
         }
         getContext().getLogger().log(Level.INFO, sb.toString());
     }
