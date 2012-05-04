@@ -37,6 +37,17 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
  * This class provides convenience methods to add pipeline steps from
  * engines, engine descriptions and engine components dynamically.
  * </p>
+ * <p>
+ * An example scenario might look like this:
+ * <pre>
+ * JCas jCas = new JCasFactory.createJCas();
+ * jCas.setDocumentText("This is test sentence. This is another sentence.");
+ * jCas.setDocumentLanguage("en");
+ * Pipeline pipeline = new Pipeline();
+ * pipeline.addStep(StanfordSegmenter.class);
+ * pipeline.run(jCas);
+ * </pre>
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -47,7 +58,7 @@ public class Pipeline {
     /**
      * Adds a step to the pipeline.
      *
-     * @param step
+     * @param step the pipeline step to be added
      */
     public void addStep(AnalysisEngine step) {
         pipeline.add(step);
@@ -56,7 +67,7 @@ public class Pipeline {
     /**
      * Adds a step to the pipeline.
      *
-     * @param step
+     * @param step the pipeline step to be added
      * @throws ResourceInitializationException
      */
     public void addStep(AnalysisEngineDescription step) throws ResourceInitializationException {
@@ -73,7 +84,7 @@ public class Pipeline {
     /**
      * Adds a step to the pipeline.
      *
-     * @param step
+     * @param step the pipeline step to be added
      * @throws ResourceInitializationException
      */
     public void addStep(Class<? extends AnalysisComponent> step)
@@ -87,7 +98,7 @@ public class Pipeline {
      *
      * The pipeline will start at the given CAS.
      *
-     * @param jCas
+     * @param jCas the CAS to start the pipeline off with
      * @throws UIMAException
      * @throws IOException
      * @throws ClozegenException
@@ -102,7 +113,7 @@ public class Pipeline {
      *
      * The pipeline will start at the given CollectionReader.
      *
-     * @param reader
+     * @param reader the Collection Reader to start the pipeline off with
      * @throws UIMAException
      * @throws IOException
      */
