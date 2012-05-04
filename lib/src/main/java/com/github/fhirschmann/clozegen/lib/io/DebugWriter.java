@@ -46,7 +46,7 @@ public class DebugWriter extends JCasConsumer_ImplBase {
                     a.getBegin(), a.getEnd(), a.getCoveredText()));
             if (a.getTypeIndexID() == Distractor.type) {
                 Distractor d = (Distractor)a;
-                sb.append(String.format(" {%s|%s}%n",
+                sb.append(String.format(" %s%s%n",
                         FSCollectionFactory.create(d.getAcceptables()).toString(),
                         FSCollectionFactory.create(d.getDistractors()).toString()));
             } else {
