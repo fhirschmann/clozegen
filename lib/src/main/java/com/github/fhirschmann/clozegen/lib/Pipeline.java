@@ -33,14 +33,10 @@ import static org.uimafit.pipeline.SimplePipeline.runPipeline;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 /**
- * A steps is a chain of AnalysisEngines arranged so that each step will
- * be run sequentially with all steps steps working on the same CAS.
- * <p>
- * This class provides convenience methods to add steps steps from
- * engines, engine descriptions and engine components dynamically.
- * </p>
- * <p>
- * An example scenario might look like this:
+ * A steps is a chain of AnalysisEngines arranged so that each step will be run
+ * sequentially with all steps steps working on the same CAS. <p> This class provides
+ * convenience methods to add steps steps from engines, engine descriptions and engine
+ * components dynamically. </p> <p> An example scenario might look like this:
  * <pre>
  * JCas jCas = new JCasFactory.createJCas();
  * jCas.setDocumentText("This is test sentence. This is another sentence.");
@@ -48,14 +44,15 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
  * Pipeline steps = new Pipeline();
  * steps.addStep(StanfordSegmenter.class);
  * steps.run(jCas);
- * </pre>
- * </p>
+ * </pre> </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class Pipeline {
 
-    /* the list of steps elements */
+    /**
+     * The list of steps elements.
+     */
     private ArrayList<AnalysisEngine> steps = new ArrayList<AnalysisEngine>();
 
     /**
@@ -71,7 +68,7 @@ public class Pipeline {
      * Adds a step to the steps.
      *
      * @param step the steps step to be added
-     * @throws ResourceInitializationException
+     * @throws ResourceInitializationException on errors during initialization
      */
     public final void addStep(final AnalysisEngineDescription step)
             throws ResourceInitializationException {
@@ -89,7 +86,7 @@ public class Pipeline {
      * Adds a step to the steps.
      *
      * @param step the steps step to be added
-     * @throws ResourceInitializationException
+     * @throws ResourceInitializationException on errors during initialization
      */
     public final void addStep(final Class<? extends AnalysisComponent> step)
             throws ResourceInitializationException {
@@ -103,12 +100,11 @@ public class Pipeline {
      * The steps will start at the given CAS.
      *
      * @param jCas the CAS to start the steps off with
-     * @throws UIMAException
-     * @throws IOException
-     * @throws ClozegenException
+     * @throws UIMAException on errors produced by UIMA
+     * @throws IOException on errors when reading a file
      */
     public final void run(final JCas jCas)
-            throws UIMAException, IOException, ClozegenException {
+            throws UIMAException, IOException {
         runPipeline(jCas, (AnalysisEngine[]) steps.toArray(
                 new AnalysisEngine[0]));
     }
@@ -120,7 +116,7 @@ public class Pipeline {
      *
      * @param reader the Collection Reader to start the steps off with
      * @throws UIMAException when UIMA errors occur
-     * @throws IOException when errors occur while reading from a fileq
+     * @throws IOException when errors occur while reading from a file
      */
     public final void run(final CollectionReader reader)
             throws UIMAException, IOException {
@@ -129,7 +125,7 @@ public class Pipeline {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         ToStringHelper ts = Objects.toStringHelper(this);
         // UIMA's AnalysisEngine has no useful toString() method
         for (AnalysisEngine a : steps) {
