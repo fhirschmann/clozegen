@@ -51,5 +51,10 @@
             <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-postagger-en-bidirectional-distsim</artifactId>
             <version>20120106</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.spullara.mustache.java</groupId>
+            <artifactId>compiler</artifactId>
+            <version>0.7.6</version>
+        </dependency>
     </dependencies>
 </project>
