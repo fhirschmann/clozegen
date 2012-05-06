@@ -33,10 +33,10 @@ import static org.uimafit.pipeline.SimplePipeline.runPipeline;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 /**
- * A pipeline is a chain of AnalysisEngines arranged so that each step will
- * be run sequentially with all pipeline steps working on the same CAS.
+ * A steps is a chain of AnalysisEngines arranged so that each step will
+ * be run sequentially with all steps steps working on the same CAS.
  * <p>
- * This class provides convenience methods to add pipeline steps from
+ * This class provides convenience methods to add steps steps from
  * engines, engine descriptions and engine components dynamically.
  * </p>
  * <p>
@@ -45,9 +45,9 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
  * JCas jCas = new JCasFactory.createJCas();
  * jCas.setDocumentText("This is test sentence. This is another sentence.");
  * jCas.setDocumentLanguage("en");
- * Pipeline pipeline = new Pipeline();
- * pipeline.addStep(StanfordSegmenter.class);
- * pipeline.run(jCas);
+ * Pipeline steps = new Pipeline();
+ * steps.addStep(StanfordSegmenter.class);
+ * steps.run(jCas);
  * </pre>
  * </p>
  *
@@ -55,22 +55,22 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
  */
 public class Pipeline {
 
-    /* the list of pipeline elements */
-    private ArrayList<AnalysisEngine> pipeline = new ArrayList<AnalysisEngine>();
+    /* the list of steps elements */
+    private ArrayList<AnalysisEngine> steps = new ArrayList<AnalysisEngine>();
 
     /**
-     * Adds a step to the pipeline.
+     * Adds a step to the steps.
      *
-     * @param step the pipeline step to be added
+     * @param step the steps step to be added
      */
     public final void addStep(final AnalysisEngine step) {
-        pipeline.add(step);
+        steps.add(step);
     }
 
     /**
-     * Adds a step to the pipeline.
+     * Adds a step to the steps.
      *
-     * @param step the pipeline step to be added
+     * @param step the steps step to be added
      * @throws ResourceInitializationException
      */
     public final void addStep(final AnalysisEngineDescription step)
@@ -82,13 +82,13 @@ public class Pipeline {
             en = AnalysisEngineFactory.createAggregate(step);
         }
 
-        pipeline.add(en);
+        steps.add(en);
     }
 
     /**
-     * Adds a step to the pipeline.
+     * Adds a step to the steps.
      *
-     * @param step the pipeline step to be added
+     * @param step the steps step to be added
      * @throws ResourceInitializationException
      */
     public final void addStep(final Class<? extends AnalysisComponent> step)
@@ -98,33 +98,33 @@ public class Pipeline {
     }
 
     /**
-     * Runs the pipeline.
+     * Runs the steps.
      *
-     * The pipeline will start at the given CAS.
+     * The steps will start at the given CAS.
      *
-     * @param jCas the CAS to start the pipeline off with
+     * @param jCas the CAS to start the steps off with
      * @throws UIMAException
      * @throws IOException
      * @throws ClozegenException
      */
     public final void run(final JCas jCas)
             throws UIMAException, IOException, ClozegenException {
-        runPipeline(jCas, (AnalysisEngine[]) pipeline.toArray(
+        runPipeline(jCas, (AnalysisEngine[]) steps.toArray(
                 new AnalysisEngine[0]));
     }
 
     /**
-     * Runs the pipeline.
+     * Runs the steps.
      *
-     * The pipeline will start at the given CollectionReader.
+     * The steps will start at the given CollectionReader.
      *
-     * @param reader the Collection Reader to start the pipeline off with
+     * @param reader the Collection Reader to start the steps off with
      * @throws UIMAException when UIMA errors occur
      * @throws IOException when errors occur while reading from a fileq
      */
     public final void run(final CollectionReader reader)
             throws UIMAException, IOException {
-        runPipeline(reader, (AnalysisEngine[]) pipeline.toArray(
+        runPipeline(reader, (AnalysisEngine[]) steps.toArray(
                 new AnalysisEngine[0]));
     }
 
@@ -132,7 +132,7 @@ public class Pipeline {
     public String toString() {
         ToStringHelper ts = Objects.toStringHelper(this);
         // UIMA's AnalysisEngine has no useful toString() method
-        for (AnalysisEngine a : pipeline) {
+        for (AnalysisEngine a : steps) {
             ts.addValue(a.getAnalysisEngineMetaData().getName());
         }
         return ts.toString();
