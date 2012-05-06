@@ -21,6 +21,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
+ * Annotates articles for use in cloze tests.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */

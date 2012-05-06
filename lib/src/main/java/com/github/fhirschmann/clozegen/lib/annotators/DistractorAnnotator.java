@@ -18,9 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.annotators;
 
 import com.github.fhirschmann.clozegen.lib.type.Distractor;
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.Set;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
@@ -30,15 +28,43 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.util.FSCollectionFactory;
 
 /**
+ * Base class for all cloze item annotations.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public abstract class DistractorAnnotator extends JCasAnnotator_ImplBase {
-
+    /**
+     * Returns the type of the word class an extending class is looking for.
+     *
+     * This should be implemented by all inheriting classes.
+     *
+     * @see de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
+     * @return word class type
+     */
     public abstract int getType();
 
+    /**
+     * Generates cloze tests item from a given subject (a word in a word class).
+     *
+     * This method should generate a number of valid and invalid answers
+     * for a given subject. For example, the subject "a" in the "articles" class
+     * might have "a" as only valid answers and {"an","the"} as invalid answers.
+     *
+     * @param subject
+     * @return
+     */
     public abstract DistractorsAcceptablesPair generate(Annotation subject);
 
+    /**
+     * Process the annotator.
+     *
+     * This method will set up the annotation for words in a word class
+     * (as defined by the extending classes) and call generate() in the
+     * extending class for each word in this class.
+     *
+     * @param jcas the CAS to work on
+     * @throws AnalysisEngineProcessException
+     */
     @Override
     public void process(JCas jcas) throws AnalysisEngineProcessException {
         for (Iterator<Annotation> i = jcas.getAnnotationIndex(getType()).iterator(); i.hasNext();) {
