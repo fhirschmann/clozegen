@@ -9,7 +9,6 @@ import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 import java.io.File;
 import java.io.IOException;
-import lombok.ToString;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.collection.CollectionReader;
@@ -22,7 +21,6 @@ import org.uimafit.factory.JCasFactory;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-@ToString(callSuper = true, includeFieldNames = true)
 public class ClozeTestGenerator {
 
     private Class<? extends AnalysisComponent> segmenter = StanfordSegmenter.class;
