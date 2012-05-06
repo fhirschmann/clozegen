@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib;
 
+import com.google.common.base.Objects;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.apache.uima.UIMAException;
@@ -118,11 +119,17 @@ public class Pipeline {
      *
      * @param reader the Collection Reader to start the pipeline off with
      * @throws UIMAException when UIMA errors occur
-     * @throws IOException when errors occur while reading from a file
+     * @throws IOException when errors occur while reading from a fileq
      */
     public final void run(final CollectionReader reader)
             throws UIMAException, IOException {
         runPipeline(reader, (AnalysisEngine[]) pipeline.toArray(
                 new AnalysisEngine[0]));
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this).
+                add("steps", pipeline.toString()).toString();
     }
 }

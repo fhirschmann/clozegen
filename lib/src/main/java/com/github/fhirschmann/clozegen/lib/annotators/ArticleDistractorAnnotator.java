@@ -27,12 +27,12 @@ import org.apache.uima.jcas.tcas.Annotation;
 public class ArticleDistractorAnnotator extends DistractorAnnotator {
 
     @Override
-    public int getType() {
+    public final int getType() {
         return ART.type;
     }
 
     @Override
-    public DistractorsAcceptablesPair generate(Annotation subject) {
+    public final DistractorsAcceptablesPair generate(final Annotation subject) {
         DistractorsAcceptablesPair pair = new DistractorsAcceptablesPair();
 
         pair.getAcceptables().add(subject.getCoveredText());

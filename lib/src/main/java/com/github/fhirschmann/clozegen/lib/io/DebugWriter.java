@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.io;
 
 import com.github.fhirschmann.clozegen.lib.type.Distractor;
+import com.google.common.base.Objects;
 import java.util.Iterator;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
@@ -35,17 +36,17 @@ import org.uimafit.util.FSCollectionFactory;
 public class DebugWriter extends JCasConsumer_ImplBase {
 
     @Override
-    public void process(JCas jcas) throws AnalysisEngineProcessException {
+    public void process(final JCas jCas) throws AnalysisEngineProcessException {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(String.format("%s%n", jcas.getDocumentText()));
+        sb.append(String.format("%s%n", jCas.getDocumentText()));
 
-        for (Iterator<Annotation> i = jcas.getAnnotationIndex().iterator(); i.hasNext();) {
+        for (Iterator<Annotation> i = jCas.getAnnotationIndex().iterator(); i.hasNext();) {
             Annotation a = i.next();
             sb.append(String.format("[%s] (%s,%s) %s", a.getType().getShortName(),
                     a.getBegin(), a.getEnd(), a.getCoveredText()));
             if (a.getTypeIndexID() == Distractor.type) {
-                Distractor d = (Distractor)a;
+                Distractor d = (Distractor) a;
                 sb.append(String.format(" %s%s%n",
                         FSCollectionFactory.create(d.getAcceptables()).toString(),
                         FSCollectionFactory.create(d.getDistractors()).toString()));
