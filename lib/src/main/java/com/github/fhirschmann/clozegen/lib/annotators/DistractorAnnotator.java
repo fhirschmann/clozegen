@@ -57,3 +57,4 @@ public abstract class DistractorAnnotator extends JCasAnnotator_ImplBase {
         }
     }
 }
+

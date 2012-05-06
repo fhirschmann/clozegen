@@ -25,5 +25,6 @@ public class Test {
     public static void main(String[] args) throws Exception {
         ClozeTestGenerator g = new ClozeTestGenerator();
         g.run();
+        System.err.println(g.getPipeline().toString());
     }
 }
