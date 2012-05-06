@@ -18,7 +18,6 @@
 package com.github.fhirschmann.clozegen.lib.io;
 
 import com.github.fhirschmann.clozegen.lib.type.Distractor;
-import com.google.common.base.Objects;
 import java.util.Iterator;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
@@ -36,7 +35,7 @@ import org.uimafit.util.FSCollectionFactory;
 public class DebugWriter extends JCasConsumer_ImplBase {
 
     @Override
-    public void process(final JCas jCas) throws AnalysisEngineProcessException {
+    public final void process(final JCas jCas) throws AnalysisEngineProcessException {
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("%s%n", jCas.getDocumentText()));
