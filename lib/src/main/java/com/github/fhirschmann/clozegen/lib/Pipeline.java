@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.lib;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.apache.uima.UIMAException;
@@ -129,7 +130,11 @@ public class Pipeline {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).
-                add("steps", pipeline.toString()).toString();
+        ToStringHelper ts = Objects.toStringHelper(this);
+        // UIMA's AnalysisEngine has no useful toString() method
+        for (AnalysisEngine a : pipeline) {
+            ts.addValue(a.getAnalysisEngineMetaData().getName());
+        }
+        return ts.toString();
     }
 }
