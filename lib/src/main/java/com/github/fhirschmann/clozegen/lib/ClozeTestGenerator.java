@@ -1,7 +1,7 @@
 package com.github.fhirschmann.clozegen.lib;
 
-import com.github.fhirschmann.clozegen.lib.annotators.ArticleDistractorAnnotator;
-import com.github.fhirschmann.clozegen.lib.annotators.PrepositionDistractorAnnotator;
+import com.github.fhirschmann.clozegen.lib.annotators.ArticleAnnotator;
+import com.github.fhirschmann.clozegen.lib.annotators.PrepositionAnnotator;
 import com.github.fhirschmann.clozegen.lib.io.DebugWriter;
 
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
@@ -41,8 +41,8 @@ public class ClozeTestGenerator {
         getPipeline().addStep(getTagger());
 
 
-        getPipeline().addStep(PrepositionDistractorAnnotator.class);
-        getPipeline().addStep(ArticleDistractorAnnotator.class);
+        getPipeline().addStep(PrepositionAnnotator.class);
+        getPipeline().addStep(ArticleAnnotator.class);
         getPipeline().addStep(DebugWriter.class);
         getPipeline().run(jcas);
     }

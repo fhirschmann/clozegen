@@ -24,13 +24,13 @@ import org.apache.uima.jcas.tcas.Annotation;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionDistractorAnnotator extends DistractorAnnotator {
+public class PrepositionAnnotator extends GapAnnotator {
 
     @Override
-    public final DistractorsAcceptablesPair generate(final Annotation subject) {
-        DistractorsAcceptablesPair pair = new DistractorsAcceptablesPair();
-        pair.getAcceptables().add(subject.getCoveredText());
-        pair.getDistractors().add(subject.getCoveredText());
+    public final Gap generate(final Annotation subject) {
+        Gap pair = new Gap();
+        pair.getValidAnswers().add(subject.getCoveredText());
+        pair.getInvalidAnswers().add(subject.getCoveredText());
 
         return pair;
     }

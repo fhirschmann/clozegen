@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-  <name>Distractor</name>
+  <name>GapAnnotation</name>
   <description/>
   <version>1.0</version>
   <vendor/>
   <types>
     <typeDescription>
-      <name>com.github.fhirschmann.clozegen.lib.type.Distractor</name>
+      <name>com.github.fhirschmann.clozegen.lib.type.GapAnnotation</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
-          <name>distractors</name>
+          <name>invalidAnswers</name>
           <description/>
           <rangeTypeName>uima.cas.NonEmptyStringList</rangeTypeName>
         </featureDescription>
         <featureDescription>
-          <name>acceptables</name>
+          <name>validAnswers</name>
           <description/>
           <rangeTypeName>uima.cas.NonEmptyStringList</rangeTypeName>
         </featureDescription>

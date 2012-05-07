@@ -24,48 +24,48 @@ import java.util.Set;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class DistractorsAcceptablesPair {
-    private Set<String> distractors = new HashSet<String>();
-    private Set<String> acceptables = new HashSet<String>();
+public class Gap {
+    private Set<String> invalidAnswers = new HashSet<String>();
+    private Set<String> validAnswers = new HashSet<String>();
 
     /**
-     * Returns the union of the distractors and acceptables set.
+     * Returns the union of all valid and invalid answers for this gap.
      *
-     * @return distractors and acceptables
+     * @return valid and invalid answers
      */
     public Set<String> getAll() {
         Set<String> all = new HashSet<String>();
-        all.addAll(distractors);
-        all.addAll(acceptables);
+        all.addAll(getInvalidAnswers());
+        all.addAll(getValidAnswers());
         return all;
     }
 
     /**
-     * @return the distractors
+     * @return the invalidAnswers
      */
-    public Set<String> getDistractors() {
-        return distractors;
+    public Set<String> getInvalidAnswers() {
+        return invalidAnswers;
     }
 
     /**
-     * @param distractors the distractors to set
+     * @param invalidAnswers the invalidAnswers to set
      */
-    public void setDistractors(Set<String> distractors) {
-        this.distractors = distractors;
+    public void setInvalidAnswers(Set<String> invalidAnswers) {
+        this.invalidAnswers = invalidAnswers;
     }
 
     /**
-     * @return the acceptables
+     * @return the validAnswers
      */
-    public Set<String> getAcceptables() {
-        return acceptables;
+    public Set<String> getValidAnswers() {
+        return validAnswers;
     }
 
     /**
-     * @param acceptables the acceptables to set
+     * @param validAnswers the validAnswers to set
      */
-    public void setAcceptables(Set<String> acceptables) {
-        this.acceptables = acceptables;
+    public void setValidAnswers(Set<String> validAnswers) {
+        this.validAnswers = validAnswers;
     }
 }
 

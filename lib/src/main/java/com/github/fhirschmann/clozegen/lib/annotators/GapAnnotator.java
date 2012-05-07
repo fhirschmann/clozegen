@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators;
 
-import com.github.fhirschmann.clozegen.lib.type.Distractor;
+import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import java.util.Iterator;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -32,13 +32,13 @@ import org.uimafit.util.FSCollectionFactory;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public abstract class DistractorAnnotator extends JCasAnnotator_ImplBase {
+public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
     /**
      * Returns the type of the word class an extending class is looking for.
      *
      * This should be implemented by all inheriting classes.
      *
-     * @see de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
+     * @see de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos
      * @return word class type
      */
     public abstract int getType();
@@ -50,10 +50,10 @@ public abstract class DistractorAnnotator extends JCasAnnotator_ImplBase {
      * for a given subject. For example, the subject "a" in the "articles" class
      * might have "a" as only valid answers and {"an","the"} as invalid answers.
      *
-     * @param subject
-     * @return
+     * @param subject the word to generate a cloze test item for
+     * @return valid and invalid answers for a gap
      */
-    public abstract DistractorsAcceptablesPair generate(Annotation subject);
+    public abstract Gap generate(Annotation subject);
 
     /**
      * Process the annotator.
@@ -69,17 +69,17 @@ public abstract class DistractorAnnotator extends JCasAnnotator_ImplBase {
     public void process(JCas jcas) throws AnalysisEngineProcessException {
         for (Iterator<Annotation> i = jcas.getAnnotationIndex(getType()).iterator(); i.hasNext();) {
             Annotation subject = i.next();
-            Distractor distractor = new Distractor(jcas);
+            GapAnnotation annotation = new GapAnnotation(jcas);
 
-            distractor.setBegin(subject.getBegin());
-            distractor.setEnd(subject.getEnd());
+            annotation.setBegin(subject.getBegin());
+            annotation.setEnd(subject.getEnd());
 
-            DistractorsAcceptablesPair pair = generate(subject);
-            NonEmptyStringList d = (NonEmptyStringList) FSCollectionFactory.createStringList(jcas, pair.getDistractors());
-            distractor.setDistractors(d);
-            NonEmptyStringList a = (NonEmptyStringList) FSCollectionFactory.createStringList(jcas, pair.getAcceptables());
-            distractor.setAcceptables(a);
-            distractor.addToIndexes();
+            Gap pair = generate(subject);
+            NonEmptyStringList d = (NonEmptyStringList) FSCollectionFactory.createStringList(jcas, pair.getInvalidAnswers());
+            annotation.setInvalidAnswers(d);
+            NonEmptyStringList a = (NonEmptyStringList) FSCollectionFactory.createStringList(jcas, pair.getValidAnswers());
+            annotation.setValidAnswers(a);
+            annotation.addToIndexes();
         }
     }
 }

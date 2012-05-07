@@ -25,7 +25,7 @@ import org.apache.uima.jcas.tcas.Annotation;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class ArticleDistractorAnnotator extends DistractorAnnotator {
+public class ArticleAnnotator extends GapAnnotator {
 
     @Override
     public final int getType() {
@@ -33,13 +33,13 @@ public class ArticleDistractorAnnotator extends DistractorAnnotator {
     }
 
     @Override
-    public final DistractorsAcceptablesPair generate(final Annotation subject) {
-        DistractorsAcceptablesPair pair = new DistractorsAcceptablesPair();
+    public final Gap generate(final Annotation subject) {
+        Gap pair = new Gap();
 
-        pair.getAcceptables().add(subject.getCoveredText());
-        pair.getDistractors().add("a");
-        pair.getDistractors().add("an");
-        pair.getDistractors().add("the");
+        pair.getValidAnswers().add(subject.getCoveredText());
+        pair.getInvalidAnswers().add("a");
+        pair.getInvalidAnswers().add("an");
+        pair.getInvalidAnswers().add("the");
 
         return pair;
     }

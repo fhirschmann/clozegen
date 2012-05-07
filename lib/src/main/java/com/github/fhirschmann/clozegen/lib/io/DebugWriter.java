@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.io;
 
-import com.github.fhirschmann.clozegen.lib.type.Distractor;
+import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import java.util.Iterator;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
@@ -28,7 +28,7 @@ import org.uimafit.util.FSCollectionFactory;
 
 /**
  * Logs a document by displaying its token's types, names, the text
- * covered, and in case of Distractors, the Acceptables and Distractors.
+ * covered, and in case of GapAnnotations, the valid and invalid answer options.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -44,11 +44,11 @@ public class DebugWriter extends JCasConsumer_ImplBase {
             Annotation a = i.next();
             sb.append(String.format("[%s] (%s,%s) %s", a.getType().getShortName(),
                     a.getBegin(), a.getEnd(), a.getCoveredText()));
-            if (a.getTypeIndexID() == Distractor.type) {
-                Distractor d = (Distractor) a;
+            if (a.getTypeIndexID() == GapAnnotation.type) {
+                GapAnnotation d = (GapAnnotation) a;
                 sb.append(String.format(" %s%s%n",
-                        FSCollectionFactory.create(d.getAcceptables()).toString(),
-                        FSCollectionFactory.create(d.getDistractors()).toString()));
+                        FSCollectionFactory.create(d.getValidAnswers()).toString(),
+                        FSCollectionFactory.create(d.getInvalidAnswers()).toString()));
             } else {
                 sb.append(String.format("%n"));
             }
