@@ -28,12 +28,12 @@ import org.apache.uima.jcas.tcas.Annotation;
 public class ArticleAnnotator extends GapAnnotator {
 
     @Override
-    public final int getType() {
+    public int getType() {
         return ART.type;
     }
 
     @Override
-    public final Gap generate(final Annotation subject) {
+    public Gap generate(final Annotation subject) {
         Gap gap = new Gap();
 
         gap.getValidAnswers().add(subject.getCoveredText());

@@ -27,7 +27,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 public class PrepositionAnnotator extends GapAnnotator {
 
     @Override
-    public final Gap generate(final Annotation subject) {
+    public Gap generate(final Annotation subject) {
         Gap gap = new Gap();
         gap.getValidAnswers().add(subject.getCoveredText());
         gap.getInvalidAnswers().add(subject.getCoveredText());
@@ -36,7 +36,7 @@ public class PrepositionAnnotator extends GapAnnotator {
     }
 
     @Override
-    public final int getType() {
+    public int getType() {
         return PP.type;
     }
 }

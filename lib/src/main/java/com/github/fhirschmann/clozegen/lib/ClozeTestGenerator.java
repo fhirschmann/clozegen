@@ -31,7 +31,7 @@ public class ClozeTestGenerator {
         org.apache.log4j.BasicConfigurator.configure();
     }
 
-    public final void run() throws ResourceInitializationException, UIMAException,
+    public void run() throws ResourceInitializationException, UIMAException,
             IOException, ClozegenException {
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText("I'd like a chicken!");
@@ -50,42 +50,42 @@ public class ClozeTestGenerator {
     /**
      * @return the segmenter
      */
-    public final Class<? extends AnalysisComponent> getSegmenter() {
+    public Class<? extends AnalysisComponent> getSegmenter() {
         return segmenter;
     }
 
     /**
      * @param segmenter the segmenter to set
      */
-    public final void setSegmenter(final Class<? extends AnalysisComponent> segmenter) {
+    public void setSegmenter(final Class<? extends AnalysisComponent> segmenter) {
         this.segmenter = segmenter;
     }
 
     /**
      * @return the tagger
      */
-    public final Class<? extends AnalysisComponent> getTagger() {
+    public Class<? extends AnalysisComponent> getTagger() {
         return tagger;
     }
 
     /**
      * @param tagger the tagger to set
      */
-    public final void setTagger(final Class<? extends AnalysisComponent> tagger) {
+    public void setTagger(final Class<? extends AnalysisComponent> tagger) {
         this.tagger = tagger;
     }
 
     /**
      * @return the pipeline
      */
-    public final Pipeline getPipeline() {
+    public Pipeline getPipeline() {
         return pipeline;
     }
 
     /**
      * @param pipeline the pipeline to set
      */
-    public final void setPipeline(final Pipeline pipeline) {
+    public void setPipeline(final Pipeline pipeline) {
         this.pipeline = pipeline;
     }
 }

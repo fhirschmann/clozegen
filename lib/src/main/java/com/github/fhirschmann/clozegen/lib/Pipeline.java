@@ -60,7 +60,7 @@ public class Pipeline {
      *
      * @param step the steps step to be added
      */
-    public final void addStep(final AnalysisEngine step) {
+    public void addStep(final AnalysisEngine step) {
         steps.add(step);
     }
 
@@ -70,7 +70,7 @@ public class Pipeline {
      * @param step the steps step to be added
      * @throws ResourceInitializationException on errors during initialization
      */
-    public final void addStep(final AnalysisEngineDescription step)
+    public void addStep(final AnalysisEngineDescription step)
             throws ResourceInitializationException {
         AnalysisEngine en;
         if (step.isPrimitive()) {
@@ -88,7 +88,7 @@ public class Pipeline {
      * @param step the steps step to be added
      * @throws ResourceInitializationException on errors during initialization
      */
-    public final void addStep(final Class<? extends AnalysisComponent> step)
+    public void addStep(final Class<? extends AnalysisComponent> step)
             throws ResourceInitializationException {
 
         addStep((AnalysisEngineDescription) createPrimitiveDescription(step));
@@ -103,7 +103,7 @@ public class Pipeline {
      * @throws UIMAException on errors produced by UIMA
      * @throws IOException on errors when reading a file
      */
-    public final void run(final JCas jCas)
+    public void run(final JCas jCas)
             throws UIMAException, IOException {
         runPipeline(jCas, (AnalysisEngine[]) steps.toArray(
                 new AnalysisEngine[0]));
@@ -118,14 +118,14 @@ public class Pipeline {
      * @throws UIMAException when UIMA errors occur
      * @throws IOException when errors occur while reading from a file
      */
-    public final void run(final CollectionReader reader)
+    public void run(final CollectionReader reader)
             throws UIMAException, IOException {
         runPipeline(reader, (AnalysisEngine[]) steps.toArray(
                 new AnalysisEngine[0]));
     }
 
     @Override
-    public final String toString() {
+    public String toString() {
         ToStringHelper ts = Objects.toStringHelper(this);
         // UIMA's AnalysisEngine has no useful toString() method
         for (AnalysisEngine a : steps) {

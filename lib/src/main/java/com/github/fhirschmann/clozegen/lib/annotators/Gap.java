@@ -50,7 +50,7 @@ public class Gap {
     /**
      * @param invalidAnswers the invalidAnswers to set
      */
-    public void setInvalidAnswers(Set<String> invalidAnswers) {
+    public void setInvalidAnswers(final Set<String> invalidAnswers) {
         this.invalidAnswers = invalidAnswers;
     }
 
@@ -64,7 +64,7 @@ public class Gap {
     /**
      * @param validAnswers the validAnswers to set
      */
-    public void setValidAnswers(Set<String> validAnswers) {
+    public void setValidAnswers(final Set<String> validAnswers) {
         this.validAnswers = validAnswers;
     }
 }

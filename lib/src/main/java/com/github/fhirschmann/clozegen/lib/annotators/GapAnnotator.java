@@ -66,7 +66,7 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
      * @throws AnalysisEngineProcessException
      */
     @Override
-    public void process(final JCas jcas) throws AnalysisEngineProcessException {
+    public final void process(final JCas jcas) throws AnalysisEngineProcessException {
         for (Iterator<Annotation> i = jcas.getAnnotationIndex(
                 getType()).iterator(); i.hasNext();) {
             Annotation subject = i.next();
