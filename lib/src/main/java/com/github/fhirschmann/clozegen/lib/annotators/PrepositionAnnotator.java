@@ -28,11 +28,11 @@ public class PrepositionAnnotator extends GapAnnotator {
 
     @Override
     public final Gap generate(final Annotation subject) {
-        Gap pair = new Gap();
-        pair.getValidAnswers().add(subject.getCoveredText());
-        pair.getInvalidAnswers().add(subject.getCoveredText());
+        Gap gap = new Gap();
+        gap.getValidAnswers().add(subject.getCoveredText());
+        gap.getInvalidAnswers().add(subject.getCoveredText());
 
-        return pair;
+        return gap;
     }
 
     @Override
