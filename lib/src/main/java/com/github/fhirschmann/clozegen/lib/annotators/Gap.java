@@ -25,7 +25,10 @@ import java.util.Set;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class Gap {
+    /** The set of invalid answers. */
     private Set<String> invalidAnswers = new HashSet<String>();
+
+    /** The set of valid answers. */
     private Set<String> validAnswers = new HashSet<String>();
 
     /**
