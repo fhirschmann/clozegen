@@ -34,13 +34,13 @@ public class ArticleAnnotator extends GapAnnotator {
 
     @Override
     public final Gap generate(final Annotation subject) {
-        Gap pair = new Gap();
+        Gap gap = new Gap();
 
-        pair.getValidAnswers().add(subject.getCoveredText());
-        pair.getInvalidAnswers().add("a");
-        pair.getInvalidAnswers().add("an");
-        pair.getInvalidAnswers().add("the");
+        gap.getValidAnswers().add(subject.getCoveredText());
+        gap.getInvalidAnswers().add("a");
+        gap.getInvalidAnswers().add("an");
+        gap.getInvalidAnswers().add("the");
 
-        return pair;
+        return gap;
     }
 }
