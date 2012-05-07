@@ -21,6 +21,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -36,15 +37,19 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
  * A steps is a chain of AnalysisEngines arranged so that each step will be run
  * sequentially with all steps steps working on the same CAS. <p> This class provides
  * convenience methods to add steps steps from engines, engine descriptions and engine
- * components dynamically. </p> <p> An example scenario might look like this:
+ * components dynamically. </p>
+ *
+ * <p>
+ * An example scenario might look like this:
  * <pre>
  * JCas jCas = new JCasFactory.createJCas();
  * jCas.setDocumentText("This is test sentence. This is another sentence.");
- * jCas.setDocumentLanguage("en");
+ * jCas.setDocumentLanguage("engine");
  * Pipeline steps = new Pipeline();
  * steps.addStep(StanfordSegmenter.class);
  * steps.run(jCas);
- * </pre> </p>
+ * </pre>
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -53,7 +58,7 @@ public class Pipeline {
     /**
      * The list of steps elements.
      */
-    private ArrayList<AnalysisEngine> steps = new ArrayList<AnalysisEngine>();
+    private final List<AnalysisEngine> steps = new ArrayList<AnalysisEngine>();
 
     /**
      * Adds a step to the steps.
@@ -72,14 +77,14 @@ public class Pipeline {
      */
     public void addStep(final AnalysisEngineDescription step)
             throws ResourceInitializationException {
-        AnalysisEngine en;
+        AnalysisEngine engine;
         if (step.isPrimitive()) {
-            en = AnalysisEngineFactory.createPrimitive(step);
+            engine = AnalysisEngineFactory.createPrimitive(step);
         } else {
-            en = AnalysisEngineFactory.createAggregate(step);
+            engine = AnalysisEngineFactory.createAggregate(step);
         }
 
-        steps.add(en);
+        steps.add(engine);
     }
 
     /**
@@ -106,7 +111,7 @@ public class Pipeline {
     public void run(final JCas jCas)
             throws UIMAException, IOException {
         runPipeline(jCas, (AnalysisEngine[]) steps.toArray(
-                new AnalysisEngine[0]));
+                new AnalysisEngine[steps.size()]));
     }
 
     /**
@@ -121,16 +126,16 @@ public class Pipeline {
     public void run(final CollectionReader reader)
             throws UIMAException, IOException {
         runPipeline(reader, (AnalysisEngine[]) steps.toArray(
-                new AnalysisEngine[0]));
+                new AnalysisEngine[steps.size()]));
     }
 
     @Override
     public String toString() {
-        ToStringHelper ts = Objects.toStringHelper(this);
+        final ToStringHelper str = Objects.toStringHelper(this);
         // UIMA's AnalysisEngine has no useful toString() method
         for (AnalysisEngine a : steps) {
-            ts.addValue(a.getAnalysisEngineMetaData().getName());
+            str.addValue(a.getAnalysisEngineMetaData().getName());
         }
-        return ts.toString();
+        return str.toString();
     }
 }
