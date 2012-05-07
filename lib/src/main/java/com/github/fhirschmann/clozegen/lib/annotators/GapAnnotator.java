@@ -66,8 +66,9 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
      * @throws AnalysisEngineProcessException
      */
     @Override
-    public void process(JCas jcas) throws AnalysisEngineProcessException {
-        for (Iterator<Annotation> i = jcas.getAnnotationIndex(getType()).iterator(); i.hasNext();) {
+    public void process(final JCas jcas) throws AnalysisEngineProcessException {
+        for (Iterator<Annotation> i = jcas.getAnnotationIndex(
+                getType()).iterator(); i.hasNext();) {
             Annotation subject = i.next();
             GapAnnotation annotation = new GapAnnotation(jcas);
 
@@ -75,9 +76,11 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
             annotation.setEnd(subject.getEnd());
 
             Gap pair = generate(subject);
-            NonEmptyStringList d = (NonEmptyStringList) FSCollectionFactory.createStringList(jcas, pair.getInvalidAnswers());
+            NonEmptyStringList d = (NonEmptyStringList) FSCollectionFactory.
+                    createStringList(jcas, pair.getInvalidAnswers());
             annotation.setInvalidAnswers(d);
-            NonEmptyStringList a = (NonEmptyStringList) FSCollectionFactory.createStringList(jcas, pair.getValidAnswers());
+            NonEmptyStringList a = (NonEmptyStringList) FSCollectionFactory.
+                    createStringList(jcas, pair.getValidAnswers());
             annotation.setValidAnswers(a);
             annotation.addToIndexes();
         }
