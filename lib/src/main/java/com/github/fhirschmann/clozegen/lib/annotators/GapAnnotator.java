@@ -18,6 +18,8 @@
 package com.github.fhirschmann.clozegen.lib.annotators;
 
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -33,22 +35,23 @@ import org.uimafit.util.FSCollectionFactory;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
+
     /**
-     * Returns the type of the word class an extending class is looking for.
+     * Returns the word classes an annotator is working on.
      *
      * This should be implemented by all inheriting classes.
      *
      * @see de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos
      * @return word class type
      */
-    public abstract int getType();
+    public abstract String[] getWordClasses();
 
     /**
      * Generates cloze tests item from a given subject (a word in a word class).
      *
-     * This method should generate a number of valid and invalid answers
-     * for a given subject. For example, the subject "a" in the "articles" class
-     * might have "a" as only valid answers and {"an","the"} as invalid answers.
+     * This method should generate a number of valid and invalid answers for a given
+     * subject. For example, the subject "a" in the "articles" class might have "a" as
+     * only valid answers and {"an","the"} as invalid answers.
      *
      * @param subject the word to generate a cloze test item for
      * @return valid and invalid answers for a gap
@@ -58,9 +61,9 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
     /**
      * Process the annotator.
      *
-     * This method will set up the annotation for words in a word class
-     * (as defined by the extending classes) and call generate() in the
-     * extending class for each word in this class.
+     * This method will set up the annotation for words in a word class (as defined by the
+     * extending classes) and call generate() in the extending class for each word in this
+     * class.
      *
      * @param jcas the CAS to work on
      * @throws AnalysisEngineProcessException
@@ -68,22 +71,30 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
     @Override
     public final void process(final JCas jcas) throws AnalysisEngineProcessException {
         for (Iterator<Annotation> i = jcas.getAnnotationIndex(
-                getType()).iterator(); i.hasNext();) {
+                POS.type).iterator(); i.hasNext();) {
             Annotation subject = i.next();
-            GapAnnotation annotation = new GapAnnotation(jcas);
+            POS pos = (POS) subject;
 
-            annotation.setBegin(subject.getBegin());
-            annotation.setEnd(subject.getEnd());
+            if (Arrays.asList(getWordClasses()).contains(pos.getPosValue())) {
 
-            Gap pair = generate(subject);
-            NonEmptyStringList d = (NonEmptyStringList) FSCollectionFactory.
-                    createStringList(jcas, pair.getInvalidAnswers());
-            annotation.setInvalidAnswers(d);
-            NonEmptyStringList a = (NonEmptyStringList) FSCollectionFactory.
-                    createStringList(jcas, pair.getValidAnswers());
-            annotation.setValidAnswers(a);
-            annotation.addToIndexes();
+                GapAnnotation annotation = new GapAnnotation(jcas);
+
+                annotation.setBegin(subject.getBegin());
+                annotation.setEnd(subject.getEnd());
+
+                Gap pair = generate(subject);
+
+                if (pair == null) {
+                    continue;
+                }
+                NonEmptyStringList d = (NonEmptyStringList) FSCollectionFactory.
+                        createStringList(jcas, pair.getInvalidAnswers());
+                annotation.setInvalidAnswers(d);
+                NonEmptyStringList a = (NonEmptyStringList) FSCollectionFactory.
+                        createStringList(jcas, pair.getValidAnswers());
+                annotation.setValidAnswers(a);
+                annotation.addToIndexes();
+            }
         }
     }
 }
-
