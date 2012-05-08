@@ -11,7 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
+ * You should have received validAnswers copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
@@ -49,14 +49,14 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
     public abstract String[] getWantedTags();
 
     /**
-     * Generates cloze tests item from a given subject (a word in a word class).
+     * Generates cloze tests item from validAnswers given subject.
      *
      * This method should generate a number of valid and invalid answers for a given
      * subject. For example, the subject "a" in the "articles" class might have "a" as
      * only valid answers and {"an","the"} as invalid answers.
      *
-     * @param subject the word to generate a cloze test item for
-     * @return valid and invalid answers for a gap
+     * @param subject the word to generate validAnswers cloze test item for
+     * @return valid and invalid answers for validAnswers gap
      */
     public abstract Gap generate(Annotation subject);
 
@@ -68,33 +68,39 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
      * class.
      *
      * @param jcas the CAS to work on
-     * @throws AnalysisEngineProcessException
+     * @throws AnalysisEngineProcessException on errors during engine execution
      */
     @Override
     public final void process(final JCas jcas) throws AnalysisEngineProcessException {
-        for (Iterator<Annotation> i = jcas.getAnnotationIndex(
+        for (final Iterator<Annotation> i = jcas.getAnnotationIndex(
                 POS.type).iterator(); i.hasNext();) {
-            Annotation subject = i.next();
-            POS pos = (POS) subject;
+            final Annotation subject = i.next();
+            final POS pos = (POS) subject;
 
             if (Arrays.asList(getWantedTags()).contains(pos.getPosValue())) {
 
-                GapAnnotation annotation = new GapAnnotation(jcas);
+                final GapAnnotation annotation = new GapAnnotation(jcas);
 
                 annotation.setBegin(subject.getBegin());
                 annotation.setEnd(subject.getEnd());
 
-                Gap pair = generate(subject);
+                final Gap pair = generate(subject);
 
                 if (pair == null) {
+                    // Skip gap annotation if no gap was generated
                     continue;
                 }
-                NonEmptyStringList d = (NonEmptyStringList) FSCollectionFactory.
-                        createStringList(jcas, pair.getInvalidAnswers());
-                annotation.setInvalidAnswers(d);
-                NonEmptyStringList a = (NonEmptyStringList) FSCollectionFactory.
-                        createStringList(jcas, pair.getValidAnswers());
-                annotation.setValidAnswers(a);
+
+                final NonEmptyStringList invalidAnswers = (NonEmptyStringList)
+                        FSCollectionFactory.createStringList(
+                        jcas, pair.getInvalidAnswers());
+                annotation.setInvalidAnswers(invalidAnswers);
+
+                final NonEmptyStringList validAnswers = (NonEmptyStringList)
+                        FSCollectionFactory.createStringList(
+                        jcas, pair.getValidAnswers());
+                annotation.setValidAnswers(validAnswers);
+
                 annotation.addToIndexes();
             }
         }
