@@ -38,6 +38,7 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
 
     /**
      * Returns the word classes an annotator is working on.
+     *
      * <p>
      * This should be implemented by all inheriting classes. Depending on the underlying
      * tagger, the tags are most likely consistent with the Penn Treebank II Tags.
@@ -51,9 +52,11 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
     /**
      * Generates cloze tests item from validAnswers given subject.
      *
+     * <p>
      * This method should generate a number of valid and invalid answers for a given
      * subject. For example, the subject "a" in the "articles" class might have "a" as
      * only valid answers and {"an","the"} as invalid answers.
+     * </p>
      *
      * @param subject the word to generate validAnswers cloze test item for
      * @return valid and invalid answers for validAnswers gap
@@ -63,9 +66,11 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
     /**
      * Process the annotator.
      *
+     * <p>
      * This method will set up the annotation for words in a word class (as defined by the
      * extending classes) and call generate() in the extending class for each word in this
      * class.
+     * </p>
      *
      * @param jcas the CAS to work on
      * @throws AnalysisEngineProcessException on errors during engine execution
