@@ -39,6 +39,7 @@ import nu.xom.*;
  * how many times the subject has occurred. You can add as many attributes
  * as you like and process them in processChild(), so the population
  * of the frequencies with ValueCount<T> is up to you.
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
