@@ -17,17 +17,19 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import java.util.Arrays;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
- * Annotates articles for use in cloze tests.
+ * Implements an Annotator for generating gaps for the English ARTICLES.
+ *
+ * This simply deletes the article and gives three choices: a, an, the.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class ArticleAnnotator extends GapAnnotator {
-    public final static String[] articles = new String[] {"a", "an", "the"};
+    /** The three English ARTICLES. */
+    public static final String[] ARTICLES = new String[] {"a", "an", "the"};
 
     @Override
     public String[] getWordClasses() {
@@ -36,8 +38,8 @@ public class ArticleAnnotator extends GapAnnotator {
 
     @Override
     public Gap generate(final Annotation subject) {
-        if (Arrays.asList(articles).contains(subject.getCoveredText())) {
-            Gap gap = new Gap();
+        if (Arrays.asList(ARTICLES).contains(subject.getCoveredText())) {
+            final Gap gap = new Gap();
 
             gap.getValidAnswers().add(subject.getCoveredText());
             gap.getInvalidAnswers().add("a");
