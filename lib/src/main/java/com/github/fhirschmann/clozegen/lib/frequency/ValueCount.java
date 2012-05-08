@@ -18,13 +18,23 @@
 package com.github.fhirschmann.clozegen.lib.frequency;
 
 /**
+ * This is a generic way of mapping a frequency to a value.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class ValueCount<T> implements Comparable {
+    /** The count (number of occurrences). */
     private Integer count;
+
+    /** The value to assign the count to. */
     private T value;
 
+    /**
+     * Initialize the Mapping.
+     *
+     * @param value the value to assign the count to
+     * @param count the count to assign
+     */
     public ValueCount(final T value, final int count) {
         this.value = value;
         this.count = count;
@@ -54,13 +64,13 @@ public class ValueCount<T> implements Comparable {
     /**
      * @param value the value to set
      */
-    public void setValue(final T word) {
-        this.value = word;
+    public void setValue(final T value) {
+        this.value = value;
     }
 
     @Override
-    public int compareTo(Object object) {
-        ValueCount other = (ValueCount) object;
+    public int compareTo(final Object object) {
+        final ValueCount other = (ValueCount) object;
         return count.compareTo(other.getCount());
     }
 
