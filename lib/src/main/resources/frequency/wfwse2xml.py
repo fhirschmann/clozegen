@@ -25,7 +25,7 @@ def main(url, xml):
         raw = line.strip().split('\t')
 
         SubElement(root, 'frequency',
-                attrib={'sofa': raw[0], 'value': raw[1]})
+                attrib={'sofa': raw[0].replace('_', ' '), 'value': raw[1]})
 
     tree.write(xml)
 
