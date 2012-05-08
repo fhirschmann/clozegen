@@ -29,9 +29,16 @@ import nu.xom.*;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class PrepositionFrequencyList extends AbstractFrequencyList<String> {
+    public PrepositionFrequencyList(String xmlFile)
+            throws ParsingException, ValidityException, IOException {
+        load(xmlFile);
+    }
+
+    public PrepositionFrequencyList() throws ParsingException, IOException {
+        load("frequency/prepositions.xml");
+    }
     public static void main(String[] args) throws Exception {
         PrepositionFrequencyList f = new PrepositionFrequencyList();
-        f.load("frequency/prepositions.xml");
         System.out.println(f.getFrequencies());
     }
 
