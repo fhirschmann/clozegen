@@ -18,32 +18,55 @@
 package com.github.fhirschmann.clozegen.lib.frequency;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Collections;
 import nu.xom.*;
 
 /**
+ * This class represents a frequency list for prepositions.
+ *
+ * <p>
+ * By default, it will use the Word Frequencies in Written and Spoken English (see below).
+ * The script used to produce the XML version of the list can be found in the
+ * resources directory.
+ * </p>
+ * <p>
+ * [1] http://ucrel.lancs.ac.uk/bncfreq/
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
+ * @see <a href="http://ucrel.lancs.ac.uk/bncfreq/">Word Frequencies in Written and Spoken English</a>
  */
 public class PrepositionFrequencyList extends AbstractFrequencyList<String> {
-    public PrepositionFrequencyList(String xmlFile)
-            throws ParsingException, ValidityException, IOException {
+    /**
+     * Loads a Preposition Frequency list from an XML file.
+     *
+     * @param xmlFile the XML file to load
+     * @throws ParsingException on errors parsing the XML file
+     * @throws IOException on errors accessing the XML file
+     */
+    public PrepositionFrequencyList(final String xmlFile)
+            throws ParsingException, IOException {
+        super();
         load(xmlFile);
     }
 
+    /**
+     * Loads the default Preposition Frequency list.
+     *
+     * @throws ParsingException on errors parsing the XML file
+     * @throws IOException on errors accessing the XML file
+     */
     public PrepositionFrequencyList() throws ParsingException, IOException {
+        super();
         load("frequency/prepositions.xml");
     }
+
     public static void main(String[] args) throws Exception {
         PrepositionFrequencyList f = new PrepositionFrequencyList();
         System.out.println(f.getFrequencies());
     }
 
     @Override
-    void processChild(Element child) {
+    void processChild(final Element child) {
             final String word = child.getAttribute("sofa").getValue();
             final int count = Integer.parseInt(
                     child.getAttribute("value").getValue());
