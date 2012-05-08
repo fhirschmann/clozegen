@@ -35,7 +35,7 @@ import nu.xom.*;
  *     <frequency value="4563" ... />
  * </frequencies>
  * </pre>
- * The only required xml attribute here is the "value" attribute which indicates
+ * The only required XML attribute here is the "value" attribute which indicates
  * how many times the subject has occurred. You can add as many attributes
  * as you like and process them in processChild(), so the population
  * of the frequencies with ValueCount<T> is up to you.
