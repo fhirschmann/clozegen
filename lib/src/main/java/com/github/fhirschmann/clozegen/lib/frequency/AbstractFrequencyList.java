@@ -50,21 +50,20 @@ public abstract class AbstractFrequencyList<T> {
     /**
      * This method lets you process individual frequency-children in the XML file.
      *
-     * @param child
+     * @param child the XML child
      */
     abstract void processChild(Element child);
 
     /**
      * Loads the frequency list from an XML file.
      *
-     * @param xmlFile
-     * @throws ParsingException
-     * @throws ValidityException
-     * @throws IOException
+     * @param xmlFile the XML file to load
+     * @throws ParsingException on errors parsing the XML file
+     * @throws IOException on errors accessing the XML file
      */
     public void load(final String xmlFile)
-            throws ParsingException, ValidityException, IOException {
-        final InputStream stream = this.getClass().getClassLoader().
+            throws ParsingException, IOException {
+        final InputStream stream = Thread.currentThread().getContextClassLoader().
                 getResourceAsStream(xmlFile);
 
         final Builder builder = new Builder();
