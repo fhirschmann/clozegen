@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.io;
 
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import java.util.Iterator;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
@@ -50,6 +51,10 @@ public class DebugWriter extends JCasConsumer_ImplBase {
                         FSCollectionFactory.create(d.getValidAnswers()).toString(),
                         FSCollectionFactory.create(d.getInvalidAnswers()).toString()));
             } else {
+                if (a.getTypeIndexID() == POS.type) {
+                    POS pos = (POS) a;
+                    sb.append(String.format(" [%s]", pos.getPosValue()));
+                }
                 sb.append(String.format("%n"));
             }
         }
