@@ -21,6 +21,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * The Gap class represents a gap in a cloze text.
+ *
+ * <p>
+ * A gap consists of valid and invalid answers.
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -34,38 +39,38 @@ public class Gap {
     /**
      * Returns the union of all valid and invalid answers for this gap.
      *
-     * @return valid and invalid answers
+     * @return the set of valid and invalid answers for this gap
      */
     public Set<String> getAll() {
-        Set<String> all = new HashSet<String>();
+        final Set<String> all = new HashSet<String>();
         all.addAll(getInvalidAnswers());
         all.addAll(getValidAnswers());
         return all;
     }
 
     /**
-     * @return the invalidAnswers
+     * @return the set of invalid answers for this gap
      */
     public Set<String> getInvalidAnswers() {
         return invalidAnswers;
     }
 
     /**
-     * @param invalidAnswers the invalidAnswers to set
+     * @param invalidAnswers the invalid answers for this gap
      */
     public void setInvalidAnswers(final Set<String> invalidAnswers) {
         this.invalidAnswers = invalidAnswers;
     }
 
     /**
-     * @return the validAnswers
+     * @return the set of valid answers of this gap
      */
     public Set<String> getValidAnswers() {
         return validAnswers;
     }
 
     /**
-     * @param validAnswers the validAnswers to set
+     * @param validAnswers the valid answers for this gap
      */
     public void setValidAnswers(final Set<String> validAnswers) {
         this.validAnswers = validAnswers;
