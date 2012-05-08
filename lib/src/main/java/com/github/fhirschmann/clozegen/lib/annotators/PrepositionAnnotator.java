@@ -17,7 +17,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
@@ -28,7 +27,7 @@ public class PrepositionAnnotator extends GapAnnotator {
 
     @Override
     public Gap generate(final Annotation subject) {
-        Gap gap = new Gap();
+        final Gap gap = new Gap();
         gap.getValidAnswers().add(subject.getCoveredText());
         gap.getInvalidAnswers().add(subject.getCoveredText());
 
