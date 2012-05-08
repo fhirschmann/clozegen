@@ -46,7 +46,7 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
      * @see <a href="http://bulba.sdsu.edu/jeanette/thesis/PennTags.html">Penn Treebank II Tags</a>
      * @return word class type
      */
-    public abstract String[] getWordClasses();
+    public abstract String[] getWantedTags();
 
     /**
      * Generates cloze tests item from a given subject (a word in a word class).
@@ -77,7 +77,7 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
             Annotation subject = i.next();
             POS pos = (POS) subject;
 
-            if (Arrays.asList(getWordClasses()).contains(pos.getPosValue())) {
+            if (Arrays.asList(getWantedTags()).contains(pos.getPosValue())) {
 
                 GapAnnotation annotation = new GapAnnotation(jcas);
 

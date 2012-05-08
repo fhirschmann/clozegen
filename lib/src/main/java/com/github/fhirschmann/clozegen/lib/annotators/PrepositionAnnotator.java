@@ -35,7 +35,7 @@ public class PrepositionAnnotator extends GapAnnotator {
     }
 
     @Override
-    public String[] getWordClasses() {
+    public String[] getWantedTags() {
         return new String[] {"TO", "P"};
     }
 }

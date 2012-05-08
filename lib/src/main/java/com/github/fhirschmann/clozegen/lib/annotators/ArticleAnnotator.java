@@ -32,7 +32,7 @@ public class ArticleAnnotator extends GapAnnotator {
     public static final String[] ARTICLES = new String[] {"a", "an", "the"};
 
     @Override
-    public String[] getWordClasses() {
+    public String[] getWantedTags() {
         return new String[] {"DT"};
     }
 
