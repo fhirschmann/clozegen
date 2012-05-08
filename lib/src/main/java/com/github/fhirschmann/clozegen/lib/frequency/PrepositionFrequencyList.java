@@ -28,9 +28,6 @@ import nu.xom.*;
  * The script used to produce the XML version of the list can be found in the
  * resources directory.
  * </p>
- * <p>
- * [1] http://ucrel.lancs.ac.uk/bncfreq/
- * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  * @see <a href="http://ucrel.lancs.ac.uk/bncfreq/">Word Frequencies in Written and Spoken English</a>
