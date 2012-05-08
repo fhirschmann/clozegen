@@ -3,15 +3,23 @@ package com.github.fhirschmann.clozegen.lib;
 import com.github.fhirschmann.clozegen.lib.annotators.ArticleAnnotator;
 import com.github.fhirschmann.clozegen.lib.annotators.PrepositionAnnotator;
 import com.github.fhirschmann.clozegen.lib.io.DebugWriter;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordPosTagger;
 
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
+import static org.uimafit.util.JCasUtil.select;
+
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 import java.io.IOException;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_component.AnalysisComponent;
+import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.factory.JCasFactory;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 
 /**
  *
@@ -19,27 +27,41 @@ import org.uimafit.factory.JCasFactory;
  */
 public class ClozeTestGenerator {
     /** The segmenter (sentence splitter) to use. */
-    private Class<? extends AnalysisComponent> segmenter = StanfordSegmenter.class;
+    private final Class<? extends AnalysisComponent> segmenter;
 
     /** The tagger to use. */
-    private Class<? extends AnalysisComponent> tagger = TreeTaggerPosLemmaTT4J.class;
+    private final AnalysisEngine tagger;
 
     /** The pipeline steps (segmenter, tagger, word class annotators). */
     private Pipeline pipeline = new Pipeline();
+
+    public ClozeTestGenerator() throws ResourceInitializationException {
+        segmenter = StanfordSegmenter.class;
+        tagger = createPrimitive(StanfordPosTagger.class,
+                StanfordPosTagger.PARAM_MODEL_PATH,
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/postagger-en-bidirectional-distsim-wsj-0-18.tagger");
+        //tagger = createPrimitive(TreeTaggerPosLemmaTT4J.class);
+    }
 
     static {
         org.apache.log4j.BasicConfigurator.configure();
     }
 
-    public void run() throws ResourceInitializationException, UIMAException,
-            IOException, ClozegenException {
+    /**
+     * Runs the cloze test generation process.
+     *
+     * @throws ResourceInitializationException
+     * @throws IOException
+     * @throws UIMAException
+     */
+    public void run() throws ResourceInitializationException,
+            IOException, UIMAException {
         JCas jcas = JCasFactory.createJCas();
-        jcas.setDocumentText("I'd like a chicken!");
+        jcas.setDocumentText("Let's go to a movie! I'd like a cookie!");
         jcas.setDocumentLanguage("en");
 
-        getPipeline().addStep(getSegmenter());
-        getPipeline().addStep(getTagger());
-
+        getPipeline().addStep(segmenter);
+        getPipeline().addStep(tagger);
 
         getPipeline().addStep(PrepositionAnnotator.class);
         getPipeline().addStep(ArticleAnnotator.class);
@@ -48,44 +70,9 @@ public class ClozeTestGenerator {
     }
 
     /**
-     * @return the segmenter
-     */
-    public Class<? extends AnalysisComponent> getSegmenter() {
-        return segmenter;
-    }
-
-    /**
-     * @param segmenter the segmenter to set
-     */
-    public void setSegmenter(final Class<? extends AnalysisComponent> segmenter) {
-        this.segmenter = segmenter;
-    }
-
-    /**
-     * @return the tagger
-     */
-    public Class<? extends AnalysisComponent> getTagger() {
-        return tagger;
-    }
-
-    /**
-     * @param tagger the tagger to set
-     */
-    public void setTagger(final Class<? extends AnalysisComponent> tagger) {
-        this.tagger = tagger;
-    }
-
-    /**
      * @return the pipeline
      */
     public Pipeline getPipeline() {
         return pipeline;
-    }
-
-    /**
-     * @param pipeline the pipeline to set
-     */
-    public void setPipeline(final Pipeline pipeline) {
-        this.pipeline = pipeline;
     }
 }
