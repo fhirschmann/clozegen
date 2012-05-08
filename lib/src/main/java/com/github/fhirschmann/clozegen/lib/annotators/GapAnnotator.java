@@ -38,10 +38,12 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
 
     /**
      * Returns the word classes an annotator is working on.
+     * <p>
+     * This should be implemented by all inheriting classes. Depending on the underlying
+     * tagger, the tags are most likely consistent with the Penn Treebank II Tags.
+     * </p>
      *
-     * This should be implemented by all inheriting classes.
-     *
-     * @see de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos
+     * @see <a href="http://bulba.sdsu.edu/jeanette/thesis/PennTags.html">Penn Treebank II Tags</a>
      * @return word class type
      */
     public abstract String[] getWordClasses();
