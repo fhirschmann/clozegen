@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.annotators;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
+import java.util.Arrays;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
@@ -26,21 +27,25 @@ import org.apache.uima.jcas.tcas.Annotation;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class ArticleAnnotator extends GapAnnotator {
+    public final static String[] articles = new String[] {"a", "an", "the"};
 
     @Override
-    public int getType() {
-        return ART.type;
+    public String[] getWordClasses() {
+        return new String[] {"DT"};
     }
 
     @Override
     public Gap generate(final Annotation subject) {
-        Gap gap = new Gap();
+        if (Arrays.asList(articles).contains(subject.getCoveredText())) {
+            Gap gap = new Gap();
 
-        gap.getValidAnswers().add(subject.getCoveredText());
-        gap.getInvalidAnswers().add("a");
-        gap.getInvalidAnswers().add("an");
-        gap.getInvalidAnswers().add("the");
+            gap.getValidAnswers().add(subject.getCoveredText());
+            gap.getInvalidAnswers().add("a");
+            gap.getInvalidAnswers().add("an");
+            gap.getInvalidAnswers().add("the");
 
-        return gap;
+            return gap;
+        }
+        return null;
     }
 }
