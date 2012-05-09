@@ -18,9 +18,6 @@
 package com.github.fhirschmann.clozegen.lib.frequency;
 
 import com.github.fhirschmann.clozegen.lib.util.ArrayListOnSteroids;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Range;
-import com.google.common.collect.Ranges;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
