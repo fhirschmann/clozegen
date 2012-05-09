@@ -17,6 +17,8 @@
  */
 package com.github.fhirschmann.clozegen.lib.frequency;
 
+import com.google.common.base.Objects;
+
 /**
  * This is a generic way of mapping a frequency to a value.
  *
@@ -77,5 +79,22 @@ public class ValueCount<T> implements Comparable {
     @Override
     public String toString() {
         return String.format("%s/%s", getValue(), getCount());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getValue(), getCount());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if ((other == null) || (other.getClass() != this.getClass())) {
+            return false;
+        }
+        final ValueCount valueCount = (ValueCount) other;
+        return valueCount.getValue().equals(getValue());
     }
 }
