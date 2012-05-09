@@ -20,9 +20,7 @@ package com.github.fhirschmann.clozegen.lib.frequency;
 import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import nu.xom.*;
 
 /**
@@ -46,7 +44,8 @@ import nu.xom.*;
  */
 public abstract class AbstractFrequencyList<T> {
     /** The frequency count. */
-    private final List<ValueCount<T>> frequencies = Lists.newArrayList();
+
+    private final NavigableSet<ValueCount<T>> frequencies = new TreeSet<ValueCount<T>>();
 
     /**
      * This method lets you process individual frequency-children in the XML file.
@@ -74,13 +73,12 @@ public abstract class AbstractFrequencyList<T> {
             final Element child = root.getChildElements().get(i);
             processChild(child);
         }
-        Collections.sort(getFrequencies());
     }
 
     /**
      * @return the frequencies
      */
-    public List<ValueCount<T>> getFrequencies() {
+    public NavigableSet<ValueCount<T>> getFrequencies() {
         return frequencies;
     }
 }

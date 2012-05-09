@@ -68,6 +68,6 @@ public class PrepositionFrequencyList extends AbstractFrequencyList<String> {
             final int count = Integer.parseInt(
                     child.getAttribute("value").getValue());
 
-            getFrequencies().add(new ValueCount(word, count));
+            getFrequencies().add(new ValueCount<String>(word, count));
     }
 }
