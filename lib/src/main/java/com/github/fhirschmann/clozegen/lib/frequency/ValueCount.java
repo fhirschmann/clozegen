@@ -17,14 +17,12 @@
  */
 package com.github.fhirschmann.clozegen.lib.frequency;
 
-import com.google.common.base.Objects;
-
 /**
  * This is a generic way of mapping a frequency to a value.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class ValueCount<T> implements Comparable {
+public class ValueCount<T> implements Comparable<ValueCount<T>> {
     /** The count (number of occurrences). */
     private Integer count;
 
@@ -40,6 +38,16 @@ public class ValueCount<T> implements Comparable {
     public ValueCount(final T value, final int count) {
         this.value = value;
         this.count = count;
+    }
+
+    /**
+     * Initialize this mapping and set count to zero.
+     *
+     * @param value the value
+     */
+    public ValueCount(final T value) {
+        this.value = value;
+        this.count = 0;
     }
 
     /**
@@ -71,9 +79,8 @@ public class ValueCount<T> implements Comparable {
     }
 
     @Override
-    public int compareTo(final Object object) {
-        final ValueCount other = (ValueCount) object;
-        return count.compareTo(other.getCount());
+    public int compareTo(final ValueCount<T> valueCount) {
+        return count.compareTo(valueCount.getCount());
     }
 
     @Override
@@ -83,18 +90,12 @@ public class ValueCount<T> implements Comparable {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getValue(), getCount());
+        return getValue().hashCode();
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (this == other) {
-            return true;
-        }
-        if ((other == null) || (other.getClass() != this.getClass())) {
-            return false;
-        }
-        final ValueCount valueCount = (ValueCount) other;
-        return valueCount.getValue().equals(getValue());
+    public boolean equals(final Object other) {
+        return (other instanceof ValueCount)
+                && getValue().equals(((ValueCount) other).getValue());
     }
 }
