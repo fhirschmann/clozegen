@@ -42,10 +42,7 @@ public class Gap {
      * @return the set of valid and invalid answers for this gap
      */
     public Set<String> getAll() {
-        final Set<String> all = Sets.newHashSet();
-        all.addAll(getInvalidAnswers());
-        all.addAll(getValidAnswers());
-        return all;
+        return Sets.union(getInvalidAnswers(), getValidAnswers());
     }
 
     /**
