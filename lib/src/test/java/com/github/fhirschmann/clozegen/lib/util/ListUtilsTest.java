@@ -31,19 +31,19 @@ public class ListUtilsTest extends TestCase {
 
     @Test
     public void testAdjacentTo() {
-        assertEquals(ListUtils.getAdjacentTo(list, 3, 1),
+        assertEquals(ListUtils.<Integer>getAdjacentTo(list, 3, 1),
                 Lists.newArrayList(2, 3, 4));
     }
 
     @Test
     public void testAdjacentToUpperBound() {
-        assertEquals(ListUtils.getAdjacentTo(list, 5, 1),
+        assertEquals(ListUtils.<Integer>getAdjacentTo(list, 5, 1),
                 Lists.newArrayList(4, 5));
     }
 
     @Test
     public void testAdjacentToLowerBound() {
-        assertEquals(ListUtils.getAdjacentTo(list, 1, 1),
+        assertEquals(ListUtils.<Integer>getAdjacentTo(list, 1, 1),
                 Lists.newArrayList(1, 2));
     }
 }
