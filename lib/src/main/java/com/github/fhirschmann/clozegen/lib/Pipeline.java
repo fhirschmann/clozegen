@@ -19,6 +19,7 @@ package com.github.fhirschmann.clozegen.lib;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class Pipeline {
     /**
      * The list of steps elements.
      */
-    private final List<AnalysisEngine> steps = new ArrayList<AnalysisEngine>();
+    private final List<AnalysisEngine> steps = Lists.newArrayList();
 
     /**
      * Adds a step to the steps.

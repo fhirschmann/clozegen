@@ -64,7 +64,7 @@ public class ClozeTestGenerator {
         getPipeline().addStep(tagger);
 
         getPipeline().addStep(PrepositionAnnotator.class);
-        getPipeline().addStep(ArticleAnnotator.class);
+        //getPipeline().addStep(ArticleAnnotator.class);
         getPipeline().addStep(DebugWriter.class);
         getPipeline().run(jcas);
     }

@@ -3,3 +3,4 @@
 /gui/target/
 /lib/target/
 *.class
+/lib/src/main/resources/frequency/.ropeproject/

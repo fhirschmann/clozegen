@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators;
 
-import java.util.HashSet;
+import com.google.common.collect.Sets;
 import java.util.Set;
 
 /**
@@ -31,10 +31,10 @@ import java.util.Set;
  */
 public class Gap {
     /** The set of invalid answers. */
-    private Set<String> invalidAnswers = new HashSet<String>();
+    private Set<String> invalidAnswers = Sets.newHashSet();
 
     /** The set of valid answers. */
-    private Set<String> validAnswers = new HashSet<String>();
+    private Set<String> validAnswers = Sets.newHashSet();
 
     /**
      * Returns the union of all valid and invalid answers for this gap.
@@ -42,7 +42,7 @@ public class Gap {
      * @return the set of valid and invalid answers for this gap
      */
     public Set<String> getAll() {
-        final Set<String> all = new HashSet<String>();
+        final Set<String> all = Sets.newHashSet();
         all.addAll(getInvalidAnswers());
         all.addAll(getValidAnswers());
         return all;
