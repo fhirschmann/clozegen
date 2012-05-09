@@ -17,7 +17,10 @@
  */
 package com.github.fhirschmann.clozegen.lib.frequency;
 
+import com.github.fhirschmann.clozegen.lib.util.ArrayListOnSteroids;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Range;
+import com.google.common.collect.Ranges;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -45,7 +48,8 @@ import nu.xom.*;
 public abstract class AbstractFrequencyList<T> {
     /** The frequency count. */
 
-    private final NavigableSet<ValueCount<T>> frequencies = new TreeSet<ValueCount<T>>();
+    private final ArrayListOnSteroids<ValueCount<T>> frequencies =
+            new ArrayListOnSteroids<ValueCount<T>>();
 
     /**
      * This method lets you process individual frequency-children in the XML file.
@@ -73,12 +77,13 @@ public abstract class AbstractFrequencyList<T> {
             final Element child = root.getChildElements().get(i);
             processChild(child);
         }
+        Collections.sort(getFrequencies());
     }
 
     /**
      * @return the frequencies
      */
-    public NavigableSet<ValueCount<T>> getFrequencies() {
+    public ArrayListOnSteroids<ValueCount<T>> getFrequencies() {
         return frequencies;
     }
 }
