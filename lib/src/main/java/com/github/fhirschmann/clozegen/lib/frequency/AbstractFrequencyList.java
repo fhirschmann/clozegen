@@ -17,7 +17,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.frequency;
 
-import com.github.fhirschmann.clozegen.lib.util.ListUtils;
 import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.io.InputStream;
