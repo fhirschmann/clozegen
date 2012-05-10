@@ -21,7 +21,6 @@ import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Lists;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_component.AnalysisComponent;
@@ -35,17 +34,18 @@ import static org.uimafit.pipeline.SimplePipeline.runPipeline;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 /**
- * A steps is a chain of AnalysisEngines arranged so that each step will be run
- * sequentially with all steps steps working on the same CAS. <p> This class provides
- * convenience methods to add steps steps from engines, engine descriptions and engine
- * components dynamically. </p>
- *
+ * A pipeline is a chain of AnalysisEngines arranged so that each step will be run
+ * sequentially with all steps steps working on the same CAS.
+ * <p>
+ * This class provides convenience methods to add steps steps from engines, engine
+ * descriptions and engine components dynamically.
+ * </p>
  * <p>
  * An example scenario might look like this:
  * <pre>
  * JCas jCas = new JCasFactory.createJCas();
  * jCas.setDocumentText("This is test sentence. This is another sentence.");
- * jCas.setDocumentLanguage("engine");
+ * jCas.setDocumentLanguage("en");
  * Pipeline steps = new Pipeline();
  * steps.addStep(StanfordSegmenter.class);
  * steps.run(jCas);
@@ -62,7 +62,7 @@ public class Pipeline {
     private final List<AnalysisEngine> steps = Lists.newArrayList();
 
     /**
-     * Adds a step to the steps.
+     * Adds a step to the pipeline.
      *
      * @param step the steps step to be added
      */
@@ -71,9 +71,9 @@ public class Pipeline {
     }
 
     /**
-     * Adds a step to the steps.
+     * Adds a step to the pipeline.
      *
-     * @param step the steps step to be added
+     * @param step the step to be added
      * @throws ResourceInitializationException on errors during initialization
      */
     public void addStep(final AnalysisEngineDescription step)
@@ -89,9 +89,9 @@ public class Pipeline {
     }
 
     /**
-     * Adds a step to the steps.
+     * Adds a step to the pipeline.
      *
-     * @param step the steps step to be added
+     * @param step the step to be added
      * @throws ResourceInitializationException on errors during initialization
      */
     public void addStep(final Class<? extends AnalysisComponent> step)
@@ -101,11 +101,11 @@ public class Pipeline {
     }
 
     /**
-     * Runs the steps.
+     * Runs the pipeline.
      *
-     * The steps will start at the given CAS.
+     * The pipeline will start at the given CAS.
      *
-     * @param jCas the CAS to start the steps off with
+     * @param jCas the CAS to start the pipeline off with
      * @throws UIMAException on errors produced by UIMA
      * @throws IOException on errors when reading a file
      */
@@ -116,11 +116,11 @@ public class Pipeline {
     }
 
     /**
-     * Runs the steps.
+     * Runs the pipeline.
      *
-     * The steps will start at the given CollectionReader.
+     * The pipeline will start at the given CollectionReader.
      *
-     * @param reader the Collection Reader to start the steps off with
+     * @param reader the Collection Reader to start the pipeline off with
      * @throws UIMAException when UIMA errors occur
      * @throws IOException when errors occur while reading from a file
      */
