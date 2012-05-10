@@ -62,4 +62,23 @@ public class FrequencyStructureTest extends TestCase {
         assertEquals(fplist.subList(1, 4), fs.getAdjacentTo("you", 1));
         assertEquals(fplist, fs.getAdjacentTo("you", 2));
     }
+
+    @Test
+    public void testDuplicate() {
+        fs.add("why", 4);
+        assertEquals(WORDS.length, fs.size());
+    }
+
+    @Test
+    public void testSorting() {
+        fs.add("foo", 10);
+        fs.add("bar", 8);
+
+        List<FrequencyPair<String>> expected = Lists.newLinkedList();
+        expected.add(new FrequencyPair<String>("this", 4));
+        expected.add(new FrequencyPair<String>("bar", 8));
+        expected.add(new FrequencyPair<String>("foo", 10));
+
+        assertEquals(expected, fs.getAdjacentTo("bar", 1));
+    }
 }
