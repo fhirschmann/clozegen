@@ -15,8 +15,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.annotators;
+package com.github.fhirschmann.clozegen.lib.annotators.en;
 
+import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapAnnotator;
+import com.github.fhirschmann.clozegen.lib.annotators.Gap;
 import java.util.Arrays;
 import org.apache.uima.jcas.tcas.Annotation;
 
@@ -28,7 +30,10 @@ import org.apache.uima.jcas.tcas.Annotation;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class ArticleAnnotator extends AbstractGapAnnotator {
-    /** The three English ARTICLES. */
+    /** The language for this annotator. */
+    protected static final String LANGUAGE = "en";
+
+    /** The three English articles. */
     public static final String[] ARTICLES = new String[] {"a", "an", "the"};
 
     @Override
@@ -49,5 +54,10 @@ public class ArticleAnnotator extends AbstractGapAnnotator {
             return gap;
         }
         return null;
+    }
+
+    @Override
+    public String getLanguageCode() {
+        return "en";
     }
 }

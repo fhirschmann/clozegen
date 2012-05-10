@@ -21,6 +21,7 @@ import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import java.util.Arrays;
 import java.util.Iterator;
+import org.apache.log4j.Logger;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
@@ -36,6 +37,9 @@ import org.uimafit.util.FSCollectionFactory;
  */
 public abstract class AbstractGapAnnotator extends JCasAnnotator_ImplBase {
 
+    /** The logger (for all inheriting classes as well). */
+    protected final Logger log = Logger.getLogger(this.getClass());
+
     /**
      * Returns the word classes an annotator is working on.
      *
@@ -48,6 +52,14 @@ public abstract class AbstractGapAnnotator extends JCasAnnotator_ImplBase {
      * @return word class type
      */
     public abstract String[] getWantedTags();
+
+    /**
+     * Needs to return the language code an inheriting annotator was meant to be
+     * used for.
+     *
+     * @return
+     */
+    public abstract String getLanguageCode();
 
     /**
      * Generates cloze tests item from validAnswers given subject.
@@ -77,6 +89,10 @@ public abstract class AbstractGapAnnotator extends JCasAnnotator_ImplBase {
      */
     @Override
     public final void process(final JCas jcas) throws AnalysisEngineProcessException {
+        if (!getLanguageCode().equals(jcas.getDocumentLanguage())) {
+            log.error("This annotator is not made for your language!");
+            return;
+        }
         for (final Iterator<Annotation> i = jcas.getAnnotationIndex(
                 POS.type).iterator(); i.hasNext();) {
             final Annotation subject = i.next();

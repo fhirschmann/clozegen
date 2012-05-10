@@ -15,8 +15,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.annotators;
+package com.github.fhirschmann.clozegen.lib.annotators.en;
 
+import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapAnnotator;
+import com.github.fhirschmann.clozegen.lib.annotators.Gap;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
@@ -37,5 +39,10 @@ public class PrepositionAnnotator extends AbstractGapAnnotator {
     @Override
     public String[] getWantedTags() {
         return new String[] {"TO", "P"};
+    }
+
+    @Override
+    public String getLanguageCode() {
+        return "en";
     }
 }
