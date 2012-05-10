@@ -59,8 +59,16 @@ public class FrequencyStructureTest extends TestCase {
 
     @Test
     public void testGetAdjacentTo() {
-        assertEquals(fplist.subList(1, 4), fs.getAdjacentTo("you", 1));
-        assertEquals(fplist, fs.getAdjacentTo("you", 2));
+        // Test by using a FrequencyPair
+        FrequencyPair<String> fp = new FrequencyPair("you", 2);
+        assertEquals(fplist.subList(1, 4), fs.getAdjacentTo(fp, 1));
+        assertEquals(fplist, fs.getAdjacentTo(fp, 2));
+
+        // Test by using a value
+        assertEquals(FrequencyStructure.frequencyPairs2Values(fplist.subList(1, 4)),
+                fs.getAdjacentTo("you", 1));
+        assertEquals(FrequencyStructure.frequencyPairs2Values(fplist),
+                fs.getAdjacentTo("you", 2));
     }
 
     @Test
@@ -72,7 +80,12 @@ public class FrequencyStructureTest extends TestCase {
         expected.add(new FrequencyPair<String>("this", 96));
         expected.add(new FrequencyPair<String>("reading", 97));
 
-        assertEquals(expected, fs.getClosestTo("foo", 2));
+        // Test by using FrequencyPair
+        assertEquals(expected, fs.getClosestTo(new FrequencyPair("foo", 100), 2));
+
+        // Test by using values
+        assertEquals(FrequencyStructure.frequencyPairs2Values(expected),
+                fs.getClosestTo("foo", 2));
     }
 
     @Test
@@ -91,6 +104,6 @@ public class FrequencyStructureTest extends TestCase {
         expected.add(new FrequencyPair<String>("bar", 8));
         expected.add(new FrequencyPair<String>("foo", 10));
 
-        assertEquals(expected, fs.getAdjacentTo("bar", 1));
+        assertEquals(expected, fs.getAdjacentTo(new FrequencyPair("bar", 8), 1));
     }
 }
