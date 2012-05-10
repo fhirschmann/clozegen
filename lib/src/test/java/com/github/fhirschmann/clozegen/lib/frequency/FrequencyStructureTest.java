@@ -64,6 +64,18 @@ public class FrequencyStructureTest extends TestCase {
     }
 
     @Test
+    public void testGetClosestTo() {
+        fs.add("foo", 100);
+        fs.add("bar", 1000);
+
+        List<FrequencyPair<String>> expected = Lists.newLinkedList();
+        expected.add(new FrequencyPair<String>("this", 96));
+        expected.add(new FrequencyPair<String>("reading", 97));
+
+        assertEquals(expected, fs.getClosestTo("foo", 2));
+    }
+
+    @Test
     public void testDuplicate() {
         fs.add("why", 4);
         assertEquals(WORDS.length, fs.size());
