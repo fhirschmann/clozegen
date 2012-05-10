@@ -21,7 +21,9 @@ import ca.odell.glazedlists.BasicEventList;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.SortedList;
 import com.github.fhirschmann.clozegen.lib.util.ListUtils;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -101,22 +103,115 @@ public class FrequencyStructure<V> implements Iterable {
     }
 
     /**
+     * Extracts the values from a {@link FrequencyPair} and puts it into a list.
+     *
+     * @param <V> type of values
+     * @param pairs list of {@link FrequencyPair}
+     * @return list of V
+     */
+    public static <V> List<V> frequencyPairs2Values(final List<FrequencyPair<V>> pairs) {
+        final List<V> result = Lists.newArrayList();
+
+        for (FrequencyPair<V> pair : pairs) {
+            result.add(pair.getValue());
+        }
+        return result;
+    }
+
+    /**
      * Returns the number of elements in this structure (its cardinality).
      *
-     * @return
+     * @return the size of this structure
      */
     public int size() {
         return basicList.size();
     }
 
-    public List<FrequencyPair<V>> getAdjacentTo(final V value, final int num) {
-        final FrequencyPair<V> frequencyPair = getFrequencyPair(value);
+    /**
+     * Returns a list of the adjacent neighbors of a {@link FrequencyPair}.
+     *
+     * @see ListUtils#getAdjacentTo(java.util.List, java.lang.Object, int)
+     * @param frequencyPair the frequency pair to get the neighbors for
+     * @param num number of neighbors to get (on each side)
+     * @return the neighbors (as list of {@link FrequencyPair})
+     */
+    public List<FrequencyPair<V>> getAdjacentTo(final FrequencyPair<V> frequencyPair,
+            final int num) {
 
         if (frequencyPair == null) {
             return null;
         }
 
         return ListUtils.<FrequencyPair<V>>getAdjacentTo(sortedList, frequencyPair, num);
+    }
+
+    /**
+     * Returns a list of the adjacent neighbors of a value.
+     *
+     * @see ListUtils#getAdjacentTo(java.util.List, java.lang.Object, int)
+     * @param value the value to get the neighbors for
+     * @param num number of neighbors to get (on each side)
+     * @return the neighbors (as list of V)
+     */
+    public List<V> getAdjacentTo(final V value, final int num) {
+        final FrequencyPair<V> frequencyPair = getFrequencyPair(value);
+
+        if (frequencyPair == null) {
+            return null;
+        }
+
+        final List<FrequencyPair<V>> adjacent = getAdjacentTo(frequencyPair, num);
+
+        return frequencyPairs2Values(adjacent);
+    }
+
+
+    /**
+     * This will return a number of {@FrequencyPair} closest to the
+     * value given.
+     * <p>
+     * The FrequencyPair's frequency attribute will contain the distance to
+     * the frequency of the value you give.
+     * </p>
+     *
+     * @param value the value
+     * @param num the number of close items to get
+     * @return a list of FrequencyPair
+     */
+    public List<FrequencyPair<V>> getClosestTo(final FrequencyPair<V> fp, final int num) {
+        final List<FrequencyPair<V>> adjacent = getAdjacentTo(fp, num);
+        final List<FrequencyPair<V>> sorted = Lists.newLinkedList();
+
+        for (FrequencyPair<V> frequencyPair : adjacent) {
+            if (frequencyPair.equals(fp)) {
+                continue;
+            }
+            final FrequencyPair newFrequencyPair =
+                    new FrequencyPair<V>(
+                        frequencyPair.getValue(),
+                        Math.abs(frequencyPair.getFrequency() - fp.getFrequency()));
+            sorted.add(newFrequencyPair);
+        }
+        Collections.sort(sorted);
+        return sorted.subList(0, num);
+    }
+
+
+    /**
+     * This will return a list of V closest to the V given.
+     *
+     * @param value the value
+     * @param num the number of close items to get
+     * @return a list of V
+     */
+    public List<V> getClosestTo(final V value, final int num) {
+        final FrequencyPair<V> frequencyPair = getFrequencyPair(value);
+
+        if (frequencyPair == null) {
+            return null;
+        }
+        final List<FrequencyPair<V>> closest = getClosestTo(frequencyPair, num);
+        return frequencyPairs2Values(closest);
     }
 
     @Override
