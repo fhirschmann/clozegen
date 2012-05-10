@@ -89,21 +89,21 @@ public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
                 annotation.setBegin(subject.getBegin());
                 annotation.setEnd(subject.getEnd());
 
-                final Gap pair = generate(subject);
+                final Gap gap = generate(subject);
 
-                if (pair == null) {
+                if (gap == null) {
                     // Skip gap annotation if no gap was generated
                     continue;
                 }
 
                 final NonEmptyStringList invalidAnswers = (NonEmptyStringList)
                         FSCollectionFactory.createStringList(
-                        jcas, pair.getInvalidAnswers());
+                        jcas, gap.getInvalidAnswers());
                 annotation.setInvalidAnswers(invalidAnswers);
 
                 final NonEmptyStringList validAnswers = (NonEmptyStringList)
                         FSCollectionFactory.createStringList(
-                        jcas, pair.getValidAnswers());
+                        jcas, gap.getValidAnswers());
                 annotation.setValidAnswers(validAnswers);
 
                 annotation.addToIndexes();

@@ -41,7 +41,7 @@ public class Gap {
      *
      * @return the set of valid and invalid answers for this gap
      */
-    public Set<String> getAll() {
+    public Set<String> getAllAnswers() {
         return Sets.union(getInvalidAnswers(), getValidAnswers());
     }
 
