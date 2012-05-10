@@ -174,7 +174,7 @@ public class FrequencyStructure<V> implements Iterable {
      * the frequency of the value you give.
      * </p>
      *
-     * @param value the value
+     * @param fp the FrequencyPair
      * @param num the number of close items to get
      * @return a list of FrequencyPair
      */
