@@ -21,6 +21,8 @@ import ca.odell.glazedlists.BasicEventList;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.SortedList;
 import com.github.fhirschmann.clozegen.lib.util.ListUtils;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import java.util.Collections;
@@ -217,5 +219,12 @@ public class FrequencyStructure<V> implements Iterable {
     @Override
     public Iterator iterator() {
         return sortedList.iterator();
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("frequencies", sortedList.toString());
+        return str.toString();
     }
 }
