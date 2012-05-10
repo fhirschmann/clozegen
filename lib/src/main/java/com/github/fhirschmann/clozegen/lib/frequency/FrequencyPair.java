@@ -47,8 +47,8 @@ public class FrequencyPair<T> implements Comparable<FrequencyPair<T>> {
 
     @Override
     public boolean equals(final Object other) {
-        return (other instanceof ValueCount)
-                && getValue().equals(((ValueCount) other).getValue());
+        return (other instanceof FrequencyPair)
+                && getValue().equals(((FrequencyPair<T>) other).getValue());
     }
 
     /**
