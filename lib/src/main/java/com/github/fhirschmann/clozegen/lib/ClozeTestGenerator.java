@@ -1,17 +1,10 @@
 package com.github.fhirschmann.clozegen.lib;
 
-import com.github.fhirschmann.clozegen.lib.annotators.ArticleAnnotator;
-import com.github.fhirschmann.clozegen.lib.annotators.PrepositionAnnotator;
+import com.github.fhirschmann.clozegen.lib.annotators.en.PrepositionAnnotator;
 import com.github.fhirschmann.clozegen.lib.io.DebugWriter;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordPosTagger;
 
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
-import static org.uimafit.util.JCasUtil.select;
-
-import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 import java.io.IOException;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_component.AnalysisComponent;
