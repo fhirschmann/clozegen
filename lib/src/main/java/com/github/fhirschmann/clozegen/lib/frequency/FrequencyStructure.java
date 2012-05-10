@@ -22,6 +22,7 @@ import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.SortedList;
 import com.github.fhirschmann.clozegen.lib.util.ListUtils;
 import com.google.common.collect.Maps;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ import java.util.Map;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class FrequencyStructure<V> {
+public class FrequencyStructure<V> implements Iterable {
     /** Map for fast lookups. */
     private final Map<V, Integer> hashMap = Maps.newHashMap();
 
@@ -108,7 +109,7 @@ public class FrequencyStructure<V> {
         return basicList.size();
     }
 
-    public List<FrequencyPair<V>> getAdjacentTo(V value, final int num) {
+    public List<FrequencyPair<V>> getAdjacentTo(final V value, final int num) {
         final FrequencyPair<V> frequencyPair = getFrequencyPair(value);
 
         if (frequencyPair == null) {
@@ -116,5 +117,10 @@ public class FrequencyStructure<V> {
         }
 
         return ListUtils.<FrequencyPair<V>>getAdjacentTo(sortedList, frequencyPair, num);
+    }
+
+    @Override
+    public Iterator iterator() {
+        return sortedList.iterator();
     }
 }
