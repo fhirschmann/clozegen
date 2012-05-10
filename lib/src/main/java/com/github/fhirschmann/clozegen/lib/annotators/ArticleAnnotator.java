@@ -27,7 +27,7 @@ import org.apache.uima.jcas.tcas.Annotation;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class ArticleAnnotator extends GapAnnotator {
+public class ArticleAnnotator extends AbstractGapAnnotator {
     /** The three English ARTICLES. */
     public static final String[] ARTICLES = new String[] {"a", "an", "the"};
 

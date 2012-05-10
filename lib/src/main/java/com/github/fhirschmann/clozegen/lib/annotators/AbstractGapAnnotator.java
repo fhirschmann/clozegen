@@ -34,7 +34,7 @@ import org.uimafit.util.FSCollectionFactory;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public abstract class GapAnnotator extends JCasAnnotator_ImplBase {
+public abstract class AbstractGapAnnotator extends JCasAnnotator_ImplBase {
 
     /**
      * Returns the word classes an annotator is working on.

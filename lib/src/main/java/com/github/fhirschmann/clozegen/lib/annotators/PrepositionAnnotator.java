@@ -23,7 +23,7 @@ import org.apache.uima.jcas.tcas.Annotation;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionAnnotator extends GapAnnotator {
+public class PrepositionAnnotator extends AbstractGapAnnotator {
 
     @Override
     public Gap generate(final Annotation subject) {
