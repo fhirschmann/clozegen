@@ -20,12 +20,13 @@ package com.github.fhirschmann.clozegen.lib.annotators.en;
 import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapGenerator;
 import com.github.fhirschmann.clozegen.lib.annotators.Gap;
 import com.github.fhirschmann.clozegen.lib.annotators.GapGeneratorMetadata;
+import com.google.common.collect.Sets;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
-import java.util.Arrays;
+import java.util.Set;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
- * Implements an Annotator for generating gaps for the English ARTICLES.
+ * Implements an generator for generating gaps for the English articles.
  *
  * This simply deletes the article and gives three choices: a, an, the.
  *
@@ -37,20 +38,16 @@ public class ArticleGapGenerator extends AbstractGapGenerator {
     protected static final String LANGUAGE = "en";
 
     /** The three English articles. */
-    public static final String[] ARTICLES = new String[] {"a", "an", "the"};
+    public static final Set<String> ARTICLES = Sets.newHashSet("a", "an", "the");
 
     @Override
     public Gap generate(final Annotation subject) {
-        if (Arrays.asList(ARTICLES).contains(subject.getCoveredText())) {
-            final Gap gap = new Gap();
+        final Gap gap = new Gap();
 
-            gap.getValidAnswers().add(subject.getCoveredText());
-            gap.getInvalidAnswers().add("a");
-            gap.getInvalidAnswers().add("an");
-            gap.getInvalidAnswers().add("the");
+        gap.getValidAnswers().add(subject.getCoveredText());
+        gap.getInvalidAnswers().addAll(Sets.difference(ARTICLES,
+                Sets.newHashSet(subject.getCoveredText())));
 
-            return gap;
-        }
-        return null;
+        return gap;
     }
 }
