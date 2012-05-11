@@ -17,11 +17,13 @@
  */
 package com.github.fhirschmann.clozegen.lib.frequency;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class FrequencyPair<T> implements Comparable<FrequencyPair<T>> {
+public class FrequencyPair<T> implements Comparable<FrequencyPair<T>>, Serializable {
     private Integer frequency;
     private T value;
 
