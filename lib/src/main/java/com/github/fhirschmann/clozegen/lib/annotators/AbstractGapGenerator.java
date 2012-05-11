@@ -128,7 +128,7 @@ public abstract class AbstractGapGenerator extends JCasAnnotator_ImplBase {
             return;
         }
         for (final Iterator<Annotation> i = jcas.getAnnotationIndex(
-                POS.type).iterator(); i.hasNext();) {
+                wantedPosSubtag).iterator(); i.hasNext();) {
             final Annotation subject = i.next();
             //final POS pos = (POS) subject;
 
