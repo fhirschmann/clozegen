@@ -54,7 +54,7 @@ public class DebugWriter extends JCasConsumer_ImplBase {
                         FSCollectionFactory.create(
                         gapAnnotation.getValidAnswers()).toString(),
                         FSCollectionFactory.create(
-                        gapAnnotation.getInvalidAnswers()).toString()));
+                        gapAnnotation.getAllAnswers()).toString()));
             } else {
                 if (annotation.getTypeIndexID() == POS.type) {
                     final POS pos = (POS) annotation;

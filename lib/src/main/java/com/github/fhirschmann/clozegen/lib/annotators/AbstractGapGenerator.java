@@ -145,10 +145,10 @@ public abstract class AbstractGapGenerator extends JCasAnnotator_ImplBase {
                     continue;
                 }
 
-                final NonEmptyStringList invalidAnswers = (NonEmptyStringList)
+                final NonEmptyStringList allAnswers = (NonEmptyStringList)
                         FSCollectionFactory.createStringList(
-                        jcas, gap.getInvalidAnswers());
-                annotation.setInvalidAnswers(invalidAnswers);
+                        jcas, gap.getAllAnswers());
+                annotation.setAllAnswers(allAnswers);
 
                 final NonEmptyStringList validAnswers = (NonEmptyStringList)
                         FSCollectionFactory.createStringList(

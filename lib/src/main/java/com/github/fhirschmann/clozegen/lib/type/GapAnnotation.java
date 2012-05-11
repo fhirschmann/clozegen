@@ -12,8 +12,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Mon May 07 16:36:58 CEST 2012
- * XML source: /home/fabian/dev/clozegen/lib/src/main/resources/desc/type/Distractor.xml
+ * Updated by JCasGen Fri May 11 12:25:39 CEST 2012
+ * XML source: /home/fabian/dev/clozegen/lib/src/main/resources/desc/type/GapAnnotation.xml
  * @generated */
 public class GapAnnotation extends Annotation {
   /** @generated
@@ -64,21 +64,21 @@ public class GapAnnotation extends Annotation {
  
     
   //*--------------*
-  //* Feature: invalidAnswers
+  //* Feature: allAnswers
 
-  /** getter for invalidAnswers - gets 
+  /** getter for allAnswers - gets 
    * @generated */
-  public NonEmptyStringList getInvalidAnswers() {
-    if (GapAnnotation_Type.featOkTst && ((GapAnnotation_Type)jcasType).casFeat_invalidAnswers == null)
-      jcasType.jcas.throwFeatMissing("invalidAnswers", "com.github.fhirschmann.clozegen.lib.type.GapAnnotation");
-    return (NonEmptyStringList)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((GapAnnotation_Type)jcasType).casFeatCode_invalidAnswers)));}
+  public NonEmptyStringList getAllAnswers() {
+    if (GapAnnotation_Type.featOkTst && ((GapAnnotation_Type)jcasType).casFeat_allAnswers == null)
+      jcasType.jcas.throwFeatMissing("allAnswers", "com.github.fhirschmann.clozegen.lib.type.GapAnnotation");
+    return (NonEmptyStringList)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((GapAnnotation_Type)jcasType).casFeatCode_allAnswers)));}
     
-  /** setter for invalidAnswers - sets  
+  /** setter for allAnswers - sets  
    * @generated */
-  public void setInvalidAnswers(NonEmptyStringList v) {
-    if (GapAnnotation_Type.featOkTst && ((GapAnnotation_Type)jcasType).casFeat_invalidAnswers == null)
-      jcasType.jcas.throwFeatMissing("invalidAnswers", "com.github.fhirschmann.clozegen.lib.type.GapAnnotation");
-    jcasType.ll_cas.ll_setRefValue(addr, ((GapAnnotation_Type)jcasType).casFeatCode_invalidAnswers, jcasType.ll_cas.ll_getFSRef(v));}    
+  public void setAllAnswers(NonEmptyStringList v) {
+    if (GapAnnotation_Type.featOkTst && ((GapAnnotation_Type)jcasType).casFeat_allAnswers == null)
+      jcasType.jcas.throwFeatMissing("allAnswers", "com.github.fhirschmann.clozegen.lib.type.GapAnnotation");
+    jcasType.ll_cas.ll_setRefValue(addr, ((GapAnnotation_Type)jcasType).casFeatCode_allAnswers, jcasType.ll_cas.ll_getFSRef(v));}    
    
     
   //*--------------*

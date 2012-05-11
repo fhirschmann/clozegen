@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Mon May 07 16:36:58 CEST 2012
+ * Updated by JCasGen Fri May 11 12:25:39 CEST 2012
  * @generated */
 public class GapAnnotation_Type extends Annotation_Type {
   /** @generated */
@@ -45,20 +45,20 @@ public class GapAnnotation_Type extends Annotation_Type {
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("com.github.fhirschmann.clozegen.lib.type.GapAnnotation");
  
   /** @generated */
-  final Feature casFeat_invalidAnswers;
+  final Feature casFeat_allAnswers;
   /** @generated */
-  final int     casFeatCode_invalidAnswers;
+  final int     casFeatCode_allAnswers;
   /** @generated */ 
-  public int getInvalidAnswers(int addr) {
-        if (featOkTst && casFeat_invalidAnswers == null)
-      jcas.throwFeatMissing("invalidAnswers", "com.github.fhirschmann.clozegen.lib.type.GapAnnotation");
-    return ll_cas.ll_getRefValue(addr, casFeatCode_invalidAnswers);
+  public int getAllAnswers(int addr) {
+        if (featOkTst && casFeat_allAnswers == null)
+      jcas.throwFeatMissing("allAnswers", "com.github.fhirschmann.clozegen.lib.type.GapAnnotation");
+    return ll_cas.ll_getRefValue(addr, casFeatCode_allAnswers);
   }
   /** @generated */    
-  public void setInvalidAnswers(int addr, int v) {
-        if (featOkTst && casFeat_invalidAnswers == null)
-      jcas.throwFeatMissing("invalidAnswers", "com.github.fhirschmann.clozegen.lib.type.GapAnnotation");
-    ll_cas.ll_setRefValue(addr, casFeatCode_invalidAnswers, v);}
+  public void setAllAnswers(int addr, int v) {
+        if (featOkTst && casFeat_allAnswers == null)
+      jcas.throwFeatMissing("allAnswers", "com.github.fhirschmann.clozegen.lib.type.GapAnnotation");
+    ll_cas.ll_setRefValue(addr, casFeatCode_allAnswers, v);}
     
   
  
@@ -89,8 +89,8 @@ public class GapAnnotation_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_invalidAnswers = jcas.getRequiredFeatureDE(casType, "invalidAnswers", "uima.cas.NonEmptyStringList", featOkTst);
-    casFeatCode_invalidAnswers  = (null == casFeat_invalidAnswers) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_invalidAnswers).getCode();
+    casFeat_allAnswers = jcas.getRequiredFeatureDE(casType, "allAnswers", "uima.cas.NonEmptyStringList", featOkTst);
+    casFeatCode_allAnswers  = (null == casFeat_allAnswers) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_allAnswers).getCode();
 
  
     casFeat_validAnswers = jcas.getRequiredFeatureDE(casType, "validAnswers", "uima.cas.NonEmptyStringList", featOkTst);
