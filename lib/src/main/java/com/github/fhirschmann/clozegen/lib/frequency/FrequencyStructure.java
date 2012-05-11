@@ -30,6 +30,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * This class represents a datastructure for managing frequencies for
@@ -194,11 +195,8 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
     public List<FrequencyPair<V>> getAdjacentTo(final FrequencyPair<V> frequencyPair,
             final int num) {
 
-        if (frequencyPair == null) {
-            return null;
-        }
-
-        return ListUtils.<FrequencyPair<V>>getAdjacentTo(sortedList, frequencyPair, num);
+        return ListUtils.<FrequencyPair<V>>getAdjacentTo(sortedList,
+                checkNotNull(frequencyPair), num);
     }
 
     /**
