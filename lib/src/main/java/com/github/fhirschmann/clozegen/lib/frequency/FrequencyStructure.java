@@ -140,6 +140,19 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
     }
 
     /**
+     * Returns the number of items for which a frequency has been recorded.
+     *
+     * <p>
+     * This is equal to size().
+     * </p>
+     *
+     * @return the number of words for which frequencies exist
+     */
+    public int getDistinctCount() {
+        return size();
+    }
+
+    /**
      * Returns a list of the adjacent neighbors of a {@link FrequencyPair}.
      *
      * @see ListUtils#getAdjacentTo(java.util.List, java.lang.Object, int)
