@@ -34,9 +34,6 @@ import org.apache.uima.jcas.tcas.Annotation;
  */
 @GapGeneratorMetadata(languageCode = "en", wantedPosSubtag = ART.class)
 public class ArticleGapGenerator extends AbstractGapGenerator {
-    /** The language for this annotator. */
-    protected static final String LANGUAGE = "en";
-
     /** The three English articles. */
     public static final Set<String> ARTICLES = Sets.newHashSet("a", "an", "the");
 
