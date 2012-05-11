@@ -1,10 +1,10 @@
 package com.github.fhirschmann.clozegen.lib;
 
-import com.github.fhirschmann.clozegen.lib.annotators.en.PrepositionAnnotator;
+import com.github.fhirschmann.clozegen.lib.annotators.en.ArticleGapGenerator;
 import com.github.fhirschmann.clozegen.lib.io.DebugWriter;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordPosTagger;
 
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 import java.io.IOException;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_component.AnalysisComponent;
@@ -30,10 +30,13 @@ public class ClozeTestGenerator {
 
     public ClozeTestGenerator() throws ResourceInitializationException {
         segmenter = StanfordSegmenter.class;
-        tagger = createPrimitive(StanfordPosTagger.class,
-                StanfordPosTagger.PARAM_MODEL_PATH,
-                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/postagger-en-bidirectional-distsim-wsj-0-18.tagger");
-        //tagger = createPrimitive(TreeTaggerPosLemmaTT4J.class);
+
+        // Produces some wird reflection errors in uimafit
+        //tagger = createPrimitive(StanfordPosTagger.class,
+        //        StanfordPosTagger.PARAM_VARIANT,
+        //        "bidirectional-distsim-wsj-0-18");
+
+        tagger = createPrimitive(TreeTaggerPosLemmaTT4J.class);
     }
 
     static {
@@ -56,8 +59,8 @@ public class ClozeTestGenerator {
         getPipeline().addStep(segmenter);
         getPipeline().addStep(tagger);
 
-        getPipeline().addStep(PrepositionAnnotator.class);
-        //getPipeline().addStep(ArticleAnnotator.class);
+        //getPipeline().addStep(PrepositionGapGenerator.class);
+        getPipeline().addStep(ArticleGapGenerator.class);
         getPipeline().addStep(DebugWriter.class);
         getPipeline().run(jcas);
     }

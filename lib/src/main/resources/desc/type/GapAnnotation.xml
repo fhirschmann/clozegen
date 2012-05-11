@@ -11,7 +11,7 @@
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
-          <name>invalidAnswers</name>
+          <name>allAnswers</name>
           <description/>
           <rangeTypeName>uima.cas.NonEmptyStringList</rangeTypeName>
         </featureDescription>
