@@ -63,6 +63,43 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
             new SortedList(basicList);
 
     /**
+     * Check to see if a frequency for a given value is on record.
+     *
+     * @param value the value to check for
+     * @return true if the value is on record
+     */
+    public boolean contains(final V value) {
+        return hashMap.containsKey(value);
+    }
+
+    /**
+     * Increases the frequency for a value.
+     *
+     * @param value The value to increase the frequency for
+     * @param increment the increment
+     * @return true if the frequency was increased
+     */
+    public boolean increase(final V value, final int increment) {
+        if (contains(value)) {
+            set(value, getFrequency(value) + increment);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Increases the frequency for a value by one.
+     *
+     * @param value The value to increase the frequency for
+     * @param increment the increment
+     * @return true if the frequency was increased
+     */
+    public boolean increase(final V value) {
+        return increase(value, 1);
+    }
+
+    /**
      * Sets the frequency for a given value.
      *
      * <p>
@@ -75,8 +112,7 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
      */
     public void set(final V value, final int frequency) {
         if (hashMap.containsKey(value)) {
-            final int currentFrequency = getFrequency(value);
-            getFrequencyPair(value).setFrequency(currentFrequency + frequency);
+            getFrequencyPair(value).setFrequency(frequency);
         } else {
             basicList.add(new FrequencyPair(value, frequency));
             hashMap.put(value, basicList.size() - 1);

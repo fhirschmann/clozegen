@@ -106,4 +106,18 @@ public class FrequencyStructureTest extends TestCase {
 
         assertEquals(expected, fs.getAdjacentTo(new FrequencyPair("bar", 8), 1));
     }
+
+    @Test
+    public void setSet() {
+        fs.set("why", 42);
+        assertEquals(42, fs.getFrequency("why"));
+    }
+
+    @Test
+    public void testIncrease() {
+        fs.increase("are", 4);
+        assertEquals(5, fs.getFrequency("are"));
+        fs.increase("are");
+        assertEquals(6, fs.getFrequency("are"));
+    }
 }
