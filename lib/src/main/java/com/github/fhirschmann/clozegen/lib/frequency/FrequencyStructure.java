@@ -25,6 +25,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -50,7 +51,7 @@ import java.util.Map;
  * @see <a href="http://www.glazedlists.com/">Glazed Lists</a>
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class FrequencyStructure<V> implements Iterable {
+public class FrequencyStructure<V> implements Iterable, Serializable {
     /** Map for fast lookups. */
     private final Map<V, Integer> hashMap = Maps.newHashMap();
 
