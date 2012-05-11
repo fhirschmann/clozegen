@@ -55,7 +55,7 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
     private final EventList<FrequencyPair<V>> basicList = new BasicEventList();
 
     /** Sorted List for accessing intervals. */
-    private final transient EventList<FrequencyPair<V>> sortedList =
+    private final EventList<FrequencyPair<V>> sortedList =
             new SortedList(basicList);
 
     /**
