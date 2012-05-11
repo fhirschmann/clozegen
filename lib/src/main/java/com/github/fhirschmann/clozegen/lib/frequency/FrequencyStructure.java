@@ -62,20 +62,24 @@ public class FrequencyStructure<V> implements Iterable {
             new SortedList(basicList);
 
     /**
-     * Adds a value with a given frequency to this structure.
+     * Sets the frequency for a given value.
      *
-     * @param value the value to add
+     * <p>
+     * If there is no frequency for the value on record,
+     * it will be added.
+     * </p>
+     *
+     * @param value the value to set
      * @param frequency the frequency of this value
-     * @return if this structure did not already contain the specified element
      */
-    public boolean add(final V value, final int frequency) {
+    public void set(final V value, final int frequency) {
         if (hashMap.containsKey(value)) {
-            return false;
+            final int currentFrequency = getFrequency(value);
+            getFrequencyPair(value).setFrequency(currentFrequency + frequency);
+        } else {
+            basicList.add(new FrequencyPair(value, frequency));
+            hashMap.put(value, basicList.size() - 1);
         }
-        basicList.add(new FrequencyPair(value, frequency));
-        hashMap.put(value, basicList.size() - 1);
-
-        return true;
     }
 
     /**

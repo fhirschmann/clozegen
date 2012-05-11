@@ -40,7 +40,7 @@ public class FrequencyStructureTest extends TestCase {
         fplist = Lists.newLinkedList();
 
         for (int i=0; i< WORDS.length; i++) {
-            fs.add(WORDS[i], i);
+            fs.set(WORDS[i], i);
             fplist.add(new FrequencyPair<String>(WORDS[i], i));
         }
     }
@@ -73,8 +73,8 @@ public class FrequencyStructureTest extends TestCase {
 
     @Test
     public void testGetClosestTo() {
-        fs.add("foo", 100);
-        fs.add("bar", 1000);
+        fs.set("foo", 100);
+        fs.set("bar", 1000);
 
         List<FrequencyPair<String>> expected = Lists.newLinkedList();
         expected.add(new FrequencyPair<String>("this", 96));
@@ -90,14 +90,14 @@ public class FrequencyStructureTest extends TestCase {
 
     @Test
     public void testDuplicate() {
-        fs.add("why", 4);
+        fs.set("why", 4);
         assertEquals(WORDS.length, fs.size());
     }
 
     @Test
     public void testSorting() {
-        fs.add("foo", 10);
-        fs.add("bar", 8);
+        fs.set("foo", 10);
+        fs.set("bar", 8);
 
         List<FrequencyPair<String>> expected = Lists.newLinkedList();
         expected.add(new FrequencyPair<String>("this", 4));
