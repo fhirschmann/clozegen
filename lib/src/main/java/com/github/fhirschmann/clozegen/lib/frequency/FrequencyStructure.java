@@ -106,7 +106,7 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
      * @param frequency the frequency of this value
      */
     public void set(final V value, final int frequency) {
-        if (hashMap.containsKey(value)) {
+        if (contains(value)) {
             getFrequencyPair(value).setFrequency(frequency);
         } else {
             basicList.add(new FrequencyPair(value, frequency));
@@ -121,7 +121,7 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
      * @return a pair of the value and the frequency
      */
     public FrequencyPair<V> getFrequencyPair(final V value) {
-        if (!hashMap.containsKey(value)) {
+        if (!contains(value)) {
             return null;
         }
         final int index = hashMap.get(value);
