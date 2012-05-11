@@ -92,7 +92,6 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
      * Increases the frequency for a value by one.
      *
      * @param value The value to increase the frequency for
-     * @param increment the increment
      * @return true if the frequency was increased
      */
     public boolean increase(final V value) {
