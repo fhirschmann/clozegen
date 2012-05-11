@@ -19,8 +19,10 @@ package com.github.fhirschmann.clozegen.lib.annotators;
 
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.logging.Level;
 import org.apache.log4j.Logger;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -31,35 +33,32 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.util.FSCollectionFactory;
 
 /**
- * Base class for all cloze item annotations.
+ * Base class for all gap generators.
+ * <p>
+ * A gap generator needs to be decorated with {@link GapGeneratorMetadata} and
+ * specify the language it supports. Additionally, it can specify the POS
+ * Subtag it wants to work on. For example, when generating gaps for articles,
+ * one would use:
+ * <pre>
+ * @GapGeneratorMetadata(languageCode = "en", wantedPosSubtag = ART.class)
+ * </pre>
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public abstract class AbstractGapAnnotator extends JCasAnnotator_ImplBase {
+public abstract class AbstractGapGenerator extends JCasAnnotator_ImplBase {
 
     /** The logger (for all inheriting classes as well). */
     protected final Logger log = Logger.getLogger(this.getClass());
 
-    /**
-     * Returns the word classes an annotator is working on.
-     *
-     * <p>
-     * This should be implemented by all inheriting classes. Depending on the underlying
-     * tagger, the tags are most likely consistent with the Penn Treebank II Tags.
-     * </p>
-     *
-     * @see <a href="http://bulba.sdsu.edu/jeanette/thesis/PennTags.html">Penn Treebank II Tags</a>
-     * @return word class type
-     */
-    public abstract String[] getWantedTags();
+    /** The language code for an annotator. Needs to be set GapGeneratorMetadata. */
+    private String languageCode;
 
-    /**
-     * Needs to return the language code an inheriting annotator was meant to be
-     * used for.
-     *
-     * @return
-     */
-    public abstract String getLanguageCode();
+    /** The POS tags (Penn TreeBank Tags) the generator is working on. */
+    //protected String[] wantedPosTags = new String[] {};
+
+    /** The POS Subtag the generator is working on. */
+    private int wantedPosSubtag;;
 
     /**
      * Generates cloze tests item from validAnswers given subject.
@@ -76,6 +75,41 @@ public abstract class AbstractGapAnnotator extends JCasAnnotator_ImplBase {
     public abstract Gap generate(Annotation subject);
 
     /**
+     * Constructor which initializes the {@links GapGeneratorMetadata} annotator
+     * using reflection.
+     *
+     */
+    public AbstractGapGenerator() {
+
+        super();
+        for (java.lang.annotation.Annotation an : getClass().getAnnotations()) {
+            if (an instanceof GapGeneratorMetadata) {
+                final GapGeneratorMetadata md = (GapGeneratorMetadata) an;
+                languageCode = md.languageCode();
+
+                // This block uses java reflection in order to allow the
+                // annotation of generators.
+                for (Field field : md.wantedPosSubtag().getDeclaredFields()) {
+                    if (field.getName().equals("type")) {
+                        try {
+                            wantedPosSubtag = field.getInt(md.wantedPosSubtag());
+                        } catch (IllegalArgumentException ex) {
+                            wantedPosSubtag = POS.type;
+                        } catch (IllegalAccessException ex) {
+                            wantedPosSubtag = POS.type;
+                        }
+                    }
+                }
+
+            }
+        }
+        if (languageCode == null) {
+            throw new NullPointerException(
+                    "Generator needs to be decorated with GapGeneratorMetadata!");
+        }
+    }
+
+    /**
      * Process the annotator.
      *
      * <p>
@@ -89,17 +123,16 @@ public abstract class AbstractGapAnnotator extends JCasAnnotator_ImplBase {
      */
     @Override
     public final void process(final JCas jcas) throws AnalysisEngineProcessException {
-        if (!getLanguageCode().equals(jcas.getDocumentLanguage())) {
+        if (!languageCode.equals(jcas.getDocumentLanguage())) {
             log.error("This annotator is not made for your language!");
             return;
         }
         for (final Iterator<Annotation> i = jcas.getAnnotationIndex(
                 POS.type).iterator(); i.hasNext();) {
             final Annotation subject = i.next();
-            final POS pos = (POS) subject;
+            //final POS pos = (POS) subject;
 
-            if (Arrays.asList(getWantedTags()).contains(pos.getPosValue())) {
-
+            //if (Arrays.asList(wantedTags).contains(pos.getPosValue())) {
                 final GapAnnotation annotation = new GapAnnotation(jcas);
 
                 annotation.setBegin(subject.getBegin());
@@ -123,7 +156,21 @@ public abstract class AbstractGapAnnotator extends JCasAnnotator_ImplBase {
                 annotation.setValidAnswers(validAnswers);
 
                 annotation.addToIndexes();
-            }
+            //}
         }
+    }
+
+    /**
+     * @return the languageCode
+     */
+    public String getLanguageCode() {
+        return languageCode;
+    }
+
+    /**
+     * @return the wantedPosSubtag
+     */
+    public int getWantedPosSubtag() {
+        return wantedPosSubtag;
     }
 }

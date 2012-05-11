@@ -17,8 +17,10 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators.en;
 
-import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapAnnotator;
+import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapGenerator;
 import com.github.fhirschmann.clozegen.lib.annotators.Gap;
+import com.github.fhirschmann.clozegen.lib.annotators.GapGeneratorMetadata;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import java.util.Arrays;
 import org.apache.uima.jcas.tcas.Annotation;
 
@@ -29,17 +31,13 @@ import org.apache.uima.jcas.tcas.Annotation;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class ArticleAnnotator extends AbstractGapAnnotator {
+@GapGeneratorMetadata(languageCode = "en", wantedPosSubtag = ART.class)
+public class ArticleGapGenerator extends AbstractGapGenerator {
     /** The language for this annotator. */
     protected static final String LANGUAGE = "en";
 
     /** The three English articles. */
     public static final String[] ARTICLES = new String[] {"a", "an", "the"};
-
-    @Override
-    public String[] getWantedTags() {
-        return new String[] {"DT"};
-    }
 
     @Override
     public Gap generate(final Annotation subject) {
@@ -54,10 +52,5 @@ public class ArticleAnnotator extends AbstractGapAnnotator {
             return gap;
         }
         return null;
-    }
-
-    @Override
-    public String getLanguageCode() {
-        return "en";
     }
 }

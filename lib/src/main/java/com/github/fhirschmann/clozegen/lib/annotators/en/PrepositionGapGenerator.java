@@ -17,15 +17,18 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators.en;
 
-import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapAnnotator;
+import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapGenerator;
 import com.github.fhirschmann.clozegen.lib.annotators.Gap;
+import com.github.fhirschmann.clozegen.lib.annotators.GapGeneratorMetadata;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionAnnotator extends AbstractGapAnnotator {
+@GapGeneratorMetadata(languageCode = "en", wantedPosSubtag = PR.class)
+public class PrepositionGapGenerator extends AbstractGapGenerator {
 
     @Override
     public Gap generate(final Annotation subject) {
@@ -34,15 +37,5 @@ public class PrepositionAnnotator extends AbstractGapAnnotator {
         gap.getInvalidAnswers().add(subject.getCoveredText());
 
         return gap;
-    }
-
-    @Override
-    public String[] getWantedTags() {
-        return new String[] {"TO", "P"};
-    }
-
-    @Override
-    public String getLanguageCode() {
-        return "en";
     }
 }
