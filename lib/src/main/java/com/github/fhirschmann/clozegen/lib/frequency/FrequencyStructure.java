@@ -43,10 +43,6 @@ import java.util.Map;
  * For fast lookup of an individual frequency, a HashMap is used. The Value
  * of this HashMap points to the FrequencyPair as it appears in the list.
  * </p>
- * <p>
- * This structure is NOT meant to count individual words in order to
- * build a distribution frequency. However, this functionality could be added.
- * </p>
  *
  * @see <a href="http://www.glazedlists.com/">Glazed Lists</a>
  * @author Fabian Hirschmann <fabian@hirschm.net>
