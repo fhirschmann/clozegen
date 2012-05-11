@@ -19,24 +19,11 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class ClozeTestGenerator {
-    /** The segmenter (sentence splitter) to use. */
-    private final Class<? extends AnalysisComponent> segmenter;
-
-    /** The tagger to use. */
-    private final AnalysisEngine tagger;
-
     /** The pipeline steps (segmenter, tagger, word class annotators). */
-    private Pipeline pipeline = new Pipeline();
+    private final Pipeline pipeline;
 
     public ClozeTestGenerator() throws ResourceInitializationException {
-        segmenter = StanfordSegmenter.class;
-
-        // Produces some wird reflection errors in uimafit
-        //tagger = createPrimitive(StanfordPosTagger.class,
-        //        StanfordPosTagger.PARAM_VARIANT,
-        //        "bidirectional-distsim-wsj-0-18");
-
-        tagger = createPrimitive(TreeTaggerPosLemmaTT4J.class);
+        pipeline = new DefaultPipeline();
     }
 
     static {
@@ -55,9 +42,6 @@ public class ClozeTestGenerator {
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText("Let's go to a movie! I'd like a cookie!");
         jcas.setDocumentLanguage("en");
-
-        getPipeline().addStep(segmenter);
-        getPipeline().addStep(tagger);
 
         //getPipeline().addStep(PrepositionGapGenerator.class);
         getPipeline().addStep(ArticleGapGenerator.class);
