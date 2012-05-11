@@ -44,13 +44,7 @@ import java.util.Map;
  * </p>
  * <p>
  * This structure is NOT meant to count individual words in order to
- * build a distribution frequency. This class can be used if the
- * frequency of something is already known beforehand. If you require
- * dynamic counting of words and don't need features that require a sorted
- * list (like getAdjacentTo()), you should take a look at
- * <a href="http://code.google.com/p/guava-libraries/wiki/NewCollectionTypesExplained">
- * Google Guava's Multisets
- * </a>.
+ * build a distribution frequency. However, this functionality could be added.
  * </p>
  *
  * @see <a href="http://www.glazedlists.com/">Glazed Lists</a>
