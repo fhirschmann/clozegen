@@ -210,11 +210,8 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
     public List<V> getAdjacentTo(final V value, final int num) {
         final FrequencyPair<V> frequencyPair = getFrequencyPair(value);
 
-        if (frequencyPair == null) {
-            return null;
-        }
-
-        final List<FrequencyPair<V>> adjacent = getAdjacentTo(frequencyPair, num);
+        final List<FrequencyPair<V>> adjacent = getAdjacentTo(
+                checkNotNull(frequencyPair), num);
 
         return frequencyPairs2Values(adjacent);
     }
