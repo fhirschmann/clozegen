@@ -20,6 +20,7 @@ package com.github.fhirschmann.clozegen.lib.tools;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Output;
 import com.github.fhirschmann.clozegen.lib.frequency.FrequencyStructure;
+import com.google.common.collect.*;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -38,12 +39,12 @@ import org.uimafit.component.JCasConsumer_ImplBase;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class PrepositionSerializationWriter extends JCasConsumer_ImplBase {
-    private FrequencyStructure<String> fs;
+    private Multiset<String> ms;
 
 	@Override
 	public void initialize(UimaContext context) throws ResourceInitializationException {
 		super.initialize(context);
-        fs = new FrequencyStructure<String>();
+        ms = HashMultiset.create();
     }
 
     @Override
@@ -52,7 +53,7 @@ public class PrepositionSerializationWriter extends JCasConsumer_ImplBase {
                 PP.type).iterator(); i.hasNext();) {
             final Annotation subject = i.next();
             final PP pp = (PP) subject;
-            fs.increase(pp.getCoveredText().toString().toLowerCase());
+            ms.add(pp.getCoveredText().toString().toLowerCase());
         }
     }
 
@@ -61,7 +62,8 @@ public class PrepositionSerializationWriter extends JCasConsumer_ImplBase {
         Kryo kryo = new Kryo();
         try {
             Output output = new Output(new FileOutputStream("src/main/resources/frequency/prepositions.bin"));
-            kryo.writeObject(output, fs);
+            ImmutableMultiset sm = Multisets.copyHighestCountFirst(ms);
+            kryo.writeObject(output, LinkedHashMultiset.create(sm));
             output.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PrepositionSerializationWriter.class.getName()).log(Level.SEVERE, null, ex);

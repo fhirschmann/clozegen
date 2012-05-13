@@ -21,13 +21,9 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapGenerator;
 import com.github.fhirschmann.clozegen.lib.annotators.Gap;
-import com.github.fhirschmann.clozegen.lib.frequency.FrequencyStructure;
+import com.google.common.collect.LinkedHashMultiset;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.uima.UimaContext;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -38,7 +34,7 @@ import org.apache.uima.resource.ResourceInitializationException;
  */
 public class PrepositionGapGenerator extends AbstractGapGenerator {
 
-    private FrequencyStructure<String> fs = null;
+    private LinkedHashMultiset<String> fs = null;
 
     @Override
     public void initialize(UimaContext context) throws ResourceInitializationException {
@@ -50,7 +46,7 @@ public class PrepositionGapGenerator extends AbstractGapGenerator {
                 getResourceAsStream("frequency/prepositions.bin");
         input = new Input(fis);
         final Kryo kryo = new Kryo();
-        fs = kryo.readObject(input, FrequencyStructure.class);
+        fs = kryo.readObject(input, LinkedHashMultiset.class);
         input.close();
     }
 
