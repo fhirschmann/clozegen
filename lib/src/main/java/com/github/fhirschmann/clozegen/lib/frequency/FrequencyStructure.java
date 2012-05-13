@@ -34,7 +34,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  *
- * OBSOLETE: Use MultimapFrequency.
+ * OBSOLETE: Use Google's MultiMap and Multimap.copyHighestCountFirst
  *
  *
  * This class represents a datastructure for managing frequencies for
