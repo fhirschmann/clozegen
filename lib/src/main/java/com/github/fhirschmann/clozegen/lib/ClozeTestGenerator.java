@@ -3,6 +3,7 @@ package com.github.fhirschmann.clozegen.lib;
 import com.github.fhirschmann.clozegen.lib.pipeline.DefaultPipeline;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.annotators.en.ArticleGapGenerator;
+import com.github.fhirschmann.clozegen.lib.annotators.en.PrepositionGapGenerator;
 import com.github.fhirschmann.clozegen.lib.io.DebugWriter;
 
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
@@ -42,10 +43,10 @@ public class ClozeTestGenerator {
     public void run() throws ResourceInitializationException,
             IOException, UIMAException {
         JCas jcas = JCasFactory.createJCas();
-        jcas.setDocumentText("Let's go to a movie! I'd like a cookie!");
+        jcas.setDocumentText("Let's go to a movie! I'd like a cookie! The book is on the table.");
         jcas.setDocumentLanguage("en");
 
-        //getPipeline().addStep(PrepositionGapGenerator.class);
+        getPipeline().addStep(PrepositionGapGenerator.class);
         getPipeline().addStep(ArticleGapGenerator.class);
         getPipeline().addStep(DebugWriter.class);
         getPipeline().run(jcas);

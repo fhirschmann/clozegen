@@ -32,6 +32,10 @@ public class FrequencyPair<T> implements Comparable<FrequencyPair<T>>, Serializa
         this.value = value;
     }
 
+    public FrequencyPair() {
+        this.frequency = 0;
+    }
+
     @Override
     public int compareTo(final FrequencyPair<T> frequencyPair) {
         return frequency.compareTo(frequencyPair.getFrequency());

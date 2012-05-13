@@ -106,5 +106,15 @@
             <artifactId>objenesis</artifactId>
             <version>1.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.fhirschmann.clozegen.dependencies</groupId>
+            <artifactId>reflectasm</artifactId>
+            <version>1.03</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.fhirschmann.clozegen.dependencies</groupId>
+            <artifactId>asm</artifactId>
+            <version>4.0</version>
+        </dependency>
     </dependencies>
 </project>

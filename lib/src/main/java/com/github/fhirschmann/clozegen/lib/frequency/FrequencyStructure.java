@@ -33,6 +33,10 @@ import java.util.Map;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
+ *
+ * OBSOLETE: Use MultimapFrequency.
+ *
+ *
  * This class represents a datastructure for managing frequencies for
  * objects.
  * <p>
