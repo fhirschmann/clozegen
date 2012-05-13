@@ -69,6 +69,15 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
         return hashMap.containsKey(value);
     }
 
+    public boolean removeFrequency(final V value) {
+        if (!contains(value)) {
+            return false;
+        }
+        final int index = hashMap.remove(value);
+        basicList.remove(index);
+        return true;
+    }
+
     /**
      * Increases the frequency for a value.
      *
@@ -77,7 +86,9 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
      */
     public void increase(final V value, final int increment) {
         if (contains(value)) {
-            set(value, getFrequency(value) + increment);
+            final int frequency = getFrequency(value);
+            removeFrequency(value);
+            set(value, frequency + increment);
         } else {
             set(value, 1);
         }
@@ -105,6 +116,7 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
      */
     public void set(final V value, final int frequency) {
         if (contains(value)) {
+
             getFrequencyPair(value).setFrequency(frequency);
         } else {
             basicList.add(new FrequencyPair(value, frequency));
