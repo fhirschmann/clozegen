@@ -11,7 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received validAnswers copy of the GNU General Public License
+ * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
@@ -62,7 +62,7 @@ public abstract class AbstractGapGenerator extends JCasAnnotator_ImplBase {
     private int filterPosTag;
 
     /**
-     * Generates cloze tests item from validAnswers given subject.
+     * Generates cloze tests item from a given subject.
      *
      * <p>
      * This method should generate a number of valid and invalid answers for a given
@@ -70,8 +70,8 @@ public abstract class AbstractGapGenerator extends JCasAnnotator_ImplBase {
      * only valid answers and {"an","the"} as invalid answers.
      * </p>
      *
-     * @param subject the word to generate validAnswers cloze test item for
-     * @return valid and invalid answers for validAnswers gap
+     * @param subject the word to generate a cloze test item for
+     * @return valid and invalid answers for this gap
      */
     public abstract Gap generate(Annotation subject);
 
@@ -138,28 +138,28 @@ public abstract class AbstractGapGenerator extends JCasAnnotator_ImplBase {
     }
 
     /**
-     * @return the languageCode
+     * @return the language code this gap generator is meant to be used with
      */
     public String getLanguageCode() {
         return languageCode;
     }
 
     /**
-     * @param languageCode the languageCode to set
+     * @param languageCode the language code this gap generator is meant to be used with
      */
     public void setLanguageCode(String languageCode) {
         this.languageCode = languageCode;
     }
 
     /**
-     * @return the filterPosTag
+     * @return the exclusive POS (Sub)tag this generator is working on
      */
     public int getFilterPosTag() {
         return filterPosTag;
     }
 
     /**
-     * @param filterPosTag the filterPosTag to set
+     * @param filterPosTag the exclusive POS (Sub)tag this generator is working on
      */
     public void setFilterPosTag(int filterPosTag) {
         this.filterPosTag = filterPosTag;
