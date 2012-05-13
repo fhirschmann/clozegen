@@ -19,10 +19,7 @@ package com.github.fhirschmann.clozegen.lib.annotators;
 
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -31,7 +28,6 @@ import org.apache.uima.jcas.cas.NonEmptyStringList;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.util.FSCollectionFactory;
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Base class for all gap generators.
