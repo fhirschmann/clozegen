@@ -74,14 +74,12 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
      *
      * @param value The value to increase the frequency for
      * @param increment the increment
-     * @return true if the frequency was increased
      */
-    public boolean increase(final V value, final int increment) {
+    public void increase(final V value, final int increment) {
         if (contains(value)) {
             set(value, getFrequency(value) + increment);
-            return true;
         } else {
-            return false;
+            set(value, 1);
         }
     }
 
@@ -89,10 +87,9 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
      * Increases the frequency for a value by one.
      *
      * @param value The value to increase the frequency for
-     * @return true if the frequency was increased
      */
-    public boolean increase(final V value) {
-        return increase(value, 1);
+    public void increase(final V value) {
+        increase(value, 1);
     }
 
     /**
