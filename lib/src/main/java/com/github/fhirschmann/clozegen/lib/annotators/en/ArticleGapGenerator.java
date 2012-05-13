@@ -22,7 +22,9 @@ import com.github.fhirschmann.clozegen.lib.annotators.Gap;
 import com.google.common.collect.Sets;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import java.util.Set;
+import org.apache.uima.UimaContext;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.apache.uima.resource.ResourceInitializationException;
 
 /**
  * Implements an generator for generating gaps for the English articles.
@@ -35,8 +37,8 @@ public class ArticleGapGenerator extends AbstractGapGenerator {
     /** The three English articles. */
     public static final Set<String> ARTICLES = Sets.newHashSet("a", "an", "the");
 
-    public ArticleGapGenerator() {
-        super();
+    @Override
+	public void initialize(UimaContext context) throws ResourceInitializationException {
         setFilterPosTag(ART.type);
         setLanguageCode("en");
     }
