@@ -20,15 +20,16 @@ package com.github.fhirschmann.clozegen.lib.annotators.en;
 import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapGenerator;
 import com.github.fhirschmann.clozegen.lib.annotators.Gap;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR;
+import org.apache.uima.UimaContext;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.apache.uima.resource.ResourceInitializationException;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class PrepositionGapGenerator extends AbstractGapGenerator {
-    public PrepositionGapGenerator() {
-        super();
+	public void initialize(UimaContext context) throws ResourceInitializationException {
         setFilterPosTag(PR.type);
         setLanguageCode("en");
     }
