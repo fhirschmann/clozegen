@@ -108,6 +108,10 @@
             <id>ukp-oss</id>
             <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/repo</url>
         </repository>
+        <repository>
+            <id>0x0b</id>
+            <url>http://mvn.0x0b.de</url>
+        </repository>
     </repositories>
 
     <licenses>
