@@ -32,13 +32,8 @@ import org.uimafit.util.FSCollectionFactory;
 /**
  * Base class for all gap generators.
  * <p>
- * A gap generator needs to be decorated with {@link GapGeneratorMetadata} and
- * specify the language it supports. Additionally, it can specify the POS
- * Subtag it wants to work on. For example, when generating gaps for articles,
- * one would use:
- * <pre>
- * @GapGeneratorMetadata(languageCode = "en", filterPosTag = ART.class)
- * </pre>
+ * A gap generator can declare the an exclusive POS Subtag it is working
+ * on using setFilterPosTag().
  * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
