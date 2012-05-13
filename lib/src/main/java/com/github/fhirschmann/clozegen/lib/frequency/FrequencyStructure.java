@@ -59,6 +59,9 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
     private final EventList<FrequencyPair<V>> sortedList =
             new SortedList(basicList);
 
+    /** The total count of all V. */
+    private long count = 0;
+
     /**
      * Check to see if a frequency for a given value is on record.
      *
@@ -75,6 +78,7 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
         }
         final int index = hashMap.remove(value);
         basicList.remove(index);
+        count += 1;
         return true;
     }
 
@@ -125,6 +129,8 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
             basicList.add(new FrequencyPair(value, frequency));
             hashMap.put(value, basicList.size() - 1);
         }
+
+        count += frequency;
     }
 
     /**
@@ -194,6 +200,16 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
      */
     public int getDistinctCount() {
         return size();
+    }
+
+    /**
+     * Returns the total number of values for which a frequency has been recorded.
+     * This includes duplicate words.
+     *
+     * @return the number of all for which frequencies exist
+     */
+    public long getCount() {
+        return count;
     }
 
     /**
@@ -285,6 +301,8 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("total_count", getCount());
+        str.add("distinct_count", getDistinctCount());
         str.add("frequencies", sortedList.toString());
         return str.toString();
     }
