@@ -1,5 +1,7 @@
 package com.github.fhirschmann.clozegen.lib;
 
+import com.github.fhirschmann.clozegen.lib.pipeline.DefaultPipeline;
+import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.annotators.en.ArticleGapGenerator;
 import com.github.fhirschmann.clozegen.lib.io.DebugWriter;
 
