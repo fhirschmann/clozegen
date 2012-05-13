@@ -31,6 +31,7 @@ import org.apache.uima.jcas.cas.NonEmptyStringList;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.util.FSCollectionFactory;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Base class for all gap generators.
@@ -103,10 +104,8 @@ public abstract class AbstractGapGenerator extends JCasAnnotator_ImplBase {
 
             }
         }
-        if (languageCode == null) {
-            throw new NullPointerException(
-                    "Generator needs to be decorated with GapGeneratorMetadata!");
-        }
+        checkNotNull(languageCode, "languageCode cannot be null. Please decorate"
+                + "your generator using GapGeneratorMetadata.");
     }
 
     /**
