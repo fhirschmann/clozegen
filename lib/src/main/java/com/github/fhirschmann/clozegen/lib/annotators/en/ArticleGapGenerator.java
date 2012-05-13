@@ -32,10 +32,15 @@ import org.apache.uima.jcas.tcas.Annotation;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-@GapGeneratorMetadata(languageCode = "en", wantedPosSubtag = ART.class)
 public class ArticleGapGenerator extends AbstractGapGenerator {
     /** The three English articles. */
     public static final Set<String> ARTICLES = Sets.newHashSet("a", "an", "the");
+
+    public ArticleGapGenerator() {
+        super();
+        setFilterPosTag(ART.type);
+        setLanguageCode("en");
+    }
 
     @Override
     public Gap generate(final Annotation subject) {

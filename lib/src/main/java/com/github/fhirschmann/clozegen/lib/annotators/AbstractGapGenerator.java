@@ -41,7 +41,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Subtag it wants to work on. For example, when generating gaps for articles,
  * one would use:
  * <pre>
- * @GapGeneratorMetadata(languageCode = "en", wantedPosSubtag = ART.class)
+ * @GapGeneratorMetadata(languageCode = "en", filterPosTag = ART.class)
  * </pre>
  * </p>
  *
@@ -59,7 +59,7 @@ public abstract class AbstractGapGenerator extends JCasAnnotator_ImplBase {
     //protected String[] wantedPosTags = new String[] {};
 
     /** The POS Subtag the generator is working on. */
-    private int wantedPosSubtag;;
+    private int filterPosTag;
 
     /**
      * Generates cloze tests item from validAnswers given subject.
@@ -81,31 +81,9 @@ public abstract class AbstractGapGenerator extends JCasAnnotator_ImplBase {
      *
      */
     public AbstractGapGenerator() {
-
         super();
-        for (java.lang.annotation.Annotation an : getClass().getAnnotations()) {
-            if (an instanceof GapGeneratorMetadata) {
-                final GapGeneratorMetadata md = (GapGeneratorMetadata) an;
-                languageCode = md.languageCode();
-
-                // This block uses java reflection in order to allow the
-                // annotation of generators.
-                for (Field field : md.wantedPosSubtag().getDeclaredFields()) {
-                    if (field.getName().equals("type")) {
-                        try {
-                            wantedPosSubtag = field.getInt(md.wantedPosSubtag());
-                        } catch (IllegalArgumentException ex) {
-                            wantedPosSubtag = POS.type;
-                        } catch (IllegalAccessException ex) {
-                            wantedPosSubtag = POS.type;
-                        }
-                    }
-                }
-
-            }
-        }
-        checkNotNull(languageCode, "languageCode cannot be null. Please decorate"
-                + "your generator using GapGeneratorMetadata.");
+        languageCode = "en";
+        filterPosTag = POS.type;
     }
 
     /**
@@ -127,7 +105,7 @@ public abstract class AbstractGapGenerator extends JCasAnnotator_ImplBase {
             return;
         }
         for (final Iterator<Annotation> i = jcas.getAnnotationIndex(
-                wantedPosSubtag).iterator(); i.hasNext();) {
+                getFilterPosTag()).iterator(); i.hasNext();) {
             final Annotation subject = i.next();
             //final POS pos = (POS) subject;
 
@@ -167,9 +145,23 @@ public abstract class AbstractGapGenerator extends JCasAnnotator_ImplBase {
     }
 
     /**
-     * @return the wantedPosSubtag
+     * @param languageCode the languageCode to set
      */
-    public int getWantedPosSubtag() {
-        return wantedPosSubtag;
+    public void setLanguageCode(String languageCode) {
+        this.languageCode = languageCode;
+    }
+
+    /**
+     * @return the filterPosTag
+     */
+    public int getFilterPosTag() {
+        return filterPosTag;
+    }
+
+    /**
+     * @param filterPosTag the filterPosTag to set
+     */
+    public void setFilterPosTag(int filterPosTag) {
+        this.filterPosTag = filterPosTag;
     }
 }
