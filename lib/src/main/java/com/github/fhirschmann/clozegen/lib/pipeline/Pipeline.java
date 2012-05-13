@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib;
+package com.github.fhirschmann.clozegen.lib.pipeline;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
