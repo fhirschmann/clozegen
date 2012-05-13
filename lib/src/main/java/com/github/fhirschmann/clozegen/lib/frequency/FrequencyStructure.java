@@ -69,7 +69,7 @@ public class FrequencyStructure<V> implements Iterable, Serializable {
         return hashMap.containsKey(value);
     }
 
-    public boolean removeFrequency(final V value) {
+    public boolean remove(final V value) {
         if (!contains(value)) {
             return false;
         }
