@@ -50,17 +50,22 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class FrequencyStructure<V> implements Iterable, Serializable {
     /** Map for fast lookups. */
-    private final Map<V, Integer> hashMap = Maps.newHashMap();
+    private final Map<V, Integer> hashMap;
 
     /** List for fast addition of new items. */
-    private final EventList<FrequencyPair<V>> basicList = new BasicEventList();
+    private final EventList<FrequencyPair<V>> basicList;
 
     /** Sorted List for accessing intervals. */
-    private final EventList<FrequencyPair<V>> sortedList =
-            new SortedList(basicList);
+    private transient EventList<FrequencyPair<V>> sortedList;
 
     /** The total count of all V. */
     private long count = 0;
+
+    public FrequencyStructure() {
+        hashMap = Maps.newHashMap();
+        basicList = new BasicEventList<FrequencyPair<V>>();
+        sortedList = new SortedList<FrequencyPair<V>>(basicList);
+    }
 
     /**
      * Check to see if a frequency for a given value is on record.
