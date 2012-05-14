@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.io;
 
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
+import com.github.fhirschmann.clozegen.lib.util.StringUtils;
 import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
@@ -47,6 +48,8 @@ public class NewCollocationsExtractor extends JCasConsumer_ImplBase {
     private Multiset<String> trigrams;
     private Multiset<String> unigrams;
 
+    private final static Joiner joiner = Joiner.on(" ");
+
     private String output = "src/main/resources/frequency/prepositions";
 
     @Override
@@ -57,6 +60,13 @@ public class NewCollocationsExtractor extends JCasConsumer_ImplBase {
         after = HashMultiset.create();
         trigrams = HashMultiset.create();
         unigrams = HashMultiset.create();
+    }
+
+    public static void addToMultiset(final Multiset<String> multiset,
+            final String... tokens) {
+        if (!StringUtils.containsPunctuationMark(tokens)) {
+            multiset.add(joiner.join(tokens).toLowerCase());
+        }
     }
 
     @Override
@@ -73,24 +83,17 @@ public class NewCollocationsExtractor extends JCasConsumer_ImplBase {
             if ((current instanceof PP) && (previous != null)) {
                 next = i.next();
 
-                String lowered_previous = previous.getCoveredText().toLowerCase();
-                String lowered_next = next.getCoveredText().toLowerCase();
-                String lowered_current = current.getCoveredText().toLowerCase();
-
-                Joiner joiner = Joiner.on(" ");
+                String lowered_previous = previous.getCoveredText();
+                String lowered_next = next.getCoveredText();
+                String lowered_current = current.getCoveredText();
 
                 unigrams.add(lowered_current);
-                before.add(joiner.join(lowered_previous, lowered_current));
-                after.add(joiner.join(lowered_current, lowered_next));
-                trigrams.add(joiner.join(lowered_previous, lowered_current, lowered_next));
+                addToMultiset(before, lowered_previous, lowered_current);
+                addToMultiset(after, lowered_current, lowered_next);
+                addToMultiset(trigrams, lowered_previous, lowered_current, lowered_next);
             }
 
             previous = current;
-        }
-
-
-        for (POS subject : select(aJCas, PP.class)) {
-
         }
     }
     @Override
