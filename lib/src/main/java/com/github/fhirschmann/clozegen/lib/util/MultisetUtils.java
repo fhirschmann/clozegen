@@ -49,6 +49,7 @@ public class MultisetUtils {
                     String.format("%s\t%d%n",
                     entry.getElement().toString(), entry.getCount()));
         }
+        bufferedWriter.close();
     }
 
     public static void writeSortedMultiSet(Multiset<String> multiSet, File file) throws IOException {
