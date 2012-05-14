@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.tools;
 
 import com.github.fhirschmann.clozegen.lib.io.CollocationsExtractor;
+import com.github.fhirschmann.clozegen.lib.io.NewCollocationsExtractor;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
 import java.io.IOException;
@@ -40,7 +41,7 @@ public class WritePrepositionCollocations {
                 BrownCorpusReader.PARAM_PATH, "src/main/resources/corpora/brown_tei",
                 BrownCorpusReader.PARAM_PATTERNS, new String[] {"[+]*.xml"});
 
-        pipeline.addStep(CollocationsExtractor.class);
+        pipeline.addStep(NewCollocationsExtractor.class);
         pipeline.run(cr);
     }
 
