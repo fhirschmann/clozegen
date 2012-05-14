@@ -21,6 +21,13 @@ import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
+import com.google.common.io.ByteStreams;
+import com.google.common.io.Files;
+import com.google.common.io.OutputSupplier;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Utility functions for Multisets.
@@ -33,4 +40,19 @@ public class MultisetUtils {
         return LinkedHashMultiset.create(immutableSet);
     }
 
+    public static void writeMultiSet(Multiset<String> multiset, File file) throws IOException {
+
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+
+        for (Multiset.Entry entry : multiset.entrySet()) {
+            bufferedWriter.write(
+                    String.format("%s\t%d%n",
+                    entry.getElement().toString(), entry.getCount()));
+        }
+    }
+
+    public static void writeSortedMultiSet(Multiset<String> multiSet, File file) throws IOException {
+        ImmutableMultiset<String> im = Multisets.copyHighestCountFirst(multiSet);
+        writeMultiSet(im, file);
+    }
 }

@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.io;
 
+import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.github.fhirschmann.clozegen.lib.util.RangeUtils;
 import com.google.common.collect.*;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
@@ -24,8 +25,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.ngrams.NGramIterable;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
@@ -54,6 +59,15 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
         before = HashMultiset.create();
         after = HashMultiset.create();
         trigrams = HashMultiset.create();
+    }
+
+    @Override
+    public void collectionProcessComplete() {
+        try {
+            MultisetUtils.writeMultiSet(trigrams, new File("/home/fabian/test.txt"));
+        } catch (IOException ex) {
+            Logger.getLogger(CollocationsExtractor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
