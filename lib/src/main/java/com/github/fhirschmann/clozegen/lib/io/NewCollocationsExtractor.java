@@ -79,6 +79,7 @@ public class NewCollocationsExtractor extends JCasConsumer_ImplBase {
                 POS.type).iterator(); i.hasNext();) {
             current = i.next();
 
+            // TODO: Check for null
 
             if ((current instanceof PP) && (previous != null)) {
                 next = i.next();
