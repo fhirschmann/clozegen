@@ -42,20 +42,20 @@ import org.uimafit.descriptor.ConfigurationParameter;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class FilteredNGramAnnotator extends JCasAnnotator_ImplBase {
-	public static final String PARAM_N = "N";
-	@ConfigurationParameter(name = PARAM_N, mandatory = true, defaultValue = "3")
-	private int n;
+    public static final String PARAM_N = "N";
+    @ConfigurationParameter(name = PARAM_N, mandatory = true, defaultValue = "3")
+    private int n;
 
     private HashSet<Range> prepositions;
 
-	@Override
-	public void initialize(UimaContext context) throws ResourceInitializationException {
-		super.initialize(context);
+    @Override
+    public void initialize(UimaContext context) throws ResourceInitializationException {
+        super.initialize(context);
         prepositions = Sets.newHashSet();
     }
 
-	@Override
-	public void process(JCas aJCas) throws AnalysisEngineProcessException {
+    @Override
+    public void process(JCas aJCas) throws AnalysisEngineProcessException {
         for (final Iterator<Annotation> i = aJCas.getAnnotationIndex(
                 PP.type).iterator(); i.hasNext();) {
             final Annotation subject = i.next();
@@ -64,15 +64,15 @@ public class FilteredNGramAnnotator extends JCasAnnotator_ImplBase {
 
         Range range;
 
-		for (Sentence s : select(aJCas, Sentence.class)) {
-			for (NGram ngram : NGramIterable.create(selectCovered(Token.class, s), n)) {
+        for (Sentence s : select(aJCas, Sentence.class)) {
+            for (NGram ngram : NGramIterable.create(selectCovered(Token.class, s), n)) {
                 range = Ranges.closed(ngram.getBegin(), ngram.getEnd());
                 for (Range preposition : prepositions) {
                     if (range.encloses(preposition)) {
                         ngram.addToIndexes();
                     }
                 }
-			}
-		}
-	}
+            }
+        }
+    }
 }
