@@ -50,6 +50,9 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
     private Multiset<String> before;
     private Multiset<String> after;
     private Multiset<String> trigrams;
+    private Multiset<String> unigrams;
+
+    private String output = "src/main/resources/frequency/prepositions";
 
     @Override
     public void initialize(final UimaContext context)
@@ -59,12 +62,16 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
         before = HashMultiset.create();
         after = HashMultiset.create();
         trigrams = HashMultiset.create();
+        unigrams = HashMultiset.create();
     }
 
     @Override
     public void collectionProcessComplete() {
         try {
-            MultisetUtils.writeMultiSet(trigrams, new File("/home/fabian/test.txt"));
+            MultisetUtils.writeSortedMultiSet(trigrams, new File(output, "trigrams.txt"));
+            MultisetUtils.writeSortedMultiSet(after, new File(output, "after.txt"));
+            MultisetUtils.writeSortedMultiSet(before, new File(output, "before.txt"));
+            MultisetUtils.writeSortedMultiSet(unigrams, new File(output, "unigrams.txt"));
         } catch (IOException ex) {
             Logger.getLogger(CollocationsExtractor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,6 +83,7 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
                 PP.type).iterator(); i.hasNext();) {
             final Annotation subject = i.next();
             prepositions.add(Ranges.closed(subject.getBegin(), subject.getEnd()));
+            unigrams.add(subject.getCoveredText().toLowerCase());
         }
 
         Range range;
