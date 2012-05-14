@@ -17,16 +17,9 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators.en;
 
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.io.Input;
 import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapGenerator;
 import com.github.fhirschmann.clozegen.lib.annotators.Gap;
-import com.google.common.collect.LinkedHashMultiset;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
-import java.io.InputStream;
-import org.apache.uima.UimaContext;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.apache.uima.resource.ResourceInitializationException;
 
 /**
  *
@@ -34,29 +27,11 @@ import org.apache.uima.resource.ResourceInitializationException;
  */
 public class PrepositionGapGenerator extends AbstractGapGenerator {
 
-    private LinkedHashMultiset<String> fs = null;
-
-    @Override
-    public void initialize(UimaContext context) throws ResourceInitializationException {
-
-        Input input = null;
-        setFilterPosTag(PP.type);
-        setLanguageCode("en");
-        InputStream fis = Thread.currentThread().getContextClassLoader().
-                getResourceAsStream("frequency/prepositions.bin");
-        input = new Input(fis);
-        final Kryo kryo = new Kryo();
-        fs = kryo.readObject(input, LinkedHashMultiset.class);
-        input.close();
-    }
-
     @Override
     public Gap generate(final Annotation subject) {
         final Gap gap = new Gap();
         gap.getValidAnswers().add(subject.getCoveredText());
         gap.getInvalidAnswers().add(subject.getCoveredText());
-
-        System.out.println(fs.toString());
 
         return gap;
     }
