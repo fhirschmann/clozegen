@@ -42,10 +42,10 @@ import org.uimafit.descriptor.ConfigurationParameter;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class FilteredNGramAnnotator extends JCasAnnotator_ImplBase {
+
     public static final String PARAM_N = "N";
     @ConfigurationParameter(name = PARAM_N, mandatory = true, defaultValue = "3")
     private int n;
-
     private HashSet<Range> prepositions;
 
     @Override
