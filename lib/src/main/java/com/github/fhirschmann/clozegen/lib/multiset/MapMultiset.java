@@ -22,23 +22,59 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.*;
 
 /**
- * Similar to de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFreqDist,
- * but uses Multisets.
+ * Object which maps a key to a {@link Multiset}. Additionally, it provides
+ * the convenience function like
+ * {@link MapMultiset#add(java.lang.Object, java.lang.Object, int)}.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
+ *
+ * @param <K> the type of keys maintained by this map
+ * @param <V> the type of values for {@link MultiSet}
  */
-public class MapMultiset <K, V> extends ForwardingMap<K, Multiset<V>> {
+public class MapMultiset<K, V> extends ForwardingMap<K, Multiset<V>> {
     private Map<K, Multiset<V>> map;
 
+    /**
+     * Creates a new empty {@link MapMultiset}.
+     *
+     * @param <K> the type of keys maintained by this map
+     * @param <V> the type of values for {@link MultiSet}
+     * @return a new empty {@link MapMultiset}
+     */
+    public static <K, V> MapMultiset<K, V> create() {
+        return new MapMultiset();
+    }
+
+    /**
+     * Creates a new empty {@link MapMultiset}.
+     */
     public MapMultiset() {
+        super();
         map = Maps.newHashMap();
     }
 
-    public ImmutableMultiset<V> getSorted(K key) {
+    /**
+     * Returns a copy of the {@link Multiset} identified by {@code key} as an
+     * {@link ImmutableMultiset} whose order is highest count first, with ties broken by
+     * the iteration order of the original multiset.
+     *
+     * @param key the key to identify the multiset by
+     * @return a new {@link ImmutableMultiset} whose order is highest count first
+     */
+    public ImmutableMultiset<V> getSorted(final K key) {
         return Multisets.copyHighestCountFirst(checkNotNull(get(key)));
     }
 
-    public void add(K key, V value, int count) {
+    /**
+     * Adds a value to the {@link Multiset} identified by {@code key}.
+     *
+     * <p>If the multiset does not exist yet, it will be created.
+     *
+     * @param key the key to identify the multiset by
+     * @param value the value of the multiset to add
+     * @param count the number to add
+     */
+    public void add(final K key, final V value, final int count) {
         Multiset<V> multiset;
 
         if (containsKey(key)) {
