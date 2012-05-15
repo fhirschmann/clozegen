@@ -19,16 +19,18 @@ package com.github.fhirschmann.clozegen.lib.io;
 
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.github.fhirschmann.clozegen.lib.util.StringUtils;
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Multiset;
+import com.google.common.collect.PeekingIterator;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.uima.UimaContext;
@@ -62,21 +64,11 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
     }
 
     public static void addToMultiset(final Multiset<String> multiset,
-            final String... tokens) {
-        if (!StringUtils.containsPunctuationMark(tokens)) {
-            multiset.add(joiner.join(tokens).toLowerCase());
-        }
-    }
-
-    public static void addToMultiset(final Multiset<String> multiset,
             final POS... tokens) {
         String[] sTokens = new String[tokens.length];
         for (int i=0; i < tokens.length; i++) {
-            if (tokens[i] == null) {
-                sTokens[i] = "NULL";
-            } else if (tokens[i].getCoveredText().equals(".")
-                    || tokens[i].getCoveredText().equals("!")
-                    || tokens[i].getCoveredText().equals("?")) {
+            if ((tokens[i] == null)
+                    || (StringUtils.isSentenceDelimiter(tokens[0].getCoveredText()))) {
                 sTokens[i] = "NULL";
             } else {
                 sTokens[i] = tokens[i].getCoveredText().toLowerCase();
@@ -87,26 +79,18 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
 
     @Override
     public void process(JCas aJCas) throws AnalysisEngineProcessException {
-        POS previous;
-        POS next;
-        POS current;
-
         for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
-            List<POS> pos = JCasUtil.selectCovered(aJCas, POS.class, sentence);
-            ListIterator<POS> it = pos.listIterator();
+            final List<POS> pos = JCasUtil.selectCovered(aJCas, POS.class, sentence);
+            final PeekingIterator<POS> it = Iterators.peekingIterator(pos.iterator());
 
-            previous = null;
-            next = null;
-            current = null;
+            POS previous;
+            POS next;
+            POS current = null;
 
             while (it.hasNext()) {
                 previous = current;
                 current = it.next();
-                if (it.hasNext()) {
-                    next = it.next();
-                } else {
-                    next = null;
-                }
+                next = it.hasNext() ? it.peek() : null;
 
                 if (current instanceof PP) {
                     addToMultiset(unigrams, current);
