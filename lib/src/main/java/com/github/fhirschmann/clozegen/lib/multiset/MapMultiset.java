@@ -75,15 +75,31 @@ public class MapMultiset<K, V> extends ForwardingMap<K, Multiset<V>> {
      * @param count the number to add
      */
     public void add(final K key, final V value, final int count) {
+        get(key).add(checkNotNull(value), count);
+    }
+
+    /**
+     * Gets the {@link Multiset} identified by {@code key}.
+     *
+     * <p>If there is no multiset present which can be identified by a given key,
+     * a new empty one is created and returned.
+     *
+     * @param key the key to identify the multiset by
+     * @return the {link Multiset} identified by key or a new empty one
+     */
+    @Override
+    public Multiset<V> get(Object key) {
         Multiset<V> multiset;
 
-        if (containsKey(key)) {
-            multiset = get(key);
+        K kKey = (K) checkNotNull(key);
+
+        if (containsKey(kKey)) {
+            multiset = super.get(key);
         } else {
             multiset = HashMultiset.create();
-            map.put(key, multiset);
+            put((K) key, multiset);
         }
-        multiset.add(value, count);
+        return multiset;
     }
 
     /**
