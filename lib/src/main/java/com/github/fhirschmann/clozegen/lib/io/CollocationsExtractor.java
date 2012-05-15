@@ -42,7 +42,7 @@ import static org.uimafit.util.JCasUtil.select;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class NewCollocationsExtractor extends JCasConsumer_ImplBase {
+public class CollocationsExtractor extends JCasConsumer_ImplBase {
 
     private Multiset<String> before;
     private Multiset<String> after;
