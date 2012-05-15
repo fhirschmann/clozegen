@@ -19,7 +19,6 @@ package com.github.fhirschmann.clozegen.lib.io;
 
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.github.fhirschmann.clozegen.lib.util.StringUtils;
-import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Iterators;
@@ -38,6 +37,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasConsumer_ImplBase;
+import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.util.JCasUtil;
 
 /**
@@ -46,12 +46,15 @@ import org.uimafit.util.JCasUtil;
  */
 public class CollocationsExtractor extends JCasConsumer_ImplBase {
 
+    public static final String PARAM_OUTPUT_DIRECTORY = "OutputDirectory";
+    @ConfigurationParameter(name = PARAM_OUTPUT_DIRECTORY, mandatory = true)
+    private String outputDirectory;
+
     private Multiset<String> before;
     private Multiset<String> after;
     private Multiset<String> trigrams;
     private Multiset<String> unigrams;
     private final static Joiner joiner = Joiner.on(" ");
-    private String output = "src/main/resources/frequency/prepositions";
 
     @Override
     public void initialize(final UimaContext context)
@@ -105,10 +108,14 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
     @Override
     public void collectionProcessComplete() {
         try {
-            MultisetUtils.writeSortedMultiSet(trigrams, new File(output, "trigrams.txt"));
-            MultisetUtils.writeSortedMultiSet(after, new File(output, "after.txt"));
-            MultisetUtils.writeSortedMultiSet(before, new File(output, "before.txt"));
-            MultisetUtils.writeSortedMultiSet(unigrams, new File(output, "unigrams.txt"));
+            MultisetUtils.writeSortedMultiSet(trigrams,
+                    new File(outputDirectory, "trigrams.txt"));
+            MultisetUtils.writeSortedMultiSet(after,
+                    new File(outputDirectory, "after.txt"));
+            MultisetUtils.writeSortedMultiSet(before,
+                    new File(outputDirectory, "before.txt"));
+            MultisetUtils.writeSortedMultiSet(unigrams,
+                    new File(outputDirectory, "unigrams.txt"));
         } catch (IOException ex) {
             Logger.getLogger(CollocationsExtractor.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -22,9 +22,11 @@ import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
 import java.io.IOException;
 import org.apache.uima.UIMAException;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.factory.CollectionReaderFactory;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 /**
  *
@@ -40,7 +42,12 @@ public class WritePrepositionCollocations {
                 BrownCorpusReader.PARAM_PATH, "src/main/resources/corpora/brown_tei",
                 BrownCorpusReader.PARAM_PATTERNS, new String[] {"[+]*.xml"});
 
-        pipeline.addStep(CollocationsExtractor.class);
+        AnalysisEngineDescription ce = createPrimitiveDescription(
+                CollocationsExtractor.class,
+                CollocationsExtractor.PARAM_OUTPUT_DIRECTORY,
+                "src/main/resources/frequency/prepositions");
+
+        pipeline.addStep(ce);
         pipeline.run(cr);
     }
 
