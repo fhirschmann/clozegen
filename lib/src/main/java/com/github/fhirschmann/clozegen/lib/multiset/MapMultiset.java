@@ -27,19 +27,11 @@ import com.google.common.collect.*;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class MapMultiset <K, V> {
+public class MapMultiset <K, V> extends ForwardingMap<K, Multiset<V>> {
     private Map<K, Multiset<V>> map;
 
     public MapMultiset() {
         map = Maps.newHashMap();
-    }
-
-    public boolean containsKey(K key) {
-        return map.containsKey(key);
-    }
-
-    public Multiset<V> get(K key) {
-        return map.get(key);
     }
 
     public ImmutableMultiset<V> getSorted(K key) {
@@ -56,5 +48,10 @@ public class MapMultiset <K, V> {
             map.put(key, multiset);
         }
         multiset.add(value, count);
+    }
+
+    @Override
+    protected Map<K, Multiset<V>> delegate() {
+        return map;
     }
 }
