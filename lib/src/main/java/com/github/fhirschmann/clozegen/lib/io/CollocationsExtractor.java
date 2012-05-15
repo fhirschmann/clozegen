@@ -24,8 +24,10 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.PeekingIterator;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import java.io.File;
 import java.io.IOException;
@@ -70,8 +72,7 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
             final POS... tokens) {
         String[] sTokens = new String[tokens.length];
         for (int i=0; i < tokens.length; i++) {
-            if ((tokens[i] == null)
-                    || (StringUtils.isSentenceDelimiter(tokens[0].getCoveredText()))) {
+            if ((tokens[i] == null) || tokens[i].getPosValue().equals("pct")) {
                 sTokens[i] = "NULL";
             } else {
                 sTokens[i] = tokens[i].getCoveredText().toLowerCase();
@@ -94,6 +95,7 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
                 previous = current;
                 current = it.next();
                 next = it.hasNext() ? it.peek() : null;
+
 
                 if (current instanceof PP) {
                     addToMultiset(unigrams, current);
