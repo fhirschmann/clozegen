@@ -86,6 +86,20 @@ public class MapMultiset<K, V> extends ForwardingMap<K, Multiset<V>> {
         multiset.add(value, count);
     }
 
+    /**
+     * Returns to total number of entries in all {@link Multiset} objects
+     * combined.
+     *
+     * @return total number of entries
+     */
+    public long total() {
+        long total = 0;
+        for (Entry<K, Multiset<V>> entry : this.entrySet()) {
+            total += entry.getValue().size();
+        }
+        return total;
+    }
+
     @Override
     protected Map<K, Multiset<V>> delegate() {
         return map;
