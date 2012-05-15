@@ -27,7 +27,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class StringUtils {
     public static final CharMatcher SENTENCE_DELIMITER_MATCHER = CharMatcher.anyOf("!.?");
 
-    public static final boolean isSentenceDelimiter(String subject) {
+    public static boolean isSentenceDelimiter(final String subject) {
         return SENTENCE_DELIMITER_MATCHER.matches(checkNotNull(subject.charAt(0)));
     }
 }
