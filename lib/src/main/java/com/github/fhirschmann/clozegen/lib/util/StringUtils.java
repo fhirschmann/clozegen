@@ -17,28 +17,17 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
-import com.google.common.collect.Sets;
-import java.util.Set;
+import com.google.common.base.CharMatcher;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class StringUtils {
-    public static final Set<String> PUNCTUATION_MARKS =
-            Sets.newHashSet(".", ",", ";", "?", "!", "''", "``", "(", ")", "--");
+    public static final CharMatcher SENTENCE_DELIMITER_MATCHER = CharMatcher.anyOf("!.?");
 
-
-    public static boolean isPunctuationMark(final String token) {
-        return PUNCTUATION_MARKS.contains(token);
-    }
-
-    public static boolean containsPunctuationMark(final String... tokens) {
-        for (int i = 0; i < tokens.length; i++) {
-            if (isPunctuationMark(tokens[i])) {
-                return true;
-            }
-        }
-        return false;
+    public static final boolean isSentenceDelimiter(String subject) {
+        return SENTENCE_DELIMITER_MATCHER.matches(checkNotNull(subject.charAt(0)));
     }
 }
