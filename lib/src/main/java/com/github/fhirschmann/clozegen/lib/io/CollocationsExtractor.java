@@ -27,16 +27,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasConsumer_ImplBase;
-import static org.uimafit.util.JCasUtil.select;
+import org.uimafit.util.JCasUtil;
 
 /**
  *
@@ -68,35 +68,54 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
         }
     }
 
+    public static void addToMultiset(final Multiset<String> multiset,
+            final POS... tokens) {
+        String[] sTokens = new String[tokens.length];
+        for (int i=0; i < tokens.length; i++) {
+            if (tokens[i] == null) {
+                sTokens[i] = "NULL";
+            } else if (tokens[i].getCoveredText().equals(".")
+                    || tokens[i].getCoveredText().equals("!")
+                    || tokens[i].getCoveredText().equals("?")) {
+                sTokens[i] = "NULL";
+            } else {
+                sTokens[i] = tokens[i].getCoveredText().toLowerCase();
+            }
+        }
+        multiset.add(joiner.join(sTokens));
+    }
+
     @Override
     public void process(JCas aJCas) throws AnalysisEngineProcessException {
-        Annotation previous = null;
-        Annotation next;
-        Annotation current;
+        POS previous;
+        POS next;
+        POS current;
 
-        //for (Sentence sentence : select(aJCas, Sentence.class)) {
-            for (final FSIterator<Annotation> i = aJCas.getAnnotationIndex(
-                    POS.type).iterator(); i.hasNext();) {
-                current = i.next();
+        for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
+            List<POS> pos = JCasUtil.selectCovered(aJCas, POS.class, sentence);
+            ListIterator<POS> it = pos.listIterator();
 
-                // TODO: Check for null
+            previous = null;
+            next = null;
+            current = null;
 
-                if ((current instanceof PP) && (previous != null)) {
-                    next = i.next();
-
-                    String lowered_previous = previous.getCoveredText();
-                    String lowered_next = next.getCoveredText();
-                    String lowered_current = current.getCoveredText();
-
-                    unigrams.add(lowered_current);
-                    addToMultiset(before, lowered_previous, lowered_current);
-                    addToMultiset(after, lowered_current, lowered_next);
-                    addToMultiset(trigrams, lowered_previous, lowered_current, lowered_next);
+            while (it.hasNext()) {
+                previous = current;
+                current = it.next();
+                if (it.hasNext()) {
+                    next = it.next();
+                } else {
+                    next = null;
                 }
 
-                previous = current;
+                if (current instanceof PP) {
+                    addToMultiset(unigrams, current);
+                    addToMultiset(before, previous, current);
+                    addToMultiset(after, current, next);
+                    addToMultiset(trigrams, previous, current, next);
+                }
             }
-        //}
+        }
     }
 
     @Override
