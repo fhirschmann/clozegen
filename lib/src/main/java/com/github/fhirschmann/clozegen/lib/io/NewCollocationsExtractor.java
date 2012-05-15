@@ -24,18 +24,18 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasConsumer_ImplBase;
-import static org.uimafit.util.JCasUtil.selectCovered;
 import static org.uimafit.util.JCasUtil.select;
 
 /**
@@ -43,13 +43,12 @@ import static org.uimafit.util.JCasUtil.select;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class NewCollocationsExtractor extends JCasConsumer_ImplBase {
+
     private Multiset<String> before;
     private Multiset<String> after;
     private Multiset<String> trigrams;
     private Multiset<String> unigrams;
-
     private final static Joiner joiner = Joiner.on(" ");
-
     private String output = "src/main/resources/frequency/prepositions";
 
     @Override
@@ -75,28 +74,31 @@ public class NewCollocationsExtractor extends JCasConsumer_ImplBase {
         Annotation next;
         Annotation current;
 
-        for (final Iterator<Annotation> i = aJCas.getAnnotationIndex(
-                POS.type).iterator(); i.hasNext();) {
-            current = i.next();
+        for (Sentence sentence : select(aJCas, Sentence.class)) {
+            for (final FSIterator<Annotation> i = aJCas.getAnnotationIndex(
+                    POS.type).subiterator(sentence); i.hasNext();) {
+                current = i.next();
 
-            // TODO: Check for null
+                // TODO: Check for null
 
-            if ((current instanceof PP) && (previous != null)) {
-                next = i.next();
+                if ((current instanceof PP) && (previous != null)) {
+                    next = i.next();
 
-                String lowered_previous = previous.getCoveredText();
-                String lowered_next = next.getCoveredText();
-                String lowered_current = current.getCoveredText();
+                    String lowered_previous = previous.getCoveredText();
+                    String lowered_next = next.getCoveredText();
+                    String lowered_current = current.getCoveredText();
 
-                unigrams.add(lowered_current);
-                addToMultiset(before, lowered_previous, lowered_current);
-                addToMultiset(after, lowered_current, lowered_next);
-                addToMultiset(trigrams, lowered_previous, lowered_current, lowered_next);
+                    unigrams.add(lowered_current);
+                    addToMultiset(before, lowered_previous, lowered_current);
+                    addToMultiset(after, lowered_current, lowered_next);
+                    addToMultiset(trigrams, lowered_previous, lowered_current, lowered_next);
+                }
+
+                previous = current;
             }
-
-            previous = current;
         }
     }
+
     @Override
     public void collectionProcessComplete() {
         try {
@@ -108,5 +110,4 @@ public class NewCollocationsExtractor extends JCasConsumer_ImplBase {
             Logger.getLogger(CollocationsExtractor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }
