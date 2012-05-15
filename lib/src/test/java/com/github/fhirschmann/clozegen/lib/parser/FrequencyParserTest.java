@@ -54,9 +54,9 @@ public class FrequencyParserTest extends TestCase {
 
     public void testParseMapMultiset() throws IOException {
         MapMultiset<String, String> mms = FrequencyParser.parseMapMultiset(bigrams, 0);
-        assertEquals(mms.get("one").count("of"), 1404);
+        assertEquals(1404, mms.get("one").count("of"));
 
         MapMultiset<String, String> mms2 = FrequencyParser.parseMapMultiset(bigrams, 1);
-        assertEquals(mms2.get("of").count("because"), 436);
+        assertEquals(436, mms2.get("of").count("because"));
     }
 }
