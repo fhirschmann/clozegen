@@ -74,9 +74,9 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
         Annotation next;
         Annotation current;
 
-        for (Sentence sentence : select(aJCas, Sentence.class)) {
+        //for (Sentence sentence : select(aJCas, Sentence.class)) {
             for (final FSIterator<Annotation> i = aJCas.getAnnotationIndex(
-                    POS.type).subiterator(sentence); i.hasNext();) {
+                    POS.type).iterator(); i.hasNext();) {
                 current = i.next();
 
                 // TODO: Check for null
@@ -96,7 +96,7 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
 
                 previous = current;
             }
-        }
+        //}
     }
 
     @Override
