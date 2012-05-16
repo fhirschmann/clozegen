@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
 import junit.framework.TestCase;
@@ -48,5 +49,17 @@ public class MultisetUtilsTest extends TestCase {
         assertEquals(46, ms.count("foo"));
         assertEquals(9, ms.count("bar"));
         assertEquals(11, ms.count("bar2"));
+    }
+
+    @Test
+    public void sortedElementList() {
+        assertEquals(ImmutableList.of("bar", "foo"),
+                MultisetUtils.sortedElementList(multiset1));
+    }
+
+    @Test
+    public void limitedSortedElementList() {
+        assertEquals(ImmutableList.of("bar"),
+                MultisetUtils.sortedElementList(multiset1, 1));
     }
 }

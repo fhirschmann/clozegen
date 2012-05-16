@@ -17,15 +17,13 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
-import com.google.common.collect.ImmutableMultiset;
-import com.google.common.collect.Iterators;
-import com.google.common.collect.LinkedHashMultiset;
-import com.google.common.collect.Multiset;
-import com.google.common.collect.Multisets;
+import com.google.common.collect.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Utility functions for Multisets.
@@ -36,6 +34,27 @@ public class MultisetUtils {
     public static <E> LinkedHashMultiset<E> sortMultiSet(Multiset<E> multiset) {
         ImmutableMultiset immutableSet = Multisets.copyHighestCountFirst(multiset);
         return LinkedHashMultiset.create(immutableSet);
+    }
+
+    public static <E> List<E> sortedElementList(Multiset<E> multiset, int limit) {
+        List<E> list = Lists.newLinkedList();
+        LinkedHashMultiset<E> sms = sortMultiSet(multiset);
+
+        if (limit == -1) {
+            limit = multiset.elementSet().size();
+        }
+
+        Iterator<E> it = Iterators.limit(sms.iterator(), limit);
+
+        while (it.hasNext()) {
+            E next = it.next();
+            list.add(next);
+        }
+        return list;
+    }
+
+    public static <E> List<E> sortedElementList(Multiset<E> multiset) {
+        return sortedElementList(multiset, -1);
     }
 
     public static void writeMultiSet(Multiset<String> multiset, File file) throws IOException {
