@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.io;
 
+import com.github.fhirschmann.clozegen.lib.annotators.AbstractPosTrigramAnnotator;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.github.fhirschmann.clozegen.lib.util.PosUtils;
 import com.github.fhirschmann.clozegen.lib.util.StringUtils;
@@ -48,7 +49,7 @@ import org.uimafit.util.JCasUtil;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CollocationsExtractor extends JCasConsumer_ImplBase {
+public class CollocationsExtractor extends AbstractPosTrigramAnnotator {
 
     public static final String PARAM_OUTPUT_DIRECTORY = "OutputDirectory";
     @ConfigurationParameter(name = PARAM_OUTPUT_DIRECTORY, mandatory = true)
@@ -71,32 +72,13 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
     }
 
     @Override
-    public void process(JCas aJCas) throws AnalysisEngineProcessException {
-        POS[] parts = new POS[3];
-        String[] strings = new String[3];
-
-        for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
-            final List<POS> pos = JCasUtil.selectCovered(aJCas, POS.class, sentence);
-            final PeekingIterator<POS> it = Iterators.peekingIterator(pos.iterator());
-
-            Arrays.fill(parts, null);
-
-            while (it.hasNext()) {
-                parts[0] = parts[1];
-                parts[1] = it.next();
-                if (it.hasNext()) {
-                    parts[2] = it.peek();
-                }
-
-                strings = PosUtils.loweredWordsOrNULL(parts);
-
-                if (parts[1] instanceof PP) {
-                    unigrams.add(strings[1]);
-                    after.add(joiner.join(strings[0], strings[1]));
-                    before.add(joiner.join(strings[1], strings[2]));
-                    trigrams.add(joiner.join(strings));
-                }
-            }
+    public void processTrigram(POS[] parts) {
+        if (parts[1] instanceof PP) {
+            String[] strings = PosUtils.loweredWordsOrNULL(parts);
+            unigrams.add(strings[1]);
+            after.add(joiner.join(strings[0], strings[1]));
+            before.add(joiner.join(strings[1], strings[2]));
+            trigrams.add(joiner.join(strings));
         }
     }
 
