@@ -91,10 +91,10 @@ public class MapMultiset<K, V> extends ForwardingMap<K, Multiset<V>> {
      * @return the {link Multiset} identified by key or a new empty one
      */
     @Override
-    public Multiset<V> get(Object key) {
+    public Multiset<V> get(final Object key) {
         Multiset<V> multiset;
 
-        K kKey = (K) checkNotNull(key);
+        final K kKey = (K) checkNotNull(key);
 
         if (containsKey(kKey)) {
             multiset = super.get(key);
