@@ -30,10 +30,25 @@ import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.util.JCasUtil;
 
 /**
+ * An abstract annotator which calls {@link AbstractPosTrigramAnnotator#processTrigram}
+ * for each {@link POS} annotation.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public abstract class AbstractPosTrigramAnnotator extends JCasAnnotator_ImplBase {
+    /**
+     * This method is called for each {@link POS} annotation in the
+     * {@link JCas}. The previous, current and next word can be found
+     * in the <code>parts</code> array. If the current word has no previous
+     * or next word, the array will contain <code>null</code>.
+     *
+     * <p>The <code>parts</code> array contains the previous word on the first
+     * position, the current word on the second, and the next word on the
+     * third position.
+     *
+     * @param aJCas the JCas the POS belongs to
+     * @param parts the previous, current and next word (or token)
+     */
     public abstract void processTrigram(JCas aJCas, POS[] parts);
 
     @Override
