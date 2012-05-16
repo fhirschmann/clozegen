@@ -21,12 +21,21 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
+ * Utility functions for dealing with {@link POS} (part of speech) annotations.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public final class PosUtils {
     private PosUtils() {}
 
+    /**
+     * Returns the text covered by a {@link POS} annotation in lowercase.
+     * If the annotation is <code>null</code> or represents a punctuation mark,
+     * <pre>"NULL"</pre> will be returned.
+     *
+     * @param pos the {@POS} (part of speech) token
+     * @return covered text in lowercase or "NULL"
+     */
     public static String loweredWordOrNULL(final POS pos) {
         if (pos == null) {
             return "NULL";
@@ -37,6 +46,12 @@ public final class PosUtils {
         }
     }
 
+    /**
+     * Maps {@link #loweredWordOrNULL(POS)} to all {@link POS} annotations.
+     *
+     * @param pos one or more {@link POS} annotations
+     * @return array of results
+     */
     public static String[] loweredWordsOrNULL(final POS... pos) {
         String[] result = new String[pos.length];
 
