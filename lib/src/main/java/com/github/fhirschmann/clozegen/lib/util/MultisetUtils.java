@@ -18,12 +18,10 @@
 package com.github.fhirschmann.clozegen.lib.util;
 
 import com.google.common.collect.ImmutableMultiset;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
-import com.google.common.io.ByteStreams;
-import com.google.common.io.Files;
-import com.google.common.io.OutputSupplier;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -55,5 +53,11 @@ public class MultisetUtils {
     public static void writeSortedMultiSet(Multiset<String> multiSet, File file) throws IOException {
         ImmutableMultiset<String> im = Multisets.copyHighestCountFirst(multiSet);
         writeMultiSet(im, file);
+    }
+
+    public static <E> Multiset<E> mergeMultiSets(Multiset<E> multiset1, Multiset<E> multiset2) {
+        Multiset<E> multiset = LinkedHashMultiset.create(multiset1);
+        Iterators.addAll(multiset, multiset2.iterator());
+        return multiset;
     }
 }
