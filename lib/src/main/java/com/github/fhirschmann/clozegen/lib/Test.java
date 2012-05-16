@@ -17,14 +17,48 @@
  */
 package com.github.fhirschmann.clozegen.lib;
 
+import com.github.fhirschmann.clozegen.lib.annotators.en.PrepositionGapGenerator;
+import com.github.fhirschmann.clozegen.lib.io.DebugWriter;
+import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
+import com.github.fhirschmann.clozegen.lib.pipeline.DefaultPipeline;
+import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import com.google.common.base.CharMatcher;
+import com.google.common.base.Charsets;
+import com.google.common.base.Splitter;
+import com.google.common.collect.*;
+import com.google.common.io.Resources;
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
+import java.io.File;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import org.apache.commons.io.FileUtils;
+import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.jcas.JCas;
+import org.uimafit.factory.JCasFactory;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class Test {
+
     public static void main(String[] args) throws Exception {
-        ClozeTestGenerator g = new ClozeTestGenerator();
-        g.run();
-        System.err.println(g.getPipeline().toString());
+        Pipeline pipeline = new DefaultPipeline();
+
+        JCas j = JCasFactory.createJCas();
+        j.setDocumentLanguage("en");
+        j.setDocumentText("He studies at the university. He can't think of anything.");
+
+        AnalysisEngineDescription an = createPrimitiveDescription(PrepositionGapGenerator.class,
+                PrepositionGapGenerator.PARAM_MODEL_PATH, "frequency/prepositions");
+        pipeline.addStep(an);
+        pipeline.addStep(DebugWriter.class);
+        pipeline.run(j);
     }
 }
