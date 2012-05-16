@@ -23,7 +23,7 @@ import com.google.common.collect.*;
 
 /**
  * Object which maps a key to a {@link Multiset}. Additionally, it provides
- * the convenience function like
+ * convenience functions like
  * {@link MapMultiset#add(java.lang.Object, java.lang.Object, int)}.
  *
  * <p>This object maps delegates most of its methods to the underlying
