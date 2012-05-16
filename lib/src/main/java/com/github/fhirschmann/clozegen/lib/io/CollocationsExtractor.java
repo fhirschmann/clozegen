@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.io;
 
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
+import com.github.fhirschmann.clozegen.lib.util.PosUtils;
 import com.github.fhirschmann.clozegen.lib.util.StringUtils;
 import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultiset;
@@ -31,6 +32,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,40 +70,31 @@ public class CollocationsExtractor extends JCasConsumer_ImplBase {
         unigrams = HashMultiset.create();
     }
 
-    public static void addToMultiset(final Multiset<String> multiset,
-            final POS... tokens) {
-        String[] sTokens = new String[tokens.length];
-        for (int i=0; i < tokens.length; i++) {
-            if ((tokens[i] == null) || tokens[i].getPosValue().equals("pct")) {
-                sTokens[i] = "NULL";
-            } else {
-                sTokens[i] = tokens[i].getCoveredText().toLowerCase();
-            }
-        }
-        multiset.add(joiner.join(sTokens));
-    }
-
     @Override
     public void process(JCas aJCas) throws AnalysisEngineProcessException {
+        POS[] parts = new POS[3];
+        String[] strings = new String[3];
+
         for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
             final List<POS> pos = JCasUtil.selectCovered(aJCas, POS.class, sentence);
             final PeekingIterator<POS> it = Iterators.peekingIterator(pos.iterator());
 
-            POS previous;
-            POS next;
-            POS current = null;
+            Arrays.fill(parts, null);
 
             while (it.hasNext()) {
-                previous = current;
-                current = it.next();
-                next = it.hasNext() ? it.peek() : null;
+                parts[0] = parts[1];
+                parts[1] = it.next();
+                if (it.hasNext()) {
+                    parts[2] = it.peek();
+                }
 
+                strings = PosUtils.loweredWordsOrNULL(parts);
 
-                if (current instanceof PP) {
-                    addToMultiset(unigrams, current);
-                    addToMultiset(before, previous, current);
-                    addToMultiset(after, current, next);
-                    addToMultiset(trigrams, previous, current, next);
+                if (parts[1] instanceof PP) {
+                    unigrams.add(strings[1]);
+                    after.add(joiner.join(strings[0], strings[1]));
+                    before.add(joiner.join(strings[1], strings[2]));
+                    trigrams.add(joiner.join(strings));
                 }
             }
         }
