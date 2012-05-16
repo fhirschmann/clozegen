@@ -19,7 +19,9 @@ package com.github.fhirschmann.clozegen.lib.util;
 
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.apache.uima.jcas.JCas;
@@ -35,10 +37,13 @@ public class UIMAUtils {
             Set<String> validAnswers, Set<String> invalidAnswers) {
         final GapAnnotation annotation = new GapAnnotation(aJCas);
 
+        final List<String> allAnswers = Lists.newArrayList(
+                Sets.union(invalidAnswers, validAnswers));
+        Collections.shuffle(allAnswers);
 
         final NonEmptyStringList all = (NonEmptyStringList)
                 FSCollectionFactory.createStringList(
-                aJCas, Sets.union(invalidAnswers, validAnswers));
+                aJCas, allAnswers);
         annotation.setAllAnswers(all);
 
         final NonEmptyStringList valid = (NonEmptyStringList)
