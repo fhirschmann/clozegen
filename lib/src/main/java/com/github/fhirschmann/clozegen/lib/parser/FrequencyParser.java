@@ -27,10 +27,30 @@ import java.net.URL;
 import java.util.List;
 
 /**
+ * Utility class for parsing frequencies from plain-text files.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class FrequencyParser {
+public final class FrequencyParser {
+    private FrequencyParser() {}
+
+    /**
+     * Parses frequencies from a URL. The subject and the count for a subject
+     * need to be delimited by <code>\t</code> with the count on the right-hand
+     * side.
+     *
+     * <p>For example, assuming your frequency file contains the following lines:
+     * <pre>
+     * one of the   200
+     * because of the  100
+     * members of the   50
+     * </pre>
+     * Then getting the count of "because of the" will yield 100.
+     *
+     * @param url the URL to the file to parse
+     * @return the parsed frequencies
+     * @throws IOException on errors reading from the file
+     */
     public static Multiset<String> parseMultiset(final URL url) throws IOException {
         final Multiset<String> multiset = LinkedHashMultiset.create();
         final List<String> lines = Resources.readLines(url, Charsets.UTF_8);
@@ -43,6 +63,29 @@ public class FrequencyParser {
         return multiset;
     }
 
+    /**
+     * Parses conditional frequencies from a URL. The subject and the count for a subject
+     * need to be delimited by <code>\t</code> with the count on the right-hand side.
+     *
+     * <p>Additionally, the remaining words on the left-hand side are split using the
+     * whitespace as delimiter. The <code>key</code> parameter identifies the condition
+     * by which the rest of the word sequence (with the key itself removed) is identified
+     * by.
+     *
+     * <p>For example, assuming your frequency file contains the following lines:
+     * <pre>
+     * one of   200
+     * because of   100
+     * members of   50
+     * </pre>
+     * Then selecting <code>0</code> as <code>key</code> will yield a count of 100 when
+     * looking up "of" given the the key (condition) is "because".
+     *
+     * @param url the URL to the file to parse
+     * @param key the key to identify the word sequence by
+     * @return the parsed frequencies
+     * @throws IOException on errors reading from the file
+     */
     public static MapMultiset<String, String> parseMapMultiset(
             final URL url, final int key) throws IOException {
         final MapMultiset<String, String> mms = MapMultiset.create();
