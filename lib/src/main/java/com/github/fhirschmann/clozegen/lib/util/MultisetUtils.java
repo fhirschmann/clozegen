@@ -30,7 +30,9 @@ import java.util.List;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class MultisetUtils {
+public final class MultisetUtils {
+    private MultisetUtils() {}
+
     public static <E> LinkedHashMultiset<E> sortMultiSet(Multiset<E> multiset) {
         ImmutableMultiset immutableSet = Multisets.copyHighestCountFirst(multiset);
         return LinkedHashMultiset.create(immutableSet);

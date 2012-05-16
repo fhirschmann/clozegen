@@ -32,7 +32,9 @@ import org.uimafit.util.FSCollectionFactory;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class UIMAUtils {
+public final class UIMAUtils {
+    private UIMAUtils() {}
+
     /**
      * Creates a {@link GapAnnotation} from <code>validAnswers</code> and
      * <code>invalidAnswers</code>. The resulting list of all answer options

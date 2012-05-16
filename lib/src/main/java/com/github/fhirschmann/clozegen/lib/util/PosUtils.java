@@ -24,7 +24,9 @@ import org.apache.uima.jcas.tcas.Annotation;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PosUtils {
+public final class PosUtils {
+    private PosUtils() {}
+
     public static String loweredWordOrNULL(final POS pos) {
         if (pos == null) {
             return "NULL";

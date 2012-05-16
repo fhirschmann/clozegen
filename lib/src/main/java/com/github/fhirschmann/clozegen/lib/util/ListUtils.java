@@ -27,6 +27,8 @@ import java.util.List;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public final class ListUtils {
+    private ListUtils() {}
+
     /**
      * Returns a view of a list made up of the n adjacent neighbors of an element
      * and the element itself.
