@@ -18,7 +18,6 @@
 package com.github.fhirschmann.clozegen.lib.util;
 
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import java.util.Collections;
@@ -29,12 +28,24 @@ import org.apache.uima.jcas.cas.NonEmptyStringList;
 import org.uimafit.util.FSCollectionFactory;
 
 /**
+ * Utility functions for UIMA related stuff.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class UIMAUtils {
-    public static GapAnnotation createGapAnnotation(JCas aJCas,
-            Set<String> validAnswers, Set<String> invalidAnswers) {
+    /**
+     * Creates a {@link GapAnnotation} from <code>validAnswers</code> and
+     * <code>invalidAnswers</code>. The resulting list of all answer options
+     * of a gap will be composed of union of <code>validAnswers</code> and
+     * <code>invalidAnswers</code> in random order.
+     *
+     * @param aJCas The {@link JCas} this Annotation belongs to
+     * @param validAnswers the valid answers for this gap
+     * @param invalidAnswers the invalid answers for this gap
+     * @return a new {@link GapAnnotation}
+     */
+    public static GapAnnotation createGapAnnotation(final JCas aJCas,
+            final Set<String> validAnswers, final Set<String> invalidAnswers) {
         final GapAnnotation annotation = new GapAnnotation(aJCas);
 
         final List<String> allAnswers = Lists.newArrayList(
