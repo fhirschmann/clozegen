@@ -20,30 +20,19 @@ package com.github.fhirschmann.clozegen.lib.io;
 import com.github.fhirschmann.clozegen.lib.annotators.AbstractPosTrigramAnnotator;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.github.fhirschmann.clozegen.lib.util.PosUtils;
-import com.github.fhirschmann.clozegen.lib.util.StringUtils;
 import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Multiset;
-import com.google.common.collect.PeekingIterator;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.util.JCasUtil;
 
 /**
  *
