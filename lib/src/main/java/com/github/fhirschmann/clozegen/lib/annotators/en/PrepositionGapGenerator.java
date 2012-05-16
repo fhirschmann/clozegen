@@ -90,6 +90,7 @@ public class PrepositionGapGenerator extends AbstractPosTrigramAnnotator {
                     candidates.remove(entry.getElement(), entry.getCount());
                 }
             }
+            candidates.remove(strings[1], candidates.count(strings[1]));
 
             if (candidates.elementSet().size() > CHOICES_COUNT - 2) {
                 final Set<String> invalidAnswers = Sets.newHashSet(
