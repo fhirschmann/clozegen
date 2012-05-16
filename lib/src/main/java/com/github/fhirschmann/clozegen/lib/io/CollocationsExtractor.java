@@ -72,7 +72,7 @@ public class CollocationsExtractor extends AbstractPosTrigramAnnotator {
     }
 
     @Override
-    public void processTrigram(POS[] parts) {
+    public void processTrigram(JCas aJCas, POS[] parts) {
         if (parts[1] instanceof PP) {
             String[] strings = PosUtils.loweredWordsOrNULL(parts);
             unigrams.add(strings[1]);

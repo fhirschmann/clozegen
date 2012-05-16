@@ -40,15 +40,22 @@ public class MultisetUtils {
         List<E> list = Lists.newLinkedList();
         LinkedHashMultiset<E> sms = sortMultiSet(multiset);
 
-        if (limit == -1) {
+        if (limit > multiset.elementSet().size()) {
+            throw new IllegalArgumentException(
+                    "The multiset does not contain that many keys.");
+        } else if (limit == -1) {
             limit = multiset.elementSet().size();
         }
 
-        Iterator<E> it = Iterators.limit(sms.iterator(), limit);
 
-        while (it.hasNext()) {
-            E next = it.next();
-            list.add(next);
+        Iterator<E> it = sms.iterator();
+
+        E next;
+        while (list.size() < limit) {
+            next = it.next();
+            if (!list.contains(next)) {
+                list.add(next);
+            }
         }
         return list;
     }

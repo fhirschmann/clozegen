@@ -34,7 +34,7 @@ import org.uimafit.util.JCasUtil;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public abstract class AbstractPosTrigramAnnotator extends JCasAnnotator_ImplBase {
-    public abstract void processTrigram(POS[] parts);
+    public abstract void processTrigram(JCas aJCas, POS[] parts);
 
     @Override
     public void process(JCas aJCas) throws AnalysisEngineProcessException {
@@ -55,7 +55,7 @@ public abstract class AbstractPosTrigramAnnotator extends JCasAnnotator_ImplBase
                 }
 
                 strings = PosUtils.loweredWordsOrNULL(parts);
-                processTrigram(parts);
+                processTrigram(aJCas, parts);
             }
         }
     }
