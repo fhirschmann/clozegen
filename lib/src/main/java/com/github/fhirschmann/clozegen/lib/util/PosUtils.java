@@ -18,7 +18,6 @@
 package com.github.fhirschmann.clozegen.lib.util;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import org.apache.uima.jcas.tcas.Annotation;
 
 /**
  * Utility functions for dealing with {@link POS} (part of speech) annotations.
