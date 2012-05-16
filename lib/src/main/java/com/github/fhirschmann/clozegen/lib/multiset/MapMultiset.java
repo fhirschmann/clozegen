@@ -26,6 +26,9 @@ import com.google.common.collect.*;
  * the convenience function like
  * {@link MapMultiset#add(java.lang.Object, java.lang.Object, int)}.
  *
+ * <p>This object maps delegates most of its methods to the underlying
+ * map, so you can use the common map interface.
+ *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  *
  * @param <K> the type of keys maintained by this map
