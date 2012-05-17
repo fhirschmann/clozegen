@@ -98,8 +98,8 @@ public class PrepositionGapGenerator extends AbstractPosTrigramAnnotator {
 
                 GapAnnotation gap = UIMAUtils.createGapAnnotation(aJCas,
                         ImmutableSet.of(strings[1]), invalidAnswers);
-                gap.setBegin(parts[0].getBegin());
-                gap.setEnd(parts[0].getEnd());
+                gap.setBegin(parts[1].getBegin());
+                gap.setEnd(parts[1].getEnd());
                 gap.addToIndexes();
 
             }
