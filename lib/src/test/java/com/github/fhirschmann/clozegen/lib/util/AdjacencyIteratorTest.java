@@ -117,5 +117,6 @@ public class AdjacencyIteratorTest extends TestCase {
         it.next();
         assertEquals(Arrays.asList("baz", "brr", "booh", null, null), it.getAdjacent());
         it.next();
+        assertFalse(it.hasNext());
     }
 }

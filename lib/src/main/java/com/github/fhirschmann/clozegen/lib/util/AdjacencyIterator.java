@@ -38,6 +38,9 @@ public class AdjacencyIterator<T> implements Iterator<T> {
     /** the offset in case we peek at the next elements. */
     private int offset;
 
+    /** the remaining elements in the underlying iterator. */
+    private int remaining;
+
     /** the number of elements on each side to keep track of. */
     private int n;
 
@@ -68,6 +71,7 @@ public class AdjacencyIterator<T> implements Iterator<T> {
         previous = new LinkedList();
         next = new LinkedList();
         current = null;
+        remaining = 0;
     }
 
     /**
@@ -85,7 +89,7 @@ public class AdjacencyIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return (offset > 0) || iterator.hasNext();
+        return ((offset > 0) && (remaining > 0)) || iterator.hasNext();
     }
 
     @Override
@@ -97,6 +101,7 @@ public class AdjacencyIterator<T> implements Iterator<T> {
         previous.add(getCurrent());
         if (offset > 0) {
             offset -= 1;
+            remaining -= 1;
             result = next.poll();
         } else {
             result = iterator.next();
@@ -138,11 +143,13 @@ public class AdjacencyIterator<T> implements Iterator<T> {
      * @return list of successors
      */
     public List<T> peekNext() {
+        int delta = 0;
         final List<T> result = new ArrayList<T>(n);
         for (int i = 0; i < n; i++) {
             if (next.isEmpty()) {
                 if (iterator.hasNext()) {
                     result.add(iterator.next());
+                    remaining += 1;
                 } else {
                     result.add(null);
                 }
