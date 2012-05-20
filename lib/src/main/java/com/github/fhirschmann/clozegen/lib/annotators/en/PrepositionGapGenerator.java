@@ -22,7 +22,6 @@ import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
 import com.github.fhirschmann.clozegen.lib.parser.FrequencyParser;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
-import com.github.fhirschmann.clozegen.lib.util.PosUtils;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.github.fhirschmann.clozegen.lib.util.WordFilterFunction;
 import com.google.common.base.Joiner;
