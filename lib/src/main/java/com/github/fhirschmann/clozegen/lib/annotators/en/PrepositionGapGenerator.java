@@ -24,6 +24,7 @@ import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.github.fhirschmann.clozegen.lib.util.PosUtils;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.github.fhirschmann.clozegen.lib.util.WordFilterFunction;
 import com.google.common.base.Joiner;
 import com.google.common.collect.*;
 import com.google.common.collect.Multiset.Entry;
@@ -77,33 +78,32 @@ public class PrepositionGapGenerator extends AbstractPosTrigramAnnotator {
     }
 
     @Override
-    public void processTrigram(JCas aJCas, POS[] parts) {
-        if (parts[1] instanceof PP) {
-            final String[] strings = PosUtils.loweredWordsOrNULL(parts);
+    public void processTrigram(JCas aJCas, List<POS> pos) {
+            List<String> strings = Lists.newArrayList(Collections2.
+                    transform(pos, new WordFilterFunction()));
+
             final Multiset<String> candidates = ConcurrentHashMultiset.create(
                     MultisetUtils.mergeMultiSets(
-                    before.get(strings[0]), after.get(strings[0])));
+                    before.get(strings.get(0)), after.get(strings.get(0))));
 
             for (Entry<String> entry : candidates.entrySet()) {
                 if (trigrams.contains(
-                        joiner.join(strings[0], entry.getElement(), strings[1]))) {
+                        joiner.join(strings.get(0), entry.getElement(), strings.get(1)))) {
                     candidates.remove(entry.getElement(), entry.getCount());
                 }
             }
-            candidates.remove(strings[1], candidates.count(strings[1]));
+            candidates.remove(strings.get(1), candidates.count(strings.get(1)));
 
             if (candidates.elementSet().size() > CHOICES_COUNT - 2) {
                 final Set<String> invalidAnswers = Sets.newHashSet(
                         MultisetUtils.sortedElementList(candidates, CHOICES_COUNT - 1));
 
                 GapAnnotation gap = UIMAUtils.createGapAnnotation(aJCas,
-                        ImmutableSet.of(strings[1]), invalidAnswers);
-                gap.setBegin(parts[1].getBegin());
-                gap.setEnd(parts[1].getEnd());
+                        ImmutableSet.of(strings.get(1)), invalidAnswers);
+                gap.setBegin(pos.get(1).getBegin());
+                gap.setEnd(pos.get(1).getEnd());
                 gap.addToIndexes();
 
             }
-
-        }
     }
 }

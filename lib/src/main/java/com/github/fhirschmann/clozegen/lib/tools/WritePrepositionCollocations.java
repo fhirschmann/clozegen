@@ -45,7 +45,7 @@ public class WritePrepositionCollocations {
         AnalysisEngineDescription ce = createPrimitiveDescription(
                 CollocationsExtractor.class,
                 CollocationsExtractor.PARAM_OUTPUT_DIRECTORY,
-                "src/main/resources/frequency/prepositions");
+                "../models-en/src/main/resources/frequencies/en/prepositions");
 
         pipeline.addStep(ce);
         pipeline.run(cr);

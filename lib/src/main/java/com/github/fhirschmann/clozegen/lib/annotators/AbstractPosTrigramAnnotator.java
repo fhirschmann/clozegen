@@ -17,12 +17,13 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators;
 
-import com.github.fhirschmann.clozegen.lib.util.PosUtils;
-import com.google.common.collect.Iterators;
-import com.google.common.collect.PeekingIterator;
+import com.github.fhirschmann.clozegen.lib.util.AdjacencyIterator;
+import com.github.fhirschmann.clozegen.lib.util.WordFilterFunction;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import java.util.Arrays;
 import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
@@ -39,38 +40,26 @@ public abstract class AbstractPosTrigramAnnotator extends JCasAnnotator_ImplBase
     /**
      * This method is called for each {@link POS} annotation in the
      * {@link JCas}. The previous, current and next word can be found
-     * in the <code>parts</code> array. If the current word has no previous
+     * in the <code>pos</code> list. If the current word has no previous
      * or next word, the array will contain <code>null</code>.
      *
-     * <p>The <code>parts</code> array contains the previous word on the first
-     * position, the current word on the second, and the next word on the
-     * third position.
-     *
      * @param aJCas the JCas the POS belongs to
-     * @param parts the previous, current and next word (or token)
+     * @param pos the previous, current and next word (or token)
      */
-    public abstract void processTrigram(JCas aJCas, POS[] parts);
+    public abstract void processTrigram(JCas aJCas, List<POS> pos);
 
     @Override
     public void process(JCas aJCas) throws AnalysisEngineProcessException {
-        POS[] parts = new POS[3];
-        String[] strings = new String[3];
-
         for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
-            final List<POS> pos = JCasUtil.selectCovered(aJCas, POS.class, sentence);
-            final PeekingIterator<POS> it = Iterators.peekingIterator(pos.iterator());
-
-            Arrays.fill(parts, null);
-
+            final AdjacencyIterator it = AdjacencyIterator.create(JCasUtil.selectCovered(
+                    aJCas, POS.class, sentence).iterator(), 1);
             while (it.hasNext()) {
-                parts[0] = parts[1];
-                parts[1] = it.next();
-                if (it.hasNext()) {
-                    parts[2] = it.peek();
-                }
+                it.next();
+                List<POS> adjacent = it.getAdjacent();
 
-                strings = PosUtils.loweredWordsOrNULL(parts);
-                processTrigram(aJCas, parts);
+                if (adjacent.get(1) instanceof PP) {
+                    processTrigram(aJCas, adjacent);
+                }
             }
         }
     }

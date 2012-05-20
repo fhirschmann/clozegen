@@ -19,14 +19,16 @@ package com.github.fhirschmann.clozegen.lib.io;
 
 import com.github.fhirschmann.clozegen.lib.annotators.AbstractPosTrigramAnnotator;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
-import com.github.fhirschmann.clozegen.lib.util.PosUtils;
+import com.github.fhirschmann.clozegen.lib.util.WordFilterFunction;
 import com.google.common.base.Joiner;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.uima.UimaContext;
@@ -43,7 +45,6 @@ public class CollocationsExtractor extends AbstractPosTrigramAnnotator {
     public static final String PARAM_OUTPUT_DIRECTORY = "OutputDirectory";
     @ConfigurationParameter(name = PARAM_OUTPUT_DIRECTORY, mandatory = true)
     private String outputDirectory;
-
     private Multiset<String> before;
     private Multiset<String> after;
     private Multiset<String> trigrams;
@@ -61,14 +62,13 @@ public class CollocationsExtractor extends AbstractPosTrigramAnnotator {
     }
 
     @Override
-    public void processTrigram(JCas aJCas, POS[] parts) {
-        if (parts[1] instanceof PP) {
-            String[] strings = PosUtils.loweredWordsOrNULL(parts);
-            unigrams.add(strings[1]);
-            after.add(joiner.join(strings[0], strings[1]));
-            before.add(joiner.join(strings[1], strings[2]));
-            trigrams.add(joiner.join(strings));
-        }
+    public void processTrigram(JCas aJCas, List<POS> pos) {
+        List<String> strings = Lists.newArrayList(Collections2.
+                transform(pos, new WordFilterFunction()));
+        unigrams.add(strings.get(1));
+        after.add(joiner.join(strings.get(0), strings.get(1)));
+        before.add(joiner.join(strings.get(1), strings.get(2)));
+        trigrams.add(joiner.join(strings));
     }
 
     @Override
