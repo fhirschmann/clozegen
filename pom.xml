@@ -34,6 +34,13 @@
     </scm>
 
     <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+                <version>2.2</version>
+            </extension>
+        </extensions>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -124,11 +131,11 @@
     <distributionManagement>
         <repository>
             <id>0x0b</id>
-            <url>scpexe://mvn.0x0b.de/var/www/mvn.0x0b.de/htdocs</url>
+            <url>scp://mvn.0x0b.de/var/www/mvn.0x0b.de/htdocs</url>
         </repository>
         <site>
             <id>0x0b</id>
-            <url>scpexe://mvn.0x0b.de/var/www/clozegen.0x0b.de/htdocs</url>
+            <url>scp://mvn.0x0b.de/var/www/clozegen.0x0b.de/htdocs</url>
         </site>
     </distributionManagement>
 
