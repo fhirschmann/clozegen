@@ -29,6 +29,8 @@ import com.google.common.collect.*;
 import com.google.common.io.Resources;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
 import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
@@ -41,6 +43,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.factory.JCasFactory;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 
 /**
  *
@@ -56,9 +59,19 @@ public class Test {
         j.setDocumentText("He studies at the university. He can't think of anything.");
 
         AnalysisEngineDescription an = createPrimitiveDescription(PrepositionGapGenerator.class,
-                PrepositionGapGenerator.PARAM_MODEL_PATH, "frequency/prepositions");
+                PrepositionGapGenerator.PARAM_MODEL_PATH, "frequencies/en/prepositions");
+
+
+        AnalysisEngineDescription xmiWriter = createPrimitiveDescription(
+                XmiWriter.class,
+                createTypeSystemDescription(),
+                XmiWriter.PARAM_PATH, "xmi");
+        DocumentMetaData x = DocumentMetaData.create(j);
+        x.setDocumentId("test");
+
         pipeline.addStep(an);
         pipeline.addStep(DebugWriter.class);
+        pipeline.addStep(xmiWriter);
         pipeline.run(j);
     }
 }
