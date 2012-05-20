@@ -33,14 +33,30 @@ import java.util.List;
 public final class MultisetUtils {
     private MultisetUtils() {}
 
+    /**
+     * Sorts a multiset by its counts and returns a new {@link LinkedHashMultiset}.
+     *
+     * @param <E> the type of the multiset elements
+     * @param multiset to multiset to sort
+     * @return a new mutable sorted multiset
+     */
     public static <E> LinkedHashMultiset<E> sortMultiSet(Multiset<E> multiset) {
         ImmutableMultiset immutableSet = Multisets.copyHighestCountFirst(multiset);
         return LinkedHashMultiset.create(immutableSet);
     }
 
-    public static <E> List<E> sortedElementList(Multiset<E> multiset, int limit) {
-        List<E> list = Lists.newLinkedList();
-        LinkedHashMultiset<E> sms = sortMultiSet(multiset);
+    /**
+     * Returns a limited list of all (distinct) elements of a multiset ordered
+     * by their counts.
+     *
+     * @param <E> the type of the multiset elements
+     * @param multiset the multiset to work on
+     * @param limit the maximum number of elements to return
+     * @return a limited list of elements ordered by their count
+     */
+    public static <E> List<E> sortedElementList(final Multiset<E> multiset, int limit) {
+        final List<E> list = Lists.newLinkedList();
+        final LinkedHashMultiset<E> sms = sortMultiSet(multiset);
 
         if (limit > multiset.elementSet().size()) {
             throw new IllegalArgumentException(
@@ -49,8 +65,7 @@ public final class MultisetUtils {
             limit = multiset.elementSet().size();
         }
 
-
-        Iterator<E> it = sms.iterator();
+        final Iterator<E> it = sms.iterator();
 
         E next;
         while (list.size() < limit) {
@@ -62,13 +77,30 @@ public final class MultisetUtils {
         return list;
     }
 
-    public static <E> List<E> sortedElementList(Multiset<E> multiset) {
+    /**
+     * Returns a list of all (distinct) elements of a multiset ordered
+     * by their counts.
+     *
+     * @param <E> the type of the multiset elements
+     * @param multiset the multiset to work on
+     * @return a limited list of elements ordered by their count
+     */
+    public static <E> List<E> sortedElementList(final Multiset<E> multiset) {
         return sortedElementList(multiset, -1);
     }
 
-    public static void writeMultiSet(Multiset<String> multiset, File file) throws IOException {
-
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+    /**
+     * Writes a multiset to a file. The elements will be written to a tab-separated
+     * file with the string representation of the elements on the left-hand side and
+     * the corresponding counts on the right-hand side.
+     *
+     * @param multiset the multiset to write from
+     * @param file the file to write to
+     * @throws IOException on errors opening/writing to the file
+     */
+    public static void writeMultiSet(final Multiset<String> multiset, final File file)
+            throws IOException {
+        final BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
 
         for (Multiset.Entry entry : multiset.entrySet()) {
             bufferedWriter.write(
@@ -78,13 +110,31 @@ public final class MultisetUtils {
         bufferedWriter.close();
     }
 
-    public static void writeSortedMultiSet(Multiset<String> multiSet, File file) throws IOException {
-        ImmutableMultiset<String> im = Multisets.copyHighestCountFirst(multiSet);
+    /**
+     * Sorts a Multiset by its counts before writing it to a file using
+     * {@link MultisetUtils#writeMultiSet}.
+     *
+     * @param multiset the multiset to write
+     * @param file the file to write to
+     * @throws IOException on errors opening/writing to the file
+     */
+    public static void writeSortedMultiSet(final Multiset<String> multiset,
+            final File file) throws IOException {
+        final ImmutableMultiset<String> im = Multisets.copyHighestCountFirst(multiset);
         writeMultiSet(im, file);
     }
 
-    public static <E> Multiset<E> mergeMultiSets(Multiset<E> multiset1, Multiset<E> multiset2) {
-        Multiset<E> multiset = LinkedHashMultiset.create(multiset1);
+    /**
+     * Merges two multisets.
+     *
+     * @param <E> the type of the elements of both multisets
+     * @param multiset1 multiset to merge
+     * @param multiset2 multiset to merge
+     * @return a new merged multiset
+     */
+    public static <E> Multiset<E> mergeMultiSets(final Multiset<E> multiset1,
+            final Multiset<E> multiset2) {
+        final Multiset<E> multiset = LinkedHashMultiset.create(multiset1);
         Iterators.addAll(multiset, multiset2.iterator());
         return multiset;
     }
