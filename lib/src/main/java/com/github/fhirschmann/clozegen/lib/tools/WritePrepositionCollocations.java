@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.tools;
 
-import com.github.fhirschmann.clozegen.lib.io.CollocationsExtractor;
+import com.github.fhirschmann.clozegen.lib.frequency.CollocationsExtractor;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
 import java.io.IOException;

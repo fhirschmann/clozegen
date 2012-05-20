@@ -19,7 +19,7 @@ package com.github.fhirschmann.clozegen.lib.annotators.en;
 
 import com.github.fhirschmann.clozegen.lib.annotators.AbstractPosTrigramAnnotator;
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
-import com.github.fhirschmann.clozegen.lib.parser.FrequencyParser;
+import com.github.fhirschmann.clozegen.lib.frequency.FrequencyParser;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;

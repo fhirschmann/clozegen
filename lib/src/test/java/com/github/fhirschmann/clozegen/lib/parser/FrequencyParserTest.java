@@ -18,7 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.parser;
 
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
-import com.github.fhirschmann.clozegen.lib.parser.FrequencyParser;
+import com.github.fhirschmann.clozegen.lib.frequency.FrequencyParser;
 import com.google.common.collect.Multiset;
 import com.google.common.io.Resources;
 import java.io.IOException;
@@ -34,7 +34,6 @@ import org.junit.Test;
 public class FrequencyParserTest extends TestCase {
     private URL trigrams;
     private URL bigrams;
-
 
     @Before
     public void setUp() {
