@@ -47,7 +47,7 @@ import org.uimafit.util.FSCollectionFactory;
  *
  * <p>It implements the concepts as proposed in the paper
  * <i>Automatic Generation of Cloze Items for Prepositions</i> [1]
- * by Lee et. all.
+ * by Lee et all.
  *
  * <p>Three collocation data files which describe the frequency of preposition
  * collocations need to be present in the model directory:
