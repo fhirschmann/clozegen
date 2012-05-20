@@ -43,6 +43,32 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.util.FSCollectionFactory;
 
 /**
+ * This annotator creates annotations for prepositions.
+ *
+ * <p>It implements the concepts as proposed in the paper
+ * <i>Automatic Generation of Cloze Items for Prepositions</i> [1]
+ * by Lee et. all.
+ *
+ * <p>Three collocation data files which describe the frequency of preposition
+ * collocations need to be present in the model directory:
+ * <ul>
+ * <li>trigrams.txt: prepositions located in the middle
+ * <li>before.txt: preposition located on the left-hand side
+ * <li>after.txt: preposition located on the right-hand side
+ * </ul>
+ * The space separated word sequence and the corresponding counts need
+ * to be separated by the tab-character. For more detail on the format,
+ * please consult the documentation on {@link FrequencyParser#parseMultiset}
+ * and {@link FrequencyParser#parseMapMultiset}, which describe the format
+ * for {before|after}.txt and trigrams.txt, respectively.
+ *
+ * <p>[1] <b>J. Lee and S. Seneff</b>.<br/>
+ * Automatic generation of cloze items for prepositions.<br/>
+ * <i>In Eight Annual Conference of the International Speech Communication
+ * Association, 2007</i>.
+ *
+ * @param PARAM_MODEL_PATH the directory in which the models can be found
+ * @param CHOICES_COUNT the number of answers to generate
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
