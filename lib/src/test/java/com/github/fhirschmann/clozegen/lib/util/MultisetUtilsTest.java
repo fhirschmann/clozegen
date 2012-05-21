@@ -69,7 +69,7 @@ public class MultisetUtilsTest extends TestCase {
      */
     @Test
     public void testPrivateConstructor() throws Exception {
-        Constructor<?>[] cons = CollectionUtils.class.getDeclaredConstructors();
+        Constructor<?>[] cons = MultisetUtils.class.getDeclaredConstructors();
         cons[0].setAccessible(true);
         cons[0].newInstance((Object[]) null);
     }

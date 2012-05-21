@@ -63,7 +63,7 @@ public class UIMAUtilsTest {
      */
     @Test
     public void testPrivateConstructor() throws Exception {
-        Constructor<?>[] cons = CollectionUtils.class.getDeclaredConstructors();
+        Constructor<?>[] cons = UIMAUtils.class.getDeclaredConstructors();
         cons[0].setAccessible(true);
         cons[0].newInstance((Object[]) null);
     }
