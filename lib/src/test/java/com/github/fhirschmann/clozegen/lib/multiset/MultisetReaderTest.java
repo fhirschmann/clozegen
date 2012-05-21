@@ -18,7 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.multiset;
 
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
-import com.github.fhirschmann.clozegen.lib.multiset.MultisetParser;
+import com.github.fhirschmann.clozegen.lib.multiset.MultisetReader;
 import com.google.common.collect.Multiset;
 import com.google.common.io.Resources;
 import java.io.IOException;
@@ -32,7 +32,7 @@ import org.junit.Test;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class MultisetParserTest extends TestCase {
+public class MultisetReaderTest extends TestCase {
     private URL trigrams;
     private URL bigrams;
 
@@ -46,17 +46,17 @@ public class MultisetParserTest extends TestCase {
 
     @Test
     public void testParseMultiset() throws IOException {
-        Multiset<String> ms = MultisetParser.parseMultiset(trigrams);
+        Multiset<String> ms = MultisetReader.parseMultiset(trigrams);
         assertEquals(806, ms.count("one of the"));
         assertEquals(188, ms.count("and in the"));
         assertEquals(174, ms.count("because of the"));
     }
 
     public void testParseMapMultiset() throws IOException {
-        MapMultiset<String, String> mms = MultisetParser.parseMapMultiset(bigrams, 0);
+        MapMultiset<String, String> mms = MultisetReader.parseMapMultiset(bigrams, 0);
         assertEquals(1404, mms.get("one").count("of"));
 
-        MapMultiset<String, String> mms2 = MultisetParser.parseMapMultiset(bigrams, 1);
+        MapMultiset<String, String> mms2 = MultisetReader.parseMapMultiset(bigrams, 1);
         assertEquals(436, mms2.get("of").count("because"));
     }
 
@@ -65,7 +65,7 @@ public class MultisetParserTest extends TestCase {
      */
     @Test
     public void testPrivateConstructor() throws Exception {
-        Constructor<?>[] cons = MultisetParser.class.getDeclaredConstructors();
+        Constructor<?>[] cons = MultisetReader.class.getDeclaredConstructors();
         cons[0].setAccessible(true);
         cons[0].newInstance((Object[]) null);
     }
