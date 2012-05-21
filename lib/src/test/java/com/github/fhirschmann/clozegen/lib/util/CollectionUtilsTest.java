@@ -22,12 +22,13 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 import junit.framework.TestCase;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CollectionUtilsTest extends TestCase {
+public class CollectionUtilsTest {
 
     private List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5);
 

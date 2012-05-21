@@ -20,12 +20,13 @@ package com.github.fhirschmann.clozegen.lib.multiset;
 import com.google.common.collect.ImmutableSet;
 import junit.framework.TestCase;
 import org.junit.Before;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class MapMultisetTest extends TestCase {
+public class MapMultisetTest {
     private MapMultiset<String, String> mms;
 
     @Before

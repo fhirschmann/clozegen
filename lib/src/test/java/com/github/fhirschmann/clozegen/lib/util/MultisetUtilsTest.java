@@ -29,12 +29,13 @@ import java.lang.reflect.Constructor;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class MultisetUtilsTest extends TestCase {
+public class MultisetUtilsTest {
 
     private Multiset<String> multiset1;
     private Multiset<String> multiset2;
@@ -63,7 +64,7 @@ public class MultisetUtilsTest extends TestCase {
                 MultisetUtils.sortedElementList(multiset1));
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testSortedElementListArguments() {
         MultisetUtils.sortedElementList(multiset1, 20);
     }

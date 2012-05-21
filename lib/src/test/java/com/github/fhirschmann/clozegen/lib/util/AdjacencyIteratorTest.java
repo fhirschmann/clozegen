@@ -22,12 +22,13 @@ import java.util.List;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class AdjacencyIteratorTest extends TestCase {
+public class AdjacencyIteratorTest {
 
     private List<String> list;
     private AdjacencyIterator<String> it;
@@ -35,7 +36,7 @@ public class AdjacencyIteratorTest extends TestCase {
     @Before
     public void setUp() {
         list = Arrays.asList("foo", "bar", "baz", "brr", "booh");
-        it = new AdjacencyIterator<String>(list.iterator(), 2);
+        it = AdjacencyIterator.create(list.iterator(), 2);
     }
 
     @Test
@@ -118,5 +119,10 @@ public class AdjacencyIteratorTest extends TestCase {
         assertEquals(Arrays.asList("baz", "brr", "booh", null, null), it.getAdjacent());
         it.next();
         assertFalse(it.hasNext());
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testArguments() {
+        new AdjacencyIterator(Arrays.asList("foo", "bar").iterator(), 0);
     }
 }
