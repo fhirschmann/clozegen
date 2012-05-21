@@ -30,7 +30,10 @@ import java.io.IOException;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class MultisetWriter {
+public final class MultisetWriter {
+    private MultisetWriter() {
+    }
+
     /**
      * Writes a multiset to a file. The elements will be written to a tab-separated
      * file with the string representation of the elements on the left-hand side and

@@ -17,9 +17,11 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
+import com.github.fhirschmann.clozegen.lib.multiset.MultisetReader;
 import com.github.fhirschmann.clozegen.lib.multiset.MultisetWriter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultiset;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 import java.io.File;
 import java.io.IOException;
@@ -61,6 +63,12 @@ public class MultisetUtilsTest extends TestCase {
                 MultisetUtils.sortedElementList(multiset1));
     }
 
+    @Test(expected=IllegalArgumentException.class)
+    public void testSortedElementListArguments() {
+        MultisetUtils.sortedElementList(multiset1, 20);
+    }
+
+
     @Test
     public void testLimitedSortedElementList() {
         assertEquals(ImmutableList.of("bar"),
@@ -68,10 +76,19 @@ public class MultisetUtilsTest extends TestCase {
     }
 
     @Test
+    public void testWriteMultiset() throws IOException {
+        File file = File.createTempFile("multisetutils", "txt");
+        MultisetWriter.writeMultiSet(multiset1, file);
+        Multiset<String> multisetr = MultisetReader.parseMultiset(file.toURI().toURL());
+        assertEquals(multiset1, multisetr);
+    }
+
+    @Test
     public void testWriteSortedMultiset() throws IOException {
         File file = File.createTempFile("multisetutils", "txt");
-        MultisetWriter.writeSortedMultiSet(multiset1, file);
-
+        MultisetWriter.writeSortedMultiSet(multiset2, file);
+        Multiset<String> multisetr = MultisetReader.parseMultiset(file.toURI().toURL());
+        assertEquals("[foo x 42, bar2 x 11]", multisetr.toString());
     }
 
     /**
