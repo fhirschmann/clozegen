@@ -15,10 +15,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.parser;
+package com.github.fhirschmann.clozegen.lib.multiset;
 
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
-import com.github.fhirschmann.clozegen.lib.frequency.FrequencyParser;
+import com.github.fhirschmann.clozegen.lib.multiset.MultisetParser;
 import com.google.common.collect.Multiset;
 import com.google.common.io.Resources;
 import java.io.IOException;
@@ -32,7 +32,7 @@ import org.junit.Test;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class FrequencyParserTest extends TestCase {
+public class MultisetParserTest extends TestCase {
     private URL trigrams;
     private URL bigrams;
 
@@ -46,17 +46,17 @@ public class FrequencyParserTest extends TestCase {
 
     @Test
     public void testParseMultiset() throws IOException {
-        Multiset<String> ms = FrequencyParser.parseMultiset(trigrams);
+        Multiset<String> ms = MultisetParser.parseMultiset(trigrams);
         assertEquals(806, ms.count("one of the"));
         assertEquals(188, ms.count("and in the"));
         assertEquals(174, ms.count("because of the"));
     }
 
     public void testParseMapMultiset() throws IOException {
-        MapMultiset<String, String> mms = FrequencyParser.parseMapMultiset(bigrams, 0);
+        MapMultiset<String, String> mms = MultisetParser.parseMapMultiset(bigrams, 0);
         assertEquals(1404, mms.get("one").count("of"));
 
-        MapMultiset<String, String> mms2 = FrequencyParser.parseMapMultiset(bigrams, 1);
+        MapMultiset<String, String> mms2 = MultisetParser.parseMapMultiset(bigrams, 1);
         assertEquals(436, mms2.get("of").count("because"));
     }
 
@@ -65,7 +65,7 @@ public class FrequencyParserTest extends TestCase {
      */
     @Test
     public void testPrivateConstructor() throws Exception {
-        Constructor<?>[] cons = FrequencyParser.class.getDeclaredConstructors();
+        Constructor<?>[] cons = MultisetParser.class.getDeclaredConstructors();
         cons[0].setAccessible(true);
         cons[0].newInstance((Object[]) null);
     }

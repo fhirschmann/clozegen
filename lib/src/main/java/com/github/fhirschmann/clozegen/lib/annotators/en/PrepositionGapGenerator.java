@@ -19,7 +19,7 @@ package com.github.fhirschmann.clozegen.lib.annotators.en;
 
 import com.github.fhirschmann.clozegen.lib.annotators.AbstractPosTrigramAnnotator;
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
-import com.github.fhirschmann.clozegen.lib.frequency.FrequencyParser;
+import com.github.fhirschmann.clozegen.lib.multiset.MultisetParser;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
@@ -58,8 +58,8 @@ import org.uimafit.util.FSCollectionFactory;
  * </ul>
  * The space separated word sequence and the corresponding counts need
  * to be separated by the tab-character. For more detail on the format,
- * please consult the documentation on {@link FrequencyParser#parseMultiset}
- * and {@link FrequencyParser#parseMapMultiset}, which describe the format
+ * please consult the documentation on {@link MultisetParser#parseMultiset}
+ * and {@link MultisetParser#parseMapMultiset}, which describe the format
  * for {before|after}.txt and trigrams.txt, respectively.
  *
  * <p>[1] <b>J. Lee and S. Seneff</b>.<br/>
@@ -90,11 +90,11 @@ public class PrepositionGapGenerator extends AbstractPosTrigramAnnotator {
     public void initialize(UimaContext context) throws ResourceInitializationException {
         super.initialize(context);
         try {
-            trigrams = FrequencyParser.parseMultiset(
+            trigrams = MultisetParser.parseMultiset(
                     Resources.getResource(modelPath + "/trigrams.txt"));
-            after = FrequencyParser.parseMapMultiset(
+            after = MultisetParser.parseMapMultiset(
                     Resources.getResource(modelPath + "/after.txt"), 0);
-            before = FrequencyParser.parseMapMultiset(
+            before = MultisetParser.parseMapMultiset(
                     Resources.getResource(modelPath + "/before.txt"), 1);
         } catch (IOException ex) {
             Logger.getLogger(PrepositionGapGenerator.class.getName()).log(Level.SEVERE, null, ex);

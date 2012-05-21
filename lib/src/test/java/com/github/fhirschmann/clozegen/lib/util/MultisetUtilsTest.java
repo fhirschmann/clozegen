@@ -20,6 +20,8 @@ package com.github.fhirschmann.clozegen.lib.util;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -53,15 +55,20 @@ public class MultisetUtilsTest extends TestCase {
     }
 
     @Test
-    public void sortedElementList() {
+    public void testSortedElementList() {
         assertEquals(ImmutableList.of("bar", "foo"),
                 MultisetUtils.sortedElementList(multiset1));
     }
 
     @Test
-    public void limitedSortedElementList() {
+    public void testLimitedSortedElementList() {
         assertEquals(ImmutableList.of("bar"),
                 MultisetUtils.sortedElementList(multiset1, 1));
+    }
+
+    @Test
+    public void testWriteSortedMultiset() throws IOException {
+        File file = File.createTempFile("multisetutils", "txt");
     }
 
     /**
