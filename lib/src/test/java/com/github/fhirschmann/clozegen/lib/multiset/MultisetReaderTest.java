@@ -17,14 +17,11 @@
  */
 package com.github.fhirschmann.clozegen.lib.multiset;
 
-import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
-import com.github.fhirschmann.clozegen.lib.multiset.MultisetReader;
 import com.google.common.collect.Multiset;
 import com.google.common.io.Resources;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.net.URL;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -53,6 +50,7 @@ public class MultisetReaderTest {
         assertEquals(174, ms.count("because of the"));
     }
 
+    @Test
     public void testParseMapMultiset() throws IOException {
         MapMultiset<String, String> mms = MultisetReader.parseMapMultiset(bigrams, 0);
         assertEquals(1404, mms.get("one").count("of"));
@@ -67,16 +65,6 @@ public class MultisetReaderTest {
     @Test
     public void testPrivateConstructor() throws Exception {
         Constructor<?>[] cons = MultisetReader.class.getDeclaredConstructors();
-        cons[0].setAccessible(true);
-        cons[0].newInstance((Object[]) null);
-    }
-
-    /**
-     * Hack to exclude the private constructor from code coverage metrics.
-     */
-    @Test
-    public void testPrivateConstructor2() throws Exception {
-        Constructor<?>[] cons = MultisetWriter.class.getDeclaredConstructors();
         cons[0].setAccessible(true);
         cons[0].newInstance((Object[]) null);
     }

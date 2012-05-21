@@ -15,11 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.util;
+package com.github.fhirschmann.clozegen.lib.multiset;
 
-import com.github.fhirschmann.clozegen.lib.multiset.MultisetReader;
-import com.github.fhirschmann.clozegen.lib.multiset.MultisetWriter;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
 import java.io.File;
@@ -33,8 +30,7 @@ import static org.junit.Assert.*;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class MultisetUtilsTest {
-
+public class MultisetWriterTest {
     private Multiset<String> multiset1;
     private Multiset<String> multiset2;
 
@@ -49,37 +45,27 @@ public class MultisetUtilsTest {
     }
 
     @Test
-    public void testMergeMultiset() {
-        Multiset<String> ms = MultisetUtils.mergeMultiSets(multiset1, multiset2);
-        assertEquals(46, ms.count("foo"));
-        assertEquals(9, ms.count("bar"));
-        assertEquals(11, ms.count("bar2"));
+    public void testWriteMultiset() throws IOException {
+        File file = File.createTempFile("multisetutils", "txt");
+        MultisetWriter.writeMultiSet(multiset1, file);
+        Multiset<String> multisetr = MultisetReader.parseMultiset(file.toURI().toURL());
+        assertEquals(multiset1, multisetr);
     }
 
     @Test
-    public void testSortedElementList() {
-        assertEquals(ImmutableList.of("bar", "foo"),
-                MultisetUtils.sortedElementList(multiset1));
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSortedElementListArguments() {
-        MultisetUtils.sortedElementList(multiset1, 20);
-    }
-
-
-    @Test
-    public void testLimitedSortedElementList() {
-        assertEquals(ImmutableList.of("bar"),
-                MultisetUtils.sortedElementList(multiset1, 1));
+    public void testWriteSortedMultiset() throws IOException {
+        File file = File.createTempFile("multisetutils", "txt");
+        MultisetWriter.writeSortedMultiSet(multiset2, file);
+        Multiset<String> multisetr = MultisetReader.parseMultiset(file.toURI().toURL());
+        assertEquals("[foo x 42, bar2 x 11]", multisetr.toString());
     }
 
     /**
      * Hack to exclude the private constructor from code coverage metrics.
      */
     @Test
-    public void testPrivateConstructor() throws Exception {
-        Constructor<?>[] cons = MultisetUtils.class.getDeclaredConstructors();
+    public void testPrivateConstructor2() throws Exception {
+        Constructor<?>[] cons = MultisetWriter.class.getDeclaredConstructors();
         cons[0].setAccessible(true);
         cons[0].newInstance((Object[]) null);
     }

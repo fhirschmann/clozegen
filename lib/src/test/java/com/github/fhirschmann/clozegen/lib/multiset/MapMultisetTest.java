@@ -21,6 +21,7 @@ import com.google.common.collect.ImmutableSet;
 import junit.framework.TestCase;
 import org.junit.Before;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  *
@@ -36,29 +37,35 @@ public class MapMultisetTest {
         mms.add("university", "in", 4);
     }
 
+    @Test
     public void testGetCount() {
         assertEquals(42, mms.get("university").count("of"));
         assertEquals(4, mms.get("university").count("in"));
     }
 
+    @Test
     public void testZeroCount() {
         assertEquals(0, mms.get("asdf").count("asdf"));
     }
 
+    @Test
     public void testAdd() {
         mms.add("foo", "bar", 12);
         mms.add("foo", "bar", 12);
         assertEquals(24, mms.get("foo").count("bar"));
     }
 
+    @Test
     public void testTotal() {
         assertEquals(46, mms.total());
     }
 
+    @Test
     public void testToString() {
         assertEquals("{university=[of x 42, in x 4]}", mms.toString());
     }
 
+    @Test
     public void testSorted() {
         mms.add("foo","bar2", 40);
         mms.add("foo","bar1", 10);

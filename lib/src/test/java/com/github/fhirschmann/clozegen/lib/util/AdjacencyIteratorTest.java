@@ -19,7 +19,6 @@ package com.github.fhirschmann.clozegen.lib.util;
 
 import java.util.Arrays;
 import java.util.List;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

@@ -20,7 +20,6 @@ package com.github.fhirschmann.clozegen.lib.util;
 import com.google.common.collect.Lists;
 import java.lang.reflect.Constructor;
 import java.util.List;
-import junit.framework.TestCase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
