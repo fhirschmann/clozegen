@@ -90,41 +90,6 @@ public final class MultisetUtils {
     }
 
     /**
-     * Writes a multiset to a file. The elements will be written to a tab-separated
-     * file with the string representation of the elements on the left-hand side and
-     * the corresponding counts on the right-hand side.
-     *
-     * @param multiset the multiset to write from
-     * @param file the file to write to
-     * @throws IOException on errors opening/writing to the file
-     */
-    public static void writeMultiSet(final Multiset<String> multiset, final File file)
-            throws IOException {
-        final BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-
-        for (Multiset.Entry entry : multiset.entrySet()) {
-            bufferedWriter.write(
-                    String.format("%s\t%d%n",
-                    entry.getElement().toString(), entry.getCount()));
-        }
-        bufferedWriter.close();
-    }
-
-    /**
-     * Sorts a Multiset by its counts before writing it to a file using
-     * {@link MultisetUtils#writeMultiSet}.
-     *
-     * @param multiset the multiset to write
-     * @param file the file to write to
-     * @throws IOException on errors opening/writing to the file
-     */
-    public static void writeSortedMultiSet(final Multiset<String> multiset,
-            final File file) throws IOException {
-        final ImmutableMultiset<String> im = Multisets.copyHighestCountFirst(multiset);
-        writeMultiSet(im, file);
-    }
-
-    /**
      * Merges two multisets.
      *
      * @param <E> the type of the elements of both multisets

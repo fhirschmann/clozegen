@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
+import com.github.fhirschmann.clozegen.lib.multiset.MultisetWriter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
@@ -69,6 +70,8 @@ public class MultisetUtilsTest extends TestCase {
     @Test
     public void testWriteSortedMultiset() throws IOException {
         File file = File.createTempFile("multisetutils", "txt");
+        MultisetWriter.writeSortedMultiSet(multiset1, file);
+
     }
 
     /**
