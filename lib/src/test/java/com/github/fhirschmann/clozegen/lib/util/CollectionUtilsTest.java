@@ -26,24 +26,24 @@ import org.junit.Test;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class ListUtilsTest extends TestCase {
+public class CollectionUtilsTest extends TestCase {
     private List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5);
 
     @Test
     public void testAdjacentTo() {
-        assertEquals(ListUtils.<Integer>getAdjacentTo(list, 3, 1),
+        assertEquals(CollectionUtils.<Integer>getAdjacentTo(list, 3, 1),
                 Lists.newArrayList(2, 3, 4));
     }
 
     @Test
     public void testAdjacentToUpperBound() {
-        assertEquals(ListUtils.<Integer>getAdjacentTo(list, 5, 1),
+        assertEquals(CollectionUtils.<Integer>getAdjacentTo(list, 5, 1),
                 Lists.newArrayList(4, 5));
     }
 
     @Test
     public void testAdjacentToLowerBound() {
-        assertEquals(ListUtils.<Integer>getAdjacentTo(list, 1, 1),
+        assertEquals(CollectionUtils.<Integer>getAdjacentTo(list, 1, 1),
                 Lists.newArrayList(1, 2));
     }
 }
