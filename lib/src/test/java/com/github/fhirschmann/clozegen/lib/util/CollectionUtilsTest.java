@@ -46,4 +46,11 @@ public class CollectionUtilsTest extends TestCase {
         assertEquals(CollectionUtils.<Integer>getAdjacentTo(list, 1, 1),
                 Lists.newArrayList(1, 2));
     }
+
+    @Test
+    public void testListAsSetEquals() {
+        assertTrue(CollectionUtils.listAsSetEquals(
+                Lists.newArrayList("foo", "foo", "bar"),
+                Lists.newArrayList("bar", "foo")));
+    }
 }

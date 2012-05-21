@@ -19,6 +19,7 @@ package com.github.fhirschmann.clozegen.lib.util;
 
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
+import com.google.common.collect.Sets;
 import java.util.List;
 
 /**
@@ -57,5 +58,19 @@ public final class CollectionUtils {
                 intersection(Ranges.closed(0, list.size() - 1));
 
         return list.subList(range.lowerEndpoint(), range.upperEndpoint() + 1);
+    }
+
+    /**
+     * Check if two lists have the same distinct values.
+     * This is a Convenience method to work around UIMA's insufficient type system.
+     *
+     * @param <T> the type of both lists
+     * @param list1 list to compare
+     * @param list2 list to compare
+     * @return true if both lists have the same distinct values
+     */
+    public static <T> boolean listAsSetEquals(final List<T> list1,
+            final List<T> list2) {
+        return Sets.newHashSet(list1).equals(Sets.newHashSet(list2));
     }
 }
