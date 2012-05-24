@@ -23,7 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * In {@link Iterator} which is able to peek the next <code>n</code> elements and
+ * An {@link Iterator} which is able to peek the next <code>n</code> elements and
  * knows the last <code>n</code> elements.
  *
  * @param <T> the type of the iterator's elements
