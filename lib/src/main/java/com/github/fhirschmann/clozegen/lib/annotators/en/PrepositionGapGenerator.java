@@ -107,16 +107,20 @@ public class PrepositionGapGenerator extends AbstractPosTrigramAnnotator {
             List<String> strings = Lists.newArrayList(Collections2.
                     transform(pos, new WordFilterFunction()));
 
+            // Collect a list of possible candidates for this gap
             final Multiset<String> candidates = ConcurrentHashMultiset.create(
                     MultisetUtils.mergeMultiSets(
                     before.get(strings.get(0)), after.get(strings.get(0))));
 
+            // Removed candidates p* which appeared in the context (A, p*, B)
             for (Entry<String> entry : candidates.entrySet()) {
                 if (trigrams.contains(
                         joiner.join(strings.get(0), entry.getElement(), strings.get(1)))) {
                     candidates.remove(entry.getElement(), entry.getCount());
                 }
             }
+
+            // Remove the correct answer from the candidates
             candidates.remove(strings.get(1), candidates.count(strings.get(1)));
 
             if (candidates.elementSet().size() > CHOICES_COUNT - 2) {
