@@ -119,7 +119,7 @@ public class PrepositionGapGenerator extends AbstractPosTrigramAnnotator {
                     MultisetUtils.mergeMultiSets(
                     before.get(strings.get(0)), after.get(strings.get(0))));
 
-            // Removed candidates p* which appeared in the context (A, p*, B)
+            // Remove candidates p* which appeared in the context (A, p*, B)
             for (Entry<String> entry : candidates.entrySet()) {
                 if (trigrams.contains(
                         joiner.join(strings.get(0), entry.getElement(), strings.get(1)))) {
