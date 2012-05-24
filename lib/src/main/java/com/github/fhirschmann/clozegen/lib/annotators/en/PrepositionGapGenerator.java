@@ -62,6 +62,8 @@ import org.uimafit.util.FSCollectionFactory;
  * and {@link MultisetReader#parseMapMultiset}, which describe the format
  * for {before|after}.txt and trigrams.txt, respectively.
  *
+ * The actual models can be generated using the
+ *
  * <p>[1] <b>J. Lee and S. Seneff</b>.<br/>
  * Automatic generation of cloze items for prepositions.<br/>
  * <i>In Eight Annual Conference of the International Speech Communication
@@ -78,8 +80,13 @@ public class PrepositionGapGenerator extends AbstractPosTrigramAnnotator {
     @ConfigurationParameter(name = PARAM_MODEL_PATH, mandatory = true)
     private String modelPath;
 
+    /** (A, p, B) - preposition surrounded by A, B. */
     private Multiset<String> trigrams;
+
+    /** (p, B) - prepositions comes second. */
     private MapMultiset<String, String> after;
+
+    /** (A, p) - prepositions comes first. */
     private MapMultiset<String, String> before;
 
     private final static Joiner joiner = Joiner.on(" ");
