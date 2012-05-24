@@ -45,10 +45,19 @@ public class CollocationsExtractor extends AbstractPosTrigramAnnotator {
     public static final String PARAM_OUTPUT_DIRECTORY = "OutputDirectory";
     @ConfigurationParameter(name = PARAM_OUTPUT_DIRECTORY, mandatory = true)
     private String outputDirectory;
+
+    /** (A, p) - prepositions comes first. */
     private Multiset<String> before;
+
+    /** (p, B) - prepositions comes second. */
     private Multiset<String> after;
+
+    /** (A, p, B) - preposition surrounded by A, B. */
     private Multiset<String> trigrams;
+
+    /** (p) - prepositions only. */
     private Multiset<String> unigrams;
+
     private final static Joiner joiner = Joiner.on(" ");
 
     @Override
