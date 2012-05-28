@@ -33,12 +33,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.uima.UimaContext;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.NonEmptyStringList;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.util.FSCollectionFactory;
 
@@ -104,7 +103,7 @@ public class PrepositionGapGenerator extends AbstractPosTrigramAnnotator {
             before = MultisetReader.parseMapMultiset(
                     Resources.getResource(modelPath + "/before.txt"), 1);
         } catch (IOException ex) {
-            Logger.getLogger(PrepositionGapGenerator.class.getName()).log(Level.SEVERE, null, ex);
+            getContext().getLogger().log(Level.SEVERE, ex.getMessage());
         }
 
     }

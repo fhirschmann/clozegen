@@ -30,11 +30,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.uima.UimaContext;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
@@ -94,7 +94,7 @@ public class CollocationsExtractor extends AbstractPosTrigramAnnotator {
             MultisetWriter.writeSortedMultiSet(unigrams,
                     new File(outputDirectory, "unigrams.txt"));
         } catch (IOException ex) {
-            Logger.getLogger(CollocationsExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            getContext().getLogger().log(Level.SEVERE, ex.getMessage());
         }
     }
 }
