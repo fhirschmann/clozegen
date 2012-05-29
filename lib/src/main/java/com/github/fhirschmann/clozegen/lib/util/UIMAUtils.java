@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
+import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Set;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.NonEmptyStringList;
+import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.util.FSCollectionFactory;
 
 /**
@@ -65,5 +67,30 @@ public final class UIMAUtils {
         annotation.setValidAnswers(valid);
 
         return annotation;
+    }
+
+    /**
+     * Creates a {@link GapAnnotation} from a {@link Gap}.
+     *
+     * @param aJCas The {@link JCas} this Annotation belongs to
+     * @param gap the gap to create the annotation for
+     * @see UIMAUtils#createGapAnnotation(JCas, Set)}
+     * @return a new {@link GapAnnotation}
+     */
+    public static GapAnnotation createGapAnnotation(final JCas aJCas, final Gap gap) {
+        return createGapAnnotation(aJCas, gap.getValidAnswers(), gap.getInvalidAnswers());
+    }
+
+    /**
+     * Copy the bounds ({@link Annotation#getBegin()} and {@link Annotation#getEnd()})
+     * from the <code>source</code> annotation to the <code>destination</code>
+     * annotation.
+     *
+     * @param source the source annotation
+     * @param destination the destination annotation
+     */
+    public static void copyBounds(final Annotation source, final Annotation destination) {
+        destination.setBegin(source.getBegin());
+        destination.setEnd(source.getEnd());
     }
 }
