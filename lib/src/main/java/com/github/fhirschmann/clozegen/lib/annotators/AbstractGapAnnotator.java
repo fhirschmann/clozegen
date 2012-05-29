@@ -27,19 +27,30 @@ import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.component.JCasAnnotator_ImplBase;
+import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.util.JCasUtil;
 
 /**
  * Abstract Gap annotator class.
  *
+ * <p>All annotators should inherit from this class and call their
+ * gap generation algorithms in {@link AbstractGapAnnotator#generate(Annotation)}.
+ *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public abstract class AbstractGapAnnotator extends
         JCasAnnotator_ImplBase implements GapAnnotatorInterface {
+
+    /** The number of answer option to produce. */
+    public static final String PARAM_ANSWER_OPTIONS_COUNT = "AnswerOptionsCount";
+    @ConfigurationParameter(name = PARAM_ANSWER_OPTIONS_COUNT,
+            mandatory = false, defaultValue = "4")
+    private int answerOptionsCount;
+
     /**
      * A constraint, possibly <code>null</code>, which limits the elements of the
      * iterator passed to
-     * {@link AbstractGapAnnotator#process(org.apache.uima.cas.FSIterator)}.
+     * {@link AbstractGapAnnotator#generate(Annotation)}.
      *
      * <p>For example, if you want to only work on annotations of the type
      * {@link ART}, then this method should return <code>cons</code> like so:
@@ -94,5 +105,14 @@ public abstract class AbstractGapAnnotator extends
                 gapan.addToIndexes();
             }
         }
+    }
+
+    /**
+     * Returns the number of answer options to generate.
+     *
+     * @return the number of answer options to generate
+     */
+    public int getAnswerOptionsCount() {
+        return answerOptionsCount;
     }
 }

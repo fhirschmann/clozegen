@@ -109,7 +109,7 @@ public class Gap {
 
     /**
      * Returns an unmodifiable view of all answers (the union
-     * of invalid and valid answers.
+     * of invalid and valid answers).
      *
      * @return set of invalid and valid answers
      */

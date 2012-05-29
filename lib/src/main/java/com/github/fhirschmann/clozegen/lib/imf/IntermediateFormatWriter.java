@@ -31,11 +31,10 @@ import org.uimafit.descriptor.ConfigurationParameter;
 /**
  * Writes all {@link GapAnnotation} to a file using the intermediate format.
  *
- * @param PARAM_OUTPUT_FILE the output file
- *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class IntermediateFormatWriter extends JCasConsumer_ImplBase {
+    /** The output file to write to. */
     public static final String PARAM_OUTPUT_FILE = "OutputFile";
     @ConfigurationParameter(name = PARAM_OUTPUT_FILE, mandatory = true)
     private String outputFile;
@@ -43,7 +42,8 @@ public class IntermediateFormatWriter extends JCasConsumer_ImplBase {
     private BufferedWriter outputBuffer;
 
     @Override
-	public void initialize(UimaContext context) throws ResourceInitializationException {
+	public void initialize(final UimaContext context) throws
+            ResourceInitializationException {
         super.initialize(context);
 
         try {
@@ -54,7 +54,7 @@ public class IntermediateFormatWriter extends JCasConsumer_ImplBase {
     }
 
     @Override
-    public void process(JCas aJCas) throws AnalysisEngineProcessException {
+    public void process(final JCas aJCas) throws AnalysisEngineProcessException {
         String imf = IntermediateFormat.format(aJCas);
         try {
             outputBuffer.write(String.format("%s%n", imf));
