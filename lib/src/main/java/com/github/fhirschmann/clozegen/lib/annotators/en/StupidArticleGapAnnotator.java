@@ -18,7 +18,6 @@
 package com.github.fhirschmann.clozegen.lib.annotators.en;
 
 import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapAnnotator;
-import com.github.fhirschmann.clozegen.lib.annotators.GapAnnotatorInterface;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.generator.en.StupidArticleGapGenerator;
 import com.google.common.collect.Sets;
@@ -32,8 +31,7 @@ import org.apache.uima.jcas.tcas.Annotation;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class StupidArticleGapAnnotator extends
-        AbstractGapAnnotator implements GapAnnotatorInterface {
+public class StupidArticleGapAnnotator extends AbstractGapAnnotator {
 
     @Override
     public FSTypeConstraint getConstraint() {
