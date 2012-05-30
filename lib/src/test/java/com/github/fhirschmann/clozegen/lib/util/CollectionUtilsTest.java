@@ -33,19 +33,19 @@ public class CollectionUtilsTest {
 
     @Test
     public void testAdjacentTo() {
-        assertEquals(CollectionUtils.<Integer>getAdjacentTo(list, 3, 1),
+        assertEquals(CollectionUtils.<Integer>getAdjacentTo(list, 2, 1),
                 Lists.newArrayList(2, 3, 4));
     }
 
     @Test
     public void testAdjacentToUpperBound() {
-        assertEquals(CollectionUtils.<Integer>getAdjacentTo(list, 5, 1),
+        assertEquals(CollectionUtils.<Integer>getAdjacentTo(list, 4, 1),
                 Lists.newArrayList(4, 5));
     }
 
     @Test
     public void testAdjacentToLowerBound() {
-        assertEquals(CollectionUtils.<Integer>getAdjacentTo(list, 1, 1),
+        assertEquals(CollectionUtils.<Integer>getAdjacentTo(list, 0, 1),
                 Lists.newArrayList(1, 2));
     }
 
@@ -54,6 +54,27 @@ public class CollectionUtilsTest {
         assertTrue(CollectionUtils.listAsSetEquals(
                 Lists.newArrayList("foo", "foo", "bar"),
                 Lists.newArrayList("bar", "foo")));
+    }
+
+    @Test
+    public void testNullPaddingLeft() {
+        assertEquals(
+                Lists.newArrayList(null, 1, 2),
+                CollectionUtils.<Integer>getNullPaddedAdjacentTo(list, 0, 1));
+    }
+
+    @Test
+    public void testNullPaddingRight() {
+        assertEquals(
+                Lists.newArrayList(4, 5, null),
+                CollectionUtils.<Integer>getNullPaddedAdjacentTo(list, 4, 1));
+    }
+
+    @Test
+    public void testNullPaddingRight3() {
+        assertEquals(
+                Lists.newArrayList(2, 3, 4, 5, null, null, null),
+                CollectionUtils.<Integer>getNullPaddedAdjacentTo(list, 4, 3));
     }
 
     /**

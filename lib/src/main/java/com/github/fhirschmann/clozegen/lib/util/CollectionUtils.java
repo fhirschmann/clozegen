@@ -17,6 +17,8 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 import com.google.common.collect.Sets;
@@ -44,20 +46,42 @@ public final class CollectionUtils {
      * </p>
      * <p>
      *
+     * @param <T> the type of the list elements
      * @param list the list to use
-     * @param element the element to get the adjacent neighbors for
+     * @param index the index of the element to get the adjacent neighbors for
      * @param num the number of neighbors (on each side) to include
      * @return a view based on the specified parameters
      */
-    public static <T> List<T> getAdjacentTo(final List<T> list, final T element,
+    public static <T> List<T> getAdjacentTo(final List<T> list, final int index,
             final int num) {
-        final int index = list.indexOf(element);
 
         /* The num adjacent neighbors of an element intersected with the list's bounds */
         final Range<Integer> range = Ranges.closed(index - num, index + num).
                 intersection(Ranges.closed(0, list.size() - 1));
 
         return list.subList(range.lowerEndpoint(), range.upperEndpoint() + 1);
+    }
+
+    /**
+     * Returns a view of a list made up of the n adjacent neighbors of an element
+     * and the element itself.
+     *
+     * If the element does not have any neighbors, null will be inserted.
+     *
+     * @param <T> the type of the list elements
+     * @param list the list to use
+     * @param index the index of the element to get the adjacent neighbors for
+     * @param num the number of neighbors (on each side) to include
+     * @return a view based on the specified parameters
+     */
+    public static <T> List<T> getNullPaddedAdjacentTo(final List<T> list, final int index,
+            final int num) {
+        List paddingNulls = Lists.newArrayList();
+        for (int i = 0; i < num; i++) {
+            paddingNulls.add(null);
+        }
+        return getAdjacentTo(Lists.newArrayList(
+                Iterables.concat(paddingNulls, list, paddingNulls)), index + num, num);
     }
 
     /**
