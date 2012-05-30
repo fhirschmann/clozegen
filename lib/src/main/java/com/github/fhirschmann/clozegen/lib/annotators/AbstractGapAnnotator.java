@@ -18,14 +18,13 @@
 package com.github.fhirschmann.clozegen.lib.annotators;
 
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
+import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.collect.Iterators;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -76,7 +75,8 @@ public abstract class AbstractGapAnnotator extends
      * @param offset the offset (index) of the word to generate a gap for
      * @return a set of gaps generated for the sentence
      */
-    public abstract Gap generate(List<Annotation> annotationList, int offset);
+    public abstract GapGeneratorInterface generator(
+            List<Annotation> annotationList, int offset);
 
     @Override
     public void process(final JCas aJCas) throws AnalysisEngineProcessException {
@@ -94,7 +94,7 @@ public abstract class AbstractGapAnnotator extends
             List<Annotation> alist = JCasUtil.selectCovered(Annotation.class, sentence);
             for (Annotation annotation : alist) {
                 if ((constraint == null) || (constraint.match(annotation))) {
-                    gap = generate(alist, i);
+                    gap = generator(alist, i).generate();
                     gapAnnotation = UIMAUtils.createGapAnnotation(aJCas, gap);
                     UIMAUtils.copyBounds(annotation, gapAnnotation);
                     gapAnnotation.addToIndexes();

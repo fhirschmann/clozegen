@@ -18,7 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.annotators.en;
 
 import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapAnnotator;
-import com.github.fhirschmann.clozegen.lib.generator.Gap;
+import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
 import com.github.fhirschmann.clozegen.lib.generator.en.StupidArticleGapGenerator;
 import com.google.common.collect.Sets;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
@@ -42,10 +42,10 @@ public class StupidArticleGapAnnotator extends AbstractGapAnnotator {
     }
 
     @Override
-    public Gap generate(final List<Annotation> annotationList, final int offset) {
-        System.out.println(offset);
-        return StupidArticleGapGenerator.create(annotationList.get(offset).
-                getCoveredText()).generate();
+    public GapGeneratorInterface generator(
+            final List<Annotation> annotationList, final int offset) {
+        return StupidArticleGapGenerator.create(
+                annotationList.get(offset).getCoveredText());
     }
 
     @Override
