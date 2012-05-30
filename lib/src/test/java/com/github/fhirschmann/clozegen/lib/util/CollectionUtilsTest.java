@@ -33,20 +33,23 @@ public class CollectionUtilsTest {
 
     @Test
     public void testAdjacentTo() {
-        assertEquals(CollectionUtils.<Integer>getAdjacentTo(list, 2, 1),
-                Lists.newArrayList(2, 3, 4));
+        assertEquals(
+                Lists.newArrayList(2, 3, 4),
+                CollectionUtils.<Integer>getAdjacentTo(list, 2, 1));
     }
 
     @Test
     public void testAdjacentToUpperBound() {
-        assertEquals(CollectionUtils.<Integer>getAdjacentTo(list, 4, 1),
-                Lists.newArrayList(4, 5));
+        assertEquals(
+                Lists.newArrayList(4, 5),
+                CollectionUtils.<Integer>getAdjacentTo(list, 4, 1));
     }
 
     @Test
     public void testAdjacentToLowerBound() {
-        assertEquals(CollectionUtils.<Integer>getAdjacentTo(list, 0, 1),
-                Lists.newArrayList(1, 2));
+        assertEquals(
+                Lists.newArrayList(1, 2),
+                CollectionUtils.<Integer>getAdjacentTo(list, 0, 1));
     }
 
     @Test
