@@ -93,7 +93,7 @@ public abstract class AbstractGapAnnotator extends
             int i = 0;
             List<Annotation> alist = JCasUtil.selectCovered(Annotation.class, sentence);
             for (Annotation annotation : alist) {
-                if (constraint.match(annotation)) {
+                if ((constraint == null) || (constraint.match(annotation))) {
                     gap = generate(alist, i);
                     gapAnnotation = UIMAUtils.createGapAnnotation(aJCas, gap);
                     UIMAUtils.copyBounds(annotation, gapAnnotation);
