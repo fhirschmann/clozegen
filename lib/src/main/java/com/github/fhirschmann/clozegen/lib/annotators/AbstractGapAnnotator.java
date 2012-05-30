@@ -73,7 +73,7 @@ public abstract class AbstractGapAnnotator extends
      *
      * @param annotationList the list of annotations in the current sentence
      * @param offset the offset (index) of the word to generate a gap for
-     * @return a set of gaps generated for the sentence
+     * @return a gap generator
      */
     public abstract GapGeneratorInterface generator(
             List<Annotation> annotationList, int offset);
