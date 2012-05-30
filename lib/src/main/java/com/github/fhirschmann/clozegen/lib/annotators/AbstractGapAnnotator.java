@@ -20,7 +20,10 @@ package com.github.fhirschmann.clozegen.lib.annotators;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.collect.Iterators;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.FSTypeConstraint;
@@ -66,13 +69,14 @@ public abstract class AbstractGapAnnotator extends
     public abstract FSTypeConstraint getConstraint();
 
     /**
-     * This method gets called for each sentence. The iterator contains the
-     * sentence annotation as constrained by {@link AbstractGapAnnotator#getConstraint()}.
+     * This method gets called for each word in a sentence which matches
+     * {@link AbstractGapAnnotator#getConstraint()}.
      *
-     * @param annotation the annotation to create a gap for
+     * @param annotationList the list of annotations in the current sentence
+     * @param offset the offset (index) of the word to generate a gap for
      * @return a set of gaps generated for the sentence
      */
-    public abstract Gap generate(Annotation annotation);
+    public abstract Gap generate(List<Annotation> annotationList, int offset);
 
     @Override
     public void process(final JCas aJCas) throws AnalysisEngineProcessException {
@@ -81,28 +85,21 @@ public abstract class AbstractGapAnnotator extends
             throw new UnsupportedOperationException(
                     "The annotator you tried to use does not support your language!");
         }
-        FSIterator<Annotation> it;
-        FSIterator<Annotation> it2;
         Gap gap;
-        GapAnnotation gapan;
-        Annotation an;
+        GapAnnotation gapAnnotation;
+        FSTypeConstraint constraint = getConstraint();
 
         for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
-            it = aJCas.getAnnotationIndex().subiterator(sentence);
-
-            // Filter the iterator if neccessary
-            if (getConstraint() == null) {
-                it2 = it;
-            } else {
-                it2 = aJCas.createFilteredIterator(it, getConstraint());
-            }
-
-            while (it2.hasNext()) {
-                an = it2.next();
-                gap = generate(an);
-                gapan = UIMAUtils.createGapAnnotation(aJCas, gap);
-                UIMAUtils.copyBounds(an, gapan);
-                gapan.addToIndexes();
+            int i = 0;
+            List<Annotation> alist = JCasUtil.selectCovered(Annotation.class, sentence);
+            for (Annotation annotation : alist) {
+                if (constraint.match(annotation)) {
+                    gap = generate(alist, i);
+                    gapAnnotation = UIMAUtils.createGapAnnotation(aJCas, gap);
+                    UIMAUtils.copyBounds(annotation, gapAnnotation);
+                    gapAnnotation.addToIndexes();
+                }
+                i++;
             }
         }
     }

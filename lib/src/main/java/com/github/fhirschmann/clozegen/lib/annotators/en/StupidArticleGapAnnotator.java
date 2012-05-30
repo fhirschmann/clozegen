@@ -22,6 +22,7 @@ import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.generator.en.StupidArticleGapGenerator;
 import com.google.common.collect.Sets;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
+import java.util.List;
 import java.util.Set;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSTypeConstraint;
@@ -41,8 +42,10 @@ public class StupidArticleGapAnnotator extends AbstractGapAnnotator {
     }
 
     @Override
-    public Gap generate(final Annotation annotation) {
-        return StupidArticleGapGenerator.create(annotation.getCoveredText()).generate();
+    public Gap generate(final List<Annotation> annotationList, final int offset) {
+        System.out.println(offset);
+        return StupidArticleGapGenerator.create(annotationList.get(offset).
+                getCoveredText()).generate();
     }
 
     @Override
