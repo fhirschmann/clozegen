@@ -49,35 +49,6 @@ public abstract class AbstractGapAnnotator extends
             mandatory = false, defaultValue = "4")
     private int answerOptionsCount;
 
-    /**
-     * A constraint, possibly <code>null</code>, which limits the elements of the
-     * iterator passed to
-     * {@link AbstractGapAnnotator#generate(Annotation)}.
-     *
-     * <p>For example, if you want to only work on annotations of the type
-     * {@link ART}, then this method should return <code>cons</code> like so:
-     * <p><blockquote><pre>
-     * {@code
-     * FSTypeConstraint cons = ConstraintFactory.instance().createTypeConstraint();
-     * cons.add(ART.class.getName());
-     * }
-     * </pre></blockquote>
-     *
-     * @return a new constraint
-     */
-    public abstract FSTypeConstraint getConstraint();
-
-    /**
-     * This method gets called for each word in a sentence which matches
-     * {@link AbstractGapAnnotator#getConstraint()}.
-     *
-     * @param annotationList the list of annotations in the current sentence
-     * @param offset the offset (index) of the word to generate a gap for
-     * @return a gap generator
-     */
-    public abstract GapGeneratorInterface generator(
-            List<Annotation> annotationList, int offset);
-
     @Override
     public void process(final JCas aJCas) throws AnalysisEngineProcessException {
         // Throw an exception if the language is not supported.
@@ -94,7 +65,7 @@ public abstract class AbstractGapAnnotator extends
             List<Annotation> alist = JCasUtil.selectCovered(Annotation.class, sentence);
             for (Annotation annotation : alist) {
                 if ((constraint == null) || (constraint.match(annotation))) {
-                    gap = generator(alist, i).generate(answerOptionsCount);
+                    gap = generator(alist, i).generate(4);
                     gapAnnotation = UIMAUtils.createGapAnnotation(aJCas, gap);
                     UIMAUtils.copyBounds(annotation, gapAnnotation);
                     gapAnnotation.addToIndexes();

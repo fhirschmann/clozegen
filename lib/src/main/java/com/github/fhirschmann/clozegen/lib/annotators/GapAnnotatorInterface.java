@@ -17,13 +17,45 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators;
 
+import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
+import java.util.List;
 import java.util.Set;
+import org.apache.uima.cas.FSTypeConstraint;
+import org.apache.uima.jcas.tcas.Annotation;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public interface GapAnnotatorInterface {
+    /**
+     * This method gets called for each word in a sentence which matches
+     * {@link AbstractGapAnnotator#getConstraint()}.
+     *
+     * @param annotationList the list of annotations in the current sentence
+     * @param offset the offset (index) of the word to generate a gap for
+     * @return a gap generator
+     */
+    GapGeneratorInterface generator(List<Annotation> annotationList, int offset);
+
+    /**
+     * A constraint, possibly <code>null</code>, which limits the elements of the
+     * iterator passed to
+     * {@link AbstractGapAnnotator#generate(Annotation)}.
+     *
+     * <p>For example, if you want to only work on annotations of the type
+     * {@link ART}, then this method should return <code>cons</code> like so:
+     * <p><blockquote><pre>
+     * {@code
+     * FSTypeConstraint cons = ConstraintFactory.instance().createTypeConstraint();
+     * cons.add(ART.class.getName());
+     * }
+     * </pre></blockquote>
+     *
+     * @return a new constraint
+     */
+
+    FSTypeConstraint getConstraint();
     /**
      * A short name for this annotator (used in the command line interface).
      *

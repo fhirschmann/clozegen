@@ -105,9 +105,6 @@ public class PrepositionGapGenerator implements GapGeneratorInterface {
         Gap gap = new Gap();
         gap.setValidAnswers(p);
 
-        System.out.println(model.getBefore().get(A));
-        System.out.println(model.getAfter().get(B));
-
         // Collect a list of possible candidates for this gap
         final Multiset<String> candidates = ConcurrentHashMultiset.create(
                 MultisetUtils.mergeMultiSets(model.getBefore().get(B),
