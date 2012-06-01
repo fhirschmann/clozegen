@@ -2,9 +2,7 @@ package com.github.fhirschmann.clozegen.lib;
 
 import com.github.fhirschmann.clozegen.lib.pipeline.DefaultPipeline;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
-import com.github.fhirschmann.clozegen.lib.annotators.en.ArticleGapGenerator;
-import com.github.fhirschmann.clozegen.lib.annotators.en.PrepositionGapGenerator;
-import com.github.fhirschmann.clozegen.lib.io.DebugWriter;
+import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
 
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
@@ -29,10 +27,6 @@ public class ClozeTestGenerator {
         pipeline = new DefaultPipeline();
     }
 
-    static {
-        org.apache.log4j.BasicConfigurator.configure();
-    }
-
     /**
      * Runs the cloze test generation process.
      *
@@ -46,8 +40,6 @@ public class ClozeTestGenerator {
         jcas.setDocumentText("Let's go to a movie! I'd like a cookie! The book is on the table.");
         jcas.setDocumentLanguage("en");
 
-        getPipeline().addStep(PrepositionGapGenerator.class);
-        getPipeline().addStep(ArticleGapGenerator.class);
         getPipeline().addStep(DebugWriter.class);
         getPipeline().run(jcas);
     }

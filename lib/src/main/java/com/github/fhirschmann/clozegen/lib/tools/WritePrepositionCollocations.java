@@ -19,6 +19,7 @@ package com.github.fhirschmann.clozegen.lib.tools;
 
 import com.github.fhirschmann.clozegen.lib.frequency.CollocationsExtractor;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import de.tudarmstadt.ukp.dkpro.core.io.web1t.Web1TFormatWriter;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
 import java.io.IOException;
 import org.apache.uima.UIMAException;
@@ -47,7 +48,14 @@ public class WritePrepositionCollocations {
                 CollocationsExtractor.PARAM_OUTPUT_DIRECTORY,
                 "../models-en/src/main/resources/frequencies/en/prepositions");
 
-        pipeline.addStep(ce);
+        AnalysisEngineDescription ce2 = createPrimitiveDescription(
+                Web1TFormatWriter.class,
+                Web1TFormatWriter.PARAM_TARGET_LOCATION, "target/ngrams",
+                Web1TFormatWriter.PARAM_MIN_NGRAM_LENGTH, 2,
+                Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, 3
+                );
+
+        pipeline.addStep(ce2);
         pipeline.run(cr);
     }
 

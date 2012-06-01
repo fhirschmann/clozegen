@@ -21,6 +21,8 @@ import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
 import com.google.common.collect.Lists;
 import java.util.List;
 import org.apache.commons.cli.*;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.apache.uima.resource.ResourceInitializationException;
 
 /**
@@ -28,7 +30,14 @@ import org.apache.uima.resource.ResourceInitializationException;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class Main {
+    static {
+        org.apache.log4j.BasicConfigurator.configure();
+    }
+
     public static void main(final String[] argv) throws ResourceInitializationException {
+        Logger logger = Logger.getRootLogger();
+        logger.setLevel(Level.INFO);
+
         CommandLineParser parser = new PosixParser();
         Options options = new Options();
         options.addOption("c", "classes", true, "word classes to generate gaps for");
@@ -54,6 +63,7 @@ public class Main {
             String output = line.getArgs()[1];
 
             ClozeTestGenerator clozegen = new ClozeTestGenerator();
+            System.out.println("--------");
 
         } catch (ParseException exp) {
             System.err.println(exp.getMessage());

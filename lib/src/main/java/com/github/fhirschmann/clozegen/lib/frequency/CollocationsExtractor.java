@@ -18,7 +18,6 @@
 package com.github.fhirschmann.clozegen.lib.frequency;
 
 import com.github.fhirschmann.clozegen.lib.annotators.AbstractPosTrigramAnnotator;
-import com.github.fhirschmann.clozegen.lib.annotators.en.PrepositionGapGenerator;
 import com.github.fhirschmann.clozegen.lib.multiset.MultisetWriter;
 import com.github.fhirschmann.clozegen.lib.util.WordFilterFunction;
 import com.google.common.base.Joiner;
@@ -30,7 +29,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Logger;
 import org.apache.uima.UimaContext;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -38,7 +36,7 @@ import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
- * Extracts the collocation model for {@link PrepositionGapGenerator}.
+ * Extracts the collocation model for {@link OldPrepositionGapGenerator}.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
