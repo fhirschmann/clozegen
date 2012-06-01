@@ -68,8 +68,6 @@ public class PrepositionGapGenerator implements GapGeneratorInterface {
     /** The model for this generator. */
     private PrepositionGapGeneratorModel model;
 
-    public final static int CHOICES_COUNT = 4;
-
     private final static Joiner JOINER = Joiner.on(" ");
 
     /**
@@ -103,7 +101,7 @@ public class PrepositionGapGenerator implements GapGeneratorInterface {
     }
 
     @Override
-    public Gap generate() {
+    public Gap generate(int count) {
         Gap gap = new Gap();
         gap.setValidAnswers(p);
 
@@ -126,9 +124,9 @@ public class PrepositionGapGenerator implements GapGeneratorInterface {
         // Remove the correct answer from the candidate set
         candidates.remove(p, candidates.count(p));
 
-        if (candidates.elementSet().size() > CHOICES_COUNT - 2) {
+        if (candidates.elementSet().size() > count - 2) {
             final Set<String> invalidAnswers = Sets.newHashSet(
-                    MultisetUtils.sortedElementList(candidates, CHOICES_COUNT - 1));
+                    MultisetUtils.sortedElementList(candidates, count - 1));
             gap.setInvalidAnswers(invalidAnswers);
         } else {
             gap = null;

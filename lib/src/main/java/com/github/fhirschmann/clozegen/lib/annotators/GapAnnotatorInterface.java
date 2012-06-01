@@ -17,8 +17,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import java.lang.annotation.Annotation;
 import java.util.Set;
 
 /**

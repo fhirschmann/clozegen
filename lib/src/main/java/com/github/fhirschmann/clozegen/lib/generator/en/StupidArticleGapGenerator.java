@@ -38,7 +38,7 @@ public class StupidArticleGapGenerator implements GapGeneratorInterface {
     }
 
     @Override
-    public Gap generate() {
+    public Gap generate(int count) {
         Gap gap = new Gap();
         gap.setValidAnswers(validAnswer);
         gap.setInvalidAnswers("the", "a", "an");

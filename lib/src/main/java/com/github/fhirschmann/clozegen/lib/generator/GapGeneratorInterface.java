@@ -22,5 +22,5 @@ package com.github.fhirschmann.clozegen.lib.generator;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public interface GapGeneratorInterface {
-    Gap generate();
+    Gap generate(int count);
 }
