@@ -23,6 +23,7 @@ import com.github.fhirschmann.clozegen.lib.generator.en.StupidArticleGapGenerato
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import java.util.List;
 import org.apache.uima.cas.ConstraintFactory;
+import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.component.Resource_ImplBase;
@@ -34,7 +35,7 @@ import org.uimafit.component.Resource_ImplBase;
 public class StupidArticleWrapper extends Resource_ImplBase implements WrapperInterface {
 
     @Override
-    public FSTypeConstraint getConstraint() {
+    public FSMatchConstraint getConstraint() {
         FSTypeConstraint cons = ConstraintFactory.instance().createTypeConstraint();
         cons.add(ART.class.getName());
         return cons;

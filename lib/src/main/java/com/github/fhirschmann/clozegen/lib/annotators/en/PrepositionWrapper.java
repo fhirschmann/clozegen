@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.uima.cas.ConstraintFactory;
+import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -76,7 +77,7 @@ public class PrepositionWrapper extends Resource_ImplBase implements WrapperInte
     }
 
     @Override
-    public FSTypeConstraint getConstraint() {
+    public FSMatchConstraint getConstraint() {
         FSTypeConstraint cons = ConstraintFactory.instance().createTypeConstraint();
         cons.add(PP.class.getName());
         return cons;

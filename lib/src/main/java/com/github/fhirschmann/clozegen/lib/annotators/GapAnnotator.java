@@ -23,7 +23,7 @@ import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.FSTypeConstraint;
+import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.component.JCasAnnotator_ImplBase;
@@ -51,7 +51,7 @@ public class GapAnnotator extends JCasAnnotator_ImplBase {
     public void process(final JCas aJCas) throws AnalysisEngineProcessException {
         Gap gap;
         GapAnnotation gapAnnotation;
-        FSTypeConstraint constraint = wrapperInterface.getConstraint();
+        FSMatchConstraint constraint = wrapperInterface.getConstraint();
 
         for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
             int i = 0;

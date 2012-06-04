@@ -20,7 +20,7 @@ package com.github.fhirschmann.clozegen.lib.annotators;
 import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import java.util.List;
-import org.apache.uima.cas.FSTypeConstraint;
+import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
@@ -56,5 +56,5 @@ public interface WrapperInterface {
      *
      * @return a new constraint
      */
-    FSTypeConstraint getConstraint();
+    FSMatchConstraint getConstraint();
 }
