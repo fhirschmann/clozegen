@@ -1,0 +1,14 @@
+    ---
+    About
+    ---
+    Fabian Hirschmann
+    ---
+    2012-05-29
+    ---
+
+About ClozeGen
+
+    ClozeGen is a tool which allows you to generate
+    {{{http://en.wikipedia.org/wiki/Cloze_test}Cloze Tests}}
+    from arbitrary text. It supports loading and outputting in
+    different formats.
