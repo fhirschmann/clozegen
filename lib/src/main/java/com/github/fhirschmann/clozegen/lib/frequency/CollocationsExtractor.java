@@ -17,7 +17,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.frequency;
 
-import com.github.fhirschmann.clozegen.lib.annotators.AbstractPosTrigramAnnotator;
 import com.github.fhirschmann.clozegen.lib.multiset.MultisetWriter;
 import com.github.fhirschmann.clozegen.lib.util.WordFilterFunction;
 import com.google.common.base.Joiner;
