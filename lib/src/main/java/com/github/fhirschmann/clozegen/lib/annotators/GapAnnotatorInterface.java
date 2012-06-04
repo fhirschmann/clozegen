@@ -54,35 +54,5 @@ public interface GapAnnotatorInterface {
      *
      * @return a new constraint
      */
-
     FSTypeConstraint getConstraint();
-    /**
-     * A short name for this annotator (used in the command line interface).
-     *
-     * This should not contain any spaces and match [a-zA-Z0-9_]*.
-     *
-     * @return a short name
-     */
-    String getShortName();
-
-    /**
-     * A long name for this annotator (used in the graphical user interface).
-     *
-     * @return a long name
-     */
-    String getLongName();
-
-    /**
-     * A description of this annotator.
-     *
-     * @return a description
-     */
-    String getDescription();
-
-    /**
-     * The supported languages of this annotator.
-     *
-     * @return list of supported languages
-     */
-    Set<String> getSupportedLanguages();
 }

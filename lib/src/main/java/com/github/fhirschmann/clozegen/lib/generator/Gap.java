@@ -125,4 +125,20 @@ public class Gap {
 
         return str.toString();
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getInvalidAnswers(), getValidAnswers());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if ((obj == null) || (!getClass().equals(obj.getClass()))) {
+            return false;
+        }
+        final Gap other = (Gap) obj;
+
+        return Objects.equal(this.invalidAnswers, other.invalidAnswers) &&
+                Objects.equal(this.validAnswers, other.validAnswers);
+    }
 }

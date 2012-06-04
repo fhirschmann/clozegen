@@ -17,14 +17,11 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators.en;
 
-import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapAnnotator;
 import com.github.fhirschmann.clozegen.lib.annotators.GapAnnotatorInterface;
 import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
 import com.github.fhirschmann.clozegen.lib.generator.en.StupidArticleGapGenerator;
-import com.google.common.collect.Sets;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import java.util.List;
-import java.util.Set;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -33,7 +30,7 @@ import org.apache.uima.jcas.tcas.Annotation;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class StupidArticleGapAnnotator implements GapAnnotatorInterface {
+public class StupidArticleWrapper implements GapAnnotatorInterface {
 
     @Override
     public FSTypeConstraint getConstraint() {
@@ -47,25 +44,5 @@ public class StupidArticleGapAnnotator implements GapAnnotatorInterface {
             final List<Annotation> annotationList, final int offset) {
         return StupidArticleGapGenerator.create(
                 annotationList.get(offset).getCoveredText());
-    }
-
-    @Override
-    public String getShortName() {
-        return "article_stupid";
-    }
-
-    @Override
-    public String getLongName() {
-        return "Stupid Article Gap Generator";
-    }
-
-    @Override
-    public String getDescription() {
-        return "Simplest method of generating gaps for articles one can think of.";
-    }
-
-    @Override
-    public Set<String> getSupportedLanguages() {
-        return Sets.newHashSet("en");
     }
 }

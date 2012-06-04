@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators.en;
 
-import com.github.fhirschmann.clozegen.lib.annotators.AbstractGapAnnotator;
+import com.github.fhirschmann.clozegen.lib.annotators.GapAnnotatorInterface;
 import com.github.fhirschmann.clozegen.lib.functions.CoveredTextFunction;
 import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
 import com.github.fhirschmann.clozegen.lib.generator.en.PrepositionGapGenerator;
@@ -26,39 +26,41 @@ import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.common.io.Resources;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
-import java.util.Set;
-import org.apache.uima.UimaContext;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.apache.uima.resource.DataResource;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Level;
+import org.apache.uima.resource.SharedResourceObject;
 
 /**
  * This annotator creates annotations for prepositions.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionGapAnnotator extends AbstractGapAnnotator {
+public class PrepositionWrapper implements GapAnnotatorInterface, SharedResourceObject {
 
     private PrepositionGapGeneratorModel model;
 
     @Override
-    public void initialize(final UimaContext context)
-            throws ResourceInitializationException {
+    public void load(DataResource aData) throws ResourceInitializationException {
+        URL baseURL = aData.getUrl();
         model = new PrepositionGapGeneratorModel();
         try {
             model.load(Resources.getResource("frequencies/en/prepositions/trigrams.txt"),
                     Resources.getResource("frequencies/en/prepositions/after.txt"),
                     Resources.getResource("frequencies/en/prepositions/before.txt"));
         } catch (IOException ex) {
-            getContext().getLogger().log(Level.SEVERE, ex.getMessage());
+            Logger.getLogger(PrepositionWrapper.class.getName()).
+                    log(Level.SEVERE, null, ex);
         }
     }
 
@@ -86,25 +88,5 @@ public class PrepositionGapAnnotator extends AbstractGapAnnotator {
 
         return PrepositionGapGenerator.create(
                 tokens.get(0), tokens.get(1), tokens.get(2), model);
-    }
-
-    @Override
-    public String getShortName() {
-        return "prepositions";
-    }
-
-    @Override
-    public String getLongName() {
-        return "Preposition Gap Generator";
-    }
-
-    @Override
-    public String getDescription() {
-        return "Creates gaps for prepositions.";
-    }
-
-    @Override
-    public Set<String> getSupportedLanguages() {
-        return Sets.newHashSet("en");
     }
 }
