@@ -19,19 +19,15 @@ package com.github.fhirschmann.clozegen.lib;
 
 import com.github.fhirschmann.clozegen.lib.annotators.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.annotators.en.PrepositionWrapper;
+import com.github.fhirschmann.clozegen.lib.annotators.en.StupidArticleWrapper;
 import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
-import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormatWriter;
 import com.github.fhirschmann.clozegen.lib.pipeline.DefaultPipeline;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
-import java.io.File;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.factory.JCasFactory;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 /**
@@ -47,37 +43,23 @@ public class Test {
         j.setDocumentLanguage("en");
         j.setDocumentText("He studies at the university. He can't think of anything.");
 
-        //AnalysisEngineDescription an = createPrimitiveDescription(OldPrepositionGapGenerator.class,
-        //        OldPrepositionGapGenerator.PARAM_MODEL_PATH, "frequencies/en/prepositions");
-
-
-        AnalysisEngineDescription xmiWriter = createPrimitiveDescription(
-                XmiWriter.class,
-                createTypeSystemDescription(),
-                XmiWriter.PARAM_PATH, "xmi");
         DocumentMetaData x = DocumentMetaData.create(j);
         x.setDocumentId("test");
 
-        AnalysisEngineDescription out = createPrimitiveDescription(IntermediateFormatWriter.class,
-                IntermediateFormatWriter.PARAM_OUTPUT_FILE, "/home/fabian/test.clz");
-
-        //pipeline.addStep(an);
-        //pipeline.addStep(xmiWriter);
-        //pipeline.addStep(StupidArticleBridge.class);
-
-        //AnalysisEngineDescription test = createPrimitiveDescription(
-        //        PrepositionWrapper.class);
-        AnalysisEngineDescription test = createPrimitiveDescription(
-                GapAnnotator.class,
-                GapAnnotator.GAP_ANNOTATOR_INTERFACE,
+        AnalysisEngineDescription test = createPrimitiveDescription(GapAnnotator.class,
+                GapAnnotator.PARAM_ANSWER_COUNT, 2,
+                GapAnnotator.WRAPPER_INTERFACE_KEY,
                 createExternalResourceDescription(
-                PrepositionWrapper.class, new File(""))
-                );
+                PrepositionWrapper.class,
+                PrepositionWrapper.PARAM_PATH, "frequencies/en/prepositions"));
+
+        AnalysisEngineDescription test2 = createPrimitiveDescription(GapAnnotator.class,
+                GapAnnotator.WRAPPER_INTERFACE_KEY,
+                createExternalResourceDescription(StupidArticleWrapper.class));
 
         pipeline.addStep(test);
+        pipeline.addStep(test2);
         pipeline.addStep(DebugWriter.class);
-        //pipeline.addStep(out);
-        CollectionReader cr = Input.fromFile("/home/fabian/x.pdf", "en");
         pipeline.run(j);
     }
 }

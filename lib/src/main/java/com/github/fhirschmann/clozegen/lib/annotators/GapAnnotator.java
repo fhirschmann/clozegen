@@ -27,6 +27,7 @@ import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.component.JCasAnnotator_ImplBase;
+import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.descriptor.ExternalResource;
 import org.uimafit.util.JCasUtil;
 
@@ -35,23 +36,29 @@ import org.uimafit.util.JCasUtil;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class GapAnnotator extends JCasAnnotator_ImplBase {
-    public final static String GAP_ANNOTATOR_INTERFACE = "GapAnnotatorInterface";
-    @ExternalResource(key = GAP_ANNOTATOR_INTERFACE)
-    private GapAnnotatorInterface annotatorInterface;
+    /** The wrapper which implements {@link WrapperInterface}. */
+    public static final String WRAPPER_INTERFACE_KEY = "GapAnnotatorInterface";
+    @ExternalResource(key = WRAPPER_INTERFACE_KEY)
+    private WrapperInterface wrapperInterface;
+
+    /** The number of invalid answers to generate. */
+    public static final String PARAM_ANSWER_COUNT = "AnswerCount";
+    @ConfigurationParameter(name = PARAM_ANSWER_COUNT,
+            mandatory = false, defaultValue = "4")
+    private int answerCount;
 
     @Override
     public void process(final JCas aJCas) throws AnalysisEngineProcessException {
-        // Throw an exception if the language is not supported.
         Gap gap;
         GapAnnotation gapAnnotation;
-        FSTypeConstraint constraint = annotatorInterface.getConstraint();
+        FSTypeConstraint constraint = wrapperInterface.getConstraint();
 
         for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
             int i = 0;
             List<Annotation> alist = JCasUtil.selectCovered(Annotation.class, sentence);
             for (Annotation annotation : alist) {
                 if ((constraint == null) || (constraint.match(annotation))) {
-                    gap = annotatorInterface.generator(alist, i).generate(4);
+                    gap = wrapperInterface.generator(alist, i).generate(answerCount);
                     gapAnnotation = UIMAUtils.createGapAnnotation(aJCas, gap);
                     UIMAUtils.copyBounds(annotation, gapAnnotation);
                     gapAnnotation.addToIndexes();

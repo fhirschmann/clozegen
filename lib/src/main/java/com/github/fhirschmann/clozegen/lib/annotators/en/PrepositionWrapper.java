@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators.en;
 
-import com.github.fhirschmann.clozegen.lib.annotators.GapAnnotatorInterface;
+import com.github.fhirschmann.clozegen.lib.annotators.WrapperInterface;
 import com.github.fhirschmann.clozegen.lib.functions.CoveredTextFunction;
 import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
 import com.github.fhirschmann.clozegen.lib.generator.en.PrepositionGapGenerator;
@@ -30,37 +30,48 @@ import com.google.common.io.Resources;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.apache.uima.resource.DataResource;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.resource.SharedResourceObject;
+import org.apache.uima.resource.ResourceSpecifier;
+import org.uimafit.component.Resource_ImplBase;
+import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
  * This annotator creates annotations for prepositions.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionWrapper implements GapAnnotatorInterface, SharedResourceObject {
+public class PrepositionWrapper extends Resource_ImplBase implements WrapperInterface {
+    /** The path to the preposition collocations. */
+    public static final String PARAM_PATH = "Path";
+    @ConfigurationParameter(name = PARAM_PATH, mandatory = true)
+    private String path;
 
     private PrepositionGapGeneratorModel model;
 
     @Override
-    public void load(DataResource aData) throws ResourceInitializationException {
-        URL baseURL = aData.getUrl();
+    public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
+            throws ResourceInitializationException {
+        if (!super.initialize(aSpecifier, aAdditionalParams)) {
+            return false;
+        }
+
         model = new PrepositionGapGeneratorModel();
         try {
-            model.load(Resources.getResource("frequencies/en/prepositions/trigrams.txt"),
-                    Resources.getResource("frequencies/en/prepositions/after.txt"),
-                    Resources.getResource("frequencies/en/prepositions/before.txt"));
+            model.load(Resources.getResource(path + "/trigrams.txt"),
+                    Resources.getResource(path + "/after.txt"),
+                    Resources.getResource(path + "/before.txt"));
+            return true;
         } catch (IOException ex) {
             Logger.getLogger(PrepositionWrapper.class.getName()).
                     log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 

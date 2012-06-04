@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators.en;
 
-import com.github.fhirschmann.clozegen.lib.annotators.GapAnnotatorInterface;
+import com.github.fhirschmann.clozegen.lib.annotators.WrapperInterface;
 import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
 import com.github.fhirschmann.clozegen.lib.generator.en.StupidArticleGapGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
@@ -25,12 +25,13 @@ import java.util.List;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.uimafit.component.Resource_ImplBase;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class StupidArticleWrapper implements GapAnnotatorInterface {
+public class StupidArticleWrapper extends Resource_ImplBase implements WrapperInterface {
 
     @Override
     public FSTypeConstraint getConstraint() {

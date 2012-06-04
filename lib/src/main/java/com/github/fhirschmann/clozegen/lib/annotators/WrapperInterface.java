@@ -18,16 +18,18 @@
 package com.github.fhirschmann.clozegen.lib.annotators;
 
 import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import java.util.List;
-import java.util.Set;
 import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
+ * This Interface represents a wrapper which wraps a Gap Generator
+ * (which implements the {@link GapGeneratorInterface}).
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public interface GapAnnotatorInterface {
+public interface WrapperInterface {
     /**
      * This method gets called for each word in a sentence which matches
      * {@link AbstractGapAnnotator#getConstraint()}.
