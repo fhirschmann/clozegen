@@ -58,7 +58,7 @@ public class Gap {
      *
      * @return set of invalid answers.
      */
-    public Set getInvalidAnswers() {
+    public Set<String> getInvalidAnswers() {
         return invalidAnswers;
     }
 
@@ -67,7 +67,7 @@ public class Gap {
      *
      * @param invalidAnswers the invalid answers to set
      */
-    public void setInvalidAnswers(final Set invalidAnswers) {
+    public void setInvalidAnswers(final Set<String> invalidAnswers) {
         this.invalidAnswers = invalidAnswers;
     }
 
@@ -94,7 +94,7 @@ public class Gap {
      *
      * @param validAnswers the valid answers to set
      */
-    public void setValidAnswers(final Set validAnswers) {
+    public void setValidAnswers(final Set<String> validAnswers) {
         this.validAnswers = validAnswers;
     }
 
@@ -113,7 +113,7 @@ public class Gap {
      *
      * @return set of invalid and valid answers
      */
-    public Set getAllAnswers() {
+    public Set<String> getAllAnswers() {
         return Sets.union(getValidAnswers(), getInvalidAnswers());
     }
 
@@ -132,13 +132,13 @@ public class Gap {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if ((obj == null) || (!getClass().equals(obj.getClass()))) {
             return false;
         }
         final Gap other = (Gap) obj;
 
-        return Objects.equal(this.invalidAnswers, other.invalidAnswers) &&
-                Objects.equal(this.validAnswers, other.validAnswers);
+        return Objects.equal(this.invalidAnswers, other.invalidAnswers)
+                && Objects.equal(this.validAnswers, other.validAnswers);
     }
 }

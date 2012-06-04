@@ -45,7 +45,7 @@ public class MapMultiset<K, V> extends ForwardingMap<K, Multiset<V>> {
      * @return a new empty {@link MapMultiset}
      */
     public static <K, V> MapMultiset<K, V> create() {
-        return new MapMultiset();
+        return new MapMultiset<K, V>();
     }
 
     /**

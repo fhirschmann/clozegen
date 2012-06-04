@@ -47,7 +47,7 @@ public final class MultisetWriter {
             throws IOException {
         final BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
 
-        for (Multiset.Entry entry : multiset.entrySet()) {
+        for (Multiset.Entry<String> entry : multiset.entrySet()) {
             bufferedWriter.write(
                     String.format("%s\t%d%n",
                     entry.getElement().toString(), entry.getCount()));

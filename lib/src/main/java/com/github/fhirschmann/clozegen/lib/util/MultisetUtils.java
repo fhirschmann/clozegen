@@ -41,7 +41,7 @@ public final class MultisetUtils {
      * @return a new mutable sorted multiset
      */
     public static <E> LinkedHashMultiset<E> sortMultiSet(Multiset<E> multiset) {
-        ImmutableMultiset immutableSet = Multisets.copyHighestCountFirst(multiset);
+        ImmutableMultiset<E> immutableSet = Multisets.copyHighestCountFirst(multiset);
         return LinkedHashMultiset.create(immutableSet);
     }
 

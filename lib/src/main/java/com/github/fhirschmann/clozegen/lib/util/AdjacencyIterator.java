@@ -68,8 +68,8 @@ public class AdjacencyIterator<T> implements Iterator<T> {
 
         this.iterator = iterator;
         this.n = n;
-        previous = new LinkedList();
-        next = new LinkedList();
+        previous = new LinkedList<T>();
+        next = new LinkedList<T>();
         current = null;
         remaining = 0;
     }
@@ -84,7 +84,7 @@ public class AdjacencyIterator<T> implements Iterator<T> {
      */
     public static <T> AdjacencyIterator<T> create(
             final Iterator<T> iterator, final int n) {
-        return new AdjacencyIterator(iterator, n);
+        return new AdjacencyIterator<T>(iterator, n);
     }
 
     @Override
