@@ -49,6 +49,7 @@ public class Gap {
      * @param validAnswers set of valid answers
      */
     public Gap(final Set<String> validAnswers, final Set<String> invalidAnswers) {
+        this();
         this.validAnswers.addAll(validAnswers);
         this.invalidAnswers.addAll(invalidAnswers);
     }

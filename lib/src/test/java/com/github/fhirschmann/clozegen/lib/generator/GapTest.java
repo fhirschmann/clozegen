@@ -21,6 +21,8 @@ import com.google.common.collect.Sets;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.matchers.JUnitMatchers.*;
 
 /**
  *
@@ -36,8 +38,9 @@ public class GapTest {
         gap.setValidAnswers("val1", "val2");
         gap.setInvalidAnswers("inval1", "inval2", "inval3");
         gap2 = new Gap();
+        gap2 = new Gap(Sets.newHashSet("val1", "val2"),
+                Sets.newHashSet("inval1", "inval2", "inval3"));
         gap2.setValidAnswers("val1", "val2");
-        gap2.setInvalidAnswers("inval1", "inval2", "inval3");
     }
 
     @Test
@@ -65,5 +68,13 @@ public class GapTest {
     @Test
     public void testEquals() {
         assertEquals(gap2, gap);
+        assertFalse(gap.equals(null));
+    }
+
+    @Test
+    public void testToString() {
+        System.out.println(gap.toString());
+        assertEquals("Gap{valid=[val1, val2], invalid=[inval3, inval2, inval1]}",
+                gap.toString());
     }
 }
