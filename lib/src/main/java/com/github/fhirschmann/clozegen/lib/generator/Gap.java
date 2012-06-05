@@ -138,7 +138,7 @@ public class Gap {
         }
         final Gap other = (Gap) obj;
 
-        return Objects.equal(this.invalidAnswers, other.invalidAnswers)
-                && Objects.equal(this.validAnswers, other.validAnswers);
+        return Objects.equal(getInvalidAnswers(), other.getInvalidAnswers())
+                && Objects.equal(getValidAnswers(), other.getValidAnswers());
     }
 }
