@@ -25,6 +25,8 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.jcas.JCas;
 import org.junit.*;
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.matchers.JUnitMatchers.*;
 import org.uimafit.factory.JCasFactory;
 import org.uimafit.util.FSCollectionFactory;
 
@@ -33,29 +35,28 @@ import org.uimafit.util.FSCollectionFactory;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class UIMAUtilsTest {
+    private JCas jcas;
+
+    @Before
+    public void setUp() throws UIMAException {
+        jcas = JCasFactory.createJCas();
+    }
 
     @Test
     public void testCreateGapAnnotationAll() throws UIMAException {
-        JCas aJCas = JCasFactory.createJCas();
-        GapAnnotation gap = UIMAUtils.createGapAnnotation(aJCas,
+        GapAnnotation gap = UIMAUtils.createGapAnnotation(jcas,
                 Sets.newHashSet("true1"), Sets.newHashSet("false1", "false2"));
-
         Collection<String> list = FSCollectionFactory.create(gap.getAllAnswers());
-        assertTrue(list.contains("true1"));
-        assertTrue(list.contains("false1"));
-        assertTrue(list.contains("false2"));
+        assertThat(list, hasItems("true1", "false1", "false2"));
     }
 
     @Test
     public void testCreateGapAnnotationValid() throws UIMAException {
-        JCas aJCas = JCasFactory.createJCas();
-        GapAnnotation gap = UIMAUtils.createGapAnnotation(aJCas,
+        GapAnnotation gap = UIMAUtils.createGapAnnotation(jcas,
                 Sets.newHashSet("true1", "true2"), Sets.newHashSet("false1", "false2"));
-
         Collection<String> list = FSCollectionFactory.create(gap.getValidAnswers());
-        assertTrue(list.contains("true1"));
-        assertTrue(list.contains("true2"));
-        assertFalse(list.contains("false2"));
+        assertThat(list, hasItems("true1", "true2"));
+        assertThat(list, not(hasItems("false2")));
     }
 
     /**
@@ -66,5 +67,25 @@ public class UIMAUtilsTest {
         Constructor<?>[] cons = UIMAUtils.class.getDeclaredConstructors();
         cons[0].setAccessible(true);
         cons[0].newInstance((Object[]) null);
+    }
+
+    @Test
+    public void testCreateGapAnnotation_3args() {
+    }
+
+    @Test
+    public void testCreateGapAnnotation_JCas_Gap() {
+    }
+
+    @Test
+    public void testCopyBounds() {
+    }
+
+    @Test
+    public void testGetAdjacentAnnotations() {
+    }
+
+    @Test
+    public void testGetAdjacentTokens() {
     }
 }
