@@ -17,16 +17,10 @@
  */
 package com.github.fhirschmann.clozegen.lib.adapter;
 
-import com.github.fhirschmann.clozegen.lib.adapter.Adapter;
-import com.github.fhirschmann.clozegen.lib.functions.CoveredTextFunction;
 import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.en.PrepositionGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.en.PrepositionGapGeneratorModel;
-import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.io.Resources;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
