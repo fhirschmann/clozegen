@@ -18,7 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.generator.en;
 
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
-import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
+import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ConcurrentHashMultiset;
@@ -55,7 +55,7 @@ import java.util.Set;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionGapGenerator implements GapGeneratorInterface {
+public class PrepositionGapGenerator implements GapGenerator {
     /** The word A in the trigram (A, p, B). */
     private String A;
 

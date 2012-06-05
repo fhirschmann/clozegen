@@ -18,7 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.generator.en;
 
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
-import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
+import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
 
 /**
  * This is a sample implementation of a generator for gaps for articles. This
@@ -26,7 +26,7 @@ import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class StupidArticleGapGenerator implements GapGeneratorInterface {
+public class StupidArticleGapGenerator implements GapGenerator {
     String validAnswer;
 
     public StupidArticleGapGenerator(String validAnswer) {

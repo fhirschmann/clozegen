@@ -19,7 +19,7 @@ package com.github.fhirschmann.clozegen.lib.annotators.en;
 
 import com.github.fhirschmann.clozegen.lib.annotators.WrapperInterface;
 import com.github.fhirschmann.clozegen.lib.functions.CoveredTextFunction;
-import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
+import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.en.PrepositionGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.en.PrepositionGapGeneratorModel;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
@@ -84,7 +84,7 @@ public class PrepositionWrapper extends Resource_ImplBase implements WrapperInte
     }
 
     @Override
-    public GapGeneratorInterface generator(
+    public GapGenerator generator(
             final List<Annotation> annotationList, final int offset) {
         // Get a list of all POS tags
         List<POS> posList = Lists.newArrayList(

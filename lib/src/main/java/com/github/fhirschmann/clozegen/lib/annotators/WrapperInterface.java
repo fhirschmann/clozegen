@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators;
 
-import com.github.fhirschmann.clozegen.lib.generator.GapGeneratorInterface;
+import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import java.util.List;
 import org.apache.uima.cas.FSMatchConstraint;
@@ -25,7 +25,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 /**
  * This Interface represents a wrapper which wraps a Gap Generator
- * (which implements the {@link GapGeneratorInterface}).
+ * (which implements the {@link GapGenerator}).
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -38,7 +38,7 @@ public interface WrapperInterface {
      * @param offset the offset (index) of the word to generate a gap for
      * @return a gap generator
      */
-    GapGeneratorInterface generator(List<Annotation> annotationList, int offset);
+    GapGenerator generator(List<Annotation> annotationList, int offset);
 
     /**
      * A constraint, possibly <code>null</code>, which limits the elements of the
