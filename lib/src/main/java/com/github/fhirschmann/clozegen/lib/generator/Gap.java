@@ -86,7 +86,7 @@ public class Gap {
      *
      * @return set of valid answers.
      */
-    public Set getValidAnswers() {
+    public Set<String> getValidAnswers() {
         return validAnswers;
     }
 
