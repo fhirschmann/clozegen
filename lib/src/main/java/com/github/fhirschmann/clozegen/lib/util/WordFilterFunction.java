@@ -22,6 +22,7 @@ import com.google.common.base.Function;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 /**
+ * Obsolete function; will be phased out soon.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
