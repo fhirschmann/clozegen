@@ -58,6 +58,7 @@ public class GapAnnotator extends JCasAnnotator_ImplBase {
             List<Annotation> alist = JCasUtil.selectCovered(Annotation.class, sentence);
             for (Annotation annotation : alist) {
                 if ((constraint == null) || (constraint.match(annotation))) {
+                    System.out.println("---");
                     gap = wrapperInterface.generator(alist, i).generate(answerCount);
                     gapAnnotation = UIMAUtils.createGapAnnotation(aJCas, gap);
                     UIMAUtils.copyBounds(annotation, gapAnnotation);

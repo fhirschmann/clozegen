@@ -23,6 +23,7 @@ import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.en.PrepositionGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.en.PrepositionGapGeneratorModel;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
+import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -86,17 +87,8 @@ public class PrepositionWrapper extends Resource_ImplBase implements Wrapper {
     @Override
     public GapGenerator generator(
             final List<Annotation> annotationList, final int offset) {
-        // Get a list of all POS tags
-        List<POS> posList = Lists.newArrayList(
-                Iterables.filter(annotationList, POS.class));
-
-        // Get the neighbors of our POS tag
-        List<POS> adjacent = CollectionUtils.getNullPaddedAdjacentTo(
-                posList, posList.indexOf(annotationList.get(offset)), 1);
-
-        // The tokens of the trigram (A, p, B)
-        List<String> tokens = Lists.newArrayList(Collections2.transform(
-                adjacent, new CoveredTextFunction()));
+        List<String> tokens = UIMAUtils.getAdjacentTokens(POS.class,
+                annotationList, offset, 1);
 
         return PrepositionGapGenerator.create(
                 tokens.get(0), tokens.get(1), tokens.get(2), model);

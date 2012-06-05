@@ -17,8 +17,11 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
+import com.github.fhirschmann.clozegen.lib.functions.CoveredTextFunction;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import java.util.Collections;
@@ -35,7 +38,9 @@ import org.uimafit.util.FSCollectionFactory;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public final class UIMAUtils {
-    private UIMAUtils() {}
+    /** Utility class cannot be called. */
+    private UIMAUtils() {
+    }
 
     /**
      * Creates a {@link GapAnnotation} from <code>validAnswers</code> and
@@ -92,5 +97,53 @@ public final class UIMAUtils {
     public static void copyBounds(final Annotation source, final Annotation destination) {
         destination.setBegin(source.getBegin());
         destination.setEnd(source.getEnd());
+    }
+
+    /**
+     * Returns a List of <code>T</code> of the <code>num</code> neighbors.
+     *
+     * @param <T> the annotation type
+     * @param clazz the class of the annotation type
+     * @param annotationList the list of annotation
+     * @param offset the offset of the element in <code>annotationList</code>
+     * @param num the number of neighbors to receive
+     * @return a list of neighbors
+     */
+    public static <T extends Annotation> List<T> getAdjacentAnnotations(
+            final Class<T> clazz, final List<Annotation> annotationList,
+            final int offset, final int num) {
+        // Get a list of all T tags
+        List<T> tList = Lists.newArrayList(
+                Iterables.filter(annotationList, clazz));
+
+        // Get the neighbors of our T tag
+        List<T> adjacent = CollectionUtils.getNullPaddedAdjacentTo(
+                tList, tList.indexOf(annotationList.get(offset)), 1);
+
+        return adjacent;
+    }
+
+    /**
+     * Returns the covered text of the list of {@link Annotation}s produced
+     * by {@link UIMAUtils#getAdjacentAnnotations(Class, List, int, int)}.
+     *
+     * @param <T> the annotation type
+     * @param clazz the class of the annotation type
+     * @param annotationList the list of annotation
+     * @param offset the offset of the element in <code>annotationList</code>
+     * @param num the number of neighbors to receive
+     * @return a list of neighbors (covered text)
+     */
+    public static <T extends Annotation> List<String> getAdjacentTokens(
+            final Class<T> clazz, final List<Annotation> annotationList,
+            final int offset, final int num) {
+
+        List<T> adjacent = getAdjacentAnnotations(clazz, annotationList, offset, num);
+
+        // The tokens of the trigram (A, p, B)
+        List<String> tokens = Lists.newArrayList(Collections2.transform(
+                adjacent, new CoveredTextFunction()));
+
+        return tokens;
     }
 }
