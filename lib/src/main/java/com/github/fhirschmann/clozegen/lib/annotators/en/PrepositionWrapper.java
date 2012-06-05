@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators.en;
 
-import com.github.fhirschmann.clozegen.lib.annotators.WrapperInterface;
+import com.github.fhirschmann.clozegen.lib.annotators.Wrapper;
 import com.github.fhirschmann.clozegen.lib.functions.CoveredTextFunction;
 import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.en.PrepositionGapGenerator;
@@ -48,7 +48,7 @@ import org.uimafit.descriptor.ConfigurationParameter;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionWrapper extends Resource_ImplBase implements WrapperInterface {
+public class PrepositionWrapper extends Resource_ImplBase implements Wrapper {
     /** The path to the preposition collocations. */
     public static final String PARAM_PATH = "Path";
     @ConfigurationParameter(name = PARAM_PATH, mandatory = true)

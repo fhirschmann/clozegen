@@ -36,10 +36,10 @@ import org.uimafit.util.JCasUtil;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class GapAnnotator extends JCasAnnotator_ImplBase {
-    /** The wrapper which implements {@link WrapperInterface}. */
+    /** The wrapper which implements {@link Wrapper}. */
     public static final String WRAPPER_INTERFACE_KEY = "GapAnnotatorInterface";
     @ExternalResource(key = WRAPPER_INTERFACE_KEY)
-    private WrapperInterface wrapperInterface;
+    private Wrapper wrapperInterface;
 
     /** The number of invalid answers to generate. */
     public static final String PARAM_ANSWER_COUNT = "AnswerCount";
