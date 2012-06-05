@@ -27,10 +27,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
+ * Utility functions to write {@link Multiset}s.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public final class MultisetWriter {
+    /** Constructor in utility class should not be called. */
     private MultisetWriter() {
     }
 
