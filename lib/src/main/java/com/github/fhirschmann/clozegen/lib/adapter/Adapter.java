@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.annotators;
+package com.github.fhirschmann.clozegen.lib.adapter;
 
 import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
@@ -29,7 +29,7 @@ import org.apache.uima.jcas.tcas.Annotation;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public interface Wrapper {
+public interface Adapter {
     /**
      * This method gets called for each word in a sentence which matches
      * {@link AbstractGapAnnotator#getConstraint()}.

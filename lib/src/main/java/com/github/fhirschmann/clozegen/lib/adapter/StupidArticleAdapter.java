@@ -15,9 +15,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.annotators.en;
+package com.github.fhirschmann.clozegen.lib.adapter;
 
-import com.github.fhirschmann.clozegen.lib.annotators.Wrapper;
+import com.github.fhirschmann.clozegen.lib.adapter.Adapter;
 import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.en.StupidArticleGapGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
@@ -32,7 +32,7 @@ import org.uimafit.component.Resource_ImplBase;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class StupidArticleWrapper extends Resource_ImplBase implements Wrapper {
+public class StupidArticleAdapter extends Resource_ImplBase implements Adapter {
 
     @Override
     public FSMatchConstraint getConstraint() {

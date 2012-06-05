@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators;
 
+import com.github.fhirschmann.clozegen.lib.adapter.Adapter;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
@@ -36,10 +37,10 @@ import org.uimafit.util.JCasUtil;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class GapAnnotator extends JCasAnnotator_ImplBase {
-    /** The wrapper which implements {@link Wrapper}. */
+    /** The wrapper which implements {@link Adapter}. */
     public static final String WRAPPER_INTERFACE_KEY = "GapAnnotatorInterface";
     @ExternalResource(key = WRAPPER_INTERFACE_KEY)
-    private Wrapper wrapperInterface;
+    private Adapter wrapperInterface;
 
     /** The number of invalid answers to generate. */
     public static final String PARAM_ANSWER_COUNT = "AnswerCount";
