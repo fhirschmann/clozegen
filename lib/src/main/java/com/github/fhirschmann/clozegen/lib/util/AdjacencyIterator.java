@@ -80,7 +80,7 @@ public class AdjacencyIterator<T> implements Iterator<T> {
      * @param <T> the type of the iterator's elements
      * @param iterator the iterator to base this iterator on
      * @param n the number of elements on each side to provide access to
-     * @return
+     * @return a new AdjacencyIterator
      */
     public static <T> AdjacencyIterator<T> create(
             final Iterator<T> iterator, final int n) {
@@ -143,7 +143,6 @@ public class AdjacencyIterator<T> implements Iterator<T> {
      * @return list of successors
      */
     public List<T> peekNext() {
-        int delta = 0;
         final List<T> result = new ArrayList<T>(n);
         for (int i = 0; i < n; i++) {
             if (next.isEmpty()) {
@@ -185,5 +184,10 @@ public class AdjacencyIterator<T> implements Iterator<T> {
         result.addAll(peekNext());
 
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
