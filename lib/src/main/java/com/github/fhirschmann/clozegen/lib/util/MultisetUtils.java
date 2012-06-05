@@ -18,10 +18,6 @@
 package com.github.fhirschmann.clozegen.lib.util;
 
 import com.google.common.collect.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,7 +27,9 @@ import java.util.List;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public final class MultisetUtils {
-    private MultisetUtils() {}
+    /** Constructor in utility class should not be called. */
+    private MultisetUtils() {
+    }
 
     /**
      * Sorts a multiset by its counts and returns a new {@link LinkedHashMultiset}.
@@ -40,7 +38,7 @@ public final class MultisetUtils {
      * @param multiset to multiset to sort
      * @return a new mutable sorted multiset
      */
-    public static <E> LinkedHashMultiset<E> sortMultiSet(Multiset<E> multiset) {
+    public static <E> LinkedHashMultiset<E> sortMultiSet(final Multiset<E> multiset) {
         ImmutableMultiset<E> immutableSet = Multisets.copyHighestCountFirst(multiset);
         return LinkedHashMultiset.create(immutableSet);
     }
