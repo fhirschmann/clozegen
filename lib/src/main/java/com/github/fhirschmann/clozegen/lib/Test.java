@@ -17,9 +17,9 @@
  */
 package com.github.fhirschmann.clozegen.lib;
 
+import com.github.fhirschmann.clozegen.lib.adapter.PrepositionAdapter;
+import com.github.fhirschmann.clozegen.lib.adapter.StupidArticleAdapter;
 import com.github.fhirschmann.clozegen.lib.annotators.GapAnnotator;
-import com.github.fhirschmann.clozegen.lib.annotators.en.PrepositionWrapper;
-import com.github.fhirschmann.clozegen.lib.annotators.en.StupidArticleWrapper;
 import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.pipeline.DefaultPipeline;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
@@ -50,12 +50,12 @@ public class Test {
                 GapAnnotator.PARAM_ANSWER_COUNT, 2,
                 GapAnnotator.WRAPPER_INTERFACE_KEY,
                 createExternalResourceDescription(
-                PrepositionWrapper.class,
-                PrepositionWrapper.PARAM_PATH, "frequencies/en/prepositions"));
+                PrepositionAdapter.class,
+                PrepositionAdapter.PARAM_PATH, "frequencies/en/prepositions"));
 
         AnalysisEngineDescription test2 = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.WRAPPER_INTERFACE_KEY,
-                createExternalResourceDescription(StupidArticleWrapper.class));
+                createExternalResourceDescription(StupidArticleAdapter.class));
 
         pipeline.addStep(test);
         pipeline.addStep(test2);
