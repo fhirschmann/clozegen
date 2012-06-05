@@ -32,7 +32,9 @@ import java.util.List;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public final class MultisetReader {
-    private MultisetReader() {}
+    /** Constructor in utility class should not be called. */
+    private MultisetReader() {
+    }
 
     /**
      * Parses frequencies from a URL. The subject and the count for a subject
