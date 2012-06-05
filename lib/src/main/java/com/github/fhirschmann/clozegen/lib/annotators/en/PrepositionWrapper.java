@@ -58,7 +58,7 @@ public class PrepositionWrapper extends Resource_ImplBase implements Wrapper {
     private PrepositionGapGeneratorModel model;
 
     @Override
-    public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
+	public boolean initialize(ResourceSpecifier aSpecifier, Map<String, Object> aAdditionalParams)
             throws ResourceInitializationException {
         if (!super.initialize(aSpecifier, aAdditionalParams)) {
             return false;
