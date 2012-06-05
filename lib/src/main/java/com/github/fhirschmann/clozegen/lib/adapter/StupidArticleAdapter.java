@@ -17,7 +17,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.adapter;
 
-import com.github.fhirschmann.clozegen.lib.adapter.Adapter;
 import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.en.StupidArticleGapGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
