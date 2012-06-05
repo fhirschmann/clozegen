@@ -96,4 +96,9 @@ public class PrepositionGapGeneratorModel {
         this.before = before;
     }
 
+    @Override
+    public String toString() {
+        // TODO
+        return super.toString();
+    }
 }

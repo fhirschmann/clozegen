@@ -21,6 +21,8 @@ import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.google.common.base.Joiner;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multiset.Entry;
@@ -130,5 +132,13 @@ public class PrepositionGapGenerator implements GapGenerator {
         }
 
         return gap;
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("trigram", String.format("(%s,%s,%s)", A, p, B));
+        str.add("model", model.toString());
+        return str.toString();
     }
 }
