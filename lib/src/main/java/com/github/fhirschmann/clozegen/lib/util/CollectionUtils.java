@@ -30,7 +30,9 @@ import java.util.List;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public final class CollectionUtils {
-    private CollectionUtils() {}
+    /** Constructor in utility class should not be called. */
+    private CollectionUtils() {
+    }
 
     /**
      * Returns a view of a list made up of the n adjacent neighbors of an element
