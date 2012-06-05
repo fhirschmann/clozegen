@@ -22,5 +22,11 @@ package com.github.fhirschmann.clozegen.lib.generator;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public interface GapGenerator {
+    /**
+     * Called for each word for which a gap should be generated.
+     *
+     * @param count the number of answers to generate
+     * @return a new gap
+     */
     Gap generate(int count);
 }
