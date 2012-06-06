@@ -48,13 +48,13 @@ public class Test {
 
         AnalysisEngineDescription test = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.PARAM_ANSWER_COUNT, 2,
-                GapAnnotator.WRAPPER_INTERFACE_KEY,
+                GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
                 PrepositionAdapter.class,
                 PrepositionAdapter.PARAM_PATH, "frequencies/en/prepositions"));
 
         AnalysisEngineDescription test2 = createPrimitiveDescription(GapAnnotator.class,
-                GapAnnotator.WRAPPER_INTERFACE_KEY,
+                GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(StupidArticleAdapter.class));
 
         pipeline.addStep(test);
