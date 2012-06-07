@@ -31,7 +31,7 @@ import java.util.Map;
  */
 public class Register extends ForwardingCollection<RegisterEntry> {
 
-    /** The set of all entries. */
+    /** The map identifier → Entry. */
     private Map<String, RegisterEntry> register;
 
     /**
