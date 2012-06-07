@@ -17,9 +17,8 @@
  */
 package com.github.fhirschmann.clozegen.cli;
 
-import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
-import com.google.common.collect.Lists;
-import java.util.List;
+import com.github.fhirschmann.clozegen.lib.register.RegisterEntry;
+import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -30,43 +29,57 @@ import org.apache.uima.resource.ResourceInitializationException;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class Main {
+    private HelpFormatter formatter;
+    private Options options;
+
     static {
         org.apache.log4j.BasicConfigurator.configure();
     }
 
-    public static void main(final String[] argv) throws ResourceInitializationException {
+    public Main() {
         Logger logger = Logger.getRootLogger();
         logger.setLevel(Level.INFO);
+        formatter = new HelpFormatter();
+        options = new Options();
+    }
 
+    public void printHelp() {
+        formatter.printHelp("clozegen [options] INPUT OUTPUT", options);
+
+    }
+
+    public void run(final String[] args) throws ResourceInitializationException {
         CommandLineParser parser = new PosixParser();
-        Options options = new Options();
         options.addOption("c", "classes", true, "word classes to generate gaps for");
         options.addOption("h", "help", false, "print help message and exit");
-
-        HelpFormatter formatter = new HelpFormatter();
+        options.addOption("l", "list", false, "print all available gap generators");
 
         try {
-            CommandLine line = parser.parse(options, argv);
+            CommandLine line = parser.parse(options, args);
 
             if (line.hasOption("help")) {
-                formatter.printHelp("clozegen [options] INPUT OUTPUT", options);
-                System.exit(0);
+                printHelp();
+            } else if (line.hasOption("list")) {
+                for (RegisterEntry entry : RegisterFactory.createDefaultRegister()) {
+                    System.out.println(String.format("[%s] %s",
+                            entry.getIdentifier(), entry.getName()));
+                }
+            } else {
+                if (line.getArgs().length != 2) {
+                    throw new ParseException("Exactly two arguments are required!");
+                }
+                Job run = new Job();
+                run.run(line, line.getArgs()[0], line.getArgs()[1]);
             }
-
-            if (line.getArgs().length != 2) {
-                throw new ParseException("Exactly two arguments are required!");
-            }
-
-            List<String> classes = Lists.newArrayList(line.getOptionValue(
-                    "classes", "prepositions").split(","));
-            String input = line.getArgs()[0];
-            String output = line.getArgs()[1];
-
-            ClozeTestGenerator clozegen = new ClozeTestGenerator();
-            System.out.println("--------");
 
         } catch (ParseException exp) {
             System.err.println(exp.getMessage());
+            printHelp();
         }
+    }
+
+    public static void main(final String[] argv) throws Exception {
+        Main main = new Main();
+        main.run(argv);
     }
 }
