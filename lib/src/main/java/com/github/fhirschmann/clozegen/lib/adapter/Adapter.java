@@ -32,7 +32,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 public interface Adapter {
     /**
      * This method gets called for each word in a sentence which matches
-     * {@link AbstractGapAnnotator#getConstraint()}.
+     * {@link Adapter#getConstraint()}.
      *
      * @param annotationList the list of annotations in the current sentence
      * @param offset the offset (index) of the word to generate a gap for
@@ -41,9 +41,10 @@ public interface Adapter {
     GapGenerator generator(List<Annotation> annotationList, int offset);
 
     /**
-     * A constraint, possibly <code>null</code>, which limits the elements of the
-     * iterator passed to
-     * {@link AbstractGapAnnotator#generate(Annotation)}.
+     * A constraint, possibly <code>null</code>, which specifies on what occasion
+     * {@link Adapter#generator(java.util.List, int)} should be called. If this
+     * returns <code>null</code>, {@link Adapter#generator(java.util.List, int)} will
+     * be called for each Annotation.
      *
      * <p>For example, if you want to only work on annotations of the type
      * {@link ART}, then this method should return <code>cons</code> like so:
