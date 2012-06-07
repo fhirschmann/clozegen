@@ -17,9 +17,12 @@
  */
 package com.github.fhirschmann.clozegen.lib.pipeline;
 
+import com.github.fhirschmann.clozegen.lib.io.AutomaticReaderFactory;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Lists;
+import de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import org.apache.uima.UIMAException;
@@ -32,6 +35,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.factory.AnalysisEngineFactory;
 import static org.uimafit.pipeline.SimplePipeline.runPipeline;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import org.uimafit.factory.JCasFactory;
 
 /**
  * A pipeline is a chain of AnalysisEngines arranged so that each step will be run
@@ -107,12 +111,30 @@ public class Pipeline {
      *
      * @param jCas the CAS to start the pipeline off with
      * @throws UIMAException on errors produced by UIMA
-     * @throws IOException on errors when reading a file
+     * @throws IOException on IO errors
      */
     public void run(final JCas jCas)
             throws UIMAException, IOException {
         runPipeline(jCas, (AnalysisEngine[]) steps.toArray(
                 new AnalysisEngine[steps.size()]));
+    }
+
+    /**
+     * Runs the pipeline.
+     *
+     * The pipeline will start at the CAS constructed from the given <code>text</code>.
+     *
+     * @param text the text
+     * @param languageCode the language of the text
+     * @throws UIMAException on errors produced by UIMA
+     * @throws IOException on IO errors
+     */
+    public void run(final String text, final String languageCode)
+            throws UIMAException, IOException {
+        final JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentText(text);
+        jcas.setDocumentLanguage(languageCode);
+        run(jcas);
     }
 
     /**
@@ -128,6 +150,22 @@ public class Pipeline {
             throws UIMAException, IOException {
         runPipeline(reader, (AnalysisEngine[]) steps.toArray(
                 new AnalysisEngine[steps.size()]));
+    }
+
+    /**
+     * Runs the pipeline.
+     *
+     * The pipeline will start at the given <code>input</code> file.
+     *
+     * @param input the input file
+     * @param languageCode the language of the input file
+     * @throws ResourceInitializationException on errors during initialization
+     * @throws UIMAException on errors produced by UIMA
+     * @throws IOException on errors reading from file
+     */
+    public void run(final File input, final String languageCode)
+            throws ResourceInitializationException, UIMAException, IOException {
+        run(AutomaticReaderFactory.choose(input, languageCode));
     }
 
     @Override
