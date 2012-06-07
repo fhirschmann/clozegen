@@ -38,9 +38,9 @@ import org.uimafit.util.JCasUtil;
  */
 public class GapAnnotator extends JCasAnnotator_ImplBase {
     /** The wrapper which implements {@link Adapter}. */
-    public static final String WRAPPER_INTERFACE_KEY = "GapAnnotatorInterface";
-    @ExternalResource(key = WRAPPER_INTERFACE_KEY)
-    private Adapter wrapperInterface;
+    public static final String ADAPTER_KEY = "GapAnnotatorInterface";
+    @ExternalResource(key = ADAPTER_KEY)
+    private Adapter adapter;
 
     /** The number of invalid answers to generate. */
     public static final String PARAM_ANSWER_COUNT = "AnswerCount";
@@ -52,7 +52,7 @@ public class GapAnnotator extends JCasAnnotator_ImplBase {
     public void process(final JCas aJCas) throws AnalysisEngineProcessException {
         Gap gap;
         GapAnnotation gapAnnotation;
-        FSMatchConstraint constraint = wrapperInterface.getConstraint();
+        FSMatchConstraint constraint = adapter.getConstraint();
 
         for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
             int i = 0;
@@ -60,7 +60,7 @@ public class GapAnnotator extends JCasAnnotator_ImplBase {
             for (Annotation annotation : alist) {
                 if ((constraint == null) || (constraint.match(annotation))) {
                     System.out.println("---");
-                    gap = wrapperInterface.generator(alist, i).generate(answerCount);
+                    gap = adapter.generator(alist, i).generate(answerCount);
                     gapAnnotation = UIMAUtils.createGapAnnotation(aJCas, gap);
                     UIMAUtils.copyBounds(annotation, gapAnnotation);
                     gapAnnotation.addToIndexes();
