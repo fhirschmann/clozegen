@@ -21,7 +21,7 @@ import com.github.fhirschmann.clozegen.lib.adapter.PrepositionAdapter;
 import com.github.fhirschmann.clozegen.lib.adapter.StupidArticleAdapter;
 import com.github.fhirschmann.clozegen.lib.annotators.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
-import com.github.fhirschmann.clozegen.lib.pipeline.DefaultPipeline;
+import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -37,7 +37,7 @@ import static org.uimafit.factory.ExternalResourceFactory.createExternalResource
 public class Test {
 
     public static void main(String[] args) throws Exception {
-        Pipeline pipeline = new DefaultPipeline();
+        Pipeline pipeline = PipelineFactory.createDefaultPipeline();
 
         JCas j = JCasFactory.createJCas();
         j.setDocumentLanguage("en");

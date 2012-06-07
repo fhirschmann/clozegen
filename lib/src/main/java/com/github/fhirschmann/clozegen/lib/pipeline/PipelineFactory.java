@@ -28,11 +28,11 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class DefaultPipeline extends Pipeline {
-    public DefaultPipeline() throws ResourceInitializationException {
-        super();
+public class PipelineFactory {
+    public static Pipeline createDefaultPipeline() throws ResourceInitializationException {
+        Pipeline pipeline = new Pipeline();
         final AnalysisEngine segmenter = createPrimitive(StanfordSegmenter.class);
-        addStep(segmenter);
+        pipeline.addStep(segmenter);
 
         // Produces some wird reflection errors in uimafit
         //AnalysisEngine tagger = createPrimitive(StanfordPosTagger.class,
@@ -40,6 +40,8 @@ public class DefaultPipeline extends Pipeline {
         //        "bidirectional-distsim-wsj-0-18");
 
         final AnalysisEngine tagger = createPrimitive(TreeTaggerPosLemmaTT4J.class);
-        addStep(tagger);
+        pipeline.addStep(tagger);
+
+        return pipeline;
     }
 }

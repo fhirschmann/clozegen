@@ -1,6 +1,6 @@
 package com.github.fhirschmann.clozegen.lib;
 
-import com.github.fhirschmann.clozegen.lib.pipeline.DefaultPipeline;
+import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.register.Register;
@@ -25,7 +25,7 @@ public class ClozeTestGenerator {
     private Register register;
 
     public ClozeTestGenerator() throws ResourceInitializationException {
-        pipeline = new DefaultPipeline();
+        pipeline = PipelineFactory.createDefaultPipeline();
         register = RegisterFactory.createDefaultRegister();
 
     }
