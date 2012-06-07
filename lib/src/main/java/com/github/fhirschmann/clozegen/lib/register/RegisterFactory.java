@@ -20,9 +20,7 @@ package com.github.fhirschmann.clozegen.lib.register;
 import com.github.fhirschmann.clozegen.lib.annotators.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.adapter.PrepositionAdapter;
 import com.google.common.collect.Sets;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.ResourceInitializationException;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 /**
@@ -34,28 +32,21 @@ public final class RegisterFactory {
     private RegisterFactory() {
     }
 
-    public static Register createDefaultRegister(int answerCount)
+    public static Register createDefaultRegister()
             throws ResourceInitializationException {
         Register register = new Register();
 
-        AnalysisEngineDescription preps = createPrimitiveDescription(GapAnnotator.class,
-                GapAnnotator.PARAM_ANSWER_COUNT, answerCount,
+        RegisterEntry entry = new RegisterEntry("prepositions",
+                GapAnnotator.class,
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
                 PrepositionAdapter.class,
                 PrepositionAdapter.PARAM_PATH, "frequencies/en/prepositions"));
 
-        RegisterEntry entry = new RegisterEntry("prepositions");
-        entry.setDescription(preps);
         entry.setName("Preposition Gap Generator");
         entry.setSupportedLanguages(Sets.newHashSet("en"));
         register.add(entry);
 
         return register;
-    }
-
-    public static Register createDefaultRegister()
-            throws ResourceInitializationException {
-        return createDefaultRegister(4);
     }
 }

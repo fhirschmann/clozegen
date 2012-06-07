@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import com.github.fhirschmann.clozegen.lib.annotators.GapAnnotator;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,14 +36,14 @@ public class RegisterEntryTest {
 
     @Before
     public void setUp() {
-        e1 = new RegisterEntry("foo");
-        e2 = new RegisterEntry("bar");
-        e3 = new RegisterEntry("foo");
+        e1 = new RegisterEntry("foo", GapAnnotator.class);
+        e2 = new RegisterEntry("bar", GapAnnotator.class);
+        e3 = new RegisterEntry("foo", GapAnnotator.class);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetIdentifier() {
-        new RegisterEntry("foo bar");
+        new RegisterEntry("foo bar", GapAnnotator.class);
     }
 
     @Test

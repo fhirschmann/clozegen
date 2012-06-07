@@ -19,21 +19,24 @@ package com.github.fhirschmann.clozegen.lib.register;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.collect.Lists;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
+import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.resource.ResourceInitializationException;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 /**
- * Represents an RegisterEntry of a {@link Register}.
+ * Represents a RegisterEntry of a {@link Register}.
  *
  * @see Register
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class RegisterEntry {
-    /** The description of this entry. */
-    private AnalysisEngineDescription description;
-
     /** The name of this entry. */
     private String name;
 
@@ -43,6 +46,12 @@ public class RegisterEntry {
     /** The languages supported by this entry. */
     private Set<String> supportedLanguages;
 
+    /** The component class (used for creating the description). */
+    private Class<? extends AnalysisComponent> componentClass;
+
+    /** The configuration data (used for creating the description). */
+    private Object[] configurationData;
+
     /** The pattern <code>identifier</code> must match. */
     public static final Pattern PATTERN = Pattern.compile("[A-Za-z0-9_]*");
 
@@ -50,27 +59,76 @@ public class RegisterEntry {
      * Creates a new register entry.
      *
      * @param identifier the identifier of this entry
+     * @param componentClass the component class for the primitive description
      */
-    public RegisterEntry(final String identifier) {
+    public RegisterEntry(final String identifier,
+            final Class<? extends AnalysisComponent> componentClass) {
         setIdentifier(identifier);
+        this.componentClass = componentClass;
     }
 
     /**
-     * Returns the description of this entry.
+     * Creates a new register entry.
+     *
+     * @param identifier the identifier of this entry
+     * @param componentClass the component class for the primitive description
+     * @param configurationData the configuration data for the primitive description
+     */
+    public RegisterEntry(final String identifier,
+            final Class<? extends AnalysisComponent> componentClass,
+            final Object... configurationData) {
+        this(identifier, componentClass);
+        this.configurationData = configurationData;
+    }
+
+    /**
+     * Creates a new description for this entry from the given
+     * <code>configurationData</code>.
+     *
+     * @param configurationData the configuration data for the description
+     * @return the description
+     * @throws ResourceInitializationException on errors constructing the description
+     */
+    private AnalysisEngineDescription getDescriptionFor(final Object[] configurationData)
+            throws ResourceInitializationException {
+        AnalysisEngineDescription desc;
+        if (configurationData == null) {
+            desc = createPrimitiveDescription(componentClass);
+        } else {
+            desc = createPrimitiveDescription(componentClass, configurationData);
+
+        }
+        return desc;
+    }
+
+    /**
+     * Creates a new description for this entry based on the configuration data
+     * supplied when this class was constructed.
      *
      * @return the description
+     * @throws ResourceInitializationException on errors constructing the description
      */
-    public AnalysisEngineDescription getDescription() {
-        return description;
+    public AnalysisEngineDescription getDescription()
+            throws ResourceInitializationException {
+        return getDescriptionFor(configurationData);
     }
 
     /**
-     * Sets the description of this entry.
+     * Creates a new description for this entry based on the configuration data
+     * supplied when this class was constructed in addition to
+     * <code>additionalConfigurationData</code>.
      *
-     * @param description the description to set
+     * @param additionalConfigurationData any additional configuration data
+     * @return the description
+     * @throws ResourceInitializationException on errors constructing the description
      */
-    public void setDescription(final AnalysisEngineDescription description) {
-        this.description = description;
+    public AnalysisEngineDescription getDescription(
+            final Object[] additionalConfigurationData)
+            throws ResourceInitializationException {
+        List<Object> data = Lists.newArrayList(configurationData);
+        data.addAll(Arrays.asList(additionalConfigurationData));
+
+        return getDescriptionFor(configurationData);
     }
 
     /**

@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import com.github.fhirschmann.clozegen.lib.annotators.GapAnnotator;
 import com.google.common.collect.Sets;
 import java.util.Collections;
 import org.junit.Before;
@@ -38,11 +39,11 @@ public class RegisterTest {
     @Before
     public void setUp() {
         r = new Register();
-        e1 = new RegisterEntry("foo");
+        e1 = new RegisterEntry("foo", GapAnnotator.class);
         e1.setSupportedLanguages(Sets.newHashSet("de", "en"));
-        e2 = new RegisterEntry("bar");
+        e2 = new RegisterEntry("bar", GapAnnotator.class);
         e2.setSupportedLanguages(Sets.newHashSet("de"));
-        e3 = new RegisterEntry("baz");
+        e3 = new RegisterEntry("baz", GapAnnotator.class);
         e3.setSupportedLanguages(Sets.newHashSet("en"));
         Collections.addAll(r, e1, e2, e3);
     }
