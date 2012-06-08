@@ -21,7 +21,6 @@ import com.github.fhirschmann.clozegen.lib.io.AutomaticReaderFactory;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Lists;
-import de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;

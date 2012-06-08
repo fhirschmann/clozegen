@@ -32,12 +32,13 @@ import java.util.Map;
 public class Register extends ForwardingCollection<RegisterEntry> {
 
     /** The map identifier → Entry. */
-    private Map<String, RegisterEntry> register;
+    private final Map<String, RegisterEntry> register;
 
     /**
      * Creates a new empty Register.
      */
     public Register() {
+        super();
         register = HashBiMap.create();
     }
 
@@ -49,7 +50,7 @@ public class Register extends ForwardingCollection<RegisterEntry> {
      */
     @Override
     public boolean add(final RegisterEntry entry) {
-        boolean changed = !register.containsKey(entry.getIdentifier());
+        final boolean changed = !register.containsKey(entry.getIdentifier());
         register.put(entry.getIdentifier(), entry);
         return changed;
     }
