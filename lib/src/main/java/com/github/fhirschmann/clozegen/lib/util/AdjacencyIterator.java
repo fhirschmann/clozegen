@@ -185,9 +185,4 @@ public class AdjacencyIterator<T> implements Iterator<T> {
 
         return result;
     }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }
