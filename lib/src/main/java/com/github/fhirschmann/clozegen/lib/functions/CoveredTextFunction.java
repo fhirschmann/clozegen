@@ -22,14 +22,19 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 /**
  * A function which returns the text covered by an
- * {@link Annotation}.
+ * {@link Annotation}. If <code>input</code> is <code>null</code>,
+ * then no action is taken.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class CoveredTextFunction implements Function<Annotation, String> {
     @Override
     public String apply(final Annotation input) {
-        return input.getCoveredText();
+        if (input == null) {
+            return null;
+        } else {
+            return input.getCoveredText();
+        }
     }
 
 }
