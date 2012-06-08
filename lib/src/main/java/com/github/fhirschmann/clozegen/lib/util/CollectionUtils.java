@@ -78,7 +78,7 @@ public final class CollectionUtils {
      */
     public static <T> List<T> getNullPaddedAdjacentTo(final List<T> list, final int index,
             final int num) {
-        List<T> paddingNulls = Lists.newArrayList();
+        final List<T> paddingNulls = Lists.newArrayList();
         for (int i = 0; i < num; i++) {
             paddingNulls.add(null);
         }
