@@ -64,7 +64,6 @@ public class CollocationModel {
         heads = MapMultiset.create();
         tails = MapMultiset.create();
 
-        final int middle = (int) Math.ceil(this.ngrams.size() / 2);
         Triplet<String, String, String> triplet;
 
         for (Entry<String> entry : this.ngrams.entrySet()) {
