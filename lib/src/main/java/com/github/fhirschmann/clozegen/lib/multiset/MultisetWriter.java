@@ -21,10 +21,7 @@ import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Utility functions to write {@link Multiset}s.
@@ -50,11 +47,24 @@ public final class MultisetWriter {
         final BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
 
         for (Multiset.Entry<String> entry : multiset.entrySet()) {
-            bufferedWriter.write(
-                    String.format("%s\t%d%n",
-                    entry.getElement().toString(), entry.getCount()));
+            writeMultiSetLine(bufferedWriter, entry.getElement().toString(),
+                    entry.getCount());
         }
         bufferedWriter.close();
+    }
+
+    /**
+     * Writes a line (entry and frequency) to a {@link Writer}. Does not close
+     * the writer.
+     *
+     * @param writer the writer to write to
+     * @param str the string to write
+     * @param count the frequency of the string
+     * @throws IOException on errors writing to file
+     */
+    public static void writeMultiSetLine(final Writer writer,
+            final String str, final int count) throws IOException {
+            writer.write(String.format("%s\t%d%n", str, count));
     }
 
     /**
@@ -70,6 +80,4 @@ public final class MultisetWriter {
         final ImmutableMultiset<String> im = Multisets.copyHighestCountFirst(multiset);
         writeMultiSet(im, file);
     }
-
-
 }
