@@ -44,7 +44,7 @@ public class MultisetReaderTest {
 
     @Test
     public void testParseMultiset() throws IOException {
-        Multiset<String> ms = MultisetReader.parseMultiset(trigrams);
+        Multiset<String> ms = ReadMultisets.parseMultiset(trigrams);
         assertEquals(806, ms.count("one of the"));
         assertEquals(188, ms.count("and in the"));
         assertEquals(174, ms.count("because of the"));
@@ -52,10 +52,10 @@ public class MultisetReaderTest {
 
     @Test
     public void testParseMapMultiset() throws IOException {
-        MapMultiset<String, String> mms = MultisetReader.parseMapMultiset(bigrams, 0);
+        MapMultiset<String, String> mms = ReadMultisets.parseMapMultiset(bigrams, 0);
         assertEquals(1404, mms.get("one").count("of"));
 
-        MapMultiset<String, String> mms2 = MultisetReader.parseMapMultiset(bigrams, 1);
+        MapMultiset<String, String> mms2 = ReadMultisets.parseMapMultiset(bigrams, 1);
         assertEquals(436, mms2.get("of").count("because"));
     }
 
@@ -64,7 +64,7 @@ public class MultisetReaderTest {
      */
     @Test
     public void testPrivateConstructor() throws Exception {
-        Constructor<?>[] cons = MultisetReader.class.getDeclaredConstructors();
+        Constructor<?>[] cons = ReadMultisets.class.getDeclaredConstructors();
         cons[0].setAccessible(true);
         cons[0].newInstance((Object[]) null);
     }

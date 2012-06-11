@@ -47,16 +47,16 @@ public class MultisetWriterTest {
     @Test
     public void testWriteMultiset() throws IOException {
         File file = File.createTempFile("multisetutils", "txt");
-        MultisetWriter.writeMultiSet(multiset1, file);
-        Multiset<String> multisetr = MultisetReader.parseMultiset(file.toURI().toURL());
+        WriteMultisets.writeMultiSet(multiset1, file);
+        Multiset<String> multisetr = ReadMultisets.parseMultiset(file.toURI().toURL());
         assertEquals(multiset1, multisetr);
     }
 
     @Test
     public void testWriteSortedMultiset() throws IOException {
         File file = File.createTempFile("multisetutils", "txt");
-        MultisetWriter.writeSortedMultiSet(multiset2, file);
-        Multiset<String> multisetr = MultisetReader.parseMultiset(file.toURI().toURL());
+        WriteMultisets.writeSortedMultiSet(multiset2, file);
+        Multiset<String> multisetr = ReadMultisets.parseMultiset(file.toURI().toURL());
         assertEquals("[foo x 42, bar2 x 11]", multisetr.toString());
     }
 
@@ -65,7 +65,7 @@ public class MultisetWriterTest {
      */
     @Test
     public void testPrivateConstructor2() throws Exception {
-        Constructor<?>[] cons = MultisetWriter.class.getDeclaredConstructors();
+        Constructor<?>[] cons = WriteMultisets.class.getDeclaredConstructors();
         cons[0].setAccessible(true);
         cons[0].newInstance((Object[]) null);
     }

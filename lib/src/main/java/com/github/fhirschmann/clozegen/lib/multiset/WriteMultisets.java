@@ -28,9 +28,9 @@ import java.io.*;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public final class MultisetWriter {
+public final class WriteMultisets {
     /** Constructor in utility class should not be called. */
-    private MultisetWriter() {
+    private WriteMultisets() {
     }
 
     /**

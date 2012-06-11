@@ -17,8 +17,8 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
-import com.github.fhirschmann.clozegen.lib.multiset.MultisetReader;
-import com.github.fhirschmann.clozegen.lib.multiset.MultisetWriter;
+import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
+import com.github.fhirschmann.clozegen.lib.multiset.WriteMultisets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
