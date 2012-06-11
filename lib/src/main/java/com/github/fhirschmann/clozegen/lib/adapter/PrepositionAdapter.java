@@ -47,16 +47,23 @@ import org.uimafit.descriptor.ConfigurationParameter;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class PrepositionAdapter extends Resource_ImplBase implements GeneratorAdapter {
-    /** The path to the preposition collocations. */
+
+    /** The path to the collocation file. */
     public static final String PARAM_PATH = "Path";
     @ConfigurationParameter(name = PARAM_PATH, mandatory = true)
     private String path;
 
+    /** The n in n-gram. */
+    public static final String PARAM_N = "N";
+    @ConfigurationParameter(name = PARAM_N, mandatory = false, defaultValue = "3")
+    private int n;
+
+    /** The collocation model. */
     private CollocationModel model;
-    private GapWriter writer;
 
     @Override
-	public boolean initialize(ResourceSpecifier aSpecifier, Map<String, Object> aAdditionalParams)
+	public boolean initialize(final ResourceSpecifier aSpecifier,
+            final Map<String, Object> aAdditionalParams)
             throws ResourceInitializationException {
         if (!super.initialize(aSpecifier, aAdditionalParams)) {
             return false;
@@ -64,7 +71,7 @@ public class PrepositionAdapter extends Resource_ImplBase implements GeneratorAd
 
         model = new CollocationModel();
         try {
-            model.load(Resources.getResource(path + "/trigrams.txt"), 3);
+            model.load(Resources.getResource(path + "/trigrams.txt"), n);
             return true;
         } catch (IOException ex) {
             Logger.getLogger(PrepositionAdapter.class.getName()).

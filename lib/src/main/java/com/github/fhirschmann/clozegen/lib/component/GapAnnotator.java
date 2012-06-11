@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.component;
 
+import com.github.fhirschmann.clozegen.lib.adapter.api.ConstraintProvider;
 import com.github.fhirschmann.clozegen.lib.component.api.AbstractAnnotator;
 import com.github.fhirschmann.clozegen.lib.adapter.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
@@ -40,6 +41,11 @@ public class GapAnnotator extends AbstractAnnotator {
     public static final String ADAPTER_KEY = "Adapter";
     @ExternalResource(key = ADAPTER_KEY)
     private GeneratorAdapter adapter;
+
+    /** A constraint for this annotator. */
+    public static final String CONSTRAINT_KEY = "Constraint";
+    @ExternalResource(key = CONSTRAINT_KEY, mandatory = true)
+    private ConstraintProvider constraint;
 
     /**
      * The number of invalid answers to generate.

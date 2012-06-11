@@ -19,12 +19,18 @@ package com.github.fhirschmann.clozegen.lib;
 
 import com.github.fhirschmann.clozegen.lib.adapter.PrepositionAdapter;
 import com.github.fhirschmann.clozegen.lib.adapter.StupidArticleAdapter;
+import com.github.fhirschmann.clozegen.lib.adapter.api.Constraint;
+import com.github.fhirschmann.clozegen.lib.adapter.constraint.PrepositionConstraint;
 import com.github.fhirschmann.clozegen.lib.component.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.cas.ConstraintFactory;
+import org.apache.uima.cas.FSMatchConstraint;
+import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.factory.JCasFactory;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
@@ -48,6 +54,8 @@ public class Test {
 
         AnalysisEngineDescription test = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.PARAM_ANSWER_COUNT, 5,
+                GapAnnotator.CONSTRAINT_KEY,
+                createExternalResourceDescription(PrepositionConstraint.class),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
                 PrepositionAdapter.class,

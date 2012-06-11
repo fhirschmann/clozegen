@@ -20,6 +20,7 @@ package com.github.fhirschmann.clozegen.lib.adapter.api;
 import org.apache.uima.cas.FSMatchConstraint;
 
 /**
+ * Implementing classes will provide a constraint.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
