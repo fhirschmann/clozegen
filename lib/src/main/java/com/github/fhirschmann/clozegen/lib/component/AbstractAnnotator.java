@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.annotators;
+package com.github.fhirschmann.clozegen.lib.component;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import java.util.List;

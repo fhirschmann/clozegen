@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
-import com.github.fhirschmann.clozegen.lib.annotators.GapAnnotator;
+import com.github.fhirschmann.clozegen.lib.component.GapAnnotator;
 import com.google.common.collect.Sets;
 import java.util.Collections;
 import org.junit.Before;
