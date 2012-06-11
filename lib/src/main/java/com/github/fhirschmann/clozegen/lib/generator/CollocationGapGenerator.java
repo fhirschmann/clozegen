@@ -74,18 +74,16 @@ public class CollocationGapGenerator implements GapGenerator {
     }
 
     /**
-     * Creates a new collocation-based gap generator. The <code>tuple</code>
-     * must have an odd number of elements and the element in the middle of the
-     * list is the word a gap is generated for.
+     * Creates a new collocation-based gap generator.
      *
-     * @param A a in (A, x, B)
-     * @param x x in (A, x, B)
-     * @param B B in (A, x, B)
+     * @param head a in (head, x, tail)
+     * @param x x in (head, x, tail)
+     * @param tail tail in (head, x, tail)
      * @param model the model for this generator
      */
-    public CollocationGapGenerator(final String A, final String x, final String B,
+    public CollocationGapGenerator(final String head, final String x, final String tail,
             final CollocationModel model) {
-        this(Lists.newArrayList(A, x, B), model);
+        this(Lists.newArrayList(head, x, tail), model);
     }
 
     @Override
@@ -95,13 +93,13 @@ public class CollocationGapGenerator implements GapGenerator {
 
         // Collect a list of possible candidates for this gap
         final Multiset<String> candidates = ConcurrentHashMultiset.create(
-                MultisetUtils.mergeMultiSets(model.getBefore().get(triplet.getValue2()),
-                model.getAfter().get(triplet.getValue0())));
+                MultisetUtils.mergeMultiSets(model.getTails().get(triplet.getValue2()),
+                model.getHeads().get(triplet.getValue0())));
 
         // Remove candidates p* which appear in the context (A, p*, B)
         for (Entry<String> entry : candidates.entrySet()) {
-            if (model.getNGrams().contains(
-                    JOINER.join(triplet.getValue0(), entry.getElement(), triplet.getValue2()))) {
+            if (model.getNGrams().contains(JOINER.join(
+                    triplet.getValue0(), entry.getElement(), triplet.getValue2()))) {
                 candidates.remove(entry.getElement(), entry.getCount());
             }
         }

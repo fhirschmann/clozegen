@@ -38,18 +38,18 @@ public class CollocationGapGeneratorTest {
         trigrams.add("as in the", 20);
 
 
-        MapMultiset<String, String> after = MapMultiset.create();
-        after.add("as", "in", 20);
-        after.add("as", "of", 10);
-        after.add("as", "by", 5);
+        MapMultiset<String, String> heads = MapMultiset.create();
+        heads.add("as", "in", 20);
+        heads.add("as", "of", 10);
+        heads.add("as", "by", 5);
 
-        MapMultiset<String, String> before = MapMultiset.create();
-        before.add("the", "in", 20);
+        MapMultiset<String, String> tails = MapMultiset.create();
+        tails.add("the", "in", 20);
 
         model = new CollocationModel();
         model.setNGrams(trigrams);
-        model.setBefore(before);
-        model.setAfter(after);
+        model.setTails(tails);
+        model.setHeads(heads);
     }
 
     @Test

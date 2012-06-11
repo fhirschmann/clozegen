@@ -42,10 +42,10 @@ public class CollocationModel {
     private Multiset<String> ngrams;
 
     /** A multiset of bigrams (x_i-n, x_i-1, x). */
-    private MapMultiset<String, String> after;
+    private MapMultiset<String, String> heads;
 
     /** A multiset of bigrams (x, x_i+1, x_i+n). */
-    private MapMultiset<String, String> before;
+    private MapMultiset<String, String> tails;
 
     /**
      * Loads the model from a single ngram file. Please see
@@ -61,8 +61,8 @@ public class CollocationModel {
     public void load(final URL ngrams, final int n) throws IOException {
         this.ngrams = ReadMultisets.parseMultiset(ngrams);
 
-        after = MapMultiset.create();
-        before = MapMultiset.create();
+        heads = MapMultiset.create();
+        tails = MapMultiset.create();
 
         final int middle = (int) Math.ceil(this.ngrams.size() / 2);
         Triplet<String, String, String> triplet;
@@ -70,8 +70,8 @@ public class CollocationModel {
         for (Entry<String> entry : this.ngrams.entrySet()) {
             triplet = CollectionUtils.triListJoin(
                     Arrays.asList(entry.getElement().split(" ")));
-            before.add(triplet.getValue0(), triplet.getValue1(), entry.getCount());
-            after.add(triplet.getValue2(), triplet.getValue1(), entry.getCount());
+            tails.add(triplet.getValue0(), triplet.getValue1(), entry.getCount());
+            heads.add(triplet.getValue2(), triplet.getValue1(), entry.getCount());
         }
     }
 
@@ -92,36 +92,36 @@ public class CollocationModel {
     /**
      * @return the ngrams where the subject word comes last
      */
-    public MapMultiset<String, String> getAfter() {
-        return after;
+    public MapMultiset<String, String> getHeads() {
+        return heads;
     }
 
     /**
-     * @param after the ngrams where the subject word comes last
+     * @param heads the ngrams where the subject word comes last
      */
-    public void setAfter(final MapMultiset<String, String> after) {
-        this.after = after;
+    public void setHeads(final MapMultiset<String, String> heads) {
+        this.heads = heads;
     }
 
     /**
      * @return the ngrams where the subject word comes first
      */
-    public MapMultiset<String, String> getBefore() {
-        return before;
+    public MapMultiset<String, String> getTails() {
+        return tails;
     }
 
     /**
-     * @param before the ngrams where the subject word comes first
+     * @param tails the ngrams where the subject word comes first
      */
-    public void setBefore(final MapMultiset<String, String> before) {
-        this.before = before;
+    public void setTails(final MapMultiset<String, String> tails) {
+        this.tails = tails;
     }
 
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("before", before.toString());
-        str.add("after", after.toString());
+        str.add("tails", tails.toString());
+        str.add("heads", heads.toString());
         str.add("ngrams", ngrams.toString());
         return str.toString();
     }
