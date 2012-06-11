@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
+import com.github.fhirschmann.clozegen.lib.component.GapProcessor;
 import com.github.fhirschmann.clozegen.lib.functions.CoveredTextFunction;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
@@ -24,13 +25,16 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.NonEmptyStringList;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.util.FSCollectionFactory;
+import org.uimafit.util.JCasUtil;
 
 /**
  * Utility functions for UIMA related stuff.
@@ -146,5 +150,20 @@ public final class UIMAUtils {
                 adjacent, new CoveredTextFunction()));
 
         return tokens;
+    }
+
+    public static void annotationCaller(final JCas jcas,
+            final FSMatchConstraint constraint, final GapProcessor processor) {
+        for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
+            int i = 0;
+            List<Annotation> alist = JCasUtil.selectCovered(Annotation.class, sentence);
+            for (Annotation annotation : alist) {
+                if ((constraint == null) || (constraint.match(annotation))) {
+                    processor.process(jcas, alist, i);
+                }
+                i++;
+            }
+        }
+
     }
 }

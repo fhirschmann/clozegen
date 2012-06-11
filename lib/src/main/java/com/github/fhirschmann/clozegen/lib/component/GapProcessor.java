@@ -17,20 +17,24 @@
  */
 package com.github.fhirschmann.clozegen.lib.component;
 
-import com.github.fhirschmann.clozegen.lib.adapter.api.ConstraintProvider;
-import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import java.util.List;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.jcas.tcas.Annotation;
 
 /**
+ * A Gap Processor is a class which processes gaps. This can be, for example,
+ * an Annotator which generates gaps or a writer which collects frequency data.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public abstract class AbstractAnnotator extends
-        JCasAnnotator_ImplBase implements ConstraintProvider, GapProcessor {
-    @Override
-    public void process(final JCas aJCas) throws AnalysisEngineProcessException {
-        UIMAUtils.annotationCaller(aJCas, getConstraint(), this);
-    }
+public interface GapProcessor {
+    /**
+     * Called for each annotation which is matched by
+     * {@link ConstraintProvider#getConstraint()}.
+     *
+     * @param jcas the JCas
+     * @param annotationList the list of annotations in a sentence
+     * @param index the index of the annotation in question
+     */
+    void process(final JCas jcas, List<Annotation> annotationList, int index);
 }
