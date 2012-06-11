@@ -21,12 +21,17 @@ import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.en.PrepositionGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.en.PrepositionGapGeneratorModel;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.github.fhirschmann.clozegen.lib.writer.GapWriter;
+import com.github.fhirschmann.clozegen.lib.writer.MultisetWriter;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.common.io.Resources;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.uima.cas.ConstraintFactory;
@@ -43,7 +48,8 @@ import org.uimafit.descriptor.ConfigurationParameter;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionAdapter extends Resource_ImplBase implements Adapter {
+public class PrepositionAdapter extends Resource_ImplBase implements GeneratorAdapter,
+        WriterAdapter {
     /** The path to the preposition collocations. */
     public static final String PARAM_PATH = "Path";
     @ConfigurationParameter(name = PARAM_PATH, mandatory = true)
@@ -86,5 +92,13 @@ public class PrepositionAdapter extends Resource_ImplBase implements Adapter {
 
         return PrepositionGapGenerator.create(
                 tokens.get(0), tokens.get(1), tokens.get(2), model);
+    }
+
+    @Override
+    public Set<GapWriter> writer(final List<Annotation> annotationList, final int offset) {
+        List<String> tokens = UIMAUtils.getAdjacentTokens(POS.class,
+                annotationList, offset, 1);
+        Set<GapWriter> writers = Sets.newHashSet();
+        return writers;
     }
 }

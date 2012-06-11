@@ -31,7 +31,7 @@ import org.uimafit.component.Resource_ImplBase;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class StupidArticleAdapter extends Resource_ImplBase implements Adapter {
+public class StupidArticleAdapter extends Resource_ImplBase implements GeneratorAdapter {
 
     @Override
     public FSMatchConstraint getConstraint() {
