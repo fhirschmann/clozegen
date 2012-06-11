@@ -17,57 +17,48 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators;
 
-import com.github.fhirschmann.clozegen.lib.adapter.Adapter;
+import com.github.fhirschmann.clozegen.lib.adapter.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import java.util.List;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.descriptor.ExternalResource;
-import org.uimafit.util.JCasUtil;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class GapAnnotator extends JCasAnnotator_ImplBase {
-    /** The wrapper which implements {@link Adapter}. */
+public class GapAnnotator extends AbstractAnnotator {
+    /**
+     * The wrapper which implements {@link GeneratorAdapter}.
+     */
     public static final String ADAPTER_KEY = "GapAnnotatorInterface";
     @ExternalResource(key = ADAPTER_KEY)
-    private Adapter adapter;
+    private GeneratorAdapter adapter;
 
-    /** The number of invalid answers to generate. */
+    /**
+     * The number of invalid answers to generate.
+     */
     public static final String PARAM_ANSWER_COUNT = "AnswerCount";
     @ConfigurationParameter(name = PARAM_ANSWER_COUNT,
             mandatory = false, defaultValue = "4")
     private int answerCount;
 
     @Override
-    public void process(final JCas aJCas) throws AnalysisEngineProcessException {
-        Gap gap;
-        GapAnnotation gapAnnotation;
-        FSMatchConstraint constraint = adapter.getConstraint();
-
-        for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
-            int i = 0;
-            List<Annotation> alist = JCasUtil.selectCovered(Annotation.class, sentence);
-            for (Annotation annotation : alist) {
-                if ((constraint == null) || (constraint.match(annotation))) {
-                    System.out.println("---");
-                    gap = adapter.generator(alist, i).generate(answerCount);
-                    gapAnnotation = UIMAUtils.createGapAnnotation(aJCas, gap);
-                    UIMAUtils.copyBounds(annotation, gapAnnotation);
-                    gapAnnotation.addToIndexes();
-                }
-                i++;
-            }
-        }
+    public FSMatchConstraint getConstraint() {
+        return adapter.getConstraint();
     }
 
+    @Override
+    public void process(final JCas jcas, final List<Annotation> annotationList,
+            final int index) {
+        Gap gap = adapter.generator(annotationList, index).generate(answerCount);
+        GapAnnotation gapAnnotation = UIMAUtils.createGapAnnotation(jcas, gap);
+        UIMAUtils.copyBounds(annotationList.get(index), gapAnnotation);
+        gapAnnotation.addToIndexes();
+    }
 }
