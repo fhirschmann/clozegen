@@ -2,7 +2,6 @@ package com.github.fhirschmann.clozegen.lib;
 
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
-import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.register.Register;
 import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
 
@@ -11,7 +10,6 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.factory.JCasFactory;
 
 /**
  *

@@ -18,9 +18,6 @@
 package com.github.fhirschmann.clozegen.lib.frequency;
 
 import com.github.fhirschmann.clozegen.lib.util.AdjacencyIterator;
-import com.github.fhirschmann.clozegen.lib.util.WordFilterFunction;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
