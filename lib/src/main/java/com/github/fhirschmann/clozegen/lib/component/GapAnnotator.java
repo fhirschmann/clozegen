@@ -58,8 +58,10 @@ public class GapAnnotator extends AbstractAnnotator {
     public void process(final JCas jcas, final List<Annotation> annotationList,
             final int index) {
         Gap gap = adapter.generator(annotationList, index).generate(answerCount);
-        GapAnnotation gapAnnotation = UIMAUtils.createGapAnnotation(jcas, gap);
-        UIMAUtils.copyBounds(annotationList.get(index), gapAnnotation);
-        gapAnnotation.addToIndexes();
+        if (gap != null) {
+            GapAnnotation gapAnnotation = UIMAUtils.createGapAnnotation(jcas, gap);
+            UIMAUtils.copyBounds(annotationList.get(index), gapAnnotation);
+            gapAnnotation.addToIndexes();
+        }
     }
 }
