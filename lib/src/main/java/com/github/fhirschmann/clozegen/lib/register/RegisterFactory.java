@@ -18,7 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.register;
 
 import com.github.fhirschmann.clozegen.lib.component.GapAnnotator;
-import com.github.fhirschmann.clozegen.lib.adapter.PrepositionAdapter;
+import com.github.fhirschmann.clozegen.lib.adapter.CollocationAdapter;
 import com.google.common.collect.Sets;
 import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
@@ -40,8 +40,8 @@ public final class RegisterFactory {
                 GapAnnotator.class,
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
-                PrepositionAdapter.class,
-                PrepositionAdapter.PARAM_PATH, "frequencies/en/prepositions"));
+                CollocationAdapter.class,
+                CollocationAdapter.PARAM_PATH, "frequencies/en/prepositions"));
 
         entry.setName("Preposition Gap Generator");
         entry.setSupportedLanguages(Sets.newHashSet("en"));

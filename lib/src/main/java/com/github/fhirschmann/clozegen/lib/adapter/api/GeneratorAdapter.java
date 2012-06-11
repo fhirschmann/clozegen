@@ -27,7 +27,7 @@ import org.apache.uima.jcas.tcas.Annotation;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public interface GeneratorAdapter extends ConstraintProvider {
+public interface GeneratorAdapter {
     /**
      * This method gets called for each word in a sentence which matches
      * {@link GeneratorAdapter#getConstraint()}.

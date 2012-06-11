@@ -33,14 +33,6 @@ import org.uimafit.component.Resource_ImplBase;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class StupidArticleAdapter extends Resource_ImplBase implements GeneratorAdapter {
-
-    @Override
-    public FSMatchConstraint getConstraint() {
-        FSTypeConstraint cons = ConstraintFactory.instance().createTypeConstraint();
-        cons.add(ART.class.getName());
-        return cons;
-    }
-
     @Override
     public GapGenerator generator(
             final List<Annotation> annotationList, final int offset) {

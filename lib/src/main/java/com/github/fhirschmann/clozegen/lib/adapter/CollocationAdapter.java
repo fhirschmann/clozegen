@@ -20,21 +20,15 @@ package com.github.fhirschmann.clozegen.lib.adapter;
 import com.github.fhirschmann.clozegen.lib.adapter.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generator.CollocationGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
-import com.github.fhirschmann.clozegen.lib.generator.PrepositionGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.CollocationModel;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.github.fhirschmann.clozegen.lib.writer.GapWriter;
 import com.google.common.io.Resources;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.uima.cas.ConstraintFactory;
-import org.apache.uima.cas.FSMatchConstraint;
-import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
@@ -42,11 +36,11 @@ import org.uimafit.component.Resource_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
- * This annotator creates annotations for prepositions.
+ * This annotator creates annotations based on collocations.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionAdapter extends Resource_ImplBase implements GeneratorAdapter {
+public class CollocationAdapter extends Resource_ImplBase implements GeneratorAdapter {
 
     /** The path to the collocation file. */
     public static final String PARAM_PATH = "Path";
@@ -74,17 +68,10 @@ public class PrepositionAdapter extends Resource_ImplBase implements GeneratorAd
             model.load(Resources.getResource(path + "/trigrams.txt"), n);
             return true;
         } catch (IOException ex) {
-            Logger.getLogger(PrepositionAdapter.class.getName()).
+            Logger.getLogger(CollocationAdapter.class.getName()).
                     log(Level.SEVERE, null, ex);
             return false;
         }
-    }
-
-    @Override
-    public FSMatchConstraint getConstraint() {
-        FSTypeConstraint cons = ConstraintFactory.instance().createTypeConstraint();
-        cons.add(PP.class.getName());
-        return cons;
     }
 
     @Override

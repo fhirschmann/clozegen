@@ -56,11 +56,6 @@ public class GapAnnotator extends AbstractAnnotator {
     private int answerCount;
 
     @Override
-    public FSMatchConstraint getConstraint() {
-        return adapter.getConstraint();
-    }
-
-    @Override
     public void process(final JCas jcas, final List<Annotation> annotationList,
             final int index) {
         Gap gap = adapter.generator(annotationList, index).generate(answerCount);
@@ -69,5 +64,10 @@ public class GapAnnotator extends AbstractAnnotator {
             UIMAUtils.copyBounds(annotationList.get(index), gapAnnotation);
             gapAnnotation.addToIndexes();
         }
+    }
+
+    @Override
+    public FSMatchConstraint getConstraint() {
+        return constraint.getConstraint();
     }
 }
