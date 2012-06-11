@@ -35,6 +35,7 @@ import com.google.common.collect.*;
  * @param <V> the type of values for {@link MultiSet}
  */
 public class MapMultiset<K, V> extends ForwardingMap<K, Multiset<V>> {
+    /** The underlying map. */
     private Map<K, Multiset<V>> map;
 
     /**
