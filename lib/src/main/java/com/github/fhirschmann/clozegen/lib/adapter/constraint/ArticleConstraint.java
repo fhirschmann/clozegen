@@ -24,6 +24,7 @@ import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FSTypeConstraint;
 
 /**
+ * A constraint which matches articles.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */

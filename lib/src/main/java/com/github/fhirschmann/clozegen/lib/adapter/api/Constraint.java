@@ -18,7 +18,6 @@
 package com.github.fhirschmann.clozegen.lib.adapter.api;
 
 import com.github.fhirschmann.clozegen.lib.component.GapAnnotator;
-import org.apache.uima.cas.FSMatchConstraint;
 import org.uimafit.component.Resource_ImplBase;
 
 /**
