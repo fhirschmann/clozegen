@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.component;
 
+import com.github.fhirschmann.clozegen.lib.component.api.AbstractAnnotator;
 import com.github.fhirschmann.clozegen.lib.adapter.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;

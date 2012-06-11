@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
-import com.github.fhirschmann.clozegen.lib.component.GapProcessor;
+import com.github.fhirschmann.clozegen.lib.component.api.GapProcessor;
 import com.github.fhirschmann.clozegen.lib.functions.CoveredTextFunction;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
@@ -152,6 +152,14 @@ public final class UIMAUtils {
         return tokens;
     }
 
+    /**
+     * Calls <code>processor</code> for each {@link Annotation} matched by
+     * <code>constraint</code> in a sentence.
+     *
+     * @param jcas the JCas to work on
+     * @param constraint the constraint to match
+     * @param processor the callback
+     */
     public static void annotationCaller(final JCas jcas,
             final FSMatchConstraint constraint, final GapProcessor processor) {
         for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
@@ -164,6 +172,5 @@ public final class UIMAUtils {
                 i++;
             }
         }
-
     }
 }

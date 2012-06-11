@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.component;
+package com.github.fhirschmann.clozegen.lib.component.api;
 
 import com.github.fhirschmann.clozegen.lib.adapter.api.ConstraintProvider;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
@@ -24,6 +24,8 @@ import org.apache.uima.jcas.JCas;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 
 /**
+ * Implementing classes have to provide a constraint which, when matched,
+ * will trigger a call to {@link GapProcessor#process(JCas, List, int)}.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
