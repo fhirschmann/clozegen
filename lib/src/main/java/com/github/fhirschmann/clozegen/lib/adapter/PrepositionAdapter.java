@@ -19,9 +19,9 @@ package com.github.fhirschmann.clozegen.lib.adapter;
 
 import com.github.fhirschmann.clozegen.lib.adapter.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.adapter.api.WriterAdapter;
-import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
-import com.github.fhirschmann.clozegen.lib.generator.en.PrepositionGapGenerator;
-import com.github.fhirschmann.clozegen.lib.generator.en.PrepositionGapGeneratorModel;
+import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
+import com.github.fhirschmann.clozegen.lib.generator.PrepositionGapGenerator;
+import com.github.fhirschmann.clozegen.lib.generator.PrepositionGapGeneratorModel;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.github.fhirschmann.clozegen.lib.writer.GapWriter;
 import com.github.fhirschmann.clozegen.lib.writer.MultisetWriter;

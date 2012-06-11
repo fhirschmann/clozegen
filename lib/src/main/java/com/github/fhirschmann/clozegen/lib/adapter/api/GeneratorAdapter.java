@@ -18,7 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.adapter.api;
 
 import com.github.fhirschmann.clozegen.lib.adapter.api.ConstraintProvider;
-import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
+import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
 import java.util.List;
 import org.apache.uima.jcas.tcas.Annotation;
 

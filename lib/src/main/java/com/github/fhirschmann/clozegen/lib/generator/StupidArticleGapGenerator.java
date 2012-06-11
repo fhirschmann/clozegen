@@ -17,16 +17,33 @@
  */
 package com.github.fhirschmann.clozegen.lib.generator;
 
+import com.github.fhirschmann.clozegen.lib.generator.Gap;
+import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
+
 /**
+ * This is a sample implementation of a generator for gaps for articles. This
+ * is only for demonstration purposes!
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public interface GapGenerator {
-    /**
-     * Called for each word for which a gap should be generated.
-     *
-     * @param count the number of answers to generate
-     * @return a new gap
-     */
-    Gap generate(int count);
+public class StupidArticleGapGenerator implements GapGenerator {
+    String validAnswer;
+
+    public StupidArticleGapGenerator(String validAnswer) {
+        this.validAnswer = validAnswer;
+    }
+
+    public static StupidArticleGapGenerator create(String validAnswer) {
+        return new StupidArticleGapGenerator(validAnswer);
+    }
+
+    @Override
+    public Gap generate(int count) {
+        Gap gap = new Gap();
+        gap.setValidAnswers(validAnswer);
+        gap.setInvalidAnswers("the", "a", "an");
+        gap.getInvalidAnswers().remove(validAnswer);
+
+        return gap;
+    }
 }

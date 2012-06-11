@@ -15,10 +15,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.generator.en;
+package com.github.fhirschmann.clozegen.lib.generator;
 
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
-import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
+import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;

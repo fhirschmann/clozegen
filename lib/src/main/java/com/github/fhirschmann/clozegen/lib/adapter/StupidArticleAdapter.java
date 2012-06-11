@@ -18,8 +18,8 @@
 package com.github.fhirschmann.clozegen.lib.adapter;
 
 import com.github.fhirschmann.clozegen.lib.adapter.api.GeneratorAdapter;
-import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
-import com.github.fhirschmann.clozegen.lib.generator.en.StupidArticleGapGenerator;
+import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
+import com.github.fhirschmann.clozegen.lib.generator.StupidArticleGapGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import java.util.List;
 import org.apache.uima.cas.ConstraintFactory;

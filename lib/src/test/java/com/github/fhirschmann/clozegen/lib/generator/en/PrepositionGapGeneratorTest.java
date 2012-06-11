@@ -17,6 +17,8 @@
  */
 package com.github.fhirschmann.clozegen.lib.generator.en;
 
+import com.github.fhirschmann.clozegen.lib.generator.PrepositionGapGeneratorModel;
+import com.github.fhirschmann.clozegen.lib.generator.PrepositionGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
 import com.google.common.collect.LinkedHashMultiset;
