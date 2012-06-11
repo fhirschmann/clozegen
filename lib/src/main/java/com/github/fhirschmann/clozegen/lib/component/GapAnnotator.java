@@ -37,7 +37,7 @@ public class GapAnnotator extends AbstractAnnotator {
     /**
      * The wrapper which implements {@link GeneratorAdapter}.
      */
-    public static final String ADAPTER_KEY = "GapAnnotatorInterface";
+    public static final String ADAPTER_KEY = "Adapter";
     @ExternalResource(key = ADAPTER_KEY)
     private GeneratorAdapter adapter;
 
