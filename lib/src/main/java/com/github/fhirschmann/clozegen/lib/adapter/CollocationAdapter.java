@@ -65,7 +65,7 @@ public class CollocationAdapter extends Resource_ImplBase implements GeneratorAd
 
         model = new CollocationModel();
         try {
-            model.load(Resources.getResource(path + "/trigrams.txt"), n);
+            model.load(Resources.getResource(path), n);
             return true;
         } catch (IOException ex) {
             Logger.getLogger(CollocationAdapter.class.getName()).

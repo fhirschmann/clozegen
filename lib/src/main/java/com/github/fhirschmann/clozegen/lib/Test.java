@@ -55,7 +55,7 @@ public class Test {
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
                 CollocationAdapter.class,
-                CollocationAdapter.PARAM_PATH, "frequencies/en/prepositions"));
+                CollocationAdapter.PARAM_PATH, "frequencies/en/prepositions/trigrams.txt"));
 
         AnalysisEngineDescription test2 = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
