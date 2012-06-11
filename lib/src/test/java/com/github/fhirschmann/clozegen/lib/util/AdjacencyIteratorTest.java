@@ -122,6 +122,6 @@ public class AdjacencyIteratorTest {
 
     @Test(expected=IllegalArgumentException.class)
     public void testArguments() {
-        new AdjacencyIterator(Arrays.asList("foo", "bar").iterator(), 0);
+        new AdjacencyIterator<String>(Arrays.asList("foo", "bar").iterator(), 0);
     }
 }
