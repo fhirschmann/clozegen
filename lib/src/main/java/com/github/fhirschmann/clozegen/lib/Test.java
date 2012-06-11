@@ -47,7 +47,7 @@ public class Test {
         x.setDocumentId("test");
 
         AnalysisEngineDescription test = createPrimitiveDescription(GapAnnotator.class,
-                GapAnnotator.PARAM_ANSWER_COUNT, 2,
+                GapAnnotator.PARAM_ANSWER_COUNT, 5,
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
                 PrepositionAdapter.class,

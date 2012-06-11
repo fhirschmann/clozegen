@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Range;
@@ -33,6 +34,9 @@ public final class CollectionUtils {
     /** Constructor in utility class should not be called. */
     private CollectionUtils() {
     }
+
+    /** A whitespace-based joiner. */
+    public static final Joiner JOINER = Joiner.on(" ");
 
     /**
      * Returns a view of a list made up of the n adjacent neighbors of an element
@@ -98,5 +102,23 @@ public final class CollectionUtils {
     public static <T> boolean listAsSetEquals(final List<T> list1,
             final List<T> list2) {
         return Sets.newHashSet(list1).equals(Sets.newHashSet(list2));
+    }
+
+
+    /**
+     * Joins all elements before and after the center of a list.
+     *
+     * @param list the list to work on
+     * @return a new list with three elements
+     */
+    public static List<String> triListJoin(final List<String> list) {
+        List<String> result = Lists.newArrayList();
+        final int middle = (int) Math.ceil(list.size() / 2);
+
+        result.add(JOINER.join(list.subList(0, middle)));
+        result.add(list.get(middle));
+        result.add(JOINER.join(list.subList(middle + 1, list.size())));
+
+        return result;
     }
 }

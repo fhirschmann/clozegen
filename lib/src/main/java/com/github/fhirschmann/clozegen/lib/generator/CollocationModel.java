@@ -19,11 +19,15 @@ package com.github.fhirschmann.clozegen.lib.generator;
 
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
 import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
+import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Multiset;
+import com.google.common.collect.Multiset.Entry;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Represents a model for the collocation-based gap generator.
@@ -35,7 +39,7 @@ import java.net.URL;
  */
 public class CollocationModel {
     /** A multiset of ngrams (x_i-n, x_i-1, x, x_i+1, x_i+n). */
-    private Multiset<String> ngram;
+    private Multiset<String> ngrams;
 
     /** A multiset of bigrams (x_i-n, x_i-1, x). */
     private MapMultiset<String, String> after;
@@ -44,40 +48,44 @@ public class CollocationModel {
     private MapMultiset<String, String> before;
 
     /**
-     * Loads the model from three files. Please see
+     * Loads the model from a single ngram file. Please see
      * {@link MultisetReader} for details on the file format.
      * <p>
-     * The space separated word sequence and the corresponding counts need
-     * to be separated by the tab-character. For more detail on the format,
-     * please consult the documentation on {@link MultisetReader#parseMultiset}
-     * and {@link ReadMultisets#parseMapMultiset}, which describe the format
-     * for {before|after}.txt and ngrams.txt, respectively.
+     * The ngrams in the files must have an odd number of words.
      * </p>
      *
-     * @param ngrams the URL to the ngram (x_i-n, x_i+1, x, x_i+1, x_i+n)
-     * @param after the URL to the bigrams (x_i-n, x_i-1, x)
-     * @param before the URL to the bigrams (x, x_i+1, x_i+n)
+     * @param ngrams the URL to the ngrams (x_i-n, x_i+1, x, x_i+1, x_i+n)
+     * @param n the n in n-gram
      * @throws IOException on errors reading a file
      */
-    public void load(final URL ngrams, final URL after, final URL before)
-            throws IOException {
-        this.ngram = ReadMultisets.parseMultiset(ngrams);
-        this.after = ReadMultisets.parseMapMultiset(after, 0);
-        this.before = ReadMultisets.parseMapMultiset(before, 1);
+    public void load(final URL ngrams, final int n) throws IOException {
+        this.ngrams = ReadMultisets.parseMultiset(ngrams);
+
+        after = MapMultiset.create();
+        before = MapMultiset.create();
+
+        final int middle = (int) Math.ceil(this.ngrams.size() / 2);
+        List<String> ngram;
+        for (Entry<String> entry : this.ngrams.entrySet()) {
+            List<String> tokens = CollectionUtils.triListJoin(
+                    Arrays.asList(entry.getElement().split(" ")));
+            before.add(tokens.get(0), tokens.get(1), entry.getCount());
+            after.add(tokens.get(2), tokens.get(1), entry.getCount());
+        }
     }
 
     /**
      * @return the ngrams (x_i-n, x_i-1, x, x_i+1, x_i+n).
      */
     public Multiset<String> getNGrams() {
-        return ngram;
+        return ngrams;
     }
 
     /**
      * @param ngrams the ngrams to set
      */
     public void setNGrams(final Multiset<String> ngrams) {
-        this.ngram = ngrams;
+        this.ngrams = ngrams;
     }
 
     /**

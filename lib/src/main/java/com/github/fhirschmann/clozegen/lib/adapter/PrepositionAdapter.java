@@ -64,9 +64,7 @@ public class PrepositionAdapter extends Resource_ImplBase implements GeneratorAd
 
         model = new CollocationModel();
         try {
-            model.load(Resources.getResource(path + "/trigrams.txt"),
-                    Resources.getResource(path + "/after.txt"),
-                    Resources.getResource(path + "/before.txt"));
+            model.load(Resources.getResource(path + "/trigrams.txt"), 3);
             return true;
         } catch (IOException ex) {
             Logger.getLogger(PrepositionAdapter.class.getName()).
