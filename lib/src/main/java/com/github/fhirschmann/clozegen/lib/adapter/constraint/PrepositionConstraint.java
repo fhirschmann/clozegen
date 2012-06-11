@@ -15,27 +15,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.adapter.api;
+package com.github.fhirschmann.clozegen.lib.adapter.constraint;
 
-import com.github.fhirschmann.clozegen.lib.adapter.api.ConstraintProvider;
-import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
-import java.util.List;
-import org.apache.uima.jcas.tcas.Annotation;
+import com.github.fhirschmann.clozegen.lib.adapter.api.Constraint;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
+import org.apache.uima.cas.ConstraintFactory;
+import org.apache.uima.cas.FSMatchConstraint;
+import org.apache.uima.cas.FSTypeConstraint;
 
 /**
- * This interface represents a class which provides an adapter to the gap
- * generating algorithms.
+ * A constraint which matches prepositions.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public interface GeneratorAdapter {
-    /**
-     * This method gets called for each word in a sentence which matches
-     * {@link GeneratorAdapter#getConstraint()}.
-     *
-     * @param annotationList the list of annotations in the current sentence
-     * @param offset the offset (index) of the word to generate a gap for
-     * @return a gap generator
-     */
-    GapGenerator generator(List<Annotation> annotationList, int offset);
+public class PrepositionConstraint extends Constraint {
+    @Override
+    public FSMatchConstraint getConstraint() {
+        FSTypeConstraint cons = ConstraintFactory.instance().
+                createTypeConstraint();
+        cons.add(PP.class.getName());
+        return cons;
+    }
 }

@@ -17,25 +17,20 @@
  */
 package com.github.fhirschmann.clozegen.lib.adapter.api;
 
-import com.github.fhirschmann.clozegen.lib.adapter.api.ConstraintProvider;
-import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
-import java.util.List;
-import org.apache.uima.jcas.tcas.Annotation;
+import com.github.fhirschmann.clozegen.lib.component.GapAnnotator;
+import org.apache.uima.cas.FSMatchConstraint;
+import org.uimafit.component.Resource_ImplBase;
 
 /**
- * This interface represents a class which provides an adapter to the gap
- * generating algorithms.
+ * A constraint.
+ *
+ * <p>
+ * This interface is used in order to inject a constraint into
+ * {@link GapAnnotator}. Example implementation of this can be
+ * found in {@link com.github.fhirschmann.clozegen.lib.adapter.constraint}.
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public interface GeneratorAdapter {
-    /**
-     * This method gets called for each word in a sentence which matches
-     * {@link GeneratorAdapter#getConstraint()}.
-     *
-     * @param annotationList the list of annotations in the current sentence
-     * @param offset the offset (index) of the word to generate a gap for
-     * @return a gap generator
-     */
-    GapGenerator generator(List<Annotation> annotationList, int offset);
+public abstract class Constraint extends Resource_ImplBase implements ConstraintProvider {
 }
