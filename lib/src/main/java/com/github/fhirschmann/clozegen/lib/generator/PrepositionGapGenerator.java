@@ -68,7 +68,7 @@ public class PrepositionGapGenerator implements GapGenerator {
     private String B;
 
     /** The model for this generator. */
-    private PrepositionGapGeneratorModel model;
+    private CollocationModel model;
 
     private final static Joiner JOINER = Joiner.on(" ");
 
@@ -81,7 +81,7 @@ public class PrepositionGapGenerator implements GapGenerator {
      * @param model the model for this generator.
      */
     public PrepositionGapGenerator(final String A, final String p, final String B,
-            final PrepositionGapGeneratorModel model) {
+            final CollocationModel model) {
         this.A = A;
         this.p = p;
         this.B = B;
@@ -98,7 +98,7 @@ public class PrepositionGapGenerator implements GapGenerator {
      * @return a new {@link PrepositionGapGenerator} instance.
      */
     public static PrepositionGapGenerator create(final String A, final String p,
-            final String B, final PrepositionGapGeneratorModel model) {
+            final String B, final CollocationModel model) {
         return new PrepositionGapGenerator(A, p, B, model);
     }
 
@@ -114,7 +114,7 @@ public class PrepositionGapGenerator implements GapGenerator {
 
         // Remove candidates p* which appear in the context (A, p*, B)
         for (Entry<String> entry : candidates.entrySet()) {
-            if (model.getTrigrams().contains(
+            if (model.getNGrams().contains(
                     JOINER.join(A, entry.getElement(), B))) {
                 candidates.remove(entry.getElement(), entry.getCount());
             }

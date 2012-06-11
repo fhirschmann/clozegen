@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.generator.en;
 
-import com.github.fhirschmann.clozegen.lib.generator.PrepositionGapGeneratorModel;
+import com.github.fhirschmann.clozegen.lib.generator.CollocationModel;
 import com.github.fhirschmann.clozegen.lib.generator.PrepositionGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
@@ -34,7 +34,7 @@ import org.junit.BeforeClass;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class PrepositionGapGeneratorTest {
-    private PrepositionGapGeneratorModel model;
+    private CollocationModel model;
     private PrepositionGapGenerator generator;
 
     @Before
@@ -51,8 +51,8 @@ public class PrepositionGapGeneratorTest {
         MapMultiset<String, String> before = MapMultiset.create();
         before.add("the", "in", 20);
 
-        model = new PrepositionGapGeneratorModel();
-        model.setTrigrams(trigrams);
+        model = new CollocationModel();
+        model.setNGrams(trigrams);
         model.setBefore(before);
         model.setAfter(after);
     }
@@ -68,7 +68,7 @@ public class PrepositionGapGeneratorTest {
 
     @Test
     public void testTrigramConstraint() {
-        model.getTrigrams().add("as of the");
+        model.getNGrams().add("as of the");
         generator = PrepositionGapGenerator.create("as", "in", "the", model);
         Gap gap = new Gap();
         gap.setValidAnswers("in");

@@ -19,78 +19,90 @@ package com.github.fhirschmann.clozegen.lib.generator;
 
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
 import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Multiset;
 import java.io.IOException;
 import java.net.URL;
 
 /**
- * Represents a model for the preposition gap generator.
+ * Represents a model for the collocation-based gap generator.
+ *
+ * <p>Three collocation data files which describe the frequency of collocations
+ * can be used in conjunction with{@link CollocationModel#load(URL, URL, URL)}.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionGapGeneratorModel {
-    /** A multiset of trigrams (A, p, B). */
-    private Multiset<String> trigrams;
+public class CollocationModel {
+    /** A multiset of ngrams (x_i-n, x_i-1, x, x_i+1, x_i+n). */
+    private Multiset<String> ngram;
 
-    /** A multiset of bigrams (A, p). */
+    /** A multiset of bigrams (x_i-n, x_i-1, x). */
     private MapMultiset<String, String> after;
 
-    /** A multiset of bigrams (p, B). */
+    /** A multiset of bigrams (x, x_i+1, x_i+n). */
     private MapMultiset<String, String> before;
 
     /**
      * Loads the model from three files. Please see
      * {@link MultisetReader} for details on the file format.
+     * <p>
+     * The space separated word sequence and the corresponding counts need
+     * to be separated by the tab-character. For more detail on the format,
+     * please consult the documentation on {@link MultisetReader#parseMultiset}
+     * and {@link ReadMultisets#parseMapMultiset}, which describe the format
+     * for {before|after}.txt and ngrams.txt, respectively.
+     * </p>
      *
-     * @param trigrams the URL to the trigrams (A, p, B)
-     * @param after the URL to the bigrams (A, p)
-     * @param before the URL to the bigrams (p, B)
+     * @param ngrams the URL to the ngram (x_i-n, x_i+1, x, x_i+1, x_i+n)
+     * @param after the URL to the bigrams (x_i-n, x_i-1, x)
+     * @param before the URL to the bigrams (x, x_i+1, x_i+n)
      * @throws IOException on errors reading a file
      */
-    public void load(final URL trigrams, final URL after, final URL before)
+    public void load(final URL ngrams, final URL after, final URL before)
             throws IOException {
-        this.trigrams = ReadMultisets.parseMultiset(trigrams);
+        this.ngram = ReadMultisets.parseMultiset(ngrams);
         this.after = ReadMultisets.parseMapMultiset(after, 0);
         this.before = ReadMultisets.parseMapMultiset(before, 1);
     }
 
     /**
-     * @return the trigrams (A, p, B)
+     * @return the ngrams (x_i-n, x_i-1, x, x_i+1, x_i+n).
      */
-    public Multiset<String> getTrigrams() {
-        return trigrams;
+    public Multiset<String> getNGrams() {
+        return ngram;
     }
 
     /**
-     * @param trigrams the trigrams (A, p, B) to set
+     * @param ngrams the ngrams to set
      */
-    public void setTrigrams(final Multiset<String> trigrams) {
-        this.trigrams = trigrams;
+    public void setNGrams(final Multiset<String> ngrams) {
+        this.ngram = ngrams;
     }
 
     /**
-     * @return the bigrams (A, p)
+     * @return the ngrams where the subject word comes last
      */
     public MapMultiset<String, String> getAfter() {
         return after;
     }
 
     /**
-     * @param after the bigrams (A, p) to set
+     * @param after the ngrams where the subject word comes last
      */
     public void setAfter(final MapMultiset<String, String> after) {
         this.after = after;
     }
 
     /**
-     * @return the bigrams (p, B)
+     * @return the ngrams where the subject word comes first
      */
     public MapMultiset<String, String> getBefore() {
         return before;
     }
 
     /**
-     * @param before the bigrams (p, B) to set
+     * @param before the ngrams where the subject word comes first
      */
     public void setBefore(final MapMultiset<String, String> before) {
         this.before = before;
@@ -98,7 +110,7 @@ public class PrepositionGapGeneratorModel {
 
     @Override
     public String toString() {
-        // TODO
-        return super.toString();
+        final ToStringHelper str = Objects.toStringHelper(this);
+        return str.toString();
     }
 }

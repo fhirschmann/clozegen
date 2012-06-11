@@ -18,9 +18,10 @@
 package com.github.fhirschmann.clozegen.lib.adapter;
 
 import com.github.fhirschmann.clozegen.lib.adapter.api.GeneratorAdapter;
+import com.github.fhirschmann.clozegen.lib.generator.CollocationGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.PrepositionGapGenerator;
-import com.github.fhirschmann.clozegen.lib.generator.PrepositionGapGeneratorModel;
+import com.github.fhirschmann.clozegen.lib.generator.CollocationModel;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.github.fhirschmann.clozegen.lib.writer.GapWriter;
 import com.google.common.io.Resources;
@@ -51,7 +52,7 @@ public class PrepositionAdapter extends Resource_ImplBase implements GeneratorAd
     @ConfigurationParameter(name = PARAM_PATH, mandatory = true)
     private String path;
 
-    private PrepositionGapGeneratorModel model;
+    private CollocationModel model;
     private GapWriter writer;
 
     @Override
@@ -61,7 +62,7 @@ public class PrepositionAdapter extends Resource_ImplBase implements GeneratorAd
             return false;
         }
 
-        model = new PrepositionGapGeneratorModel();
+        model = new CollocationModel();
         try {
             model.load(Resources.getResource(path + "/trigrams.txt"),
                     Resources.getResource(path + "/after.txt"),
@@ -87,7 +88,7 @@ public class PrepositionAdapter extends Resource_ImplBase implements GeneratorAd
         List<String> tokens = UIMAUtils.getAdjacentTokens(POS.class,
                 annotationList, offset, 1);
 
-        return PrepositionGapGenerator.create(
-                tokens.get(0), tokens.get(1), tokens.get(2), model);
+        GapGenerator generator = new CollocationGapGenerator(tokens, model);
+        return generator;
     }
 }

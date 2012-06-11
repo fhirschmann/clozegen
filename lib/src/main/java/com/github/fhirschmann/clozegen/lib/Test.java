@@ -58,7 +58,7 @@ public class Test {
                 createExternalResourceDescription(StupidArticleAdapter.class));
 
         pipeline.addStep(test);
-        pipeline.addStep(test2);
+        //pipeline.addStep(test2);
         pipeline.addStep(DebugWriter.class);
         pipeline.run(j);
     }
