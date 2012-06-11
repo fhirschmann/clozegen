@@ -120,6 +120,9 @@ public class CollocationModel {
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("before", before.toString());
+        str.add("after", after.toString());
+        str.add("ngrams", ngrams.toString());
         return str.toString();
     }
 }

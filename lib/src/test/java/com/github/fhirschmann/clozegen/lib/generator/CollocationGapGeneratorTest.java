@@ -15,27 +15,22 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.generator.en;
+package com.github.fhirschmann.clozegen.lib.generator;
 
-import com.github.fhirschmann.clozegen.lib.generator.CollocationModel;
-import com.github.fhirschmann.clozegen.lib.generator.PrepositionGapGenerator;
-import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.BeforeClass;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionGapGeneratorTest {
+public class CollocationGapGeneratorTest {
     private CollocationModel model;
-    private PrepositionGapGenerator generator;
+    private CollocationGapGenerator generator;
 
     @Before
     public void setUp() {
@@ -59,7 +54,7 @@ public class PrepositionGapGeneratorTest {
 
     @Test
     public void testGenerate() {
-        generator = PrepositionGapGenerator.create("as", "in", "the", model);
+        generator = new CollocationGapGenerator("as", "in", "the", model);
         Gap gap = new Gap();
         gap.setValidAnswers("in");
         gap.setInvalidAnswers("of");
@@ -69,7 +64,7 @@ public class PrepositionGapGeneratorTest {
     @Test
     public void testTrigramConstraint() {
         model.getNGrams().add("as of the");
-        generator = PrepositionGapGenerator.create("as", "in", "the", model);
+        generator = new CollocationGapGenerator("as", "in", "the", model);
         Gap gap = new Gap();
         gap.setValidAnswers("in");
         gap.setInvalidAnswers("by");
@@ -78,7 +73,7 @@ public class PrepositionGapGeneratorTest {
 
     @Test
     public void testNull() {
-        generator = PrepositionGapGenerator.create("xx", "yy", "zz", model);
+        generator = new CollocationGapGenerator("xx", "yy", "zz", model);
         assertNull(generator.generate(2));
     }
 }

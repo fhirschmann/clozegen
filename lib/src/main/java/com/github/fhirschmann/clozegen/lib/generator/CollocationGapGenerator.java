@@ -30,6 +30,7 @@ import com.google.common.collect.Sets;
 import java.util.List;
 import java.util.Set;
 import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.common.collect.Lists;
 import org.javatuples.Triplet;
 
 /**
@@ -72,6 +73,21 @@ public class CollocationGapGenerator implements GapGenerator {
         triplet = CollectionUtils.triListJoin(tuple);
     }
 
+    /**
+     * Creates a new collocation-based gap generator. The <code>tuple</code>
+     * must have an odd number of elements and the element in the middle of the
+     * list is the word a gap is generated for.
+     *
+     * @param A a in (A, x, B)
+     * @param x x in (A, x, B)
+     * @param B B in (A, x, B)
+     * @param model the model for this generator
+     */
+    public CollocationGapGenerator(final String A, final String x, final String B,
+            final CollocationModel model) {
+        this(Lists.newArrayList(A, x, B), model);
+    }
+
     @Override
     public Gap generate(final int count) {
         Gap gap = new Gap();
@@ -79,8 +95,8 @@ public class CollocationGapGenerator implements GapGenerator {
 
         // Collect a list of possible candidates for this gap
         final Multiset<String> candidates = ConcurrentHashMultiset.create(
-                MultisetUtils.mergeMultiSets(model.getBefore().get(triplet.getValue0()),
-                model.getAfter().get(triplet.getValue2())));
+                MultisetUtils.mergeMultiSets(model.getBefore().get(triplet.getValue2()),
+                model.getAfter().get(triplet.getValue0())));
 
         // Remove candidates p* which appear in the context (A, p*, B)
         for (Entry<String> entry : candidates.entrySet()) {
