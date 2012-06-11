@@ -4,7 +4,6 @@
 
     <groupId>com.github.fhirschmann.clozegen</groupId>
     <artifactId>clozegen-gui</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>clozegen-gui</name>
