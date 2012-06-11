@@ -18,7 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.generator;
 
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
-import com.github.fhirschmann.clozegen.lib.multiset.MultisetReader;
+import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
 import com.google.common.collect.Multiset;
 import java.io.IOException;
 import java.net.URL;
@@ -49,9 +49,9 @@ public class PrepositionGapGeneratorModel {
      */
     public void load(final URL trigrams, final URL after, final URL before)
             throws IOException {
-        this.trigrams = MultisetReader.parseMultiset(trigrams);
-        this.after = MultisetReader.parseMapMultiset(after, 0);
-        this.before = MultisetReader.parseMapMultiset(before, 1);
+        this.trigrams = ReadMultisets.parseMultiset(trigrams);
+        this.after = ReadMultisets.parseMapMultiset(after, 0);
+        this.before = ReadMultisets.parseMapMultiset(before, 1);
     }
 
     /**

@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.frequency;
 
-import com.github.fhirschmann.clozegen.lib.multiset.MultisetWriter;
+import com.github.fhirschmann.clozegen.lib.multiset.WriteMultisets;
 import com.github.fhirschmann.clozegen.lib.util.WordFilterFunction;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Collections2;
@@ -82,13 +82,13 @@ public class CollocationsExtractor extends AbstractPosTrigramAnnotator {
     @Override
     public void collectionProcessComplete() {
         try {
-            MultisetWriter.writeSortedMultiSet(trigrams,
+            WriteMultisets.writeSortedMultiSet(trigrams,
                     new File(outputDirectory, "trigrams.txt"));
-            MultisetWriter.writeSortedMultiSet(after,
+            WriteMultisets.writeSortedMultiSet(after,
                     new File(outputDirectory, "after.txt"));
-            MultisetWriter.writeSortedMultiSet(before,
+            WriteMultisets.writeSortedMultiSet(before,
                     new File(outputDirectory, "before.txt"));
-            MultisetWriter.writeSortedMultiSet(unigrams,
+            WriteMultisets.writeSortedMultiSet(unigrams,
                     new File(outputDirectory, "unigrams.txt"));
         } catch (IOException ex) {
             getContext().getLogger().log(Level.SEVERE, ex.getMessage());
