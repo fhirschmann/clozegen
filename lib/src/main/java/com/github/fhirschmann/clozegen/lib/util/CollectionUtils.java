@@ -24,6 +24,7 @@ import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 import com.google.common.collect.Sets;
 import java.util.List;
+import org.javatuples.Triplet;
 
 /**
  * Collection of utility functions in order to deal with lists.
@@ -106,19 +107,18 @@ public final class CollectionUtils {
 
 
     /**
-     * Joins all elements before and after the center of a list.
+     * Returns a triplet (A, x, B) where A and B are word sequences before and after x,
+     * respectively.
      *
      * @param list the list to work on
-     * @return a new list with three elements
+     * @return a triplet
      */
-    public static List<String> triListJoin(final List<String> list) {
-        List<String> result = Lists.newArrayList();
+    public static Triplet<String, String, String> triListJoin(final List<String> list) {
         final int middle = (int) Math.ceil(list.size() / 2);
 
-        result.add(JOINER.join(list.subList(0, middle)));
-        result.add(list.get(middle));
-        result.add(JOINER.join(list.subList(middle + 1, list.size())));
-
-        return result;
+        return Triplet.with(
+                JOINER.join(list.subList(0, middle)),
+                list.get(middle),
+                JOINER.join(list.subList(middle + 1, list.size())));
     }
 }

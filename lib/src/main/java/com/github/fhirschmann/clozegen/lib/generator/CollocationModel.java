@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import org.javatuples.Triplet;
 
 /**
  * Represents a model for the collocation-based gap generator.
@@ -65,12 +66,13 @@ public class CollocationModel {
         before = MapMultiset.create();
 
         final int middle = (int) Math.ceil(this.ngrams.size() / 2);
-        List<String> ngram;
+        Triplet<String, String, String> triplet;
+
         for (Entry<String> entry : this.ngrams.entrySet()) {
-            List<String> tokens = CollectionUtils.triListJoin(
+            triplet = CollectionUtils.triListJoin(
                     Arrays.asList(entry.getElement().split(" ")));
-            before.add(tokens.get(0), tokens.get(1), entry.getCount());
-            after.add(tokens.get(2), tokens.get(1), entry.getCount());
+            before.add(triplet.getValue0(), triplet.getValue1(), entry.getCount());
+            after.add(triplet.getValue2(), triplet.getValue1(), entry.getCount());
         }
     }
 
