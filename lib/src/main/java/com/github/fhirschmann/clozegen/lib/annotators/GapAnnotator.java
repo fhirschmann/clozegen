@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.annotators;
 
-import com.github.fhirschmann.clozegen.lib.adapter.GeneratorAdapter;
+import com.github.fhirschmann.clozegen.lib.adapter.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;

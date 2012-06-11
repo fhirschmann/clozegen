@@ -15,8 +15,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.adapter;
+package com.github.fhirschmann.clozegen.lib.adapter.api;
 
+import com.github.fhirschmann.clozegen.lib.adapter.api.ConstraintProvider;
 import com.github.fhirschmann.clozegen.lib.generator.GapGenerator;
 import java.util.List;
 import org.apache.uima.jcas.tcas.Annotation;
