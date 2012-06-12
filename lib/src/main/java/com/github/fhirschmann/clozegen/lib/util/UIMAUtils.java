@@ -25,14 +25,17 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import org.apache.uima.UIMAException;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.NonEmptyStringList;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.uimafit.factory.JCasFactory;
 import org.uimafit.util.FSCollectionFactory;
 import org.uimafit.util.JCasUtil;
 
@@ -172,5 +175,21 @@ public final class UIMAUtils {
                 i++;
             }
         }
+    }
+
+    /**
+     * Creates a JCas solely meant for testing purposes.
+     *
+     * @return a sample jcas
+     * @throws UIMAException on errors creating the JCas
+     */
+    public static JCas createTestJCas() throws UIMAException {
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("en");
+        jcas.setDocumentText("He studies at the university. He can't think of anything.");
+
+        DocumentMetaData metadata = DocumentMetaData.create(jcas);
+        metadata.setDocumentId("test");
+        return jcas;
     }
 }
