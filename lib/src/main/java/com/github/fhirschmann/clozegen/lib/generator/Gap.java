@@ -118,6 +118,34 @@ public class Gap {
         return Sets.union(getValidAnswers(), getInvalidAnswers());
     }
 
+    /**
+     * Convenience method for generating gaps.
+     *
+     * @param validAnswer the valid answers of this gap
+     * @return a new gap based upon the parameters provided
+     */
+    public static Gap with(final String validAnswer) {
+        Gap gap = new Gap();
+        gap.setValidAnswers(new String[] {validAnswer});
+
+        return gap;
+    }
+
+    /**
+     * Convenience method for generating gaps.
+     *
+     * @param validAnswer the valid answers of this gap
+     * @param invalidAnswers the invalid answers of this gap
+     * @return a new gap based upon the parameters provided
+     */
+    public static Gap with(final String validAnswer, final String... invalidAnswers) {
+        Gap gap = Gap.with(validAnswer);
+        gap.setValidAnswers(new String[] {validAnswer});
+        gap.setInvalidAnswers(invalidAnswers);
+
+        return gap;
+    }
+
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
