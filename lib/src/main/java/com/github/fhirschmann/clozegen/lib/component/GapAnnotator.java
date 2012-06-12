@@ -21,6 +21,7 @@ import com.github.fhirschmann.clozegen.lib.constraint.api.ConstraintProvider;
 import com.github.fhirschmann.clozegen.lib.component.api.AbstractAnnotator;
 import com.github.fhirschmann.clozegen.lib.adapter.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
+import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import java.util.List;
@@ -31,24 +32,39 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.descriptor.ExternalResource;
 
 /**
+ * This annotator annotates words with a {@link GapAnnotation}.
+ *
+ * @see com.github.fhirschmann.clozegen.lib.examples
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class GapAnnotator extends AbstractAnnotator {
     /**
-     * The wrapper which implements {@link GeneratorAdapter}.
+     * <em>[mandatory]</em>
+     *
+     * The argument to this keyword should be a {@link GeneratorAdapter} which
+     * knows how to create a {@link GapGenerator}.
      */
     public static final String ADAPTER_KEY = "Adapter";
     @ExternalResource(key = ADAPTER_KEY)
     private GeneratorAdapter adapter;
 
-    /** A constraint for this annotator. */
+    /**
+     * <em>[mandatory]</em>
+     *
+     * A constraint which limits the words the generator is called for.
+     *
+     * @see com.github.fhirschmann.clozegen.lib.constraint
+     */
     public static final String CONSTRAINT_KEY = "Constraint";
     @ExternalResource(key = CONSTRAINT_KEY, mandatory = true)
     private ConstraintProvider constraint;
 
     /**
-     * The number of invalid answers to generate.
+     * <em>[optional]</em>
+     *
+     * The number of invalid answers to generate. This argument is optional
+     * and defaults to 4.
      */
     public static final String PARAM_ANSWER_COUNT = "AnswerCount";
     @ConfigurationParameter(name = PARAM_ANSWER_COUNT,
