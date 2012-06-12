@@ -36,6 +36,7 @@ import java.util.Set;
  * gap2.addInvalidAnswers("of", "at");
  * }
  * </pre></blockquote>
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
