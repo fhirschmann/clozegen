@@ -27,11 +27,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
+import org.apache.uima.util.Level;
 import org.uimafit.component.Resource_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
@@ -68,8 +68,7 @@ public class CollocationAdapter extends Resource_ImplBase implements GeneratorAd
             model.load(Resources.getResource(path), n);
             return true;
         } catch (IOException ex) {
-            Logger.getLogger(CollocationAdapter.class.getName()).
-                    log(Level.SEVERE, null, ex);
+            this.getUimaContext().getLogger().log(Level.SEVERE, ex.getMessage());
             return false;
         }
     }
