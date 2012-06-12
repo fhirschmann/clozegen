@@ -25,13 +25,27 @@ import java.util.Set;
 /**
  * A gap object contains valid and invalid answers.
  *
+ * <p>
+ * A gap provides multiple convenience methods. The following gaps are all equal:
+ * <blockquote><pre>
+ * {@code
+ * Gap gap1 = new Gap.with("in", "of", "at");
+ * Gap gap();
+ * gap.setValidAnswer
+ * }
+ * </pre></blockquote>
+ *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class Gap {
-    /** The set of invalid answers. */
+    /**
+     * The set of invalid answers.
+     */
     private Set<String> invalidAnswers;
 
-    /** The set of valid answers. */
+    /**
+     * The set of valid answers.
+     */
     private Set<String> validAnswers;
 
     /**
@@ -109,8 +123,17 @@ public class Gap {
     }
 
     /**
-     * Returns an unmodifiable view of all answers (the union
-     * of invalid and valid answers).
+     * Sets the valid answer to a single answer.
+     *
+     * @param validAnswer the valid answer to set
+     */
+    public void setValidAnswer(final String validAnswer) {
+        setValidAnswers(new String[] {validAnswer});
+    }
+
+    /**
+     * Returns an unmodifiable view of all answers (the union of invalid and valid
+     * answers).
      *
      * @return set of invalid and valid answers
      */
@@ -126,7 +149,7 @@ public class Gap {
      */
     public static Gap with(final String validAnswer) {
         Gap gap = new Gap();
-        gap.setValidAnswers(new String[] {validAnswer});
+        gap.setValidAnswer(validAnswer);
 
         return gap;
     }
@@ -140,7 +163,6 @@ public class Gap {
      */
     public static Gap with(final String validAnswer, final String... invalidAnswers) {
         Gap gap = Gap.with(validAnswer);
-        gap.setValidAnswers(new String[] {validAnswer});
         gap.setInvalidAnswers(invalidAnswers);
 
         return gap;
