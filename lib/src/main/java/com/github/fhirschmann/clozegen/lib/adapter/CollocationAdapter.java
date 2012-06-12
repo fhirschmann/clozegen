@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.adapter;
 
 import com.github.fhirschmann.clozegen.lib.adapter.api.GeneratorAdapter;
+import com.github.fhirschmann.clozegen.lib.component.api.AbstractResource;
 import com.github.fhirschmann.clozegen.lib.generator.CollocationGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.CollocationModel;
@@ -26,13 +27,8 @@ import com.google.common.io.Resources;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.resource.ResourceSpecifier;
 import org.apache.uima.util.Level;
-import org.uimafit.component.Resource_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
@@ -40,7 +36,7 @@ import org.uimafit.descriptor.ConfigurationParameter;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CollocationAdapter extends Resource_ImplBase implements GeneratorAdapter {
+public class CollocationAdapter extends AbstractResource implements GeneratorAdapter {
 
     /** The path to the collocation file. */
     public static final String PARAM_PATH = "Path";
@@ -56,13 +52,7 @@ public class CollocationAdapter extends Resource_ImplBase implements GeneratorAd
     private CollocationModel model;
 
     @Override
-    public boolean initialize(final ResourceSpecifier aSpecifier,
-            final Map<String, Object> aAdditionalParams)
-            throws ResourceInitializationException {
-        if (!super.initialize(aSpecifier, aAdditionalParams)) {
-            return false;
-        }
-
+    public boolean initialize() {
         model = new CollocationModel();
         try {
             model.load(Resources.getResource(path), n);
