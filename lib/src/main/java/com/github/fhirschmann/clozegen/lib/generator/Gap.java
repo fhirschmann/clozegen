@@ -30,8 +30,10 @@ import java.util.Set;
  * <blockquote><pre>
  * {@code
  * Gap gap1 = new Gap.with("in", "of", "at");
- * Gap gap();
- * gap.addValidAnswer
+ *
+ * Gap gap2 = new Gap();
+ * gap2.addValidAnswer("in");
+ * gap2.addInvalidAnswers("of", "at");
  * }
  * </pre></blockquote>
  *
