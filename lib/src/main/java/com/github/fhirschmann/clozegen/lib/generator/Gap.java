@@ -31,7 +31,7 @@ import java.util.Set;
  * {@code
  * Gap gap1 = new Gap.with("in", "of", "at");
  * Gap gap();
- * gap.setValidAnswer
+ * gap.addValidAnswer
  * }
  * </pre></blockquote>
  *
@@ -78,21 +78,21 @@ public class Gap {
     }
 
     /**
-     * Sets the invalid answers.
+     * Adds invalid answers to this gap.
      *
      * @param invalidAnswers the invalid answers to set
      */
-    public void setInvalidAnswers(final Set<String> invalidAnswers) {
-        this.invalidAnswers = invalidAnswers;
+    public void addInvalidAnswers(final Set<String> invalidAnswers) {
+        this.invalidAnswers.addAll(invalidAnswers);
     }
 
     /**
-     * Sets the invalid answers.
+     * Adds invalid answers to this gap.
      *
      * @param invalidAnswers the invalid answers to set
      */
-    public void setInvalidAnswers(final String... invalidAnswers) {
-        this.invalidAnswers.addAll(Sets.newHashSet(invalidAnswers));
+    public void addInvalidAnswers(final String... invalidAnswers) {
+        addInvalidAnswers(Sets.newHashSet(invalidAnswers));
     }
 
     /**
@@ -109,8 +109,8 @@ public class Gap {
      *
      * @param validAnswers the valid answers to set
      */
-    public void setValidAnswers(final Set<String> validAnswers) {
-        this.validAnswers = validAnswers;
+    public void addValidAnswers(final Set<String> validAnswers) {
+        this.validAnswers.addAll(validAnswers);
     }
 
     /**
@@ -118,8 +118,8 @@ public class Gap {
      *
      * @param validAnswers the invalid answers to set
      */
-    public void setValidAnswers(final String... validAnswers) {
-        this.validAnswers.addAll(Sets.newHashSet(validAnswers));
+    public void addValidAnswers(final String... validAnswers) {
+        addValidAnswers(Sets.newHashSet(validAnswers));
     }
 
     /**
@@ -127,8 +127,8 @@ public class Gap {
      *
      * @param validAnswer the valid answer to set
      */
-    public void setValidAnswer(final String validAnswer) {
-        setValidAnswers(new String[] {validAnswer});
+    public void addValidAnswer(final String validAnswer) {
+        addValidAnswers(new String[] {validAnswer});
     }
 
     /**
@@ -149,7 +149,7 @@ public class Gap {
      */
     public static Gap with(final String validAnswer) {
         Gap gap = new Gap();
-        gap.setValidAnswer(validAnswer);
+        gap.addValidAnswer(validAnswer);
 
         return gap;
     }
@@ -163,7 +163,7 @@ public class Gap {
      */
     public static Gap with(final String validAnswer, final String... invalidAnswers) {
         Gap gap = Gap.with(validAnswer);
-        gap.setInvalidAnswers(invalidAnswers);
+        gap.addInvalidAnswers(invalidAnswers);
 
         return gap;
     }

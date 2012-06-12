@@ -89,7 +89,7 @@ public class CollocationGapGenerator implements GapGenerator {
     @Override
     public Gap generate(final int count) {
         Gap gap = new Gap();
-        gap.setValidAnswers(triplet.getValue1());
+        gap.addValidAnswers(triplet.getValue1());
 
         // Collect a list of possible candidates for this gap
         final Multiset<String> candidates = ConcurrentHashMultiset.create(
@@ -110,7 +110,7 @@ public class CollocationGapGenerator implements GapGenerator {
         if (candidates.elementSet().size() > count - 2) {
             final Set<String> invalidAnswers = Sets.newHashSet(
                     MultisetUtils.sortedElementList(candidates, count - 1));
-            gap.setInvalidAnswers(invalidAnswers);
+            gap.addInvalidAnswers(invalidAnswers);
         } else {
             gap = null;
         }

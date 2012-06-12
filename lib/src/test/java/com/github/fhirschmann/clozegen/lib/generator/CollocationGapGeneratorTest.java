@@ -56,8 +56,8 @@ public class CollocationGapGeneratorTest {
     public void testGenerate() {
         generator = new CollocationGapGenerator("as", "in", "the", model);
         Gap gap = new Gap();
-        gap.setValidAnswers("in");
-        gap.setInvalidAnswers("of");
+        gap.addValidAnswers("in");
+        gap.addInvalidAnswers("of");
         assertEquals(gap, generator.generate(2));
     }
 
@@ -66,8 +66,8 @@ public class CollocationGapGeneratorTest {
         model.getNGrams().add("as of the");
         generator = new CollocationGapGenerator("as", "in", "the", model);
         Gap gap = new Gap();
-        gap.setValidAnswers("in");
-        gap.setInvalidAnswers("by");
+        gap.addValidAnswers("in");
+        gap.addInvalidAnswers("by");
         assertEquals(gap, generator.generate(2));
     }
 

@@ -35,12 +35,12 @@ public class GapTest {
     @Before
     public void setUp() {
         gap = new Gap();
-        gap.setValidAnswers("val1", "val2");
-        gap.setInvalidAnswers("inval1", "inval2", "inval3");
+        gap.addValidAnswers("val1", "val2");
+        gap.addInvalidAnswers("inval1", "inval2", "inval3");
         gap2 = new Gap();
         gap2 = new Gap(Sets.newHashSet("val1", "val2"),
                 Sets.newHashSet("inval1", "inval2", "inval3"));
-        gap2.setValidAnswers("val1", "val2");
+        gap2.addValidAnswers("val1", "val2");
     }
 
     @Test

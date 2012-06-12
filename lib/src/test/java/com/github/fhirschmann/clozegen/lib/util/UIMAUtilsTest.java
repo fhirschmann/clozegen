@@ -87,8 +87,8 @@ public class UIMAUtilsTest {
     @Test
     public void testCreateGapAnnotation_3args() {
         Gap gap = new Gap();
-        gap.setInvalidAnswers("foo");
-        gap.setValidAnswers("bar");
+        gap.addInvalidAnswers("foo");
+        gap.addValidAnswers("bar");
         GapAnnotation an = UIMAUtils.createGapAnnotation(jcas, gap);
         assertThat(an.getValidAnswers().getHead(), is("bar"));
     }
