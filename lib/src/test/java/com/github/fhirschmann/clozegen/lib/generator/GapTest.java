@@ -21,6 +21,8 @@ import com.google.common.collect.Sets;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.matchers.JUnitMatchers.*;
 
 /**
  *
@@ -71,8 +73,14 @@ public class GapTest {
 
     @Test
     public void testToString() {
-        System.out.println(gap.toString());
         assertEquals("Gap{valid=[val1, val2], invalid=[inval3, inval2, inval1]}",
                 gap.toString());
+    }
+
+    @Test
+    public void testWith_String_StringArr() {
+        Gap gap = Gap.with("foo", "bar", "bar2");
+        assertThat(gap.getValidAnswers(), hasItem("foo"));
+        assertThat(gap.getInvalidAnswers(), hasItems("bar", "bar2"));
     }
 }
