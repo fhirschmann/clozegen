@@ -18,18 +18,34 @@
 package com.github.fhirschmann.clozegen.lib.pipeline;
 
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
+import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
+import org.uimafit.factory.JCasFactory;
 
 /**
+ * Utility functions for dealing with pipelines.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PipelineFactory {
-    public static Pipeline createDefaultPipeline() throws ResourceInitializationException {
+public final class PipelineFactory {
+    /** Utility class. */
+    private PipelineFactory() {
+    }
+
+    /**
+     * Creates a pipeline utilizing Stanford Segmenter and Tree Tagger.
+     *
+     * @return a new default pipeline
+     * @throws ResourceInitializationException on errors on initialization
+     */
+    public static Pipeline createDefaultPipeline()
+            throws ResourceInitializationException {
         Pipeline pipeline = new Pipeline();
         final AnalysisEngine segmenter = createPrimitive(StanfordSegmenter.class);
         pipeline.addStep(segmenter);
