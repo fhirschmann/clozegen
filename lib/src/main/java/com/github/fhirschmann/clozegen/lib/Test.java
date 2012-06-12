@@ -26,10 +26,12 @@ import com.github.fhirschmann.clozegen.lib.component.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ExternalResourceDescription;
 import org.uimafit.factory.JCasFactory;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
@@ -42,13 +44,9 @@ public class Test {
 
     public static void main(String[] args) throws Exception {
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
+        JCas j = UIMAUtils.createTestJCas();
 
-        JCas j = JCasFactory.createJCas();
-        j.setDocumentLanguage("en");
-        j.setDocumentText("He studies at the university. He can't think of anything.");
-
-        DocumentMetaData x = DocumentMetaData.create(j);
-        x.setDocumentId("test");
+        ExternalResourceDescription x = createExternalResourceDescription(StupidArticleAdapter.class);
 
         AnalysisEngineDescription test = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.PARAM_ANSWER_COUNT, 5,

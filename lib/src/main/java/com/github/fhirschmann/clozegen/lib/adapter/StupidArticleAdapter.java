@@ -20,6 +20,7 @@ package com.github.fhirschmann.clozegen.lib.adapter;
 import com.github.fhirschmann.clozegen.lib.adapter.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.StupidArticleGapGenerator;
+import com.github.fhirschmann.clozegen.lib.generator.api.SingleTokenInputGapGenerator;
 import java.util.List;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.component.Resource_ImplBase;
@@ -32,7 +33,8 @@ public class StupidArticleAdapter extends Resource_ImplBase implements Generator
     @Override
     public GapGenerator generator(
             final List<Annotation> annotationList, final int offset) {
-        return StupidArticleGapGenerator.create(
-                annotationList.get(offset).getCoveredText());
+        SingleTokenInputGapGenerator gen = new StupidArticleGapGenerator();
+        gen.initialize(annotationList.get(offset).getCoveredText());
+        return gen;
     }
 }

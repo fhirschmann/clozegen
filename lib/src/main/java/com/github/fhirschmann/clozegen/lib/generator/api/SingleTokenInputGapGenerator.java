@@ -15,29 +15,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.generator;
-
-import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
-import com.github.fhirschmann.clozegen.lib.generator.api.SingleTokenInputGapGenerator;
-
+package com.github.fhirschmann.clozegen.lib.generator.api;
 
 /**
- * This is a sample implementation of a generator for gaps for articles. This
- * is only for demonstration purposes!
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class StupidArticleGapGenerator implements SingleTokenInputGapGenerator {
-    /** The valid answer for this gap. */
-    private String validAnswer;
-
-    @Override
-    public void initialize(String token) {
-        this.validAnswer = token;
-    }
-
-    @Override
-    public Gap generate(final int count) {
-        return Gap.with(validAnswer, "a", "an", "the");
-    }
+public interface SingleTokenInputGapGenerator extends GapGenerator {
+    public void initialize(String token);
 }

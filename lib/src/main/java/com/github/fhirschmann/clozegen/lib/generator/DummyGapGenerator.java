@@ -17,27 +17,24 @@
  */
 package com.github.fhirschmann.clozegen.lib.generator;
 
-import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.api.SingleTokenInputGapGenerator;
 
-
 /**
- * This is a sample implementation of a generator for gaps for articles. This
- * is only for demonstration purposes!
+ * Creates a gap with no invalid answers.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class StupidArticleGapGenerator implements SingleTokenInputGapGenerator {
+public class DummyGapGenerator implements SingleTokenInputGapGenerator {
     /** The valid answer for this gap. */
     private String validAnswer;
 
     @Override
-    public void initialize(String token) {
+    public void initialize(final String token) {
         this.validAnswer = token;
     }
 
     @Override
     public Gap generate(final int count) {
-        return Gap.with(validAnswer, "a", "an", "the");
+        return Gap.with(validAnswer);
     }
 }

@@ -15,29 +15,32 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.generator;
+package com.github.fhirschmann.clozegen.lib.adapter;
 
+import com.github.fhirschmann.clozegen.lib.adapter.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.api.SingleTokenInputGapGenerator;
-
+import java.util.List;
+import org.apache.uima.jcas.tcas.Annotation;
+import org.uimafit.component.Resource_ImplBase;
+import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
- * This is a sample implementation of a generator for gaps for articles. This
- * is only for demonstration purposes!
+ * This adapter calls a {@link SingleTokenInputGapGenerator} with the
+ * covered text of the input annotation.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class StupidArticleGapGenerator implements SingleTokenInputGapGenerator {
-    /** The valid answer for this gap. */
-    private String validAnswer;
+public class SingleTokenInputAdapter
+        extends Resource_ImplBase implements GeneratorAdapter {
+    public static final String PARAM_GENERATOR = "SingleTokenInputGapGenerator";
+    @ConfigurationParameter(name = PARAM_GENERATOR)
+    private SingleTokenInputGapGenerator generator;
 
     @Override
-    public void initialize(String token) {
-        this.validAnswer = token;
-    }
-
-    @Override
-    public Gap generate(final int count) {
-        return Gap.with(validAnswer, "a", "an", "the");
+    public GapGenerator generator(
+            final List<Annotation> annotationList, final int offset) {
+        generator.initialize(annotationList.get(offset).getCoveredText());
+        return generator;
     }
 }

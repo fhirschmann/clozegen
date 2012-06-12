@@ -15,29 +15,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.generator;
+package com.github.fhirschmann.clozegen.lib.adapter.api;
 
-import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
-import com.github.fhirschmann.clozegen.lib.generator.api.SingleTokenInputGapGenerator;
-
+import com.github.fhirschmann.clozegen.lib.writer.GapWriter;
+import java.util.List;
+import java.util.Set;
+import org.apache.uima.jcas.tcas.Annotation;
 
 /**
- * This is a sample implementation of a generator for gaps for articles. This
- * is only for demonstration purposes!
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class StupidArticleGapGenerator implements SingleTokenInputGapGenerator {
-    /** The valid answer for this gap. */
-    private String validAnswer;
-
-    @Override
-    public void initialize(String token) {
-        this.validAnswer = token;
-    }
-
-    @Override
-    public Gap generate(final int count) {
-        return Gap.with(validAnswer, "a", "an", "the");
-    }
+public interface WriterAdapter extends ConstraintProvider {
+    /**
+     * This method gets called for each word in a sentence which matches
+     * {@link WriterAdapter#getConstraint()}.
+     *
+     * @param annotationList the list of annotations in the current sentence
+     * @param offset the offset (index) of the word to generate a gap for
+     * @return a gap writer
+     */
+    Set<GapWriter> writer(List<Annotation> annotationList, int offset);
 }
