@@ -21,10 +21,12 @@ import com.github.fhirschmann.clozegen.lib.adapter.CollocationAdapter;
 import com.github.fhirschmann.clozegen.lib.adapter.StupidArticleAdapter;
 import com.github.fhirschmann.clozegen.lib.adapter.constraint.ArticleConstraint;
 import com.github.fhirschmann.clozegen.lib.adapter.constraint.PrepositionConstraint;
+import com.github.fhirschmann.clozegen.lib.adapter.constraint.TypeConstraint;
 import com.github.fhirschmann.clozegen.lib.component.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
@@ -59,7 +61,9 @@ public class Test {
 
         AnalysisEngineDescription test2 = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
-                createExternalResourceDescription(ArticleConstraint.class),
+                createExternalResourceDescription(
+                    TypeConstraint.class,
+                    TypeConstraint.PARAM_TYPE, ART.class.getName()),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(StupidArticleAdapter.class));
 
