@@ -56,7 +56,7 @@ public class CollocationAdapter extends Resource_ImplBase implements GeneratorAd
     private CollocationModel model;
 
     @Override
-	public boolean initialize(final ResourceSpecifier aSpecifier,
+    public boolean initialize(final ResourceSpecifier aSpecifier,
             final Map<String, Object> aAdditionalParams)
             throws ResourceInitializationException {
         if (!super.initialize(aSpecifier, aAdditionalParams)) {
