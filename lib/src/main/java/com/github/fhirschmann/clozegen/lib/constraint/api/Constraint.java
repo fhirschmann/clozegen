@@ -15,25 +15,21 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.adapter.constraint;
+package com.github.fhirschmann.clozegen.lib.constraint.api;
 
-import com.github.fhirschmann.clozegen.lib.adapter.api.Constraint;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
-import org.apache.uima.cas.ConstraintFactory;
-import org.apache.uima.cas.FSMatchConstraint;
-import org.apache.uima.cas.FSTypeConstraint;
+import com.github.fhirschmann.clozegen.lib.component.GapAnnotator;
+import org.uimafit.component.Resource_ImplBase;
 
 /**
- * A constraint which matches articles.
+ * A constraint.
+ *
+ * <p>
+ * This interface is used in order to inject a constraint into
+ * {@link GapAnnotator}. Example implementation of this can be
+ * found in {@link com.github.fhirschmann.clozegen.lib.adapter.constraint}.
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class ArticleConstraint extends Constraint {
-    @Override
-    public FSMatchConstraint getConstraint() {
-        FSTypeConstraint cons = ConstraintFactory.instance().
-                createTypeConstraint();
-        cons.add(ART.class.getName());
-        return cons;
-    }
+public abstract class Constraint extends Resource_ImplBase implements ConstraintProvider {
 }

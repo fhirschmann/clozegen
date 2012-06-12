@@ -15,32 +15,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.adapter.api;
+package com.github.fhirschmann.clozegen.lib.constraint;
 
+import com.github.fhirschmann.clozegen.lib.constraint.api.Constraint;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
+import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSMatchConstraint;
+import org.apache.uima.cas.FSTypeConstraint;
 
 /**
- * Implementing classes will provide a constraint.
+ * A constraint which matches articles.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public interface ConstraintProvider {
-    /**
-     * A constraint, possibly <code>null</code>, which specifies on what occasion
-     * {@link Adapter#generator(java.util.List, int)} should be called. If this
-     * returns <code>null</code>, {@link Adapter#generator(java.util.List, int)} will
-     * be called for each Annotation.
-     *
-     * <p>For example, if you want to only work on annotations of the type
-     * {@link ART}, then this method should return <code>cons</code> like so:
-     * <p><blockquote><pre>
-     * {@code
-     * FSTypeConstraint cons = ConstraintFactory.instance().createTypeConstraint();
-     * cons.add(ART.class.getName());
-     * }
-     * </pre></blockquote>
-     *
-     * @return a new constraint
-     */
-    FSMatchConstraint getConstraint();
+public class ArticleConstraint extends Constraint {
+    @Override
+    public FSMatchConstraint getConstraint() {
+        FSTypeConstraint cons = ConstraintFactory.instance().
+                createTypeConstraint();
+        cons.add(ART.class.getName());
+        return cons;
+    }
 }

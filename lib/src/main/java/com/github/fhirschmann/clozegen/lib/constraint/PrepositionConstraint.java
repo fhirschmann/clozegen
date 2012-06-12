@@ -15,21 +15,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.adapter.api;
+package com.github.fhirschmann.clozegen.lib.constraint;
 
-import com.github.fhirschmann.clozegen.lib.component.GapAnnotator;
-import org.uimafit.component.Resource_ImplBase;
+import com.github.fhirschmann.clozegen.lib.constraint.api.Constraint;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
+import org.apache.uima.cas.ConstraintFactory;
+import org.apache.uima.cas.FSMatchConstraint;
+import org.apache.uima.cas.FSTypeConstraint;
 
 /**
- * A constraint.
- *
- * <p>
- * This interface is used in order to inject a constraint into
- * {@link GapAnnotator}. Example implementation of this can be
- * found in {@link com.github.fhirschmann.clozegen.lib.adapter.constraint}.
- * </p>
+ * A constraint which matches prepositions.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public abstract class Constraint extends Resource_ImplBase implements ConstraintProvider {
+public class PrepositionConstraint extends Constraint {
+    @Override
+    public FSMatchConstraint getConstraint() {
+        FSTypeConstraint cons = ConstraintFactory.instance().
+                createTypeConstraint();
+        cons.add(PP.class.getName());
+        return cons;
+    }
 }

@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.component.api;
 
-import com.github.fhirschmann.clozegen.lib.adapter.api.ConstraintProvider;
+import com.github.fhirschmann.clozegen.lib.constraint.api.ConstraintProvider;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;

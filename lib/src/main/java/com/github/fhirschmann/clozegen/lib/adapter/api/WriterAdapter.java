@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.adapter.api;
 
+import com.github.fhirschmann.clozegen.lib.constraint.api.ConstraintProvider;
 import com.github.fhirschmann.clozegen.lib.writer.GapWriter;
 import java.util.List;
 import java.util.Set;

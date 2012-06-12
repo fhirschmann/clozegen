@@ -19,9 +19,9 @@ package com.github.fhirschmann.clozegen.lib;
 
 import com.github.fhirschmann.clozegen.lib.adapter.CollocationAdapter;
 import com.github.fhirschmann.clozegen.lib.adapter.StupidArticleAdapter;
-import com.github.fhirschmann.clozegen.lib.adapter.constraint.ArticleConstraint;
-import com.github.fhirschmann.clozegen.lib.adapter.constraint.PrepositionConstraint;
-import com.github.fhirschmann.clozegen.lib.adapter.constraint.TypeConstraint;
+import com.github.fhirschmann.clozegen.lib.constraint.ArticleConstraint;
+import com.github.fhirschmann.clozegen.lib.constraint.PrepositionConstraint;
+import com.github.fhirschmann.clozegen.lib.constraint.TypeConstraint;
 import com.github.fhirschmann.clozegen.lib.component.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
