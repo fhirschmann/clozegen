@@ -23,7 +23,7 @@ import com.github.fhirschmann.clozegen.lib.generator.api.SingleTokenInputGapGene
 import java.util.List;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.component.Resource_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.ExternalResource;
 
 /**
  * This adapter calls a {@link SingleTokenInputGapGenerator} with the
@@ -33,8 +33,8 @@ import org.uimafit.descriptor.ConfigurationParameter;
  */
 public class SingleTokenInputAdapter
         extends Resource_ImplBase implements GeneratorAdapter {
-    public static final String PARAM_GENERATOR = "SingleTokenInputGapGenerator";
-    @ConfigurationParameter(name = PARAM_GENERATOR)
+    public static final String RES_GENERATOR = "Generator";
+    @ExternalResource(key = RES_GENERATOR)
     private SingleTokenInputGapGenerator generator;
 
     @Override
