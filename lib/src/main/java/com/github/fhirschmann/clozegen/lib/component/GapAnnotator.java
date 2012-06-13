@@ -49,12 +49,16 @@ public class GapAnnotator extends ConstraintBasedAnnotator {
     @ExternalResource(key = ADAPTER_KEY)
     private GeneratorAdapter adapter;
 
-
     /**
      * <em>[optional]</em>
      *
      * The number of invalid answers to generate. This argument is optional
      * and defaults to 4.
+     *
+     * <p>
+     * Please not that it is up to the underlying generator to respect this
+     * parameter.
+     * </p>
      */
     public static final String PARAM_ANSWER_COUNT = "AnswerCount";
     @ConfigurationParameter(name = PARAM_ANSWER_COUNT,
