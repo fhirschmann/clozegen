@@ -20,9 +20,11 @@ package com.github.fhirschmann.clozegen.lib.component.api;
 import com.github.fhirschmann.clozegen.lib.constraint.api.ConstraintProvider;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.component.JCasConsumer_ImplBase;
+import org.uimafit.descriptor.ExternalResource;
 
 /**
  * This is equal to {@link AbstractAnnotator}, except that this class extends
@@ -30,10 +32,26 @@ import org.uimafit.component.JCasConsumer_ImplBase;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public abstract class AbstractConsumer extends JCasConsumer_ImplBase implements
+public abstract class ConstraintBasedConsumer extends JCasConsumer_ImplBase implements
         ConstraintProvider, GapProcessor {
+    /**
+     * <em>[mandatory]</em>
+     *
+     * A constraint which limits the words the generator is called for.
+     *
+     * @see com.github.fhirschmann.clozegen.lib.constraint
+     */
+    public static final String CONSTRAINT_KEY = "Constraint";
+    @ExternalResource(key = CONSTRAINT_KEY, mandatory = true)
+    private ConstraintProvider constraint;
+
     @Override
     public void process(final JCas aJCas) throws AnalysisEngineProcessException {
         UIMAUtils.annotationCaller(aJCas, getConstraint(), this);
+    }
+
+    @Override
+    public FSMatchConstraint getConstraint() {
+        return constraint.getConstraint();
     }
 }

@@ -21,8 +21,10 @@ import com.github.fhirschmann.clozegen.lib.constraint.api.ConstraintProvider;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.component.JCasAnnotator_ImplBase;
+import org.uimafit.descriptor.ExternalResource;
 
 /**
  * Implementing classes have to provide a constraint which, when matched,
@@ -30,10 +32,26 @@ import org.uimafit.component.JCasAnnotator_ImplBase;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public abstract class AbstractAnnotator extends
+public abstract class ConstraintBasedAnnotator extends
         JCasAnnotator_ImplBase implements ConstraintProvider, GapProcessor {
+    /**
+     * <em>[mandatory]</em>
+     *
+     * A constraint which limits the words the generator is called for.
+     *
+     * @see com.github.fhirschmann.clozegen.lib.constraint
+     */
+    public static final String CONSTRAINT_KEY = "Constraint";
+    @ExternalResource(key = CONSTRAINT_KEY, mandatory = true)
+    private ConstraintProvider constraint;
+
     @Override
     public void process(final JCas aJCas) throws AnalysisEngineProcessException {
         UIMAUtils.annotationCaller(aJCas, getConstraint(), this);
+    }
+
+    @Override
+    public FSMatchConstraint getConstraint() {
+        return constraint.getConstraint();
     }
 }

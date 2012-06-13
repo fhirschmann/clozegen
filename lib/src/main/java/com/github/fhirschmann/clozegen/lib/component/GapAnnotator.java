@@ -18,7 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.component;
 
 import com.github.fhirschmann.clozegen.lib.constraint.api.ConstraintProvider;
-import com.github.fhirschmann.clozegen.lib.component.api.AbstractAnnotator;
+import com.github.fhirschmann.clozegen.lib.component.api.ConstraintBasedAnnotator;
 import com.github.fhirschmann.clozegen.lib.adapter.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
@@ -38,7 +38,7 @@ import org.uimafit.descriptor.ExternalResource;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class GapAnnotator extends AbstractAnnotator {
+public class GapAnnotator extends ConstraintBasedAnnotator {
     /**
      * <em>[mandatory]</em>
      *
@@ -49,16 +49,6 @@ public class GapAnnotator extends AbstractAnnotator {
     @ExternalResource(key = ADAPTER_KEY)
     private GeneratorAdapter adapter;
 
-    /**
-     * <em>[mandatory]</em>
-     *
-     * A constraint which limits the words the generator is called for.
-     *
-     * @see com.github.fhirschmann.clozegen.lib.constraint
-     */
-    public static final String CONSTRAINT_KEY = "Constraint";
-    @ExternalResource(key = CONSTRAINT_KEY, mandatory = true)
-    private ConstraintProvider constraint;
 
     /**
      * <em>[optional]</em>
@@ -80,10 +70,5 @@ public class GapAnnotator extends AbstractAnnotator {
             UIMAUtils.copyBounds(annotationList.get(index), gapAnnotation);
             gapAnnotation.addToIndexes();
         }
-    }
-
-    @Override
-    public FSMatchConstraint getConstraint() {
-        return constraint.getConstraint();
     }
 }
