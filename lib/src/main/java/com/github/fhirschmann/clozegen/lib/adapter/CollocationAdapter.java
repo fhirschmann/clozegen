@@ -56,7 +56,7 @@ public class CollocationAdapter extends AbstractResource implements GeneratorAda
     public boolean initialize() {
         model = new CollocationModel();
         try {
-            model.load(Resources.getResource(path), n);
+            model.load(Resources.getResource(path));
             return true;
         } catch (IOException ex) {
             this.getUimaContext().getLogger().log(Level.SEVERE, ex.getMessage());
