@@ -22,6 +22,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FSTypeConstraint;
+import org.apache.uima.jcas.JCas;
 
 /**
  * A constraint which matches articles.
@@ -30,7 +31,7 @@ import org.apache.uima.cas.FSTypeConstraint;
  */
 public class ArticleConstraint extends Constraint {
     @Override
-    public FSMatchConstraint getConstraint() {
+    public FSMatchConstraint getConstraint(final JCas jcas) {
         FSTypeConstraint cons = ConstraintFactory.instance().
                 createTypeConstraint();
         cons.add(ART.class.getName());

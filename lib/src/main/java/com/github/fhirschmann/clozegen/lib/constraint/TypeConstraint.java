@@ -21,6 +21,7 @@ import com.github.fhirschmann.clozegen.lib.constraint.api.Constraint;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FSTypeConstraint;
+import org.apache.uima.jcas.JCas;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 
@@ -36,7 +37,7 @@ public class TypeConstraint extends Constraint {
     private String type;
 
     @Override
-    public FSMatchConstraint getConstraint() {
+    public FSMatchConstraint getConstraint(final JCas jcas) {
         FSTypeConstraint cons = ConstraintFactory.instance().
                 createTypeConstraint();
         cons.add(type);

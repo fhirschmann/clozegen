@@ -22,6 +22,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FSTypeConstraint;
+import org.apache.uima.jcas.JCas;
 
 /**
  * A constraint which matches prepositions.
@@ -30,7 +31,7 @@ import org.apache.uima.cas.FSTypeConstraint;
  */
 public class PrepositionConstraint extends Constraint {
     @Override
-    public FSMatchConstraint getConstraint() {
+    public FSMatchConstraint getConstraint(final JCas jcas) {
         FSTypeConstraint cons = ConstraintFactory.instance().
                 createTypeConstraint();
         cons.add(PP.class.getName());

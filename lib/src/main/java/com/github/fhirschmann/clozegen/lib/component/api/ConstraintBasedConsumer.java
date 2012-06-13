@@ -52,11 +52,11 @@ public abstract class ConstraintBasedConsumer extends JCasConsumer_ImplBase impl
 
     @Override
     public void process(final JCas aJCas) throws AnalysisEngineProcessException {
-        UIMAUtils.annotationCaller(aJCas, getConstraint(), this);
+        UIMAUtils.annotationCaller(aJCas, getConstraint(aJCas), this);
     }
 
     @Override
-    public FSMatchConstraint getConstraint() {
-        return constraint.getConstraint();
+    public FSMatchConstraint getConstraint(JCas jcas) {
+        return constraint.getConstraint(jcas);
     }
 }

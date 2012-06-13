@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.constraint.api;
 
 import org.apache.uima.cas.FSMatchConstraint;
+import org.apache.uima.jcas.JCas;
 
 /**
  * Implementing classes will provide a constraint.
@@ -40,7 +41,8 @@ public interface ConstraintProvider {
      * }
      * </pre></blockquote>
      *
+     * @param jcas the JCas
      * @return a new constraint
      */
-    FSMatchConstraint getConstraint();
+    FSMatchConstraint getConstraint(JCas jcas);
 }
