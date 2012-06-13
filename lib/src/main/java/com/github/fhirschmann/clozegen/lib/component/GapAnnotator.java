@@ -56,7 +56,7 @@ public class GapAnnotator extends ConstraintBasedAnnotator {
      * and defaults to 4.
      *
      * <p>
-     * Please not that it is up to the underlying generator to respect this
+     * Please note that it is up to the underlying generator to respect this
      * parameter.
      * </p>
      */
