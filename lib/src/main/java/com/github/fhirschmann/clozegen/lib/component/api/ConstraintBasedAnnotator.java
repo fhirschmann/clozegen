@@ -37,7 +37,8 @@ public abstract class ConstraintBasedAnnotator extends
     /**
      * <em>[mandatory]</em>
      *
-     * A constraint which limits the words the generator is called for.
+     * A constraint which limits the words {@link GapProcessor#process(JCas, List, int)}
+     * is called for.
      *
      * @see com.github.fhirschmann.clozegen.lib.constraint
      */
