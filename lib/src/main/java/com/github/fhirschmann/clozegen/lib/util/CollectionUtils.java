@@ -105,7 +105,6 @@ public final class CollectionUtils {
         return Sets.newHashSet(list1).equals(Sets.newHashSet(list2));
     }
 
-
     /**
      * Returns a triplet (A, x, B) where A and B are word sequences before and after x,
      * respectively.
