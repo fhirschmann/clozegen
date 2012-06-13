@@ -32,7 +32,8 @@ import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
- * This annotator creates annotations based on collocations.
+ * This adapter is backed by {@link CollocationGapGenerator} and injects
+ * a {@link CollocationModel} from {@link CollocationAdapter#PARAM_PATH}.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
