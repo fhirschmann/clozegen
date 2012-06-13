@@ -55,10 +55,9 @@ public class CollocationModel {
      * </p>
      *
      * @param ngrams the URL to the ngrams (x_i-n, x_i+1, x, x_i+1, x_i+n)
-     * @param n the n in n-gram
      * @throws IOException on errors reading a file
      */
-    public void load(final URL ngrams, final int n) throws IOException {
+    public void load(final URL ngrams) throws IOException {
         this.ngrams = ReadMultisets.parseMultiset(ngrams);
 
         heads = MapMultiset.create();
