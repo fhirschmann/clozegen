@@ -30,6 +30,11 @@ import org.uimafit.descriptor.ExternalResource;
  * Implementing classes have to provide a constraint which, when matched,
  * will trigger a call to {@link GapProcessor#process(JCas, List, int)}.
  *
+ * <p>
+ * Due to the lack of mixins or multiple inheritance in the Java language, this
+ * is the same as {@link ConstraintBasedConsumer}.
+ * </p>
+ *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public abstract class ConstraintBasedAnnotator extends

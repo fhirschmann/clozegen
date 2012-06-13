@@ -22,13 +22,17 @@ import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.descriptor.ExternalResource;
 
 /**
  * This is equal to {@link AbstractAnnotator}, except that this class extends
  * {@link JCasConsumer_ImplBase} instead of {@link JCasAnnotator_ImplBase}.
+ *
+ * <p>
+ * Due to the lack of mixins or multiple inheritance in the Java language, this
+ * is the same as {@link ConstraintBasedAnnotator}.
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
