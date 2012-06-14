@@ -21,7 +21,7 @@ import com.github.fhirschmann.clozegen.lib.adapter.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.component.api.AbstractResource;
 import com.github.fhirschmann.clozegen.lib.generator.CollocationGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generator.api.GapGenerator;
-import com.github.fhirschmann.clozegen.lib.generator.CollocationModel;
+import com.github.fhirschmann.clozegen.lib.generator.model.CollocationModel;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.io.Resources;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;

@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.generator;
 
+import com.github.fhirschmann.clozegen.lib.generator.model.CollocationModel;
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
