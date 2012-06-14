@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class MultisetWriterTest {
+public class WriteMultisetTest {
     private Multiset<String> multiset1;
     private Multiset<String> multiset2;
 

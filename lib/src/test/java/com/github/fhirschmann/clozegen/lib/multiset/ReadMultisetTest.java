@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class MultisetReaderTest {
+public class ReadMultisetTest {
     private URL trigrams;
     private URL bigrams;
 
