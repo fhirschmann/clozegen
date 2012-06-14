@@ -21,6 +21,7 @@ import com.github.fhirschmann.clozegen.lib.component.CollocationWriter;
 import com.github.fhirschmann.clozegen.lib.constraint.PrepositionConstraint;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
+import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbReader;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
@@ -47,6 +48,14 @@ public class CollocationWriterExample {
                 DKProContext.getContext().getWorkspace("brown_tei").getAbsolutePath(),
                 BrownCorpusReader.PARAM_PATTERNS, new String[] {"[+]*.xml"});
 
+        CollectionReader wacky = CollectionReaderFactory.createCollectionReader(
+                ImsCwbReader.class,
+                BrownCorpusReader.PARAM_PATH,
+                DKProContext.getContext().getWorkspace("wacky/uk/x").getAbsolutePath(),
+                ImsCwbReader.PARAM_TAGGER_TAGSET, "en",
+                ImsCwbReader.PARAM_PATTERNS, new String[] {"[+]*.xml.gz"});
+
+
         AnalysisEngineDescription trigrams = createPrimitiveDescription(
                 CollocationWriter.class,
                 CollocationWriter.CONSTRAINT_KEY,
@@ -54,7 +63,7 @@ public class CollocationWriterExample {
                 CollocationWriter.PARAM_OUTPUT_PATH, "target/test.txt");
 
         pipeline.addStep(trigrams);
-        pipeline.run(cr);
+        pipeline.run(wacky);
     }
 
 }

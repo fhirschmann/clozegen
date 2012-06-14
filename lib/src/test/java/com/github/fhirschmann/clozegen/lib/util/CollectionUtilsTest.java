@@ -79,14 +79,4 @@ public class CollectionUtilsTest {
                 Lists.newArrayList(2, 3, 4, 5, null, null, null),
                 CollectionUtils.<Integer>getNullPaddedAdjacentTo(list, 4, 3));
     }
-
-    /**
-     * Hack to exclude the private constructor from code coverage metrics.
-     */
-    @Test
-    public void testPrivateConstructor() throws Exception {
-        Constructor<?>[] cons = CollectionUtils.class.getDeclaredConstructors();
-        cons[0].setAccessible(true);
-        cons[0].newInstance((Object[]) null);
-    }
 }

@@ -69,14 +69,4 @@ public class MultisetUtilsTest {
         assertEquals(ImmutableList.of("bar"),
                 MultisetUtils.sortedElementList(multiset1, 1));
     }
-
-    /**
-     * Hack to exclude the private constructor from code coverage metrics.
-     */
-    @Test
-    public void testPrivateConstructor() throws Exception {
-        Constructor<?>[] cons = MultisetUtils.class.getDeclaredConstructors();
-        cons[0].setAccessible(true);
-        cons[0].newInstance((Object[]) null);
-    }
 }

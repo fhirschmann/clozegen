@@ -84,14 +84,4 @@ public class IntermediateFormatTest {
         String result2 = IntermediateFormat.format(jcas2);
         assertEquals(str2, result2);
     }
-
-    /**
-     * Hack to exclude the private constructor from code coverage metrics.
-     */
-    @Test
-    public void testPrivateConstructor() throws Exception {
-        Constructor<?>[] cons = IntermediateFormat.class.getDeclaredConstructors();
-        cons[0].setAccessible(true);
-        cons[0].newInstance((Object[]) null);
-    }
 }

@@ -58,14 +58,4 @@ public class MultisetReaderTest {
         MapMultiset<String, String> mms2 = ReadMultisets.parseMapMultiset(bigrams, 1);
         assertEquals(436, mms2.get("of").count("because"));
     }
-
-    /**
-     * Hack to exclude the private constructor from code coverage metrics.
-     */
-    @Test
-    public void testPrivateConstructor() throws Exception {
-        Constructor<?>[] cons = ReadMultisets.class.getDeclaredConstructors();
-        cons[0].setAccessible(true);
-        cons[0].newInstance((Object[]) null);
-    }
 }

@@ -59,14 +59,4 @@ public class MultisetWriterTest {
         Multiset<String> multisetr = ReadMultisets.parseMultiset(file.toURI().toURL());
         assertEquals("[foo x 42, bar2 x 11]", multisetr.toString());
     }
-
-    /**
-     * Hack to exclude the private constructor from code coverage metrics.
-     */
-    @Test
-    public void testPrivateConstructor2() throws Exception {
-        Constructor<?>[] cons = WriteMultisets.class.getDeclaredConstructors();
-        cons[0].setAccessible(true);
-        cons[0].newInstance((Object[]) null);
-    }
 }
