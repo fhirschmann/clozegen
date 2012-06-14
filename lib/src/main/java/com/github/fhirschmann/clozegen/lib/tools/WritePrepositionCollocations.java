@@ -17,9 +17,10 @@
  */
 package com.github.fhirschmann.clozegen.lib.tools;
 
-import com.github.fhirschmann.clozegen.lib.frequency.CollocationsExtractor;
+import com.github.fhirschmann.clozegen.lib.component.CollocationWriter;
+import com.github.fhirschmann.clozegen.lib.constraint.PrepositionConstraint;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
-import de.tudarmstadt.ukp.dkpro.core.io.web1t.Web1TFormatWriter;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
 import java.io.IOException;
 import org.apache.uima.UIMAException;
@@ -28,34 +29,29 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.factory.CollectionReaderFactory;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class WritePrepositionCollocations {
-    public static void main(String[] args)
-            throws ResourceInitializationException, UIMAException, IOException {
+    public static void main(String[] args) throws Exception {
         Pipeline pipeline = new Pipeline();
 
         CollectionReader cr = CollectionReaderFactory.createCollectionReader(
                 BrownCorpusReader.class,
-                BrownCorpusReader.PARAM_PATH, "src/main/resources/corpora/brown_tei",
+                BrownCorpusReader.PARAM_PATH,
+                DKProContext.getContext().getWorkspace("brown_tei").getAbsolutePath(),
                 BrownCorpusReader.PARAM_PATTERNS, new String[] {"[+]*.xml"});
 
-        AnalysisEngineDescription ce = createPrimitiveDescription(
-                CollocationsExtractor.class,
-                CollocationsExtractor.PARAM_OUTPUT_DIRECTORY,
-                "../models-en/src/main/resources/frequencies/en/prepositions");
+        AnalysisEngineDescription preposition_trigrams = createPrimitiveDescription(
+                CollocationWriter.class,
+                CollocationWriter.CONSTRAINT_KEY,
+                createExternalResourceDescription(PrepositionConstraint.class),
+                CollocationWriter.PARAM_OUTPUT_PATH, "target/test.txt");
 
-        AnalysisEngineDescription ce2 = createPrimitiveDescription(
-                Web1TFormatWriter.class,
-                Web1TFormatWriter.PARAM_TARGET_LOCATION, "target/ngrams",
-                Web1TFormatWriter.PARAM_MIN_NGRAM_LENGTH, 2,
-                Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, 3
-                );
-
-        pipeline.addStep(ce2);
+        pipeline.addStep(preposition_trigrams);
         pipeline.run(cr);
     }
 
