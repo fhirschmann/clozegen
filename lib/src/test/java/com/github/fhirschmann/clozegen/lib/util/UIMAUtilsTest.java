@@ -118,7 +118,7 @@ public class UIMAUtilsTest {
         list.add(gap2);
         List<String> result = UIMAUtils.getAdjacentTokens(
                 GapAnnotation.class, list, 0, 1);
-        List<String> expected = Lists.newArrayList(null, "This", "is");
+        List<String> expected = Lists.newArrayList("NULL", "This", "is");
         assertThat(result, is(expected));
     }
 }
