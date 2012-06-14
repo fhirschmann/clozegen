@@ -38,7 +38,7 @@ public class GapTest {
         gap.addValidAnswers("val1", "val2");
         gap.addInvalidAnswers("inval1", "inval2", "inval3");
         gap2 = new Gap();
-        gap2 = new Gap(Sets.newHashSet("val1", "val2"),
+        gap2 = Gap.with(Sets.newHashSet("val1", "val2"),
                 Sets.newHashSet("inval1", "inval2", "inval3"));
         gap2.addValidAnswers("val1", "val2");
     }
