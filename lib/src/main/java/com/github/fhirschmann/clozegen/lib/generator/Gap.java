@@ -60,18 +60,6 @@ public class Gap {
     }
 
     /**
-     * Constructs a gap prefilled with the given answers.
-     *
-     * @param invalidAnswers set of invalid answers
-     * @param validAnswers set of valid answers
-     */
-    public Gap(final Set<String> validAnswers, final Set<String> invalidAnswers) {
-        this();
-        this.validAnswers.addAll(validAnswers);
-        this.invalidAnswers.addAll(invalidAnswers);
-    }
-
-    /**
      * Returns the set of invalid answers.
      *
      * @return set of invalid answers.
@@ -170,6 +158,23 @@ public class Gap {
 
         return gap;
     }
+
+    /**
+     * Convenience method for generating gaps.
+     *
+     * @param invalidAnswers set of invalid answers
+     * @param validAnswers set of valid answers
+     * @return a new gap based upon the parameters provided
+     */
+    public static Gap with(final Set<String> validAnswers,
+            final Set<String> invalidAnswers) {
+        Gap gap = new Gap();
+        gap.addValidAnswers(validAnswers);
+        gap.addInvalidAnswers(invalidAnswers);
+
+        return gap;
+    }
+
 
     @Override
     public String toString() {
