@@ -74,16 +74,6 @@ public class UIMAUtilsTest {
         assertThat(list, not(hasItems("false2")));
     }
 
-    /**
-     * Hack to exclude the private constructor from code coverage metrics.
-     */
-    @Test
-    public void testPrivateConstructor() throws Exception {
-        Constructor<?>[] cons = UIMAUtils.class.getDeclaredConstructors();
-        cons[0].setAccessible(true);
-        cons[0].newInstance((Object[]) null);
-    }
-
     @Test
     public void testCreateGapAnnotation_3args() {
         Gap gap = new Gap();
@@ -120,5 +110,11 @@ public class UIMAUtilsTest {
                 GapAnnotation.class, list, 0, 1);
         List<String> expected = Lists.newArrayList("NULL", "This", "is");
         assertThat(result, is(expected));
+    }
+
+    @Test
+    public void testCreateTestJCas() throws Exception {
+        jcas = UIMAUtils.createTestJCas();
+        assertThat(jcas.getDocumentLanguage(), is("en"));
     }
 }
