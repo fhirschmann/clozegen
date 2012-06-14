@@ -55,7 +55,6 @@ public class PrivateConstructorTest {
             Constructor<?>[] cons = clazz.getDeclaredConstructors();
             cons[0].setAccessible(true);
             cons[0].newInstance((Object[]) null);
-
         }
     }
 }
