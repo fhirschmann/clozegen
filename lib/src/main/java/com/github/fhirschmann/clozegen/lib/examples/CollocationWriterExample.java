@@ -15,27 +15,29 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.tools;
+package com.github.fhirschmann.clozegen.lib.examples;
 
 import com.github.fhirschmann.clozegen.lib.component.CollocationWriter;
 import com.github.fhirschmann.clozegen.lib.constraint.PrepositionConstraint;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
-import java.io.IOException;
-import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.factory.CollectionReaderFactory;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 /**
+ * This example demonstrates the usage of {@link CollocationWriterExample}.
+ *
+ * <p>
+ * The brown_tei corpus is expected in $DKPRO_HOME.
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class WritePrepositionCollocations {
+public class CollocationWriterExample {
     public static void main(String[] args) throws Exception {
         Pipeline pipeline = new Pipeline();
 
@@ -45,13 +47,13 @@ public class WritePrepositionCollocations {
                 DKProContext.getContext().getWorkspace("brown_tei").getAbsolutePath(),
                 BrownCorpusReader.PARAM_PATTERNS, new String[] {"[+]*.xml"});
 
-        AnalysisEngineDescription preposition_trigrams = createPrimitiveDescription(
+        AnalysisEngineDescription trigrams = createPrimitiveDescription(
                 CollocationWriter.class,
                 CollocationWriter.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraint.class),
                 CollocationWriter.PARAM_OUTPUT_PATH, "target/test.txt");
 
-        pipeline.addStep(preposition_trigrams);
+        pipeline.addStep(trigrams);
         pipeline.run(cr);
     }
 
