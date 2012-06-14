@@ -19,8 +19,10 @@ package com.github.fhirschmann.clozegen.lib.util;
 
 import com.github.fhirschmann.clozegen.lib.component.api.GapProcessor;
 import com.github.fhirschmann.clozegen.lib.functions.CoveredTextFunction;
+import com.github.fhirschmann.clozegen.lib.functions.EscapeNullFunction;
 import com.github.fhirschmann.clozegen.lib.generator.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import com.google.common.base.Functions;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -133,6 +135,7 @@ public final class UIMAUtils {
     /**
      * Returns the covered text of the list of {@link Annotation}s produced
      * by {@link UIMAUtils#getAdjacentAnnotations(Class, List, int, int)}.
+     * {@code null} will be replaced with "NULL" by {@link EscapeNullFunction}.
      *
      * @param <T> the annotation type
      * @param clazz the class of the annotation type
@@ -150,7 +153,8 @@ public final class UIMAUtils {
 
         // The tokens of the trigram (A, p, B)
         final List<String> tokens = Lists.newArrayList(Collections2.transform(
-                adjacent, new CoveredTextFunction()));
+                adjacent, Functions.compose(
+                new EscapeNullFunction(), new CoveredTextFunction())));
 
         return tokens;
     }
