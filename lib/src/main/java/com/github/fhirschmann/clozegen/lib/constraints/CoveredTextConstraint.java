@@ -22,18 +22,25 @@ import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
+ * A constraint which tries to match an annotation's covered text.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class CoveredTextConstraint implements FSMatchConstraint {
+    /** The covered text to match. */
     private String matchText;
 
-    public CoveredTextConstraint(String coveredText) {
+    /**
+     * Constructs a new constraint.
+     *
+     * @param coveredText covered text to match
+     */
+    public CoveredTextConstraint(final String coveredText) {
         this.matchText = coveredText;
     }
 
     @Override
-    public boolean match(FeatureStructure fs) {
+    public boolean match(final FeatureStructure fs) {
         if (fs instanceof Annotation) {
             Annotation annotation = (Annotation) fs;
             return annotation.getCoveredText().equals(matchText);
