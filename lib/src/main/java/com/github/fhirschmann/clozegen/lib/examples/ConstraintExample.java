@@ -22,10 +22,12 @@ import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
 import com.github.fhirschmann.clozegen.lib.components.DebugWriter;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.CoveredTextConstraintResource;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
@@ -45,51 +47,81 @@ public class ConstraintExample {
      * given to {@link TypeConstraintResource} will result in {@link GapAnnotator} being
      * constrained to articles.
      * </p>
+     *
      * @return an analysis engine description
      * @throws ResourceInitializationException on errors during initialization
      */
     public static AnalysisEngineDescription example1()
             throws ResourceInitializationException {
-        AnalysisEngineDescription desc1 = createPrimitiveDescription(GapAnnotator.class,
+        AnalysisEngineDescription desc = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
                 createExternalResourceDescription(
                     TypeConstraintResource.class,
                     TypeConstraintResource.PARAM_TYPE, ART.class.getName()),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(DummyAdapter.class));
-        return desc1;
-
+        return desc;
     }
 
     /**
      * Example 2.
      *
      * <p>
-     * This example demonstrates the usage of {@link TypeConstraintResource} in conjunction
-     * with a predefined {@link Constraint}, which will restrict {@link GapAnnotator}
-     * to prepositions only.
+     * This example demonstrates the usage of {@link TypeConstraintResource} in
+     * conjunction with a predefined {@link Constraint}, which will restrict
+     * {@link GapAnnotator} to prepositions only.
      * </p>
+     *
      * @return an analysis engine description
      * @throws ResourceInitializationException on errors during initialization
      */
     public static AnalysisEngineDescription example2()
             throws ResourceInitializationException {
-        AnalysisEngineDescription desc1 = createPrimitiveDescription(GapAnnotator.class,
+        AnalysisEngineDescription desc = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraintResource.class),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(DummyAdapter.class));
-        return desc1;
-
+        return desc;
     }
 
-    public static void main(String[] args) throws Exception {
+    /**
+     * Example 3.
+     *
+     * <p>
+     * This example demonstrates the usage of {@link CoveredTextConstraintResource} by
+     * matching the word "studies" of the type {@link POS}.
+     * </p>
+     *
+     * @return an analysis engine description
+     * @throws ResourceInitializationException on errors during initialization
+     */
+    public static AnalysisEngineDescription example3()
+            throws ResourceInitializationException {
+        AnalysisEngineDescription desc = createPrimitiveDescription(GapAnnotator.class,
+                GapAnnotator.CONSTRAINT_KEY,
+                createExternalResourceDescription(
+                    CoveredTextConstraintResource.class,
+                    CoveredTextConstraintResource.PARAM_STRING, "studies",
+                    TypeConstraintResource.PARAM_TYPE, POS.class.getName()),
+                GapAnnotator.ADAPTER_KEY,
+                createExternalResourceDescription(DummyAdapter.class));
+        return desc;
+    }
+
+    /**
+     * Runs all examples.
+     *
+     * @param args unused
+     * @throws Exception on errors
+     */
+    public static void main(final String[] args) throws Exception {
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
 
         pipeline.addStep(example1());
         pipeline.addStep(example2());
+        pipeline.addStep(example3());
         pipeline.addStep(DebugWriter.class);
         pipeline.run(UIMAUtils.createTestJCas());
-
     }
 }
