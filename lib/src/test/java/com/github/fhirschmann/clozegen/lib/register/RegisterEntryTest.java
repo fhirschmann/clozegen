@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
-import com.github.fhirschmann.clozegen.lib.component.GapAnnotator;
+import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

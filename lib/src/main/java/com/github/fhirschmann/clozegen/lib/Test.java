@@ -17,18 +17,18 @@
  */
 package com.github.fhirschmann.clozegen.lib;
 
-import com.github.fhirschmann.clozegen.lib.adapter.CollocationAdapter;
-import com.github.fhirschmann.clozegen.lib.adapter.DummyAdapter;
-import com.github.fhirschmann.clozegen.lib.adapter.SingleTokenInputAdapter;
-import com.github.fhirschmann.clozegen.lib.adapter.StupidArticleAdapter;
-import com.github.fhirschmann.clozegen.lib.component.CollocationWriter;
-import com.github.fhirschmann.clozegen.lib.constraint.PrepositionConstraint;
-import com.github.fhirschmann.clozegen.lib.constraint.TypeConstraint;
-import com.github.fhirschmann.clozegen.lib.component.GapAnnotator;
-import com.github.fhirschmann.clozegen.lib.constraint.ArticleConstraint;
-import com.github.fhirschmann.clozegen.lib.constraint.WHConstraint;
+import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
+import com.github.fhirschmann.clozegen.lib.adapters.DummyAdapter;
+import com.github.fhirschmann.clozegen.lib.adapters.SingleTokenInputAdapter;
+import com.github.fhirschmann.clozegen.lib.adapters.StupidArticleAdapter;
+import com.github.fhirschmann.clozegen.lib.components.CollocationWriter;
+import com.github.fhirschmann.clozegen.lib.constraints.PrepositionConstraint;
+import com.github.fhirschmann.clozegen.lib.constraints.TypeConstraint;
+import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
+import com.github.fhirschmann.clozegen.lib.constraints.ArticleConstraint;
+import com.github.fhirschmann.clozegen.lib.constraints.WHConstraint;
 import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
-import com.github.fhirschmann.clozegen.lib.generator.DummyGapGenerator;
+import com.github.fhirschmann.clozegen.lib.generators.DummyGapGenerator;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;

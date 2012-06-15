@@ -17,10 +17,10 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
-import com.github.fhirschmann.clozegen.lib.component.api.GapProcessor;
+import com.github.fhirschmann.clozegen.lib.components.api.GapProcessor;
 import com.github.fhirschmann.clozegen.lib.functions.CoveredTextFunction;
 import com.github.fhirschmann.clozegen.lib.functions.EscapeNullFunction;
-import com.github.fhirschmann.clozegen.lib.generator.Gap;
+import com.github.fhirschmann.clozegen.lib.generators.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.google.common.base.Functions;
 import com.google.common.collect.Collections2;

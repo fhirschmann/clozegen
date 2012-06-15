@@ -17,8 +17,8 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
-import com.github.fhirschmann.clozegen.lib.component.GapAnnotator;
-import com.github.fhirschmann.clozegen.lib.adapter.CollocationAdapter;
+import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
+import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
 import com.google.common.collect.Sets;
 import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
