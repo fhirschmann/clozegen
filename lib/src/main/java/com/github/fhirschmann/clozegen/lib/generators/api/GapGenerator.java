@@ -17,8 +17,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators.api;
 
-import com.github.fhirschmann.clozegen.lib.generators.Gap;
-
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>

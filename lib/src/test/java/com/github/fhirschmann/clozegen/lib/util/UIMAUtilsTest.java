@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
-import com.github.fhirschmann.clozegen.lib.generators.Gap;
+import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;

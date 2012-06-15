@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators;
 
-import com.github.fhirschmann.clozegen.lib.generators.Gap;
+import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.google.common.collect.Sets;
 import org.junit.Before;
 import org.junit.Test;

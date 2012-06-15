@@ -20,7 +20,7 @@ package com.github.fhirschmann.clozegen.lib.components;
 import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintProvider;
 import com.github.fhirschmann.clozegen.lib.components.api.ConstraintBasedAnnotator;
 import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
-import com.github.fhirschmann.clozegen.lib.generators.Gap;
+import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;

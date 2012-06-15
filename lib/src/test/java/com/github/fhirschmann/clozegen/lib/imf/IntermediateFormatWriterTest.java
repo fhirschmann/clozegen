@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.imf;
 
-import com.github.fhirschmann.clozegen.lib.generators.Gap;
+import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;

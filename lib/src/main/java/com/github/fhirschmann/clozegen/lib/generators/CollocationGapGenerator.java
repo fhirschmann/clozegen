@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators;
 
+import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.model.CollocationModel;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
