@@ -18,7 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.examples;
 
 import com.github.fhirschmann.clozegen.lib.components.CollocationWriter;
-import com.github.fhirschmann.clozegen.lib.constraints.PrepositionConstraint;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbReader;
@@ -59,7 +59,7 @@ public class CollocationWriterExample {
         AnalysisEngineDescription trigrams = createPrimitiveDescription(
                 CollocationWriter.class,
                 CollocationWriter.CONSTRAINT_KEY,
-                createExternalResourceDescription(PrepositionConstraint.class),
+                createExternalResourceDescription(PrepositionConstraintResource.class),
                 CollocationWriter.PARAM_OUTPUT_PATH, "target/test.txt");
 
         pipeline.addStep(trigrams);

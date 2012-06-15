@@ -15,25 +15,26 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.constraints;
+package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
 import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
+import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSMatchConstraint;
+import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
+ * A constraint which matches articles.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CoveredTextConstraintResource extends ConstraintResource {
-    /** The string to match. */
-    public static final String PARAM_STRING = "String";
-    @ConfigurationParameter(name = PARAM_STRING, mandatory = true)
-    private String string;
-
+public class ArticleConstraintResource extends ConstraintResource {
     @Override
-    public FSMatchConstraint getConstraint(JCas jcas) {
-        return new CoveredTextConstraint(string);
+    public FSMatchConstraint getConstraint(final JCas jcas) {
+        FSTypeConstraint cons = ConstraintFactory.instance().
+                createTypeConstraint();
+        cons.add(ART.class.getName());
+        return cons;
     }
 }

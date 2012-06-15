@@ -17,22 +17,14 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints;
 
-import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import java.util.Iterator;
 import org.apache.uima.UIMAException;
 import org.apache.uima.cas.FSMatchConstraint;
-import org.apache.uima.cas.FeatureStructure;
-import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
-import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.BeforeClass;
 
 /**
  *

@@ -22,11 +22,11 @@ import com.github.fhirschmann.clozegen.lib.adapters.DummyAdapter;
 import com.github.fhirschmann.clozegen.lib.adapters.SingleTokenInputAdapter;
 import com.github.fhirschmann.clozegen.lib.adapters.StupidArticleAdapter;
 import com.github.fhirschmann.clozegen.lib.components.CollocationWriter;
-import com.github.fhirschmann.clozegen.lib.constraints.PrepositionConstraint;
-import com.github.fhirschmann.clozegen.lib.constraints.TypeConstraint;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
-import com.github.fhirschmann.clozegen.lib.constraints.ArticleConstraint;
-import com.github.fhirschmann.clozegen.lib.constraints.WHConstraint;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.ArticleConstraintResource;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.WHConstraintResource;
 import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.generators.DummyGapGenerator;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
@@ -57,7 +57,7 @@ public class Test {
         AnalysisEngineDescription test = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.PARAM_ANSWER_COUNT, 5,
                 GapAnnotator.CONSTRAINT_KEY,
-                createExternalResourceDescription(PrepositionConstraint.class),
+                createExternalResourceDescription(PrepositionConstraintResource.class),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
                 CollocationAdapter.class,
@@ -66,23 +66,23 @@ public class Test {
         AnalysisEngineDescription test2 = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
                 createExternalResourceDescription(
-                    TypeConstraint.class,
-                    TypeConstraint.PARAM_TYPE, ART.class.getName()),
+                    TypeConstraintResource.class,
+                    TypeConstraintResource.PARAM_TYPE, ART.class.getName()),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(StupidArticleAdapter.class));
 
         AnalysisEngineDescription test3 = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
                 createExternalResourceDescription(
-                    TypeConstraint.class,
-                    TypeConstraint.PARAM_TYPE, NN.class.getName()),
+                    TypeConstraintResource.class,
+                    TypeConstraintResource.PARAM_TYPE, NN.class.getName()),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(SingleTokenInputAdapter.class));
 
         AnalysisEngineDescription writer = createPrimitiveDescription(
                 CollocationWriter.class,
                 CollocationWriter.CONSTRAINT_KEY,
-                createExternalResourceDescription(PrepositionConstraint.class),
+                createExternalResourceDescription(PrepositionConstraintResource.class),
                 CollocationWriter.PARAM_OUTPUT_PATH, "/home/fabian/test.txt");
 
         ExternalResourceDescription gen = createExternalResourceDescription(

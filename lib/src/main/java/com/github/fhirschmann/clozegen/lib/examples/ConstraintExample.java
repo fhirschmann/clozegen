@@ -19,8 +19,8 @@ package com.github.fhirschmann.clozegen.lib.examples;
 
 import com.github.fhirschmann.clozegen.lib.adapters.DummyAdapter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
-import com.github.fhirschmann.clozegen.lib.constraints.PrepositionConstraint;
-import com.github.fhirschmann.clozegen.lib.constraints.TypeConstraint;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
 import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
@@ -41,8 +41,8 @@ public class ConstraintExample {
      * Example 1.
      *
      * <p>
-     * This example demonstrates the usage of {@link TypeConstraint}. The argument
-     * given to {@link TypeConstraint} will result in {@link GapAnnotator} being
+     * This example demonstrates the usage of {@link TypeConstraintResource}. The argument
+     * given to {@link TypeConstraintResource} will result in {@link GapAnnotator} being
      * constrained to articles.
      * </p>
      * @return an analysis engine description
@@ -53,8 +53,8 @@ public class ConstraintExample {
         AnalysisEngineDescription desc1 = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
                 createExternalResourceDescription(
-                    TypeConstraint.class,
-                    TypeConstraint.PARAM_TYPE, ART.class.getName()),
+                    TypeConstraintResource.class,
+                    TypeConstraintResource.PARAM_TYPE, ART.class.getName()),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(DummyAdapter.class));
         return desc1;
@@ -65,7 +65,7 @@ public class ConstraintExample {
      * Example 2.
      *
      * <p>
-     * This example demonstrates the usage of {@link TypeConstraint} in conjunction
+     * This example demonstrates the usage of {@link TypeConstraintResource} in conjunction
      * with a predefined {@link Constraint}, which will restrict {@link GapAnnotator}
      * to prepositions only.
      * </p>
@@ -76,7 +76,7 @@ public class ConstraintExample {
             throws ResourceInitializationException {
         AnalysisEngineDescription desc1 = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
-                createExternalResourceDescription(PrepositionConstraint.class),
+                createExternalResourceDescription(PrepositionConstraintResource.class),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(DummyAdapter.class));
         return desc1;

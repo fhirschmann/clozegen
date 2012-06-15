@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.constraints;
+package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
 import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
@@ -29,7 +29,7 @@ import org.apache.uima.jcas.JCas;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PrepositionConstraint extends ConstraintResource {
+public class PrepositionConstraintResource extends ConstraintResource {
     @Override
     public FSMatchConstraint getConstraint(final JCas jcas) {
         FSTypeConstraint cons = ConstraintFactory.instance().

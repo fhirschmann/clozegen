@@ -15,32 +15,26 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.constraints;
+package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
+import com.github.fhirschmann.clozegen.lib.constraints.CoveredTextConstraint;
 import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
-import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSMatchConstraint;
-import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.descriptor.ConfigurationParameter;
 
-
 /**
- * A generic constraint which matches exactly one type.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class TypeConstraint extends ConstraintResource {
-    /** The type to match. */
-    public static final String PARAM_TYPE = "Types";
-    @ConfigurationParameter(name = PARAM_TYPE, mandatory = true)
-    private String type;
+public class CoveredTextConstraintResource extends ConstraintResource {
+    /** The string to match. */
+    public static final String PARAM_STRING = "String";
+    @ConfigurationParameter(name = PARAM_STRING, mandatory = true)
+    private String string;
 
     @Override
-    public FSMatchConstraint getConstraint(final JCas jcas) {
-        FSTypeConstraint cons = ConstraintFactory.instance().
-                createTypeConstraint();
-        cons.add(type);
-        return cons;
+    public FSMatchConstraint getConstraint(JCas jcas) {
+        return new CoveredTextConstraint(string);
     }
 }
