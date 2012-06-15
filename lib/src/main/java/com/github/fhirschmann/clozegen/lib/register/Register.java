@@ -67,6 +67,18 @@ public class Register extends ForwardingCollection<RegisterEntry> {
     }
 
     /**
+     * Indicates whether this {@link Register} contains an entry identified
+     * by {@code identifier}.
+     *
+     * @param identifier the identifier in question
+     * @return true if this register contains an entry for a given identifier
+     */
+    @Override
+    public boolean contains(final Object identifier) {
+        return register.keySet().contains(identifier);
+    }
+
+    /**
      * Returns a live view of the set of Descriptions which support
      * the given <code>language</code>.
      *

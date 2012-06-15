@@ -49,6 +49,14 @@ public class RegisterTest {
     }
 
     @Test
+    public void testContains() {
+        assertTrue(r.contains("foo"));
+        assertTrue(r.contains("bar"));
+        assertTrue(r.contains("baz"));
+        assertFalse(r.contains("asdf"));
+    }
+
+    @Test
     public void testAdd() {
         r.clear();
         assertThat(r.add(e1), is(true));
