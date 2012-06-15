@@ -27,7 +27,7 @@ import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintR
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.ArticleConstraintResource;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.WHConstraintResource;
-import com.github.fhirschmann.clozegen.lib.debug.DebugWriter;
+import com.github.fhirschmann.clozegen.lib.components.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.generators.DummyGapGenerator;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
