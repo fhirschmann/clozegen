@@ -31,5 +31,6 @@ import org.uimafit.component.Resource_ImplBase;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public abstract class Constraint extends Resource_ImplBase implements ConstraintProvider {
+public abstract class ConstraintResource
+    extends Resource_ImplBase implements ConstraintProvider {
 }

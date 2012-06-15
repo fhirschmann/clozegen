@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints;
 
-import com.github.fhirschmann.clozegen.lib.constraints.api.Constraint;
+import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSMatchConstraint;
@@ -29,7 +29,7 @@ import org.apache.uima.jcas.JCas;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class ArticleConstraint extends Constraint {
+public class ArticleConstraint extends ConstraintResource {
     @Override
     public FSMatchConstraint getConstraint(final JCas jcas) {
         FSTypeConstraint cons = ConstraintFactory.instance().

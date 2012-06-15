@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints;
 
-import com.github.fhirschmann.clozegen.lib.constraints.api.Constraint;
+import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FSTypeConstraint;
@@ -30,7 +30,7 @@ import org.uimafit.descriptor.ConfigurationParameter;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class TypeConstraint extends Constraint {
+public class TypeConstraint extends ConstraintResource {
     /** The type to match. */
     public static final String PARAM_TYPE = "Types";
     @ConfigurationParameter(name = PARAM_TYPE, mandatory = true)
