@@ -28,20 +28,20 @@ import static org.hamcrest.CoreMatchers.*;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class RegisterEntryTest {
-    private RegisterEntry e1;
-    private RegisterEntry e2;
-    private RegisterEntry e3;
+    private DescriptionRegisterEntry e1;
+    private DescriptionRegisterEntry e2;
+    private DescriptionRegisterEntry e3;
 
     @Before
     public void setUp() {
-        e1 = new RegisterEntry("foo", GapAnnotator.class);
-        e2 = new RegisterEntry("bar", GapAnnotator.class);
-        e3 = new RegisterEntry("foo", GapAnnotator.class);
+        e1 = new DescriptionRegisterEntry("foo", GapAnnotator.class);
+        e2 = new DescriptionRegisterEntry("bar", GapAnnotator.class);
+        e3 = new DescriptionRegisterEntry("foo", GapAnnotator.class);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetIdentifier() {
-        new RegisterEntry("foo bar", GapAnnotator.class);
+        new DescriptionRegisterEntry("foo bar", GapAnnotator.class);
     }
 
     @Test

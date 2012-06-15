@@ -32,11 +32,11 @@ public final class RegisterFactory {
     private RegisterFactory() {
     }
 
-    public static Register createDefaultRegister()
+    public static DescriptionRegister createDefaultRegister()
             throws ResourceInitializationException {
-        Register register = new Register();
+        DescriptionRegister register = new DescriptionRegister();
 
-        RegisterEntry entry = new RegisterEntry("prepositions",
+        DescriptionRegisterEntry entry = new DescriptionRegisterEntry("prepositions",
                 GapAnnotator.class,
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(

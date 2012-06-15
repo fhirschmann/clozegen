@@ -31,19 +31,19 @@ import static org.junit.matchers.JUnitMatchers.*;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class RegisterTest {
-    RegisterEntry e1;
-    RegisterEntry e2;
-    RegisterEntry e3;
-    Register r;
+    DescriptionRegisterEntry e1;
+    DescriptionRegisterEntry e2;
+    DescriptionRegisterEntry e3;
+    DescriptionRegister r;
 
     @Before
     public void setUp() {
-        r = new Register();
-        e1 = new RegisterEntry("foo", GapAnnotator.class);
+        r = new DescriptionRegister();
+        e1 = new DescriptionRegisterEntry("foo", GapAnnotator.class);
         e1.setSupportedLanguages(Sets.newHashSet("de", "en"));
-        e2 = new RegisterEntry("bar", GapAnnotator.class);
+        e2 = new DescriptionRegisterEntry("bar", GapAnnotator.class);
         e2.setSupportedLanguages(Sets.newHashSet("de"));
-        e3 = new RegisterEntry("baz", GapAnnotator.class);
+        e3 = new DescriptionRegisterEntry("baz", GapAnnotator.class);
         e3.setSupportedLanguages(Sets.newHashSet("en"));
         Collections.addAll(r, e1, e2, e3);
     }

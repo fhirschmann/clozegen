@@ -29,45 +29,45 @@ import java.util.Map;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class Register extends ForwardingCollection<RegisterEntry> {
+public class DescriptionRegister extends ForwardingCollection<DescriptionRegisterEntry> {
 
     /** The map identifier → Entry. */
-    private final Map<String, RegisterEntry> register;
+    private final Map<String, DescriptionRegisterEntry> register;
 
     /**
-     * Creates a new empty Register.
+     * Creates a new empty DescriptionRegister.
      */
-    public Register() {
+    public DescriptionRegister() {
         super();
         register = HashBiMap.create();
     }
 
     /**
-     * Adds the specified {@link RegisterEntry} to the register.
+     * Adds the specified {@link DescriptionRegisterEntry} to the register.
      *
-     * @param entry the {@link RegisterEntry} to add.
+     * @param entry the {@link DescriptionRegisterEntry} to add.
      * @return whether this collection changed
      */
     @Override
-    public boolean add(final RegisterEntry entry) {
+    public boolean add(final DescriptionRegisterEntry entry) {
         final boolean changed = !register.containsKey(entry.getIdentifier());
         register.put(entry.getIdentifier(), entry);
         return changed;
     }
 
     /**
-     * Returns the {@link RegisterEntry} identified by <code>identifier</code>
+     * Returns the {@link DescriptionRegisterEntry} identified by <code>identifier</code>
      * or <code>null</code> if it doesn't exist.
      *
      * @param identifier the identifier of the entry in question
      * @return the entry identified by a given <code>identifier</code>
      */
-    public RegisterEntry get(final String identifier) {
+    public DescriptionRegisterEntry get(final String identifier) {
         return register.get(identifier);
     }
 
     /**
-     * Indicates whether this {@link Register} contains an entry identified
+     * Indicates whether this {@link DescriptionRegister} contains an entry identified
      * by {@code identifier}.
      *
      * @param identifier the identifier in question
@@ -84,10 +84,10 @@ public class Register extends ForwardingCollection<RegisterEntry> {
      * @param language the language(code)
      * @return live view of filtered descriptions
      */
-    public Collection<RegisterEntry> getAnnotatorsForLanguage(final String language) {
-        return Collections2.filter(register.values(), new Predicate<RegisterEntry>() {
+    public Collection<DescriptionRegisterEntry> getAnnotatorsForLanguage(final String language) {
+        return Collections2.filter(register.values(), new Predicate<DescriptionRegisterEntry>() {
             @Override
-            public boolean apply(final RegisterEntry input) {
+            public boolean apply(final DescriptionRegisterEntry input) {
                 return input.getSupportedLanguages().contains(language);
             }
         });
@@ -99,7 +99,7 @@ public class Register extends ForwardingCollection<RegisterEntry> {
     }
 
     @Override
-    protected Collection<RegisterEntry> delegate() {
+    protected Collection<DescriptionRegisterEntry> delegate() {
         return register.values();
     }
 

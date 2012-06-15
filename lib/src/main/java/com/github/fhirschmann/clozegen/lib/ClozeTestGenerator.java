@@ -2,7 +2,7 @@ package com.github.fhirschmann.clozegen.lib;
 
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
-import com.github.fhirschmann.clozegen.lib.register.Register;
+import com.github.fhirschmann.clozegen.lib.register.DescriptionRegister;
 import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class ClozeTestGenerator {
     private Pipeline pipeline;
 
     /** The register of all annotator descriptions. */
-    private Register register;
+    private DescriptionRegister register;
 
     public ClozeTestGenerator() throws ResourceInitializationException {
         pipeline = PipelineFactory.createDefaultPipeline();
@@ -71,14 +71,14 @@ public class ClozeTestGenerator {
     /**
      * @return the register
      */
-    public Register getRegister() {
+    public DescriptionRegister getRegister() {
         return register;
     }
 
     /**
      * @param register the register to set
      */
-    public void setRegister(final Register register) {
+    public void setRegister(final DescriptionRegister register) {
         this.register = register;
     }
 }

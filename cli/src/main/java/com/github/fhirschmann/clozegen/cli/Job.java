@@ -18,8 +18,8 @@
 package com.github.fhirschmann.clozegen.cli;
 
 import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
-import com.github.fhirschmann.clozegen.lib.register.Register;
-import com.github.fhirschmann.clozegen.lib.register.RegisterEntry;
+import com.github.fhirschmann.clozegen.lib.register.DescriptionRegister;
+import com.github.fhirschmann.clozegen.lib.register.DescriptionRegisterEntry;
 import java.util.Map;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.ParseException;

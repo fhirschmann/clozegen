@@ -30,13 +30,13 @@ import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 /**
- * Represents a RegisterEntry of a {@link Register}.
+ * Represents a DescriptionRegisterEntry of a {@link Register}.
  *
  * @see Register
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class RegisterEntry {
+public class DescriptionRegisterEntry {
     /** The name of this entry. */
     private String name;
 
@@ -61,7 +61,7 @@ public class RegisterEntry {
      * @param identifier the identifier of this entry
      * @param componentClass the component class for the primitive description
      */
-    public RegisterEntry(final String identifier,
+    public DescriptionRegisterEntry(final String identifier,
             final Class<? extends AnalysisComponent> componentClass) {
         setIdentifier(identifier);
         this.componentClass = componentClass;
@@ -74,7 +74,7 @@ public class RegisterEntry {
      * @param componentClass the component class for the primitive description
      * @param configurationData the configuration data for the primitive description
      */
-    public RegisterEntry(final String identifier,
+    public DescriptionRegisterEntry(final String identifier,
             final Class<? extends AnalysisComponent> componentClass,
             final Object... configurationData) {
         this(identifier, componentClass);
@@ -208,7 +208,7 @@ public class RegisterEntry {
         if ((obj == null) || (!getClass().equals(obj.getClass()))) {
             return false;
         }
-        final RegisterEntry other = (RegisterEntry) obj;
+        final DescriptionRegisterEntry other = (DescriptionRegisterEntry) obj;
 
         return Objects.equal(getIdentifier(), other.getIdentifier());
     }

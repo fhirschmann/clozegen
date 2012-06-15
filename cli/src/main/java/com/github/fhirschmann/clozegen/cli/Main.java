@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.cli;
 
-import com.github.fhirschmann.clozegen.lib.register.RegisterEntry;
+import com.github.fhirschmann.clozegen.lib.register.DescriptionRegisterEntry;
 import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Level;
@@ -60,7 +60,7 @@ public class Main {
             if (line.hasOption("help")) {
                 printHelp();
             } else if (line.hasOption("list")) {
-                for (RegisterEntry entry : RegisterFactory.createDefaultRegister()) {
+                for (DescriptionRegisterEntry entry : RegisterFactory.createDefaultRegister()) {
                     System.out.println(String.format("[%s] %s",
                             entry.getIdentifier(), entry.getName()));
                 }

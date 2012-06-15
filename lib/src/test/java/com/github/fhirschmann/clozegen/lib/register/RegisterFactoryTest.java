@@ -28,7 +28,7 @@ import static org.hamcrest.CoreMatchers.*;
 public class RegisterFactoryTest {
     @Test
     public void testCreateDefaultRegister() throws Exception {
-        Register r = RegisterFactory.createDefaultRegister();
+        DescriptionRegister r = RegisterFactory.createDefaultRegister();
         assertThat(r.isEmpty(), is(false));
     }
 }
