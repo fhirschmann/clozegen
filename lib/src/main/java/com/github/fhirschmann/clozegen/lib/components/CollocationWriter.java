@@ -49,6 +49,10 @@ public class CollocationWriter extends ConstraintBasedConsumer {
     @ConfigurationParameter(name = PARAM_N, mandatory = false, defaultValue = "3")
     private int n;
 
+	public static final String PARAM_MIN_FREQUENCY = "minFrequency";
+	@ConfigurationParameter(name = PARAM_MIN_FREQUENCY, mandatory = false, defaultValue = "1")
+	private int minFrequency;
+
     /** The multiset we will write to a file. */
     private Multiset<String> ms;
 
@@ -70,7 +74,7 @@ public class CollocationWriter extends ConstraintBasedConsumer {
     @Override
     public void collectionProcessComplete() {
         try {
-            WriteMultisets.writeMultiSet(ms, new File(path));
+            WriteMultisets.writeMultiSet(ms, minFrequency, new File(path));
         } catch (IOException ex) {
             getContext().getLogger().log(Level.SEVERE, ex.getMessage());
         }

@@ -17,7 +17,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.multiset;
 
-import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
@@ -39,19 +38,38 @@ public final class WriteMultisets {
      * the corresponding counts on the right-hand side.
      *
      * @param multiset the multiset to write from
+     * @param minFrequency the minimum frequency a word must have in order to be written
+     * @param file the file to write to
+     * @throws IOException on errors opening/writing to the file
+     */
+    public static void writeMultiSet(final Multiset<String> multiset,
+            final int minFrequency, final File file)
+            throws IOException {
+        final BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+
+        for (Multiset.Entry<String> entry : multiset.entrySet()) {
+            if (entry.getCount() >= minFrequency) {
+                writeMultiSetLine(bufferedWriter, entry.getElement().toString(),
+                        entry.getCount());
+            }
+        }
+        bufferedWriter.close();
+    }
+
+    /**
+     * Writes a multiset to a file. The elements will be written to a tab-separated
+     * file with the string representation of the elements on the left-hand side and
+     * the corresponding counts on the right-hand side.
+     *
+     * @param multiset the multiset to write from
      * @param file the file to write to
      * @throws IOException on errors opening/writing to the file
      */
     public static void writeMultiSet(final Multiset<String> multiset, final File file)
             throws IOException {
-        final BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-
-        for (Multiset.Entry<String> entry : multiset.entrySet()) {
-            writeMultiSetLine(bufferedWriter, entry.getElement().toString(),
-                    entry.getCount());
-        }
-        bufferedWriter.close();
+        writeMultiSet(multiset, 1, file);
     }
+
 
     /**
      * Writes a line (entry and frequency) to a {@link Writer}. Does not close
