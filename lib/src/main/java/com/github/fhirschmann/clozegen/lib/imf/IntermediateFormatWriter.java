@@ -18,9 +18,11 @@
 package com.github.fhirschmann.clozegen.lib.imf;
 
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import com.google.common.io.Closeables;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
@@ -66,10 +68,6 @@ public class IntermediateFormatWriter extends JCasConsumer_ImplBase {
 
     @Override
     public void collectionProcessComplete() {
-        try {
-            outputBuffer.close();
-        } catch (IOException ex) {
-            getLogger().error(ex);
-        }
+        Closeables.closeQuietly(outputBuffer);
     }
 }
