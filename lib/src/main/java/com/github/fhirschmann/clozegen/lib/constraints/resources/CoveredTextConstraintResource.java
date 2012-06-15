@@ -18,23 +18,27 @@
 package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
 import com.github.fhirschmann.clozegen.lib.constraints.CoveredTextConstraint;
-import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
+import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
+ * This is an extension to {@link TypeConstraintResource} which additionally matches
+ * an annotation's covered text using {@link CoveredTextConstraint}.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CoveredTextConstraintResource extends ConstraintResource {
+public class CoveredTextConstraintResource extends TypeConstraintResource {
     /** The string to match. */
     public static final String PARAM_STRING = "String";
     @ConfigurationParameter(name = PARAM_STRING, mandatory = true)
     private String string;
 
     @Override
-    public FSMatchConstraint getConstraint(JCas jcas) {
-        return new CoveredTextConstraint(string);
+    public FSMatchConstraint getConstraint(final JCas jcas) {
+        FSMatchConstraint typeConstraint = super.getConstraint(jcas);
+        return ConstraintFactory.instance().and(typeConstraint,
+                new CoveredTextConstraint(string));
     }
 }
