@@ -73,9 +73,8 @@ public class Register extends ForwardingCollection<RegisterEntry> {
      * @param identifier the identifier in question
      * @return true if this register contains an entry for a given identifier
      */
-    @Override
-    public boolean contains(final Object identifier) {
-        return register.keySet().contains(identifier);
+    public boolean containsIdentifier(final String identifier) {
+        return register.containsKey(identifier);
     }
 
     /**

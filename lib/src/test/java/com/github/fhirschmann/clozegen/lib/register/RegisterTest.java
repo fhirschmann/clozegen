@@ -49,11 +49,11 @@ public class RegisterTest {
     }
 
     @Test
-    public void testContains() {
-        assertTrue(r.contains("foo"));
-        assertTrue(r.contains("bar"));
-        assertTrue(r.contains("baz"));
-        assertFalse(r.contains("asdf"));
+    public void testContainsIdentifier() {
+        assertTrue(r.containsIdentifier("foo"));
+        assertTrue(r.containsIdentifier("bar"));
+        assertTrue(r.containsIdentifier("baz"));
+        assertFalse(r.containsIdentifier("asdf"));
     }
 
     @Test
