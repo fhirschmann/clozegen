@@ -24,7 +24,7 @@ public class ClozeTestGenerator {
 
     public ClozeTestGenerator() throws ResourceInitializationException {
         pipeline = PipelineFactory.createDefaultPipeline();
-        register = RegisterFactory.createDefaultRegister();
+        register = RegisterFactory.createDefaultDescriptionRegister();
 
     }
 

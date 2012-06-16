@@ -32,7 +32,7 @@ public final class RegisterFactory {
     private RegisterFactory() {
     }
 
-    public static DescriptionRegister createDefaultRegister()
+    public static DescriptionRegister createDefaultDescriptionRegister()
             throws ResourceInitializationException {
         DescriptionRegister register = new DescriptionRegister();
 

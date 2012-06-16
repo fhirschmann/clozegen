@@ -27,7 +27,7 @@ import static org.hamcrest.CoreMatchers.*;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class RegisterEntryTest {
+public class DescriptionRegisterEntryTest {
     private DescriptionRegisterEntry e1;
     private DescriptionRegisterEntry e2;
     private DescriptionRegisterEntry e3;

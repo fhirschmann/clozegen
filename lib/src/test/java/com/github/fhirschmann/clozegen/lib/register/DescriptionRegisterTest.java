@@ -30,7 +30,7 @@ import static org.junit.matchers.JUnitMatchers.*;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class RegisterTest {
+public class DescriptionRegisterTest {
     DescriptionRegisterEntry e1;
     DescriptionRegisterEntry e2;
     DescriptionRegisterEntry e3;
