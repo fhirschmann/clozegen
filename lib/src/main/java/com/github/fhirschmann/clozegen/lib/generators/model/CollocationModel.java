@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators.model;
 
+import com.github.fhirschmann.clozegen.lib.adapters.api.URLBasedModelAdapter;
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
 import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
@@ -34,7 +35,7 @@ import org.javatuples.Triplet;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CollocationModel {
+public class CollocationModel implements URLBasedModel {
     /** A multiset of ngrams (x_i-n, x_i-1, x, x_i+1, x_i+n). */
     private Multiset<String> ngrams;
 
@@ -54,6 +55,7 @@ public class CollocationModel {
      * @param ngrams the URL to the ngrams (x_i-n, x_i+1, x, x_i+1, x_i+n)
      * @throws IOException on errors reading a file
      */
+    @Override
     public void load(final URL ngrams) throws IOException {
         this.ngrams = ReadMultisets.parseMultiset(ngrams);
 

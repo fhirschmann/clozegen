@@ -18,52 +18,23 @@
 package com.github.fhirschmann.clozegen.lib.adapters;
 
 import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
-import com.github.fhirschmann.clozegen.lib.components.api.AbstractResource;
+import com.github.fhirschmann.clozegen.lib.adapters.api.URLBasedModelAdapter;
 import com.github.fhirschmann.clozegen.lib.generators.CollocationGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.model.CollocationModel;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.io.Resources;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import java.io.IOException;
 import java.util.List;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.apache.uima.util.Level;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
  * This adapter is backed by {@link CollocationGapGenerator} and injects
- * a {@link CollocationModel} from {@link CollocationAdapter#PARAM_PATH}.
+ * a {@link CollocationModel} from {@link URLBasedModelAdapter#PARAM_PATH}.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CollocationAdapter extends AbstractResource implements GeneratorAdapter {
-
-    /** The path to the collocation file. */
-    public static final String PARAM_PATH = "Path";
-    @ConfigurationParameter(name = PARAM_PATH, mandatory = true)
-    private String path;
-
-    /** The n in n-gram. */
-    public static final String PARAM_N = "N";
-    @ConfigurationParameter(name = PARAM_N, mandatory = false, defaultValue = "3")
-    private int n;
-
-    /** The collocation model. */
-    private CollocationModel model;
-
-    @Override
-    public boolean initialize() {
-        model = new CollocationModel();
-        try {
-            model.load(Resources.getResource(path));
-            return true;
-        } catch (IOException ex) {
-            this.getUimaContext().getLogger().log(Level.SEVERE, ex.getMessage());
-            return false;
-        }
-    }
-
+public class CollocationAdapter
+        extends URLBasedModelAdapter<CollocationModel> implements GeneratorAdapter {
     @Override
     public GapGenerator generator(
             final List<Annotation> annotationList, final int offset) {

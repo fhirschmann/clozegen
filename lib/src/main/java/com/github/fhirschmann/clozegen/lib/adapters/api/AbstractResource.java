@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.components.api;
+package com.github.fhirschmann.clozegen.lib.adapters.api;
 
 import java.util.Map;
 import org.apache.uima.resource.ResourceInitializationException;
