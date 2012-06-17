@@ -36,9 +36,6 @@ public final class CollectionUtils {
     private CollectionUtils() {
     }
 
-    /** A whitespace-based joiner. */
-    public static final Joiner JOINER = Joiner.on(" ");
-
     /**
      * Returns a view of a list made up of the n adjacent neighbors of an element
      * and the element itself.
@@ -116,8 +113,8 @@ public final class CollectionUtils {
         final int middle = (int) Math.ceil(list.size() / 2);
 
         return Triplet.with(
-                JOINER.join(list.subList(0, middle)),
+                MiscUtils.WS_JOINER.join(list.subList(0, middle)),
                 list.get(middle),
-                JOINER.join(list.subList(middle + 1, list.size())));
+                MiscUtils.WS_JOINER.join(list.subList(middle + 1, list.size())));
     }
 }

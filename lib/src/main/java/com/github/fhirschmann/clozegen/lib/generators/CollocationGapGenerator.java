@@ -21,6 +21,7 @@ import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.model.CollocationModel;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
+import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
@@ -58,8 +59,6 @@ public class CollocationGapGenerator implements GapGenerator {
 
     /** The triplet (A, x, B) where x is the subject in question. */
     private Triplet<String, String, String> triplet;
-
-    private final static Joiner JOINER = Joiner.on(" ");
 
     /**
      * Creates a new collocation-based gap generator. The <code>tuple</code>
@@ -100,7 +99,7 @@ public class CollocationGapGenerator implements GapGenerator {
 
         // Remove candidates p* which appear in the context (A, p*, B)
         for (Entry<String> entry : candidates.entrySet()) {
-            if (model.getMultiset().contains(JOINER.join(
+            if (model.getMultiset().contains(MiscUtils.WS_JOINER.join(
                     triplet.getValue0(), entry.getElement(), triplet.getValue2()))) {
                 candidates.remove(entry.getElement(), entry.getCount());
             }
