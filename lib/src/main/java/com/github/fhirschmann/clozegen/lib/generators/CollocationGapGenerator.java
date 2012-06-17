@@ -51,9 +51,6 @@ import org.javatuples.Triplet;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class CollocationGapGenerator implements GapGenerator {
-    /** The index of the element in the middle. */
-    private int index;
-
     /** The model for this generator. */
     private CollocationModel model;
 
