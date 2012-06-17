@@ -92,7 +92,7 @@ public class Test {
         pipeline.addStep(test);
         //pipeline.addStep(test2);
         //pipeline.addStep(test3);
-        pipeline.addStep(writer);
+        //pipeline.addStep(writer);
         pipeline.addStep(DebugWriter.class);
         pipeline.run(j);
     }

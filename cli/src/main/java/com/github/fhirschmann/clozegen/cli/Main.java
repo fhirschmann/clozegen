@@ -60,7 +60,7 @@ public class Main {
             if (line.hasOption("help")) {
                 printHelp();
             } else if (line.hasOption("list")) {
-                for (DescriptionRegisterEntry entry : RegisterFactory.createDefaultRegister()) {
+                for (DescriptionRegisterEntry entry : RegisterFactory.createDefaultDescriptionRegister()) {
                     System.out.println(String.format("[%s] %s",
                             entry.getIdentifier(), entry.getName()));
                 }
