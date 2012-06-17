@@ -32,9 +32,6 @@ import org.javatuples.Triplet;
 /**
  * Represents a model for the collocation-based gap generator.
  *
- * <p>Three collocation data files which describe the frequency of collocations
- * can be used in conjunction with{@link CollocationModel#load(URL, URL, URL)}.
- *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class CollocationModel {
