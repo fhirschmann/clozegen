@@ -100,7 +100,7 @@ public class CollocationGapGenerator implements GapGenerator {
 
         // Remove candidates p* which appear in the context (A, p*, B)
         for (Entry<String> entry : candidates.entrySet()) {
-            if (model.getNGrams().contains(JOINER.join(
+            if (model.getMultiset().contains(JOINER.join(
                     triplet.getValue0(), entry.getElement(), triplet.getValue2()))) {
                 candidates.remove(entry.getElement(), entry.getCount());
             }

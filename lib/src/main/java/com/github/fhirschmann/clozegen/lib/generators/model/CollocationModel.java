@@ -17,16 +17,12 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators.model;
 
-import com.github.fhirschmann.clozegen.lib.adapters.api.URLBasedModelAdapter;
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
-import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multiset.Entry;
-import java.io.IOException;
-import java.net.URL;
 import java.util.Arrays;
 import org.javatuples.Triplet;
 
@@ -35,10 +31,7 @@ import org.javatuples.Triplet;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CollocationModel implements URLBasedModel {
-    /** A multiset of ngrams (x_i-n, x_i-1, x, x_i+1, x_i+n). */
-    private Multiset<String> ngrams;
-
+public class CollocationModel extends MultisetModel {
     /** A multiset of bigrams (x_i-n, x_i-1, x). */
     private MapMultiset<String, String> heads;
 
@@ -46,44 +39,25 @@ public class CollocationModel implements URLBasedModel {
     private MapMultiset<String, String> tails;
 
     /**
-     * Loads the model from a single ngram file. Please see
-     * {@link MultisetReader} for details on the file format.
-     * <p>
-     * The ngrams in the files must have an odd number of words.
-     * </p>
-     *
-     * @param ngrams the URL to the ngrams (x_i-n, x_i+1, x, x_i+1, x_i+n)
-     * @throws IOException on errors reading a file
+     * Creates a new empty {@link CollectionModel}.
      */
-    @Override
-    public void load(final URL ngrams) throws IOException {
-        this.ngrams = ReadMultisets.parseMultiset(ngrams);
-
+    public CollocationModel() {
+        super();
         heads = MapMultiset.create();
         tails = MapMultiset.create();
+    }
 
+    @Override
+    public void setMultiset(final Multiset<String> multiset) {
+        super.setMultiset(multiset);
         Triplet<String, String, String> triplet;
 
-        for (Entry<String> entry : this.ngrams.entrySet()) {
+        for (Entry<String> entry : getMultiset().entrySet()) {
             triplet = CollectionUtils.triListJoin(
                     Arrays.asList(entry.getElement().split(" ")));
             tails.add(triplet.getValue0(), triplet.getValue1(), entry.getCount());
             heads.add(triplet.getValue2(), triplet.getValue1(), entry.getCount());
         }
-    }
-
-    /**
-     * @return the ngrams (x_i-n, x_i-1, x, x_i+1, x_i+n).
-     */
-    public Multiset<String> getNGrams() {
-        return ngrams;
-    }
-
-    /**
-     * @param ngrams the ngrams to set
-     */
-    public void setNGrams(final Multiset<String> ngrams) {
-        this.ngrams = ngrams;
     }
 
     /**
@@ -94,32 +68,18 @@ public class CollocationModel implements URLBasedModel {
     }
 
     /**
-     * @param heads the ngrams where the subject word comes last
-     */
-    public void setHeads(final MapMultiset<String, String> heads) {
-        this.heads = heads;
-    }
-
-    /**
      * @return the ngrams where the subject word comes first
      */
     public MapMultiset<String, String> getTails() {
         return tails;
     }
 
-    /**
-     * @param tails the ngrams where the subject word comes first
-     */
-    public void setTails(final MapMultiset<String, String> tails) {
-        this.tails = tails;
-    }
-
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("tails", tails.toString());
-        str.add("heads", heads.toString());
-        str.add("ngrams", ngrams.toString());
+        str.add("tails", getTails().toString());
+        str.add("heads", getHeads().toString());
+        str.add("ngrams", getMultiset().toString());
         return str.toString();
     }
 }
