@@ -63,7 +63,7 @@ public class CollocationWriterExample {
                 CollocationWriter.PARAM_OUTPUT_PATH, "target/test.txt");
 
         pipeline.addStep(trigrams);
-        pipeline.run(wacky);
+        pipeline.run(cr);
     }
 
 }
