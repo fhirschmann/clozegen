@@ -30,7 +30,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 public interface GeneratorAdapter {
     /**
      * This method gets called for each word in a sentence which matches
-     * {@link GeneratorAdapter#getConstraint()}.
+     * {@link ConstraintProvider#getConstraint()}.
      *
      * @param annotationList the list of annotations in the current sentence
      * @param offset the offset (index) of the word to generate a gap for

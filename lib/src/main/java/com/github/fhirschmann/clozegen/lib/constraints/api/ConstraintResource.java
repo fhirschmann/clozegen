@@ -26,7 +26,7 @@ import org.uimafit.component.Resource_ImplBase;
  * <p>
  * This interface is used in order to inject a constraint into
  * {@link GapAnnotator}. Example implementation of this can be
- * found in {@link com.github.fhirschmann.clozegen.lib.adapter.constraint}.
+ * found in {@link com.github.fhirschmann.clozegen.lib.constraints.resources}.
  * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
