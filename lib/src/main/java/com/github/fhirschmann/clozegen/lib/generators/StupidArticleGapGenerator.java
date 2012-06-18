@@ -19,6 +19,7 @@ package com.github.fhirschmann.clozegen.lib.generators;
 
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.SingleTokenInputGapGenerator;
+import com.google.common.base.Optional;
 
 
 /**
@@ -37,7 +38,7 @@ public class StupidArticleGapGenerator implements SingleTokenInputGapGenerator {
     }
 
     @Override
-    public Gap generate(final int count) {
-        return Gap.with(validAnswer, "a", "an", "the");
+    public Optional<Gap> generate(final int count) {
+        return Optional.of(Gap.with(validAnswer, "a", "an", "the"));
     }
 }

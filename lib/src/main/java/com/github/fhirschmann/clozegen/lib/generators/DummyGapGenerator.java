@@ -19,6 +19,7 @@ package com.github.fhirschmann.clozegen.lib.generators;
 
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.SingleTokenInputGapGenerator;
+import com.google.common.base.Optional;
 
 /**
  * Creates a gap with no invalid answers.
@@ -35,7 +36,7 @@ public class DummyGapGenerator implements SingleTokenInputGapGenerator {
     }
 
     @Override
-    public Gap generate(final int count) {
-        return Gap.with(validAnswer);
+    public Optional<Gap> generate(final int count) {
+        return Optional.of(Gap.with(validAnswer));
     }
 }
