@@ -62,12 +62,6 @@ public class CollocationGapGenerator implements GapGenerator {
     private Triplet<String, String, String> triplet;
 
     /**
-     * The logger for this class.
-     */
-    private static final Logger LOGGER = Logger.
-            getLogger(CollocationGapGenerator.class.getName());
-
-    /**
      * Creates a new collocation-based gap generator. The <code>tuple</code>
      * must have an odd number of elements and the element in the middle of the
      * list is the word a gap is generated for.
