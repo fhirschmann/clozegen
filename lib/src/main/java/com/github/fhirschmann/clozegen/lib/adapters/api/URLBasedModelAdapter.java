@@ -41,9 +41,11 @@ public class URLBasedModelAdapter<M extends URLBasedModel> extends AbstractResou
     @ConfigurationParameter(name = PARAM_PATH, mandatory = true)
     private String path;
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public boolean initialize() {
-        TypeToken<M> type = new TypeToken<M>(getClass()) {};
+        @SuppressWarnings("serial")
+		TypeToken<M> type = new TypeToken<M>(getClass()) {};
         try {
             model = (M) type.getRawType().newInstance();
             model.load(Resources.getResource(path));
