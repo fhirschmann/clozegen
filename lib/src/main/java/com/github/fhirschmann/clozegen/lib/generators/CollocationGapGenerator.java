@@ -34,6 +34,8 @@ import java.util.List;
 import java.util.Set;
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.Lists;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.javatuples.Triplet;
 
 /**
@@ -51,11 +53,21 @@ import org.javatuples.Triplet;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class CollocationGapGenerator implements GapGenerator {
-    /** The model for this generator. */
+    /**
+     * The model for this generator.
+     */
     private CollocationModel model;
 
-    /** The triplet (A, x, B) where x is the subject in question. */
+    /**
+     * The triplet (A, x, B) where x is the subject in question.
+     */
     private Triplet<String, String, String> triplet;
+
+    /**
+     * The logger for this class.
+     */
+    private static final Logger LOGGER = Logger.
+            getLogger(CollocationGapGenerator.class.getName());
 
     /**
      * Creates a new collocation-based gap generator. The <code>tuple</code>

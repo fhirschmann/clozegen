@@ -55,8 +55,8 @@ public class CollocationModel extends MultisetModel {
         for (Entry<String> entry : getMultiset().entrySet()) {
             triplet = CollectionUtils.triListJoin(
                     Arrays.asList(entry.getElement().split(" ")));
-            tails.add(triplet.getValue0(), triplet.getValue1(), entry.getCount());
-            heads.add(triplet.getValue2(), triplet.getValue1(), entry.getCount());
+            heads.add(triplet.getValue0(), triplet.getValue1(), entry.getCount());
+            tails.add(triplet.getValue2(), triplet.getValue1(), entry.getCount());
         }
     }
 

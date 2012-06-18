@@ -39,20 +39,11 @@ public class CollocationGapGeneratorTest {
     public void setUp() {
         Multiset<String> trigrams = LinkedHashMultiset.create();
         trigrams.add("as in the", 20);
-
-
-        MapMultiset<String, String> heads = MapMultiset.create();
-        heads.add("as", "in", 20);
-        heads.add("as", "of", 10);
-        heads.add("as", "by", 5);
-
-        MapMultiset<String, String> tails = MapMultiset.create();
-        tails.add("the", "in", 20);
+        trigrams.add("as of the", 11);
+        trigrams.add("as by a", 55);
 
         model = new CollocationModel();
-        model.setNGrams(trigrams);
-        model.setTails(tails);
-        model.setHeads(heads);
+        model.setMultiset(trigrams);
     }
 
     @Test
@@ -60,13 +51,13 @@ public class CollocationGapGeneratorTest {
         generator = new CollocationGapGenerator("as", "in", "the", model);
         Gap gap = new Gap();
         gap.addValidAnswers("in");
-        gap.addInvalidAnswers("of");
+        gap.addInvalidAnswers("by");
         assertEquals(gap, generator.generate(2));
     }
 
     @Test
     public void testTrigramConstraint() {
-        model.getNGrams().add("as of the");
+        model.getMultiset().add("as of the");
         generator = new CollocationGapGenerator("as", "in", "the", model);
         Gap gap = new Gap();
         gap.addValidAnswers("in");
