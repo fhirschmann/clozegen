@@ -27,10 +27,8 @@ import org.apache.uima.jcas.JCas;
  */
 public interface ConstraintProvider {
     /**
-     * A constraint, possibly <code>null</code>, which specifies on what occasion
-     * {@link Adapter#generator(java.util.List, int)} should be called. If this
-     * returns <code>null</code>, {@link Adapter#generator(java.util.List, int)} will
-     * be called for each Annotation.
+     * A constraint which specifies on what occasion
+     * {@link Adapter#generator(java.util.List, int)} should be called.
      *
      * <p>For example, if you want to only work on annotations of the type
      * {@link ART}, then this method should return <code>cons</code> like so:

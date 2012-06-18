@@ -40,6 +40,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.factory.JCasFactory;
 import org.uimafit.util.FSCollectionFactory;
 import org.uimafit.util.JCasUtil;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Utility functions for UIMA related stuff.
@@ -173,7 +174,7 @@ public final class UIMAUtils {
             int i = 0;
             List<Annotation> alist = JCasUtil.selectCovered(Annotation.class, sentence);
             for (Annotation annotation : alist) {
-                if ((constraint == null) || (constraint.match(annotation))) {
+                if ((checkNotNull(constraint).match(annotation))) {
                     processor.process(jcas, alist, i);
                 }
                 i++;
