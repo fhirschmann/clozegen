@@ -18,8 +18,10 @@
 package com.github.fhirschmann.clozegen.cli;
 
 import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
+import java.io.IOException;
 import java.util.Map;
 import org.apache.commons.cli.CommandLine;
+import org.apache.uima.UIMAException;
 import org.apache.uima.resource.ResourceInitializationException;
 
 /**
@@ -28,13 +30,14 @@ import org.apache.uima.resource.ResourceInitializationException;
  */
 public class Job {
     public void run(final CommandLine line, final String input, final String output)
-            throws ResourceInitializationException {
-        ClozeTestGenerator gen = new ClozeTestGenerator();
+            throws ResourceInitializationException, UIMAException, IOException {
+        ClozeTestGenerator gen = ClozeTestGenerator.defaultGenerator();
 
         if (line.hasOption("classes")) {
             Map<String, Integer> classes = Utils.parseGapClasses(
                     line.getOptionValue("classes"));
         }
 
+        gen.run(input, output, "en");
     }
 }

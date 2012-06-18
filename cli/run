@@ -1,4 +1,8 @@
 #!/bin/sh
+cd ../lib
+mvn install -DskipTests
+cd ../cli
+
 mvn -o compile
 
 mvn -o exec:java -Dexec.mainClass="com.github.fhirschmann.clozegen.cli.Main" -Dexec.args="$*" 2>&1 | egrep -v "^\[INFO"

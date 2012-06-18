@@ -17,10 +17,15 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.Maps;
+import com.google.common.io.Resources;
+import java.io.File;
+import java.net.MalformedURLException;
 import java.util.Map;
-import java.util.logging.Logger;
+import org.apache.uima.collection.CollectionReader;
 
 /**
  * A register of mappings from file extensions to {@link ReaderRegisterEntry}.
@@ -28,8 +33,6 @@ import java.util.logging.Logger;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class ReaderRegister extends ForwardingMap<String, ReaderRegisterEntry> {
-    public static final Logger LOGGER = Logger.getLogger(ReaderRegister.class.getName());
-
     /**
      * The entry register.
      */
@@ -42,8 +45,32 @@ public class ReaderRegister extends ForwardingMap<String, ReaderRegisterEntry> {
         register = Maps.newHashMap();
     }
 
+    /**
+     * Returns the collection reader associated with the given input file.
+     *
+     * @param input the input file
+     * @param languageCode the language of the input file
+     * @return a new {@link CollectionReader}
+     */
+    public CollectionReader getReaderForFile(final String input,
+            final String languageCode) throws MalformedURLException {
+        String inExt = input.substring(input.lastIndexOf(".") + 1);
+        if (!register.containsKey(inExt)) {
+            throw new IllegalArgumentException("Input file type is unknown!");
+        }
+        File file = new File(input);
+        return get(inExt).get(file.toURI().toURL(), languageCode);
+    }
+
     @Override
     protected Map<String, ReaderRegisterEntry> delegate() {
         return register;
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("entries", register.keySet().toString());
+        return str.toString();
     }
 }
