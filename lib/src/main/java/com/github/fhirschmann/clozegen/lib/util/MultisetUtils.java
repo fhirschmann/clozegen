@@ -53,21 +53,23 @@ public final class MultisetUtils {
      * @param limit the maximum number of elements to return
      * @return a limited list of elements ordered by their count
      */
-    public static <E> List<E> sortedElementList(final Multiset<E> multiset, int limit) {
+    public static <E> List<E> sortedElementList(final Multiset<E> multiset,
+            final int limit) {
         final List<E> list = Lists.newLinkedList();
         final LinkedHashMultiset<E> sms = sortMultiSet(multiset);
+        int newlimit = limit;
 
-        if (limit > multiset.elementSet().size()) {
+        if (newlimit > multiset.elementSet().size()) {
             throw new IllegalArgumentException(
                     "The multiset does not contain that many keys.");
-        } else if (limit == -1) {
-            limit = multiset.elementSet().size();
+        } else if (newlimit == -1) {
+            newlimit = multiset.elementSet().size();
         }
 
         final Iterator<E> it = sms.iterator();
 
         E next;
-        while (list.size() < limit) {
+        while (list.size() < newlimit) {
             next = it.next();
             if (!list.contains(next)) {
                 list.add(next);
