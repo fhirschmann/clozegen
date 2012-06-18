@@ -17,7 +17,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.pipeline;
 
-import com.github.fhirschmann.clozegen.lib.io.AutomaticReaderFactory;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Lists;
@@ -149,22 +148,6 @@ public class Pipeline {
             throws UIMAException, IOException {
         runPipeline(reader, (AnalysisEngine[]) steps.toArray(
                 new AnalysisEngine[steps.size()]));
-    }
-
-    /**
-     * Runs the pipeline.
-     *
-     * The pipeline will start at the given <code>input</code> file.
-     *
-     * @param input the input file
-     * @param languageCode the language of the input file
-     * @throws ResourceInitializationException on errors during initialization
-     * @throws UIMAException on errors produced by UIMA
-     * @throws IOException on errors reading from file
-     */
-    public void run(final File input, final String languageCode)
-            throws ResourceInitializationException, UIMAException, IOException {
-        run(AutomaticReaderFactory.choose(input, languageCode));
     }
 
     @Override
