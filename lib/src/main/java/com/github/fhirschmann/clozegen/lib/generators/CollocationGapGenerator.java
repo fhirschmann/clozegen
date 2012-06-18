@@ -25,6 +25,7 @@ import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.Optional;
 import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multiset.Entry;
@@ -89,7 +90,7 @@ public class CollocationGapGenerator implements GapGenerator {
     }
 
     @Override
-    public Gap generate(final int count) {
+    public Optional<Gap> generate(final int count) {
         Gap gap = new Gap();
         gap.addValidAnswers(triplet.getValue1());
 
@@ -113,11 +114,10 @@ public class CollocationGapGenerator implements GapGenerator {
             final Set<String> invalidAnswers = Sets.newHashSet(
                     MultisetUtils.sortedElementList(candidates, count - 1));
             gap.addInvalidAnswers(invalidAnswers);
+            return Optional.of(gap);
         } else {
-            gap = null;
+            return Optional.absent();
         }
-
-        return gap;
     }
 
     @Override

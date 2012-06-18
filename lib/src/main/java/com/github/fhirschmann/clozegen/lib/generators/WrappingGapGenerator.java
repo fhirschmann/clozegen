@@ -19,6 +19,7 @@ package com.github.fhirschmann.clozegen.lib.generators;
 
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
+import com.google.common.base.Optional;
 
 /**
  * This is a simple wrapper for generators which do not implement the
@@ -42,7 +43,7 @@ public class WrappingGapGenerator implements GapGenerator {
     }
 
     @Override
-    public Gap generate(final int count) {
-        return gap;
+    public Optional<Gap> generate(final int count) {
+        return Optional.fromNullable(gap);
     }
 }

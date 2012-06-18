@@ -17,7 +17,10 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators.api;
 
+import com.google.common.base.Optional;
+
 /**
+ * This is the basic interface which Gap Generators must implement.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -25,8 +28,14 @@ public interface GapGenerator {
     /**
      * Called for each word for which a gap should be generated.
      *
+     * <p>
+     * This method should return an {@link Optional} Gap. {@link Optional} is a way
+     * of replacing a nullable Gap reference with a non-null value in order to
+     * prevent the ambiguity that comes with null.
+     * </p>
+     *
      * @param count the number of answers to generate
      * @return a new gap
      */
-    Gap generate(int count);
+    Optional<Gap> generate(int count);
 }

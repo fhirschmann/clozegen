@@ -23,6 +23,7 @@ import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.base.Optional;
 import java.util.List;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -66,9 +67,11 @@ public class GapAnnotator extends ConstraintBasedAnnotator {
     @Override
     public void process(final JCas jcas, final List<Annotation> annotationList,
             final int index) {
-        Gap gap = adapter.generator(annotationList, index).generate(answerCount);
-        if (gap != null) {
-            GapAnnotation gapAnnotation = UIMAUtils.createGapAnnotation(jcas, gap);
+        Optional<Gap> gap = adapter.generator(annotationList, index).
+                generate(answerCount);
+
+        if (gap.isPresent()) {
+            GapAnnotation gapAnnotation = UIMAUtils.createGapAnnotation(jcas, gap.get());
             UIMAUtils.copyBounds(annotationList.get(index), gapAnnotation);
             gapAnnotation.addToIndexes();
         }
