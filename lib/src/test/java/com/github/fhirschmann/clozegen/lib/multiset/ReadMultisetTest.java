@@ -20,7 +20,6 @@ package com.github.fhirschmann.clozegen.lib.multiset;
 import com.google.common.collect.Multiset;
 import com.google.common.io.Resources;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.net.URL;
 import org.junit.Before;
 import org.junit.Test;

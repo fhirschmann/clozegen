@@ -20,7 +20,6 @@ package com.github.fhirschmann.clozegen.lib.util;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
-import java.lang.reflect.Constructor;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

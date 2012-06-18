@@ -23,7 +23,6 @@ import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
-import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.ConcurrentHashMultiset;
@@ -34,7 +33,6 @@ import java.util.List;
 import java.util.Set;
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.Lists;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.javatuples.Triplet;
 

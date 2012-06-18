@@ -17,7 +17,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Range;

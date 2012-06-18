@@ -20,7 +20,6 @@ package com.github.fhirschmann.clozegen.lib.generators;
 import com.github.fhirschmann.clozegen.lib.generators.CollocationGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.model.CollocationModel;
-import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
 import org.junit.Before;

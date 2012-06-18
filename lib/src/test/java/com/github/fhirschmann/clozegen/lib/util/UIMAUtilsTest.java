@@ -21,7 +21,6 @@ import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import java.lang.reflect.Constructor;
 import java.util.Collection;
 import java.util.List;
 import org.apache.uima.UIMAException;

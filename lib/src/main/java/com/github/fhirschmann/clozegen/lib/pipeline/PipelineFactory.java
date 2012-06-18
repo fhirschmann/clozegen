@@ -18,15 +18,11 @@
 package com.github.fhirschmann.clozegen.lib.pipeline;
 
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
-import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import org.uimafit.factory.JCasFactory;
 
 /**
  * Utility functions for dealing with pipelines.

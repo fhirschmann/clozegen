@@ -20,7 +20,6 @@ package com.github.fhirschmann.clozegen.lib.imf;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.collect.Sets;
-import java.lang.reflect.Constructor;
 import org.apache.uima.UIMAException;
 import org.apache.uima.jcas.JCas;
 import org.junit.Before;

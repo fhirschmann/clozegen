@@ -28,12 +28,9 @@ import java.io.IOException;
 import java.util.List;
 import org.apache.uima.UIMAException;
 import org.apache.uima.jcas.JCas;
-import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 import static org.junit.matchers.JUnitMatchers.*;
-import org.junit.BeforeClass;
 import org.uimafit.factory.JCasFactory;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
