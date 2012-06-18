@@ -19,10 +19,13 @@ package com.github.fhirschmann.clozegen.cli;
 
 import com.github.fhirschmann.clozegen.lib.register.DescriptionRegisterEntry;
 import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
+import java.io.IOException;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.uima.UIMAException;
 import org.apache.uima.resource.ResourceInitializationException;
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  *
@@ -48,7 +51,8 @@ public class Main {
 
     }
 
-    public void run(final String[] args) throws ResourceInitializationException {
+    public void run(final String[] args)
+            throws ResourceInitializationException, UIMAException, IOException {
         CommandLineParser parser = new PosixParser();
         options.addOption("c", "classes", true, "word classes to generate gaps for");
         options.addOption("h", "help", false, "print help message and exit");
@@ -65,9 +69,8 @@ public class Main {
                             entry.getIdentifier(), entry.getName()));
                 }
             } else {
-                if (line.getArgs().length != 2) {
-                    throw new ParseException("Exactly two arguments are required!");
-                }
+                checkArgument(line.getArgs().length == 2,
+                        "Exactly two arguments are required!");
                 Job run = new Job();
                 run.run(line, line.getArgs()[0], line.getArgs()[1]);
             }

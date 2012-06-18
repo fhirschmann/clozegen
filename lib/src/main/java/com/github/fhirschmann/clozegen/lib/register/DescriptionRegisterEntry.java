@@ -28,6 +28,7 @@ import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * Represents a DescriptionRegisterEntry of a {@link Register}.
@@ -164,11 +165,9 @@ public class DescriptionRegisterEntry {
      * @param identifier the identifier to set
      */
     private void setIdentifier(final String identifier) {
-        if (!PATTERN.matcher(identifier).matches()) {
-            throw new IllegalArgumentException(
-                    String.format("identifier '%s' must match %s.",
-                    identifier, PATTERN.toString()));
-        }
+        checkArgument(PATTERN.matcher(identifier).matches(),
+                String.format("identifier '%s' must match %s.",
+                identifier, PATTERN.toString()));
         this.identifier = identifier;
     }
 

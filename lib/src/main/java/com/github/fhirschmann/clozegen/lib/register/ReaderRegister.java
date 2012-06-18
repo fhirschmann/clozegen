@@ -21,11 +21,11 @@ import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.Maps;
-import com.google.common.io.Resources;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.Map;
 import org.apache.uima.collection.CollectionReader;
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * A register of mappings from file extensions to {@link ReaderRegisterEntry}.
@@ -55,9 +55,7 @@ public class ReaderRegister extends ForwardingMap<String, ReaderRegisterEntry> {
     public CollectionReader getReaderForFile(final String input,
             final String languageCode) throws MalformedURLException {
         String inExt = input.substring(input.lastIndexOf(".") + 1);
-        if (!register.containsKey(inExt)) {
-            throw new IllegalArgumentException("Input file type is unknown!");
-        }
+        checkArgument(register.containsKey(inExt), "Input file type is unknown!");
         File file = new File(input);
         return get(inExt).get(file.toURI().toURL(), languageCode);
     }
