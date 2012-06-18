@@ -1,0 +1,4 @@
+#!/bin/sh
+mvn -o compile
+
+mvn -o exec:java -Dexec.mainClass="com.github.fhirschmann.clozegen.cli.Main" -Dexec.args="$*" 2>&1 | egrep -v "^\[INFO"
