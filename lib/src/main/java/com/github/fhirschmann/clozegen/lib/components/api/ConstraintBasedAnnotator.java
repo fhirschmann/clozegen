@@ -27,8 +27,8 @@ import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ExternalResource;
 
 /**
- * Implementing classes have to provide a constraint which, when matched,
- * will trigger a call to {@link GapProcessor#process(JCas, List, int)}.
+ * An annotator which calls {@link GapProcessor#process(JCas, List, int)} for each
+ * word matched by a given constraint.
  *
  * <p>
  * Due to the lack of mixins or multiple inheritance in the Java language, this
@@ -57,7 +57,7 @@ public abstract class ConstraintBasedAnnotator extends
     }
 
     @Override
-    public FSMatchConstraint getConstraint(JCas jcas) {
+    public FSMatchConstraint getConstraint(final JCas jcas) {
         return constraint.getConstraint(jcas);
     }
 }

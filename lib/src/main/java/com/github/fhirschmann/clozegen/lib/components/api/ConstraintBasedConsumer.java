@@ -26,8 +26,8 @@ import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.descriptor.ExternalResource;
 
 /**
- * This is equal to {@link AbstractAnnotator}, except that this class extends
- * {@link JCasConsumer_ImplBase} instead of {@link JCasAnnotator_ImplBase}.
+ * A consumer which calls {@link GapProcessor#process(JCas, List, int)} for each
+ * word matched by a given constraint.
  *
  * <p>
  * Due to the lack of mixins or multiple inheritance in the Java language, this
@@ -56,7 +56,7 @@ public abstract class ConstraintBasedConsumer extends JCasConsumer_ImplBase impl
     }
 
     @Override
-    public FSMatchConstraint getConstraint(JCas jcas) {
+    public FSMatchConstraint getConstraint(final JCas jcas) {
         return constraint.getConstraint(jcas);
     }
 }
