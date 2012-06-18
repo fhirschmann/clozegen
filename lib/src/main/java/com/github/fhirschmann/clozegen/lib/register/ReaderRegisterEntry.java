@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
-import java.net.URL;
+import java.io.File;
 import javax.annotation.Nullable;
 import org.apache.uima.collection.CollectionReader;
 
@@ -31,11 +31,11 @@ public interface ReaderRegisterEntry {
      * Returns a new {@link CollectionReader} based on the input {@code url} and
      * {@link languageCode}.
      *
-     * @param url the url to the input file
+     * @param file the input file
      * @param languageCode the language of the input file
      * @return a new collection reader
      */
-    CollectionReader get(URL url, String languageCode);
+    CollectionReader get(File file, String languageCode);
 
     /**
     * Indicates whether another object is equal to this function.

@@ -30,7 +30,11 @@ import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import java.io.File;
+import java.net.URI;
+import java.util.Arrays;
 import org.apache.uima.collection.CollectionReader_ImplBase;
 
 /**
@@ -73,11 +77,13 @@ public final class RegisterFactory {
      * Convenience method for creating {@link CollectionReader} patterns which
      * should work on only one input file.
      *
-     * @param file the file to work on
+     * @param file the file in question
      * @return a new pattern
      */
-    public static String[] createPatterns(final String file) {
-        return new String[] {String.format("[+]%s", checkNotNull(file))};
+    public static String[] createPatterns(final File file) {
+        String[] patterns = new String[] {String.format("[+]%s",
+                checkNotNull(file.getName()))};
+        return patterns;
     }
 
     /**
@@ -85,25 +91,24 @@ public final class RegisterFactory {
      * parameters.
      *
      * @param clazz the collection reader class
+     * @param file the input file
      * @param languageCode the language code
-     * @param path the path to the input file
      * @return a new collection reader
      * @throws ResourceInitializationException on errors during initialization
      */
     public static CollectionReader createDefaultReader(
             final Class<? extends CollectionReader_ImplBase> clazz,
-            final String languageCode, final String path)
+            final File file, final String languageCode)
             throws ResourceInitializationException {
         return createCollectionReader(
             clazz,
             ResourceCollectionReaderBase.PARAM_LANGUAGE, languageCode,
-            ResourceCollectionReaderBase.PARAM_PATH, path,
-            ResourceCollectionReaderBase.PARAM_PATTERNS, createPatterns(path));
+            ResourceCollectionReaderBase.PARAM_PATH, file.getParent(),
+            ResourceCollectionReaderBase.PARAM_PATTERNS, createPatterns(file));
     }
 
     /**
-     * Creates a new standard {@link ReaderRegisterEntry} using
-     * {@link #createDefaultReader(Class, String, String)}.
+     * Creates a new standard {@link ReaderRegisterEntry}.
      *
      * @param clazz the collection reader class
      * @return a new register entry
@@ -112,9 +117,9 @@ public final class RegisterFactory {
             final Class<? extends CollectionReader_ImplBase> clazz) {
         return new ReaderRegisterEntry() {
             @Override
-            public CollectionReader get(final URL url, final String languageCode) {
+            public CollectionReader get(final File file, final String languageCode) {
                 try {
-                    return createDefaultReader(clazz, languageCode, url.getPath());
+                    return createDefaultReader(clazz, file, languageCode);
                 } catch (ResourceInitializationException ex) {
                     LOGGER.log(Level.SEVERE, null, ex);
                     return null;

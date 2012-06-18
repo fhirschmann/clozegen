@@ -53,11 +53,11 @@ public class ReaderRegister extends ForwardingMap<String, ReaderRegisterEntry> {
      * @return a new {@link CollectionReader}
      */
     public CollectionReader getReaderForFile(final String input,
-            final String languageCode) throws MalformedURLException {
+            final String languageCode) {
         String inExt = input.substring(input.lastIndexOf(".") + 1);
         checkArgument(register.containsKey(inExt), "Input file type is unknown!");
         File file = new File(input);
-        return get(inExt).get(file.toURI().toURL(), languageCode);
+        return get(inExt).get(file, languageCode);
     }
 
     @Override

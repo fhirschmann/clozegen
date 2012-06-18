@@ -25,6 +25,7 @@ import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionCons
 import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.components.DebugWriter;
+import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
