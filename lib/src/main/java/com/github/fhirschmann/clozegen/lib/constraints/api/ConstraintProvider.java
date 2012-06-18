@@ -31,7 +31,7 @@ public interface ConstraintProvider {
      * {@link Adapter#generator(java.util.List, int)} should be called.
      *
      * <p>For example, if you want to only work on annotations of the type
-     * {@link ART}, then this method should return <code>cons</code> like so:
+     * {@link ART}, then this method should return {@code cons} like so:
      * <p><blockquote><pre>
      * {@code
      * FSTypeConstraint cons = ConstraintFactory.instance().createTypeConstraint();

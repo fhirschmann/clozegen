@@ -63,7 +63,7 @@ public class CollocationGapGenerator implements GapGenerator {
     private Triplet<String, String, String> triplet;
 
     /**
-     * Creates a new collocation-based gap generator. The <code>tuple</code>
+     * Creates a new collocation-based gap generator. The {@code tuple}
      * must have an odd number of elements and the element in the middle of the
      * list is the word a gap is generated for.
      *

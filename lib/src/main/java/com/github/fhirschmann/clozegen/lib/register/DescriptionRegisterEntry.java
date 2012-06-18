@@ -53,7 +53,7 @@ public class DescriptionRegisterEntry {
     /** The configuration data (used for creating the description). */
     private Object[] configurationData;
 
-    /** The pattern <code>identifier</code> must match. */
+    /** The pattern {@code identifier} must match. */
     public static final Pattern PATTERN = Pattern.compile("[A-Za-z0-9_]*");
 
     /**
@@ -84,7 +84,7 @@ public class DescriptionRegisterEntry {
 
     /**
      * Creates a new description for this entry from the given
-     * <code>configurationData</code>.
+     * {@code configurationData}.
      *
      * @param configurationData the configuration data for the description
      * @return the description
@@ -117,7 +117,7 @@ public class DescriptionRegisterEntry {
     /**
      * Creates a new description for this entry based on the configuration data
      * supplied when this class was constructed in addition to
-     * <code>additionalConfigurationData</code>.
+     * {@code additionalConfigurationData}.
      *
      * @param additionalConfigurationData any additional configuration data
      * @return the description

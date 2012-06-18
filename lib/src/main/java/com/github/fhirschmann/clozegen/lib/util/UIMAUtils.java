@@ -53,10 +53,10 @@ public final class UIMAUtils {
     }
 
     /**
-     * Creates a {@link GapAnnotation} from <code>validAnswers</code> and
-     * <code>invalidAnswers</code>. The resulting list of all answer options
-     * of a gap will be composed of union of <code>validAnswers</code> and
-     * <code>invalidAnswers</code> in random order.
+     * Creates a {@link GapAnnotation} from {@code validAnswers} and
+     * {@code invalidAnswers}. The resulting list of all answer options
+     * of a gap will be composed of union of {@code validAnswers} and
+     * {@code invalidAnswers} in random order.
      *
      * @param aJCas The {@link JCas} this Annotation belongs to
      * @param validAnswers the valid answers for this gap
@@ -98,7 +98,7 @@ public final class UIMAUtils {
 
     /**
      * Copy the bounds ({@link Annotation#getBegin()} and {@link Annotation#getEnd()})
-     * from the <code>source</code> annotation to the <code>destination</code>
+     * from the {@code source</code> annotation to the <code>destination}
      * annotation.
      *
      * @param source the source annotation
@@ -110,12 +110,12 @@ public final class UIMAUtils {
     }
 
     /**
-     * Returns a List of <code>T</code> of the <code>num</code> neighbors.
+     * Returns a List of {@code T</code> of the <code>num} neighbors.
      *
      * @param <T> the annotation type
      * @param clazz the class of the annotation type
      * @param annotationList the list of annotation
-     * @param offset the offset of the element in <code>annotationList</code>
+     * @param offset the offset of the element in {@code annotationList}
      * @param num the number of neighbors to receive
      * @return a list of neighbors
      */
@@ -141,7 +141,7 @@ public final class UIMAUtils {
      * @param <T> the annotation type
      * @param clazz the class of the annotation type
      * @param annotationList the list of annotation
-     * @param offset the offset of the element in <code>annotationList</code>
+     * @param offset the offset of the element in {@code annotationList}
      * @param num the number of neighbors to receive
      * @return a list of neighbors (covered text)
      */
@@ -161,8 +161,8 @@ public final class UIMAUtils {
     }
 
     /**
-     * Calls <code>processor</code> for each {@link Annotation} matched by
-     * <code>constraint</code> in a sentence.
+     * Calls {@code processor} for each {@link Annotation} matched by
+     * {@code constraint} in a sentence.
      *
      * @param jcas the JCas to work on
      * @param constraint the constraint to match

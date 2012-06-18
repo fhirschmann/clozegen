@@ -120,7 +120,7 @@ public class Pipeline {
     /**
      * Runs the pipeline.
      *
-     * The pipeline will start at the CAS constructed from the given <code>text</code>.
+     * The pipeline will start at the CAS constructed from the given {@code text}.
      *
      * @param text the text
      * @param languageCode the language of the text

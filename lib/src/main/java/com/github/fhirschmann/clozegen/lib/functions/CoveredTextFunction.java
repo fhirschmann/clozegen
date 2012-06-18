@@ -22,7 +22,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 /**
  * A function which returns the text covered by an
- * {@link Annotation}. If <code>input</code> is <code>null</code>,
+ * {@link Annotation}. If {@code input</code> is <code>null},
  * then no action is taken.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>

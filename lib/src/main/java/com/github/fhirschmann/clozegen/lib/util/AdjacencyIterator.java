@@ -23,8 +23,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * An {@link Iterator} which is able to peek the next <code>n</code> elements and
- * knows the last <code>n</code> elements.
+ * An {@link Iterator} which is able to peek the next {@code n} elements and
+ * knows the last {@code n} elements.
  *
  * @param <T> the type of the iterator's elements
  *
@@ -117,9 +117,9 @@ public class AdjacencyIterator<T> implements Iterator<T> {
     }
 
     /**
-     * Returns a list of the <code>n</code> previous elements we have iterated
-     * over. This will always be an <code>n</code>-sized array with elements
-     * filled with <code>null</code> in case there are not enough predecessors
+     * Returns a list of the {@code n} previous elements we have iterated
+     * over. This will always be an {@code n}-sized array with elements
+     * filled with {@code null} in case there are not enough predecessors
      * yet.
      *
      * @return list of predecessors
@@ -135,9 +135,9 @@ public class AdjacencyIterator<T> implements Iterator<T> {
     }
 
     /**
-     * Returns a list of the <code>n</code> next elements without advancing
-     * the iteration pointer. This will always be an <code>n</code>-sized array
-     * with elements filled with <code>null</code> in case there are no more
+     * Returns a list of the {@code n} next elements without advancing
+     * the iteration pointer. This will always be an {@code n}-sized array
+     * with elements filled with {@code null} in case there are no more
      * successors.
      *
      * @return list of successors
@@ -172,8 +172,8 @@ public class AdjacencyIterator<T> implements Iterator<T> {
     }
 
     /**
-     * Returns a list of the <code>n</code> predecessors, the current element,
-     * and the <code>n</code> successors.
+     * Returns a list of the {@code n} predecessors, the current element,
+     * and the {@code n} successors.
      *
      * @return list made up of predecessors, the current element and successors
      */

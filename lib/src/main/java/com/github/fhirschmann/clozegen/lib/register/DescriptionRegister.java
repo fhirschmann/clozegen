@@ -56,11 +56,11 @@ public class DescriptionRegister extends ForwardingCollection<DescriptionRegiste
     }
 
     /**
-     * Returns the {@link DescriptionRegisterEntry} identified by <code>identifier</code>
-     * or <code>null</code> if it doesn't exist.
+     * Returns the {@link DescriptionRegisterEntry} identified by {@code identifier}
+     * or {@code null} if it doesn't exist.
      *
      * @param identifier the identifier of the entry in question
-     * @return the entry identified by a given <code>identifier</code>
+     * @return the entry identified by a given {@code identifier}
      */
     public DescriptionRegisterEntry get(final String identifier) {
         return register.get(identifier);
@@ -79,7 +79,7 @@ public class DescriptionRegister extends ForwardingCollection<DescriptionRegiste
 
     /**
      * Returns a live view of the set of Descriptions which support
-     * the given <code>language</code>.
+     * the given {@code language}.
      *
      * @param language the language(code)
      * @return live view of filtered descriptions

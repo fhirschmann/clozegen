@@ -38,7 +38,7 @@ public final class ReadMultisets {
 
     /**
      * Parses frequencies from a URL. The subject and the count for a subject
-     * need to be delimited by <code>\t</code> with the count on the right-hand
+     * need to be delimited by {@code \t} with the count on the right-hand
      * side.
      *
      * <p>For example, assuming your frequency file contains the following lines:
@@ -67,10 +67,10 @@ public final class ReadMultisets {
 
     /**
      * Parses conditional frequencies from a URL. The subject and the count for a subject
-     * need to be delimited by <code>\t</code> with the count on the right-hand side.
+     * need to be delimited by {@code \t} with the count on the right-hand side.
      *
      * <p>Additionally, the remaining words on the left-hand side are split using the
-     * whitespace as delimiter. The <code>key</code> parameter identifies the condition
+     * whitespace as delimiter. The {@code key} parameter identifies the condition
      * by which the rest of the word sequence (with the key itself removed) is identified
      * by.
      *
@@ -80,7 +80,7 @@ public final class ReadMultisets {
      * because of   100
      * members of   50
      * </pre>
-     * Then selecting <code>0</code> as <code>key</code> will yield a count of 100 when
+     * Then selecting {@code 0</code> as <code>key} will yield a count of 100 when
      * looking up "of" given the the key (condition) is "because".
      *
      * @param url the URL to the file to parse
