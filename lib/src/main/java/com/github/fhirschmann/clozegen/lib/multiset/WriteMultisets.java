@@ -90,12 +90,27 @@ public final class WriteMultisets {
      * {@link MultisetUtils#writeMultiSet}.
      *
      * @param multiset the multiset to write
+     * @param minFrequency the minimum frequency a word must have in order to be written
+     * @param file the file to write to
+     * @throws IOException on errors opening/writing to the file
+     */
+    public static void writeSortedMultiSet(final Multiset<String> multiset,
+            final int minFrequency, final File file) throws IOException {
+        final ImmutableMultiset<String> im = Multisets.copyHighestCountFirst(multiset);
+        writeMultiSet(im, minFrequency, file);
+    }
+
+    /**
+     * Sorts a Multiset by its counts before writing it to a file using
+     * {@link MultisetUtils#writeMultiSet}.
+     *
+     * @param multiset the multiset to write
      * @param file the file to write to
      * @throws IOException on errors opening/writing to the file
      */
     public static void writeSortedMultiSet(final Multiset<String> multiset,
             final File file) throws IOException {
-        final ImmutableMultiset<String> im = Multisets.copyHighestCountFirst(multiset);
-        writeMultiSet(im, file);
+        writeSortedMultiSet(multiset, 1, file);
     }
+
 }

@@ -74,7 +74,7 @@ public class CollocationWriter extends ConstraintBasedConsumer {
     @Override
     public void collectionProcessComplete() {
         try {
-            WriteMultisets.writeMultiSet(ms, minFrequency, new File(path));
+            WriteMultisets.writeSortedMultiSet(ms, minFrequency, new File(path));
         } catch (IOException ex) {
             getContext().getLogger().log(Level.SEVERE, ex.getMessage());
         }
