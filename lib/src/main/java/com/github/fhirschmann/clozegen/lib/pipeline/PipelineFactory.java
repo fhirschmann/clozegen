@@ -17,8 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.pipeline;
 
-import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -43,7 +42,7 @@ public final class PipelineFactory {
     public static Pipeline createDefaultPipeline()
             throws ResourceInitializationException {
         Pipeline pipeline = new Pipeline();
-        final AnalysisEngine segmenter = createPrimitive(StanfordSegmenter.class);
+        final AnalysisEngine segmenter = createPrimitive(BreakIteratorSegmenter.class);
         pipeline.addStep(segmenter);
 
         // Produces some wird reflection errors in uimafit
