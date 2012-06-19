@@ -50,6 +50,7 @@ public class CollocationWriterExample {
 
         AnalysisEngineDescription trigrams = createPrimitiveDescription(
                 CollocationWriter.class,
+                CollocationWriter.PARAM_MIN_FREQUENCY, 2,
                 CollocationWriter.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraintResource.class),
                 CollocationWriter.PARAM_OUTPUT_PATH, "target/test.txt");
