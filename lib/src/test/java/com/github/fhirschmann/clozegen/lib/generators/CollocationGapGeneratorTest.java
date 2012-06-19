@@ -20,6 +20,7 @@ package com.github.fhirschmann.clozegen.lib.generators;
 import com.github.fhirschmann.clozegen.lib.generators.CollocationGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.model.CollocationModel;
+import com.google.common.base.Optional;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
 import org.junit.Before;
@@ -51,7 +52,7 @@ public class CollocationGapGeneratorTest {
         Gap gap = new Gap();
         gap.addValidAnswers("in");
         gap.addInvalidAnswers("by");
-        assertEquals(gap, generator.generate(2));
+        assertEquals(Optional.of(gap), generator.generate(2));
     }
 
     @Test
@@ -61,7 +62,7 @@ public class CollocationGapGeneratorTest {
         Gap gap = new Gap();
         gap.addValidAnswers("in");
         gap.addInvalidAnswers("by");
-        assertEquals(gap, generator.generate(2));
+        assertEquals(Optional.of(gap), generator.generate(2));
     }
 
     @Test
