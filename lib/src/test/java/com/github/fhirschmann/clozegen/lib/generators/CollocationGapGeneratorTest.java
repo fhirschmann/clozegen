@@ -68,6 +68,6 @@ public class CollocationGapGeneratorTest {
     @Test
     public void testNull() {
         generator = new CollocationGapGenerator("xx", "yy", "zz", model);
-        assertNull(generator.generate(2));
+        assertEquals(Optional.absent(), generator.generate(2));
     }
 }
