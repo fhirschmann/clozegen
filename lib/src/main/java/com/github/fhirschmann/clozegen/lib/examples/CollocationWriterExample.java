@@ -48,14 +48,6 @@ public class CollocationWriterExample {
                 DKProContext.getContext().getWorkspace("brown_tei").getAbsolutePath(),
                 BrownCorpusReader.PARAM_PATTERNS, new String[] {"[+]*.xml"});
 
-        CollectionReader wacky = CollectionReaderFactory.createCollectionReader(
-                ImsCwbReader.class,
-                BrownCorpusReader.PARAM_PATH,
-                DKProContext.getContext().getWorkspace("wacky/uk/x").getAbsolutePath(),
-                ImsCwbReader.PARAM_TAGGER_TAGSET, "en",
-                ImsCwbReader.PARAM_PATTERNS, new String[] {"[+]*.xml.gz"});
-
-
         AnalysisEngineDescription trigrams = createPrimitiveDescription(
                 CollocationWriter.class,
                 CollocationWriter.CONSTRAINT_KEY,
