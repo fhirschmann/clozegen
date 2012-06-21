@@ -36,6 +36,7 @@ public class Job {
         if (line.hasOption("classes")) {
             Map<String, Integer> classes = Utils.parseGapClasses(
                     line.getOptionValue("classes"));
+            gen.activate(classes);
         }
 
         gen.run(input, output, "en");

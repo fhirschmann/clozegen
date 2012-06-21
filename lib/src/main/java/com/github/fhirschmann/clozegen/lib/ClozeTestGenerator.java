@@ -8,6 +8,8 @@ import com.github.fhirschmann.clozegen.lib.register.ReaderRegister;
 import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.Map.Entry;
 import org.apache.uima.UIMAException;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.JCas;
@@ -114,6 +116,15 @@ public class ClozeTestGenerator {
      */
     public void run(final CollectionReader reader) throws UIMAException, IOException {
         getPipeline().run(reader);
+    }
+
+    public void activate(final Map<String, Integer> classes)
+            throws ResourceInitializationException {
+        for (Entry<String, Integer> entry : classes.entrySet()) {
+            getPipeline().addStep(getDescriptionRegister().
+                    get(entry.getKey()).getDescription());
+        }
+
     }
 
     /**
