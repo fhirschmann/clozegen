@@ -17,7 +17,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.multiset;
 
-import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
 import com.google.common.base.Charsets;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
@@ -25,7 +24,8 @@ import com.google.common.io.Resources;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.github.fhirschmann.clozegen.lib.util.Preconditions2.checkFile;
+import java.net.URISyntaxException;
 
 /**
  * Utility class for parsing frequencies from plain-text files.
@@ -53,10 +53,12 @@ public final class ReadMultisets {
      * @param url the URL to the file to parse
      * @return the parsed frequencies
      * @throws IOException on errors reading from the file
+     * @throws URISyntaxException on errors during URI conversion
      */
-    public static Multiset<String> parseMultiset(final URL url) throws IOException {
+    public static Multiset<String> parseMultiset(final URL url)
+            throws IOException, URISyntaxException {
         final Multiset<String> multiset = LinkedHashMultiset.create();
-        final List<String> lines = Resources.readLines(checkNotNull(url), Charsets.UTF_8);
+        final List<String> lines = Resources.readLines(checkFile(url), Charsets.UTF_8);
 
         for (String line : lines) {
             final String[] tokens = line.split("\t");
@@ -88,11 +90,12 @@ public final class ReadMultisets {
      * @param key the key to identify the word sequence by
      * @return the parsed frequencies
      * @throws IOException on errors reading from the file
+     * @throws URISyntaxException on errors during URI conversion
      */
     public static MapMultiset<String, String> parseMapMultiset(
-            final URL url, final int key) throws IOException {
+            final URL url, final int key) throws IOException, URISyntaxException {
         final MapMultiset<String, String> mms = MapMultiset.create();
-        final List<String> lines = Resources.readLines(checkNotNull(url), Charsets.UTF_8);
+        final List<String> lines = Resources.readLines(checkFile(url), Charsets.UTF_8);
 
         for (String line : lines) {
             final String[] tokens = line.split("\t");
