@@ -26,6 +26,7 @@ import java.net.URL;
 import java.util.List;
 import static com.github.fhirschmann.clozegen.lib.util.Preconditions2.checkFile;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 
 /**
  * Utility class for parsing frequencies from plain-text files.
@@ -51,14 +52,15 @@ public final class ReadMultisets {
      * Then getting the count of "because of the" will yield 100.
      *
      * @param url the URL to the file to parse
+     * @param charset the charset of the file
      * @return the parsed frequencies
      * @throws IOException on errors reading from the file
      * @throws URISyntaxException on errors during URI conversion
      */
-    public static Multiset<String> parseMultiset(final URL url)
+    public static Multiset<String> parseMultiset(final URL url, final Charset charset)
             throws IOException, URISyntaxException {
         final Multiset<String> multiset = LinkedHashMultiset.create();
-        final List<String> lines = Resources.readLines(checkFile(url), Charsets.UTF_8);
+        final List<String> lines = Resources.readLines(checkFile(url), charset);
 
         for (String line : lines) {
             final String[] tokens = line.split("\t");
@@ -66,6 +68,29 @@ public final class ReadMultisets {
         }
 
         return multiset;
+    }
+
+    /**
+     * Parses UTF-8 encoded frequencies from a URL. The subject and the count for a
+     * subject need to be delimited by {@code \t} with the count on the right-hand
+     * side.
+     *
+     * <p>For example, assuming your frequency file contains the following lines:
+     * <pre>
+     * one of the   200
+     * because of the  100
+     * members of the   50
+     * </pre>
+     * Then getting the count of "because of the" will yield 100.
+     *
+     * @param url the URL to the file to parse
+     * @return the parsed frequencies
+     * @throws IOException on errors reading from the file
+     * @throws URISyntaxException on errors during URI conversion
+     */
+    public static Multiset<String> parseMultiset(final URL url)
+            throws IOException, URISyntaxException {
+        return parseMultiset(url, Charsets.UTF_8);
     }
 
     /**
@@ -88,14 +113,16 @@ public final class ReadMultisets {
      *
      * @param url the URL to the file to parse
      * @param key the key to identify the word sequence by
+     * @param charset the charset of the file
      * @return the parsed frequencies
      * @throws IOException on errors reading from the file
      * @throws URISyntaxException on errors during URI conversion
      */
     public static MapMultiset<String, String> parseMapMultiset(
-            final URL url, final int key) throws IOException, URISyntaxException {
+            final URL url, final int key, final Charset charset)
+            throws IOException, URISyntaxException {
         final MapMultiset<String, String> mms = MapMultiset.create();
-        final List<String> lines = Resources.readLines(checkFile(url), Charsets.UTF_8);
+        final List<String> lines = Resources.readLines(checkFile(url), charset);
 
         for (String line : lines) {
             final String[] tokens = line.split("\t");
@@ -110,5 +137,36 @@ public final class ReadMultisets {
             mms.add(ngram[key], sb.toString(), Integer.parseInt(tokens[1]));
         }
         return mms;
+    }
+
+    /**
+     * Parses UTF-8 encoded conditional frequencies from a URL. The subject and the
+     * count for a subject need to be delimited by {@code \t} with the count on the
+     * right-hand side.
+     *
+     * <p>Additionally, the remaining words on the left-hand side are split using the
+     * whitespace as delimiter. The {@code key} parameter identifies the condition
+     * by which the rest of the word sequence (with the key itself removed) is identified
+     * by.
+     *
+     * <p>For example, assuming your frequency file contains the following lines:
+     * <pre>
+     * one of   200
+     * because of   100
+     * members of   50
+     * </pre>
+     * Then selecting {@code 0} as key will yield a count of 100 when
+     * looking up "of" given the the key (condition) is "because".
+     *
+     * @param url the URL to the file to parse
+     * @param key the key to identify the word sequence by
+     * @return the parsed frequencies
+     * @throws IOException on errors reading from the file
+     * @throws URISyntaxException on errors during URI conversion
+     */
+    public static MapMultiset<String, String> parseMapMultiset(
+            final URL url, final int key)
+            throws IOException, URISyntaxException {
+        return parseMapMultiset(url, key, Charsets.UTF_8);
     }
 }
