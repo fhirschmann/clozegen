@@ -41,6 +41,11 @@ import org.uimafit.factory.JCasFactory;
 import org.uimafit.util.FSCollectionFactory;
 import org.uimafit.util.JCasUtil;
 import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.common.io.Resources;
+import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
+import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.uimafit.factory.CollectionReaderFactory;
 
 /**
  * Utility functions for UIMA related stuff.
@@ -196,5 +201,19 @@ public final class UIMAUtils {
         DocumentMetaData metadata = DocumentMetaData.create(jcas);
         metadata.setDocumentId("test");
         return jcas;
+    }
+
+    /**
+     * Creates a new {@link CollectionReader} solely meant for testing purposes.
+     *
+     * @return a new {@link CollectionReader}
+     * @throws ResourceInitializationException on errors during initialization
+     */
+    public static CollectionReader createTestReader()
+            throws ResourceInitializationException {
+        return CollectionReaderFactory.createCollectionReader(
+                BrownCorpusReader.class,
+                BrownCorpusReader.PARAM_PATH, Resources.getResource("brown_tei_test").getPath(),
+                BrownCorpusReader.PARAM_PATTERNS, new String[] {"[+]*.xml"});
     }
 }
