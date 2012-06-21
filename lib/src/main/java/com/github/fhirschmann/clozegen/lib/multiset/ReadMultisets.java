@@ -25,6 +25,7 @@ import com.google.common.io.Resources;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Utility class for parsing frequencies from plain-text files.
@@ -55,7 +56,7 @@ public final class ReadMultisets {
      */
     public static Multiset<String> parseMultiset(final URL url) throws IOException {
         final Multiset<String> multiset = LinkedHashMultiset.create();
-        final List<String> lines = Resources.readLines(url, Charsets.UTF_8);
+        final List<String> lines = Resources.readLines(checkNotNull(url), Charsets.UTF_8);
 
         for (String line : lines) {
             final String[] tokens = line.split("\t");
@@ -80,7 +81,7 @@ public final class ReadMultisets {
      * because of   100
      * members of   50
      * </pre>
-     * Then selecting {@code 0</code> as <code>key} will yield a count of 100 when
+     * Then selecting {@code 0} as key will yield a count of 100 when
      * looking up "of" given the the key (condition) is "because".
      *
      * @param url the URL to the file to parse
@@ -91,7 +92,7 @@ public final class ReadMultisets {
     public static MapMultiset<String, String> parseMapMultiset(
             final URL url, final int key) throws IOException {
         final MapMultiset<String, String> mms = MapMultiset.create();
-        final List<String> lines = Resources.readLines(url, Charsets.UTF_8);
+        final List<String> lines = Resources.readLines(checkNotNull(url), Charsets.UTF_8);
 
         for (String line : lines) {
             final String[] tokens = line.split("\t");
