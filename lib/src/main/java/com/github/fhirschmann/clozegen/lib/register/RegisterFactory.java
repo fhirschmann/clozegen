@@ -19,6 +19,7 @@ package com.github.fhirschmann.clozegen.lib.register;
 
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.google.common.collect.Sets;
 import de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
@@ -65,7 +66,10 @@ public final class RegisterFactory {
                 createExternalResourceDescription(
                 CollocationAdapter.class,
                 CollocationAdapter.PARAM_PATH,
-                "frequencies/en/prepositions/trigrams.txt"));
+                "frequencies/en/prepositions/trigrams.txt"),
+                GapAnnotator.CONSTRAINT_KEY,
+                createExternalResourceDescription(
+                PrepositionConstraintResource.class));
 
         entry.setName("Preposition Gap Generator");
         entry.setSupportedLanguages(Sets.newHashSet("en"));
