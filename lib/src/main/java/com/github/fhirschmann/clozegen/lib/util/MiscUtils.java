@@ -34,5 +34,4 @@ public final class MiscUtils {
      * Joins a string using a single whitespace.
      */
     public static final Joiner WS_JOINER = Joiner.on(" ");
-
 }

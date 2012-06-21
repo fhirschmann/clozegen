@@ -29,16 +29,11 @@ import org.apache.uima.resource.ResourceInitializationException;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class Job {
-    public void run(final CommandLine line, final String input, final String output)
+    public void run(final Map<String, Integer> generators, final String input, final String output)
             throws ResourceInitializationException, UIMAException, IOException {
-        ClozeTestGenerator gen = ClozeTestGenerator.defaultGenerator();
+        ClozeTestGenerator gen = new ClozeTestGenerator();
 
-        if (line.hasOption("classes")) {
-            Map<String, Integer> classes = Utils.parseGapClasses(
-                    line.getOptionValue("classes"));
-            gen.activate(classes);
-        }
-
+        gen.activate(generators);
         gen.run(input, output, "en");
     }
 }

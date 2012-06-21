@@ -26,6 +26,8 @@ import org.apache.log4j.Logger;
 import org.apache.uima.UIMAException;
 import org.apache.uima.resource.ResourceInitializationException;
 import static com.google.common.base.Preconditions.checkArgument;
+import com.google.common.collect.Maps;
+import java.util.Map;
 
 /**
  *
@@ -54,7 +56,7 @@ public class Main {
     public void run(final String[] args)
             throws ResourceInitializationException, UIMAException, IOException {
         CommandLineParser parser = new PosixParser();
-        options.addOption("c", "classes", true, "word classes to generate gaps for");
+        options.addOption("g", "generators", true, "generators to activate");
         options.addOption("h", "help", false, "print help message and exit");
         options.addOption("l", "list", false, "print all available gap generators");
 
@@ -64,15 +66,24 @@ public class Main {
             if (line.hasOption("help")) {
                 printHelp();
             } else if (line.hasOption("list")) {
-                for (DescriptionRegisterEntry entry : RegisterFactory.createDefaultDescriptionRegister()) {
+                for (DescriptionRegisterEntry entry : RegisterFactory.
+                        createDefaultDescriptionRegister()) {
                     System.out.println(String.format("[%s] %s",
                             entry.getIdentifier(), entry.getName()));
                 }
             } else {
                 checkArgument(line.getArgs().length == 2,
                         "Exactly two arguments are required!");
-                Job run = new Job();
-                run.run(line, line.getArgs()[0], line.getArgs()[1]);
+                Job job = new Job();
+
+                Map<String, Integer> generators = Maps.newHashMap();
+
+                if (line.hasOption("generators")) {
+                    generators.putAll(Utils.parseGapClasses(
+                            line.getOptionValue("generators")));
+                }
+
+                job.run(generators, line.getArgs()[0], line.getArgs()[1]);
             }
 
         } catch (ParseException exp) {

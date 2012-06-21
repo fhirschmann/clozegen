@@ -17,6 +17,11 @@ import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 /**
+ * Cloze Test Generator.
+ *
+ * <p>
+ * This is the main entry point for the cloze test generation process.
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -35,32 +40,6 @@ public class ClozeTestGenerator {
      * The reader register.
      */
     private ReaderRegister readerRegister;
-
-    /**
-     * Creates a new {@link ClozeTestGenerator} with empty registers.
-     *
-     * @throws ResourceInitializationException on errors during initialization
-     */
-    public ClozeTestGenerator() throws ResourceInitializationException {
-        pipeline = new Pipeline();
-        descriptionRegister = new DescriptionRegister();
-        readerRegister = new ReaderRegister();
-    }
-
-    /**
-     * Creates a new {@link ClozeTestGenerator with default registers.
-     *
-     * @return a new generator with default register
-     * @throws ResourceInitializationException on errors during initialization
-     */
-    public static ClozeTestGenerator defaultGenerator()
-            throws ResourceInitializationException {
-        ClozeTestGenerator gen = new ClozeTestGenerator();
-        gen.setPipeline(PipelineFactory.createDefaultPipeline());
-        gen.setDescriptionRegister(RegisterFactory.createDefaultDescriptionRegister());
-        gen.setReaderRegister(RegisterFactory.createDefaultReaderRegister());
-        return gen;
-    }
 
     /**
      * Runs the cloze test generation process.
@@ -118,19 +97,47 @@ public class ClozeTestGenerator {
         getPipeline().run(reader);
     }
 
-    public void activate(final Map<String, Integer> classes)
+    /**
+     * Activate the given {@code generators}.
+     *
+     * @param generators the generators to activate
+     * @throws ResourceInitializationException on errors during initialization
+     */
+    public void activate(final Map<String, Integer> generators)
             throws ResourceInitializationException {
-        for (Entry<String, Integer> entry : classes.entrySet()) {
-            getPipeline().addStep(getDescriptionRegister().
-                    get(entry.getKey()).getDescription());
+        for (Entry<String, Integer> entry : generators.entrySet()) {
+            activate(entry);
         }
 
     }
 
     /**
-     * @return the pipeline
+     * Activate the given {@code generator}.
+     *
+     * @param generator the generator to activate
+     * @throws ResourceInitializationException on errors during initialization
      */
-    public Pipeline getPipeline() {
+    public void activate(final Entry<String, Integer> generator)
+            throws ResourceInitializationException {
+        getPipeline().addStep(getDescriptionRegister().
+                get(generator.getKey()).getDescription());
+    }
+
+    /**
+     * Returns the pipeline of the generation process. You can safely add
+     * your own analysis engines to the pipeline.
+     *
+     * <p>
+     * If no register has been set, a new default one will be created.
+     * </p>
+     *
+     * @return the pipeline
+     * @throws ResourceInitializationException on errors during initialization
+     */
+    public Pipeline getPipeline() throws ResourceInitializationException {
+        if (pipeline == null) {
+            setPipeline(PipelineFactory.createDefaultPipeline());
+        }
         return pipeline;
     }
 
@@ -142,9 +149,21 @@ public class ClozeTestGenerator {
     }
 
     /**
+     * Returns the description register. This register holds all information
+     * used to construct an analysis engine in order to generate gaps.
+     *
+     * <p>
+     * If no register has been set, a new default one will be created.
+     * </p>
+     *
      * @return the descriptionRegister
+     * @throws ResourceInitializationException on errors during initialization
      */
-    public DescriptionRegister getDescriptionRegister() {
+    public DescriptionRegister getDescriptionRegister()
+            throws ResourceInitializationException {
+        if (descriptionRegister == null) {
+            setDescriptionRegister(RegisterFactory.createDefaultDescriptionRegister());
+        }
         return descriptionRegister;
     }
 
@@ -156,9 +175,19 @@ public class ClozeTestGenerator {
     }
 
     /**
+     * Returns the reader register. This register maps file extensions to UIMA
+     * readers. You can safely add new mappings to this register.
+     *
+     * <p>
+     * If no register has been set, a new default one will be created.
+     * </p>
+     *
      * @return the readerRegister
      */
     public ReaderRegister getReaderRegister() {
+        if (readerRegister == null) {
+            return RegisterFactory.createDefaultReaderRegister();
+        }
         return readerRegister;
     }
 
