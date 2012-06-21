@@ -20,6 +20,7 @@ package com.github.fhirschmann.clozegen.lib.multiset;
 import com.google.common.collect.Multiset;
 import com.google.common.io.Resources;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +43,7 @@ public class ReadMultisetTest {
     }
 
     @Test
-    public void testParseMultiset() throws IOException {
+    public void testParseMultiset() throws IOException, URISyntaxException {
         Multiset<String> ms = ReadMultisets.parseMultiset(trigrams);
         assertEquals(806, ms.count("one of the"));
         assertEquals(188, ms.count("and in the"));
@@ -50,7 +51,7 @@ public class ReadMultisetTest {
     }
 
     @Test
-    public void testParseMapMultiset() throws IOException {
+    public void testParseMapMultiset() throws IOException, URISyntaxException {
         MapMultiset<String, String> mms = ReadMultisets.parseMapMultiset(bigrams, 0);
         assertEquals(1404, mms.get("one").count("of"));
 

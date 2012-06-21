@@ -21,6 +21,7 @@ import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -44,7 +45,7 @@ public class WriteMultisetTest {
     }
 
     @Test
-    public void testWriteMultiset() throws IOException {
+    public void testWriteMultiset() throws IOException, URISyntaxException {
         File file = File.createTempFile("multisetutils", "txt");
         WriteMultisets.writeMultiSet(multiset1, file);
         Multiset<String> multisetr = ReadMultisets.parseMultiset(file.toURI().toURL());
@@ -52,7 +53,7 @@ public class WriteMultisetTest {
     }
 
     @Test
-    public void testWriteSortedMultiset() throws IOException {
+    public void testWriteSortedMultiset() throws IOException, URISyntaxException {
         File file = File.createTempFile("multisetutils", "txt");
         WriteMultisets.writeSortedMultiSet(multiset2, file);
         Multiset<String> multisetr = ReadMultisets.parseMultiset(file.toURI().toURL());
