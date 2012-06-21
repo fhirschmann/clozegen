@@ -1,4 +1,5 @@
 #!/bin/sh
+
 cd ../lib
 mvn install -DskipTests
 cd ../cli
