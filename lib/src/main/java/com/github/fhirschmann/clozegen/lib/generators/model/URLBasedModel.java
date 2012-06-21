@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.generators.model;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
@@ -25,5 +26,5 @@ import java.net.URL;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public interface URLBasedModel {
-    void load(URL url) throws IOException;
+    void load(URL url) throws IOException, URISyntaxException;
 }
