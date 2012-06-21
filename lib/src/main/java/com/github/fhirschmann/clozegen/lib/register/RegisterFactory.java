@@ -64,7 +64,8 @@ public final class RegisterFactory {
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
                 CollocationAdapter.class,
-                CollocationAdapter.PARAM_PATH, "frequencies/en/prepositions"));
+                CollocationAdapter.PARAM_PATH,
+                "frequencies/en/prepositions/trigrams.txt"));
 
         entry.setName("Preposition Gap Generator");
         entry.setSupportedLanguages(Sets.newHashSet("en"));
