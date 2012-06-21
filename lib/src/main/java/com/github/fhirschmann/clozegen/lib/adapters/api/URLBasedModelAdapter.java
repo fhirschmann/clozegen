@@ -21,6 +21,7 @@ import com.github.fhirschmann.clozegen.lib.generators.model.URLBasedModel;
 import com.google.common.io.Resources;
 import com.google.common.reflect.TypeToken;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
@@ -55,6 +56,8 @@ public class URLBasedModelAdapter<M extends URLBasedModel> extends AbstractResou
         } catch (IllegalAccessException ex) {
             getLogger().error(ex);
         } catch (IOException ex) {
+            getLogger().error(ex);
+        } catch (URISyntaxException ex) {
             getLogger().error(ex);
         }
         return false;
