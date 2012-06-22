@@ -32,7 +32,7 @@ import com.google.common.collect.*;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  *
  * @param <K> the type of keys maintained by this map
- * @param <V> the type of values for {@link MultiSet}
+ * @param <V> the type of values for {@link Multiset}
  */
 public class MapMultiset<K, V> extends ForwardingMap<K, Multiset<V>> {
     /** The underlying map. */
@@ -42,7 +42,7 @@ public class MapMultiset<K, V> extends ForwardingMap<K, Multiset<V>> {
      * Creates a new empty {@link MapMultiset}.
      *
      * @param <K> the type of keys maintained by this map
-     * @param <V> the type of values for {@link MultiSet}
+     * @param <V> the type of values for {@link Multiset}
      * @return a new empty {@link MapMultiset}
      */
     public static <K, V> MapMultiset<K, V> create() {
