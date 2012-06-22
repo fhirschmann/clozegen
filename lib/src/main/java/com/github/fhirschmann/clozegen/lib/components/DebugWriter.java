@@ -23,7 +23,6 @@ import java.util.Iterator;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.apache.uima.util.Level;
 import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.util.FSCollectionFactory;
 
@@ -41,14 +40,15 @@ public class DebugWriter extends JCasConsumer_ImplBase {
 
         sb.append(String.format("%s%n", jCas.getDocumentText()));
 
-        for (Iterator<Annotation> i = jCas.getAnnotationIndex().iterator(); i.hasNext();) {
+        for (Iterator<Annotation> i = jCas.
+                getAnnotationIndex().iterator(); i.hasNext();) {
             final Annotation annotation = i.next();
             sb.append(String.format("[%s] (%s,%s) %s",
                     annotation.getType().getShortName(),
                     annotation.getBegin(),
                     annotation.getEnd(),
                     annotation.getCoveredText()));
-            if (annotation.getTypeIndexID() == GapAnnotation.type) {
+            if (annotation instanceof GapAnnotation) {
                 final GapAnnotation gapAnnotation = (GapAnnotation) annotation;
                 sb.append(String.format(" %s%s%n",
                         FSCollectionFactory.create(
@@ -56,13 +56,13 @@ public class DebugWriter extends JCasConsumer_ImplBase {
                         FSCollectionFactory.create(
                         gapAnnotation.getAllAnswers()).toString()));
             } else {
-                if (annotation.getTypeIndexID() == POS.type) {
+                if (annotation instanceof POS) {
                     final POS pos = (POS) annotation;
                     sb.append(String.format(" [%s]", pos.getPosValue()));
                 }
                 sb.append(String.format("%n"));
             }
         }
-        getContext().getLogger().log(Level.INFO, sb.toString());
+        getLogger().info(sb.toString());
     }
 }
