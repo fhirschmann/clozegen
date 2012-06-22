@@ -28,15 +28,34 @@ import org.javatuples.Triplet;
 
 /**
  * Represents a model for the collocation-based gap generator.
- * This minimum n in n-gram for this model is 3.
+ * This minimum n in n-gram for this model is 3 and n needs to be an odd number!
+ *
+ * <p>
+ * Let's assume you load the following frequencies from a file:
+ *
+ * <pre>
+ * one of the   200
+ * because of the  100
+ * members of the   50
+ * </pre>
+ *
+ * Then you'd end up with a model like this:
+ * <pre>
+ * CollocationModel{
+ *     tails={the=[of x 350]},
+ *     heads={because=[of x 100], one=[of x 200],
+ *     members=[of x 50]}, ngrams=[members of the x 50,
+ *         because of the x 100, one of the x 200]}
+ * </pre>
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class CollocationModel extends MultisetModel {
-    /** A multiset of bigrams (x_i-n, x_i-1, x). */
+    /** The head ngrams. */
     private MapMultiset<String, String> heads;
 
-    /** A multiset of bigrams (x, x_i+1, x_i+n). */
+    /** The tail ngrams. */
     private MapMultiset<String, String> tails;
 
     /**
