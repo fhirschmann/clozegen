@@ -22,10 +22,7 @@ import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
 import com.github.fhirschmann.clozegen.lib.multiset.WriteMultisets;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
-import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
-import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
-import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
-import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.github.fhirschmann.clozegen.lib.util.*;
 import com.google.common.collect.Sets;
 import java.lang.reflect.Constructor;
 import java.util.Set;
@@ -50,6 +47,7 @@ public class PrivateConstructorTest {
         set.add(PipelineFactory.class);
         set.add(RegisterFactory.class);
         set.add(IntermediateFormat.class);
+        set.add(JCasFactory2.class);
 
         for (Class<? extends Object> clazz : set) {
             Constructor<?>[] cons = clazz.getDeclaredConstructors();

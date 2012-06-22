@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.adapters;
 
+import com.github.fhirschmann.clozegen.lib.components.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.CoveredTextConstraintResource;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
@@ -60,6 +61,7 @@ public class GenericSingleTokenInputAdapterTest {
 
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
         pipeline.addStep(test);
+        pipeline.addStep(DebugWriter.class);
         JCas jcas = JCasFactory2.createTestJCas("This is just a test.", "en");
         pipeline.run(jcas);
         Annotation an = jcas.getAnnotationIndex(GapAnnotation.type).iterator().next();

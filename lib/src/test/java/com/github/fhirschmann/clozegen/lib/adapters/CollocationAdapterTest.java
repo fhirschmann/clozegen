@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.adapters;
 
+import com.github.fhirschmann.clozegen.lib.components.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
@@ -55,6 +56,7 @@ public class CollocationAdapterTest {
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
         pipeline.addStep(test);
         JCas jcas = JCasFactory2.createTestJCas("I can't think of anything.", "en");
+        pipeline.addStep(DebugWriter.class);
         pipeline.run(jcas);
         Annotation an = jcas.getAnnotationIndex(GapAnnotation.type).iterator().next();
         assertThat(an.getCoveredText(), is("of"));
