@@ -58,7 +58,7 @@ public final class ReadMultisets {
      * @throws URISyntaxException on errors during URI conversion
      */
     public static Multiset<String> parseMultiset(final URL url, final Charset charset)
-            throws IOException, URISyntaxException {
+            throws IOException {
         final Multiset<String> multiset = LinkedHashMultiset.create();
         final List<String> lines = Resources.readLines(checkNotNull(url), charset);
 
@@ -86,10 +86,8 @@ public final class ReadMultisets {
      * @param url the URL to the file to parse
      * @return the parsed frequencies
      * @throws IOException on errors reading from the file
-     * @throws URISyntaxException on errors during URI conversion
      */
-    public static Multiset<String> parseMultiset(final URL url)
-            throws IOException, URISyntaxException {
+    public static Multiset<String> parseMultiset(final URL url) throws IOException {
         return parseMultiset(url, Charsets.UTF_8);
     }
 

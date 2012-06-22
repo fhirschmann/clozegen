@@ -18,7 +18,6 @@
 package com.github.fhirschmann.clozegen.lib.generators.model;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
@@ -34,5 +33,5 @@ public interface URLBasedModel {
      * @throws IOException on errors loading the model
      * @throws URISyntaxException on errors when converting to a URI
      */
-    void load(URL url) throws IOException, URISyntaxException;
+    void load(URL url) throws IOException;
 }

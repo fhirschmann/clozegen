@@ -21,7 +21,6 @@ import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
@@ -45,7 +44,7 @@ public class MultisetModel implements URLBasedModel {
     }
 
     @Override
-    public void load(final URL url) throws IOException, URISyntaxException {
+    public void load(final URL url) throws IOException {
         setMultiset(ReadMultisets.parseMultiset(url));
     }
 
