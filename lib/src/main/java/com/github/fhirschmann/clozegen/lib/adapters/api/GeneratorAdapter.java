@@ -22,8 +22,8 @@ import java.util.List;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
- * This interface represents a class which provides an adapter to the gap
- * generating algorithms.
+ * Adapters implementing this interface will provide an instance of a gap
+ * generator.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */

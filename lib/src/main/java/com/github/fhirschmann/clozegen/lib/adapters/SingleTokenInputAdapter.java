@@ -17,25 +17,46 @@
  */
 package com.github.fhirschmann.clozegen.lib.adapters;
 
+import com.github.fhirschmann.clozegen.lib.adapters.api.AbstractResource;
 import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.SingleTokenInputGapGenerator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.component.Resource_ImplBase;
 import org.uimafit.descriptor.ExternalResource;
 
 /**
- * This adapter calls a {@link SingleTokenInputGapGenerator} with the
- * covered text of the input annotation.
+ * This adapter calls a {@link SingleTokenInputGapGenerator} with the covered text of the
+ * input annotation.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class SingleTokenInputAdapter
-        extends Resource_ImplBase implements GeneratorAdapter {
-    public static final String RES_GENERATOR = "Generator";
+        extends AbstractResource implements GeneratorAdapter {
+    public static final String RES_GENERATOR = "GeneratorClass";
     @ExternalResource(key = RES_GENERATOR)
+    private String generatorClass;
+
     private SingleTokenInputGapGenerator generator;
+
+    @Override
+    public boolean initialize() {
+        try {
+            generator = (SingleTokenInputGapGenerator) Class.
+                    forName(generatorClass).newInstance();
+        } catch (InstantiationException ex) {
+            getLogger().error(ex);
+        } catch (IllegalAccessException ex) {
+            getLogger().error(ex);
+        } catch (ClassNotFoundException ex) {
+            getLogger().error(ex);
+        }
+
+        return true;
+    }
 
     @Override
     public GapGenerator generator(

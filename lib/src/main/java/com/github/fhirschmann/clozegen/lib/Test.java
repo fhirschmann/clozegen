@@ -25,10 +25,13 @@ import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionCons
 import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.components.DebugWriter;
+import com.github.fhirschmann.clozegen.lib.generators.model.CollocationModel;
 import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -85,9 +88,9 @@ public class Test {
 
 
         pipeline.addStep(test);
-        //pipeline.addStep(test2);
-        //pipeline.addStep(test3);
-        //pipeline.addStep(writer);
+        pipeline.addStep(test2);
+        pipeline.addStep(test3);
+        pipeline.addStep(writer);
         pipeline.addStep(DebugWriter.class);
         pipeline.run(j);
     }

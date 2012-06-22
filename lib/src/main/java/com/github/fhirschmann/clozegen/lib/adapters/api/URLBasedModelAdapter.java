@@ -28,6 +28,12 @@ import org.uimafit.descriptor.ConfigurationParameter;
  * Extending classes will have to declare a model which extends {@link URLBasedModel} of
  * which a new instance will be created.
  *
+ * <p>
+ * The {@link URLBasedModelAdapter#model} will by loaded by calling
+ * {@link URLBasedModel#load(URL)}. This works by creating a new instance
+ * of {@code <M>}.
+ * </p>
+ *
  * @param <M> a model which extends {@link URLBasedModel}
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -37,16 +43,19 @@ public class URLBasedModelAdapter<M extends URLBasedModel> extends AbstractResou
      */
     protected M model;
 
-    /** The path to the collocation file. */
+    /**
+     * The path to the model. This parameter will be passed to
+     * {@link URLBasedModel#load(URL)}.
+     */
     public static final String PARAM_PATH = "Path";
     @ConfigurationParameter(name = PARAM_PATH, mandatory = true)
     private String path;
 
     @SuppressWarnings("unchecked")
-	@Override
+    @Override
     public boolean initialize() {
         @SuppressWarnings("serial")
-		TypeToken<M> type = new TypeToken<M>(getClass()) {};
+        TypeToken<M> type = new TypeToken<M>(getClass()) {};
         try {
             model = (M) type.getRawType().newInstance();
             model.load(Resources.getResource(path));

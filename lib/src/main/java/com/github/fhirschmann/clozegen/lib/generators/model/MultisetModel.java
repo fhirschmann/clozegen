@@ -25,7 +25,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
- * A simple multiset-based model.
+ * A simple multiset-based model. The frequencies will be loaded from a file.
+ * Please see {@link ReadMultisets#parseMultiset(URL)} for information on
+ * the file format.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
