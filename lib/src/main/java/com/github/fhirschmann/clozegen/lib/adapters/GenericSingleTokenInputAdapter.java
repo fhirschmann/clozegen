@@ -50,8 +50,8 @@ public class GenericSingleTokenInputAdapter
     @Override
     public boolean initialize() {
         try {
-        	@SuppressWarnings("rawtypes")
-			Class clazz = Class.forName(checkNotNull(generatorClass));
+            @SuppressWarnings("rawtypes")
+            Class clazz = Class.forName(checkNotNull(generatorClass));
             generator = (SingleTokenInputGapGenerator) clazz.newInstance();
         } catch (InstantiationException ex) {
             getLogger().error(ex);
