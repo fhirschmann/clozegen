@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib;
 
-import com.github.fhirschmann.clozegen.lib.adapters.SingleTokenInputAdapter;
+import com.github.fhirschmann.clozegen.lib.adapters.GenericSingleTokenInputAdapter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
@@ -40,12 +40,12 @@ public class BindResourceThing {
         JCas j = UIMAUtils.createTestJCas();
 
         ExternalResourceDescription ext = createExternalResourceDescription(
-                SingleTokenInputAdapter.class);
+                GenericSingleTokenInputAdapter.class);
 
         // bindResource does not eat ExternalResourceDescription:
         /*
         bindResource(ext,
-                SingleTokenInputAdapter.RES_GENERATOR,
+                GenericSingleTokenInputAdapter.PARAM_GENERATOR_CLASS,
                 JndiResourceLocator.class,
                 JndiResourceLocator.PARAM_NAME, "DummyGapGenerator");
         */

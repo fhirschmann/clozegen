@@ -22,11 +22,9 @@ import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.SingleTokenInputGapGenerator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.uimafit.component.Resource_ImplBase;
-import org.uimafit.descriptor.ExternalResource;
+import static com.google.common.base.Preconditions.checkNotNull;
+import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
  * This adapter calls a {@link SingleTokenInputGapGenerator} with the covered text of the
@@ -34,19 +32,26 @@ import org.uimafit.descriptor.ExternalResource;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class SingleTokenInputAdapter
+public class GenericSingleTokenInputAdapter
         extends AbstractResource implements GeneratorAdapter {
-    public static final String RES_GENERATOR = "GeneratorClass";
-    @ExternalResource(key = RES_GENERATOR)
+    /**
+     * The class of the generator to use. This will be passed to
+     * {@link Class#forName(java.lang.String)}.
+     */
+    public static final String PARAM_GENERATOR_CLASS = "GeneratorClass";
+    @ConfigurationParameter(name = PARAM_GENERATOR_CLASS, mandatory = true)
     private String generatorClass;
 
+    /**
+     * The underlying generator.
+     */
     private SingleTokenInputGapGenerator generator;
 
     @Override
     public boolean initialize() {
         try {
-            generator = (SingleTokenInputGapGenerator) Class.
-                    forName(generatorClass).newInstance();
+            Class clazz = Class.forName(checkNotNull(generatorClass));
+            generator = (SingleTokenInputGapGenerator) clazz.newInstance();
         } catch (InstantiationException ex) {
             getLogger().error(ex);
         } catch (IllegalAccessException ex) {
