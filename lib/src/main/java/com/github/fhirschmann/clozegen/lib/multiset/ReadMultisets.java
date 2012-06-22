@@ -24,9 +24,9 @@ import com.google.common.io.Resources;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import static com.github.fhirschmann.clozegen.lib.util.Preconditions2.checkFile;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Utility class for parsing frequencies from plain-text files.
@@ -60,7 +60,7 @@ public final class ReadMultisets {
     public static Multiset<String> parseMultiset(final URL url, final Charset charset)
             throws IOException, URISyntaxException {
         final Multiset<String> multiset = LinkedHashMultiset.create();
-        final List<String> lines = Resources.readLines(checkFile(url), charset);
+        final List<String> lines = Resources.readLines(checkNotNull(url), charset);
 
         for (String line : lines) {
             final String[] tokens = line.split("\t");
@@ -122,7 +122,7 @@ public final class ReadMultisets {
             final URL url, final int key, final Charset charset)
             throws IOException, URISyntaxException {
         final MapMultiset<String, String> mms = MapMultiset.create();
-        final List<String> lines = Resources.readLines(checkFile(url), charset);
+        final List<String> lines = Resources.readLines(checkNotNull(url), charset);
 
         for (String line : lines) {
             final String[] tokens = line.split("\t");
