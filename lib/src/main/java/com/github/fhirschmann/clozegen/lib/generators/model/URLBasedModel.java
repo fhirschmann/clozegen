@@ -22,9 +22,17 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
+ * Interface for url-based models.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public interface URLBasedModel {
+    /**
+     * Loads the model from a given {@code url}.
+     *
+     * @param url the url to load the model from
+     * @throws IOException on errors loading the model
+     * @throws URISyntaxException on errors when converting to a URI
+     */
     void load(URL url) throws IOException, URISyntaxException;
 }

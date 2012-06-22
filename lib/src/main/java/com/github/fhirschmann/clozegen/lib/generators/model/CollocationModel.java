@@ -28,6 +28,7 @@ import org.javatuples.Triplet;
 
 /**
  * Represents a model for the collocation-based gap generator.
+ * This minimum n in n-gram for this model is 3.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
