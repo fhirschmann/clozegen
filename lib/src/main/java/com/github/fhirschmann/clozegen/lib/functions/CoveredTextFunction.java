@@ -18,18 +18,19 @@
 package com.github.fhirschmann.clozegen.lib.functions;
 
 import com.google.common.base.Function;
+import javax.annotation.Nullable;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
  * A function which returns the text covered by an
- * {@link Annotation}. If {@code input</code> is <code>null},
+ * {@link Annotation}. If {@code input} is {@code null},
  * then no action is taken.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class CoveredTextFunction implements Function<Annotation, String> {
     @Override
-    public String apply(final Annotation input) {
+    public String apply(@Nullable final Annotation input) {
         if (input == null) {
             return null;
         } else {

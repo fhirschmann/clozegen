@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.functions;
 
 import com.google.common.base.Function;
+import javax.annotation.Nullable;
 
 /**
  * Transforms a String to lowercase if it isn't {@code null}.
@@ -26,7 +27,7 @@ import com.google.common.base.Function;
  */
 public class LowerCaseFunction implements Function<String, String> {
     @Override
-    public String apply(final String input) {
+    public String apply(@Nullable final String input) {
         if (input == null) {
             return null;
         } else {
