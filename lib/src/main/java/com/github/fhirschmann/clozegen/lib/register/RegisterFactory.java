@@ -23,7 +23,6 @@ import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionCons
 import com.google.common.collect.Sets;
 import de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.uima.collection.CollectionReader;
@@ -31,11 +30,8 @@ import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import java.io.File;
-import java.net.URI;
-import java.util.Arrays;
 import org.apache.uima.collection.CollectionReader_ImplBase;
 
 /**

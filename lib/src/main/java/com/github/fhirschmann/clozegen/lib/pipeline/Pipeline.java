@@ -20,7 +20,6 @@ package com.github.fhirschmann.clozegen.lib.pipeline;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Lists;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import org.apache.uima.UIMAException;

@@ -20,6 +20,7 @@ package com.github.fhirschmann.clozegen.lib.adapters.api;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import java.util.List;
 import org.apache.uima.jcas.tcas.Annotation;
+import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintProvider;
 
 /**
  * Adapters implementing this interface will provide an instance of a gap

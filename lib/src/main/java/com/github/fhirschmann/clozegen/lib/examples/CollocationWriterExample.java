@@ -21,7 +21,6 @@ import com.github.fhirschmann.clozegen.lib.components.CollocationWriter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
-import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbReader;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;

@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Set;
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.Lists;
-import java.util.logging.Logger;
 import org.javatuples.Triplet;
 
 /**

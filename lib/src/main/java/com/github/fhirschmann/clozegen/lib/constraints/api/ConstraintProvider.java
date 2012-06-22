@@ -17,6 +17,8 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints.api;
 
+import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
 
@@ -28,7 +30,7 @@ import org.apache.uima.jcas.JCas;
 public interface ConstraintProvider {
     /**
      * A constraint which specifies on what occasion
-     * {@link Adapter#generator(java.util.List, int)} should be called.
+     * {@link GeneratorAdapter#generator(java.util.List, int)} should be called.
      *
      * <p>For example, if you want to only work on annotations of the type
      * {@link ART}, then this method should return {@code cons} like so:

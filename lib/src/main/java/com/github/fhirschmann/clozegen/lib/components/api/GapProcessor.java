@@ -20,6 +20,7 @@ package com.github.fhirschmann.clozegen.lib.components.api;
 import java.util.List;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintProvider;
 
 /**
  * A Gap Processor is a class which processes gaps. This can be, for example,

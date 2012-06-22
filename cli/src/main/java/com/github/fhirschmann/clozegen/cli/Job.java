@@ -20,7 +20,6 @@ package com.github.fhirschmann.clozegen.cli;
 import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
 import java.io.IOException;
 import java.util.Map;
-import org.apache.commons.cli.CommandLine;
 import org.apache.uima.UIMAException;
 import org.apache.uima.resource.ResourceInitializationException;
 

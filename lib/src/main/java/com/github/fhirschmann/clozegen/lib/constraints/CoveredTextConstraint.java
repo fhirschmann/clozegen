@@ -26,6 +26,7 @@ import org.apache.uima.jcas.tcas.Annotation;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
+@SuppressWarnings("serial")
 public class CoveredTextConstraint implements FSMatchConstraint {
     /** The covered text to match. */
     private String matchText;

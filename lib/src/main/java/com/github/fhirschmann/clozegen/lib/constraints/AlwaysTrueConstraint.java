@@ -25,8 +25,9 @@ import org.apache.uima.cas.FeatureStructure;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
+@SuppressWarnings("serial")
 public class AlwaysTrueConstraint implements FSMatchConstraint {
-    @Override
+	@Override
     public boolean match(final FeatureStructure fs) {
         return true;
     }

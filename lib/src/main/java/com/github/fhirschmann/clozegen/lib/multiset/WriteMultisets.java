@@ -87,7 +87,7 @@ public final class WriteMultisets {
 
     /**
      * Sorts a Multiset by its counts before writing it to a file using
-     * {@link MultisetUtils#writeMultiSet}.
+     * {@link WriteMultisets#writeMultiSet(Multiset, File)}.
      *
      * @param multiset the multiset to write
      * @param minFrequency the minimum frequency a word must have in order to be written
@@ -102,7 +102,7 @@ public final class WriteMultisets {
 
     /**
      * Sorts a Multiset by its counts before writing it to a file using
-     * {@link MultisetUtils#writeMultiSet}.
+     * {@link WriteMultisets#writeMultiSet(Multiset, File)}.
      *
      * @param multiset the multiset to write
      * @param file the file to write to
