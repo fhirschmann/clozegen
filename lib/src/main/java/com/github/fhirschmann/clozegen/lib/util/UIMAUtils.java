@@ -190,13 +190,16 @@ public final class UIMAUtils {
     /**
      * Creates a JCas solely meant for testing purposes.
      *
+     * @param text the document text of the JCas
+     * @param languageCode the language code of the {@code text}
      * @return a sample jcas
      * @throws UIMAException on errors creating the JCas
      */
-    public static JCas createTestJCas() throws UIMAException {
+    public static JCas createTestJCas(final String text, final String languageCode)
+            throws UIMAException {
         JCas jcas = JCasFactory.createJCas();
-        jcas.setDocumentLanguage("en");
-        jcas.setDocumentText("He studies at the university. He can't think of anything.");
+        jcas.setDocumentLanguage(languageCode);
+        jcas.setDocumentText(text);
 
         DocumentMetaData metadata = DocumentMetaData.create(jcas);
         metadata.setDocumentId("test");
