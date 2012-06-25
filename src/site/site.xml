@@ -10,7 +10,13 @@
     </skin>
     <body>
         <menu ref="parent" inherit="top" />
+        <menu name="Documentation">
+            <item name="Overview" href="overview.html"/>
+            <item name="Writing Generators" href="generators.html"/>
+            <item name="Constraints" href="constraints.html"/>
+            <item name="Wiring it up" href="wire.html"/>
+        </menu>
         <menu ref="reports" inherit="bottom" />
-        <menu ref="modules" />
+        <!-- <menu ref="modules" /> -->
     </body>
 </project>

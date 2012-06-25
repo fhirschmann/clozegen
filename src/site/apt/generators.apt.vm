@@ -1,0 +1,45 @@
+Writing Generators
+
+    The integration of generators into ClozeGen is quite easy and
+    will be explained in this document.
+
+* Background
+
+    A generator is a class which implements the
+    {{{/apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html}GapGenerator}} interface. The method specified
+    in this interface then gets called for each word in a sentence
+    matched by a {{{/constraints.html}constraint}}. Right now,
+    you should only worry about the actual implementation of
+    your generator.
+
+* Simple example
+
+    Let's suppose we want to write a generator for creating gaps for
+    articles. This generator should find all occurences of
+    <<<a>>>, <<<an>>> and <<<the>>> and provide all articles as
+    distractors. Because there is already an
+    {{{/adapter.html}adapter}} available for this scenario,
+    our generator will implement the associated interface:
+    
+%{snippet|id=stupidart|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/StupidArticleGapGenerator.java}
+
+    This generator takes only one input token: The word for which
+    a gap should be generated. Please note that it doesn't matter
+    how you name your <<<initialize(...)>>> method, but for consistency
+    reasons, you should name it <<<initialize(...)>>>. In this
+    case, we are implementing the
+    {{{/apidocs/com/github/fhirschmann/clozegen/lib/generators/api/SingleTokenInputGapGenerator.html}SingleTokenInputGapGenerator}}
+    interface, so the name and signature of our initialization
+    function is predetermined.
+    
+    When {{{/apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html#generate(int)}generate}}
+    is called, the generator can return a gap or indicate the
+    absence thereof. Please see the corresponding
+    {{{/apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html#generate(int)}interface}}
+    for further details.
+    
+    The next step in the process
+    is {{{/constraints.html}writing a constraint}}
+    (if neccessary) and {{{/wire.html}wiring it up}}.
+    
+* More complex example

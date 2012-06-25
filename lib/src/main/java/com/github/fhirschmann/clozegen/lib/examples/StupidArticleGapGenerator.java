@@ -15,12 +15,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.generators;
+package com.github.fhirschmann.clozegen.lib.examples;
 
+// START SNIPPET: stupidart
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.SingleTokenInputGapGenerator;
 import com.google.common.base.Optional;
-
 
 /**
  * This is a sample implementation of a generator for gaps for articles. This
@@ -42,3 +42,4 @@ public class StupidArticleGapGenerator implements SingleTokenInputGapGenerator {
         return Optional.of(Gap.with(validAnswer, "a", "an", "the"));
     }
 }
+// END SNIPPET: stupidart

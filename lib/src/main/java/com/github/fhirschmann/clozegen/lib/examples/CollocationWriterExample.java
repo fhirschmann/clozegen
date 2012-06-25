@@ -39,6 +39,7 @@ import static org.uimafit.factory.ExternalResourceFactory.createExternalResource
  */
 public class CollocationWriterExample {
     public static void main(String[] args) throws Exception {
+        // START SNIPPET: colwrex1a
         Pipeline pipeline = new Pipeline();
 
         CollectionReader cr = CollectionReaderFactory.createCollectionReader(
@@ -56,6 +57,7 @@ public class CollocationWriterExample {
 
         pipeline.addStep(trigrams);
         pipeline.run(cr);
+        // END SNIPPET: colwrex1a
     }
 
 }

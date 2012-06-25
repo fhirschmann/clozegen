@@ -38,7 +38,7 @@ import static org.uimafit.factory.ExternalResourceFactory.createExternalResource
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class ConstraintExample {
+public final class ConstraintExample {
     /**
      * Example 1.
      *
@@ -55,10 +55,12 @@ public class ConstraintExample {
             throws ResourceInitializationException {
         AnalysisEngineDescription desc = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
+                // START SNIPPET: constex1
                 createExternalResourceDescription(
                     TypeConstraintResource.class,
                     TypeConstraintResource.PARAM_TYPE, ART.class.getName()),
                 GapAnnotator.ADAPTER_KEY,
+                // END SNIPPET: constex1
                 createExternalResourceDescription(DummyAdapter.class));
         return desc;
     }
@@ -76,11 +78,13 @@ public class ConstraintExample {
      */
     public static AnalysisEngineDescription example2()
             throws ResourceInitializationException {
+        // START SNIPPET: constex2
         AnalysisEngineDescription desc = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraintResource.class),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(DummyAdapter.class));
+        // END SNIPPET: constex2
         return desc;
     }
 
@@ -97,6 +101,7 @@ public class ConstraintExample {
      */
     public static AnalysisEngineDescription example3()
             throws ResourceInitializationException {
+    // START SNIPPET: constex2
         AnalysisEngineDescription desc = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
                 createExternalResourceDescription(
@@ -105,8 +110,10 @@ public class ConstraintExample {
                     TypeConstraintResource.PARAM_TYPE, POS.class.getName()),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(DummyAdapter.class));
+        // END SNIPPET: constex3
         return desc;
     }
+    // END SNIPPET: constex3
 
     /**
      * Runs all examples.

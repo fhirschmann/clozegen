@@ -45,7 +45,8 @@ public abstract class AbstractGenericGeneratorAdapter<T> extends AbstractResourc
      */
     protected T generator;
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public boolean initialize() {
         try {
             @SuppressWarnings("rawtypes")
