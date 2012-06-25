@@ -3,14 +3,13 @@ package com.github.fhirschmann.clozegen.lib;
 import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormatWriter;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
-import com.github.fhirschmann.clozegen.lib.register.DescriptionRegister;
-import com.github.fhirschmann.clozegen.lib.register.ReaderRegister;
-import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
+import com.github.fhirschmann.clozegen.lib.register.*;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.apache.uima.UIMAException;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -34,12 +33,19 @@ public class ClozeTestGenerator {
     /**
      * The annotator register.
      */
-    private DescriptionRegister annotatorRegister;
+    private AnnotatorRegister annotatorRegister;
 
     /**
-     * The reader register.
+     * The reader register. This holds information about how to construct
+     * a reader which reads from an input file.
      */
     private ReaderRegister readerRegister;
+
+    /**
+     * The writer register. This holds information about how to construct
+     * a reader which writes to an output file.
+     */
+    private WriterRegister writerRegister;
 
     /**
      * Runs the cloze test generation process.
@@ -60,9 +66,8 @@ public class ClozeTestGenerator {
         CollectionReader reader = getReaderRegister().
                 getReaderForFile(input, languageCode);
 
-        getPipeline().addStep(createPrimitiveDescription(
-                IntermediateFormatWriter.class,
-                IntermediateFormatWriter.PARAM_OUTPUT_FILE, output));
+        AnalysisEngineDescription writer = getWriterRegister().getWriterForFile(output);
+        getPipeline().addStep(writer);
 
         run(reader);
     }
@@ -156,10 +161,10 @@ public class ClozeTestGenerator {
      * If no register has been set, a new default one will be created.
      * </p>
      *
-     * @return the annotatorRegister
+     * @return the annotator Register
      * @throws ResourceInitializationException on errors during initialization
      */
-    public DescriptionRegister getAnnotatorRegister()
+    public AnnotatorRegister getAnnotatorRegister()
             throws ResourceInitializationException {
         if (annotatorRegister == null) {
             setAnnotatorRegister(RegisterFactory.createDefaultAnnotatorRegister());
@@ -168,10 +173,36 @@ public class ClozeTestGenerator {
     }
 
     /**
-     * @param annotatorRegister the annotatorRegister to set
+     * @param annotatorRegister the annotator register to set
      */
-    public void setAnnotatorRegister(final DescriptionRegister annotatorRegister) {
+    public void setAnnotatorRegister(final AnnotatorRegister annotatorRegister) {
         this.annotatorRegister = annotatorRegister;
+    }
+
+    /**
+     * Returns the writer register. This register holds all information
+     * used to construct a consumer which writes the cloze test to a file.
+     *
+     * <p>
+     * If no register has been set, a new default one will be created.
+     * </p>
+     *
+     * @return the writer register
+     * @throws ResourceInitializationException on errors during initialization
+     */
+    public WriterRegister getWriterRegister()
+            throws ResourceInitializationException {
+        if (writerRegister == null) {
+            setWriterRegister(RegisterFactory.createDefaultWriterRegister());
+        }
+        return writerRegister;
+    }
+
+    /**
+     * @param writerRegister the writer register to set
+     */
+    public void setWriterRegister(final WriterRegister writerRegister) {
+        this.writerRegister = writerRegister;
     }
 
     /**
