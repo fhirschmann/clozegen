@@ -30,6 +30,7 @@ import org.apache.uima.jcas.JCas;
 import org.uimafit.factory.JCasFactory;
 import org.uimafit.util.FSCollectionFactory;
 import org.uimafit.util.JCasUtil;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Parses and Formats the Intermediate Format.
@@ -63,7 +64,9 @@ public final class IntermediateFormat {
 
     /** As usual, regexps are read-only; this one matches {x}{y}. */
     public static final Pattern PATTERN =
-            Pattern.compile("\\{([^\\}\\{]+)\\}\\{([^\\}\\{]+)\\}");
+            Pattern.compile(String.format(
+            "\\%1$s([^\\%2$s\\%1$s]+)\\%2$s\\%1$s([^\\%2$s\\%1$s]+)\\%2$s",
+            OPENING_TOKEN, CLOSING_TOKEN));
 
     /** This class is not meant to be instantiated. */
     private IntermediateFormat() {
@@ -78,7 +81,7 @@ public final class IntermediateFormat {
     public static String format(final JCas aJCas) {
 
         StringBuilder sb = new StringBuilder();
-        String text = aJCas.getDocumentText();
+        String text = checkNotNull(aJCas).getDocumentText();
         int position = 0;
         for (GapAnnotation gap : JCasUtil.select(aJCas, GapAnnotation.class)) {
             sb.append(text.substring(position, gap.getBegin()));
