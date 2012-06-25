@@ -64,8 +64,9 @@ public final class IntermediateFormat {
 
     /** As usual, regexps are read-only; this one matches {x}{y}. */
     public static final Pattern PATTERN =
-            Pattern.compile(String.format(
-            "\\%1$s([^\\%2$s\\%1$s]+)\\%2$s\\%1$s([^\\%2$s\\%1$s]+)\\%2$s",
+            Pattern.compile(String.format(""
+            + "\\%1$s" + "([^%2$s%1$s]+)" + "\\%2$s"
+            + "\\%1$s" + "([^%2$s%1$s]+)" + "\\%2$s",
             OPENING_TOKEN, CLOSING_TOKEN));
 
     /** This class is not meant to be instantiated. */
