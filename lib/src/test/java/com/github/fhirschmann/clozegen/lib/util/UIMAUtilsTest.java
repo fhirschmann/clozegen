@@ -112,8 +112,8 @@ public class UIMAUtilsTest {
     }
 
     @Test
-    public void testCreateTestJCas() throws Exception {
-        jcas = UIMAUtils.createJCas("foo", "etn");
+    public void testCreateJCas() throws Exception {
+        jcas = UIMAUtils.createJCas("foo", "en");
         assertThat(jcas.getDocumentLanguage(), is("en"));
     }
 }
