@@ -195,7 +195,7 @@ public final class UIMAUtils {
      * @return a sample jcas
      * @throws UIMAException on errors creating the JCas
      */
-    public static JCas createTestJCas(final String text, final String languageCode)
+    public static JCas createJCas(final String text, final String languageCode)
             throws UIMAException {
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentLanguage(languageCode);

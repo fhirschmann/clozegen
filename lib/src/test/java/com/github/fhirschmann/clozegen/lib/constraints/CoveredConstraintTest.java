@@ -33,7 +33,7 @@ import static org.junit.Assert.*;
 public class CoveredConstraintTest {
     @Test
     public void testGetConstraint() throws UIMAException {
-        JCas jcas = UIMAUtils.createTestJCas("He can't think of anything.", "en");
+        JCas jcas = UIMAUtils.createJCas("He can't think of anything.", "en");
         FSMatchConstraint constraint = new CoveredTextConstraint("He");
         GapAnnotation annotation = UIMAUtils.createGapAnnotation(jcas, Gap.with("foo"));
         annotation.setBegin(0);

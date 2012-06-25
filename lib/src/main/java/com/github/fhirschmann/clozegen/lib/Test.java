@@ -47,7 +47,7 @@ public class Test {
 
     public static void main(String[] args) throws Exception {
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
-        JCas j = UIMAUtils.createTestJCas("He can't think of anything", "en");
+        JCas j = UIMAUtils.createJCas("He can't think of anything", "en");
 
         AnalysisEngineDescription test = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.PARAM_ANSWER_COUNT, 5,
