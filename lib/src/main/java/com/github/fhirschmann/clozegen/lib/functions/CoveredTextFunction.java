@@ -37,5 +37,4 @@ public class CoveredTextFunction implements Function<Annotation, String> {
             return input.getCoveredText();
         }
     }
-
 }

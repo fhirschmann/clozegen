@@ -26,12 +26,13 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.component.Resource_ImplBase;
 
 /**
- * An adapter for {@link DummyGapGenerator}.
+ * An adapter for {@link DummyGapGenerator}. Please note that
+ * {@link GenericSingleTokenInputAdapter} can also be used for
+ * {@link DummyGapGenerator}.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class DummyAdapter extends Resource_ImplBase implements GeneratorAdapter {
-
     @Override
     public GapGenerator generator(final List<Annotation> annotationList,
             final int offset) {

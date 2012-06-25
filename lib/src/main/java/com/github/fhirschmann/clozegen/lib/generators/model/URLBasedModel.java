@@ -31,7 +31,6 @@ public interface URLBasedModel {
      *
      * @param url the url to load the model from
      * @throws IOException on errors loading the model
-     * @throws URISyntaxException on errors when converting to a URI
      */
     void load(URL url) throws IOException;
 }

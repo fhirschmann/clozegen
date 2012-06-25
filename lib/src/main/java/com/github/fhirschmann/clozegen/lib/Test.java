@@ -19,7 +19,6 @@ package com.github.fhirschmann.clozegen.lib;
 
 import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
 import com.github.fhirschmann.clozegen.lib.adapters.GenericSingleTokenInputAdapter;
-import com.github.fhirschmann.clozegen.lib.adapters.StupidArticleAdapter;
 import com.github.fhirschmann.clozegen.lib.components.CollocationWriter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
@@ -50,8 +49,6 @@ public class Test {
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
         JCas j = UIMAUtils.createTestJCas();
 
-        ExternalResourceDescription x = createExternalResourceDescription(StupidArticleAdapter.class);
-
         AnalysisEngineDescription test = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.PARAM_ANSWER_COUNT, 5,
                 GapAnnotator.CONSTRAINT_KEY,
@@ -60,14 +57,6 @@ public class Test {
                 createExternalResourceDescription(
                 CollocationAdapter.class,
                 CollocationAdapter.PARAM_PATH, "frequencies/en/prepositions/trigrams.txt"));
-
-        AnalysisEngineDescription test2 = createPrimitiveDescription(GapAnnotator.class,
-                GapAnnotator.CONSTRAINT_KEY,
-                createExternalResourceDescription(
-                    TypeConstraintResource.class,
-                    TypeConstraintResource.PARAM_TYPE, ART.class.getName()),
-                GapAnnotator.ADAPTER_KEY,
-                createExternalResourceDescription(StupidArticleAdapter.class));
 
         AnalysisEngineDescription test3 = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,

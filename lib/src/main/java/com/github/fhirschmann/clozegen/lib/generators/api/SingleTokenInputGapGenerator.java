@@ -18,9 +18,16 @@
 package com.github.fhirschmann.clozegen.lib.generators.api;
 
 /**
+ * Generators implementing this interface are simply based on the word
+ * for which a gap should be generated.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public interface SingleTokenInputGapGenerator extends GapGenerator {
-    public void initialize(String token);
+    /**
+     * Initializes this gap generator.
+     *
+     * @param token the token (word) for which a gap should be generated
+     */
+    void initialize(String token);
 }

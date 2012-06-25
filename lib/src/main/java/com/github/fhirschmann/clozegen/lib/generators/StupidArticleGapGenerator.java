@@ -33,7 +33,7 @@ public class StupidArticleGapGenerator implements SingleTokenInputGapGenerator {
     private String validAnswer;
 
     @Override
-    public void initialize(String token) {
+    public void initialize(final String token) {
         this.validAnswer = token;
     }
 

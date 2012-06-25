@@ -24,7 +24,7 @@ import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintProvider;
 
 /**
  * A Gap Processor is a class which processes gaps. This can be, for example,
- * an Annotator which generates gaps or a writer which collects frequency data.
+ * an annotator which generates gaps or a writer which collects frequency data.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */

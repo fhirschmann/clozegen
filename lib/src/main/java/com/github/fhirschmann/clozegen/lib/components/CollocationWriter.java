@@ -39,21 +39,37 @@ import org.uimafit.descriptor.ConfigurationParameter;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class CollocationWriter extends ConstraintBasedConsumer {
-    /** The path to the collocation file. */
+    /**
+     * <em>[mandatory]</em>
+     *
+     * The file to which the collocation n-grams will be written to.
+     */
     public static final String PARAM_OUTPUT_PATH = "OutputPath";
     @ConfigurationParameter(name = PARAM_OUTPUT_PATH, mandatory = true)
     private String path;
 
-    /** The n in n-gram. */
+    /**
+     * <em>[mandatory]</em>
+     *
+     * The number of neighbors on each side to include in the ngram.
+     */
     public static final String PARAM_N = "N";
     @ConfigurationParameter(name = PARAM_N, mandatory = false, defaultValue = "3")
     private int n;
 
-	public static final String PARAM_MIN_FREQUENCY = "minFrequency";
-	@ConfigurationParameter(name = PARAM_MIN_FREQUENCY, mandatory = false, defaultValue = "1")
-	private int minFrequency;
+    /**
+     * <em>[mandatory]</em>
+     *
+     * The minimum number of occurrences an n-gram must yield in order to be included.
+     */
+    public static final String PARAM_MIN_FREQUENCY = "minFrequency";
+    @ConfigurationParameter(name = PARAM_MIN_FREQUENCY,
+            mandatory = false, defaultValue = "1")
+    private int minFrequency;
 
-    /** The multiset we will write to a file. */
+    /**
+     * The {@link Multiset} used to collect the frequencies.
+     */
     private Multiset<String> ms;
 
     @Override
