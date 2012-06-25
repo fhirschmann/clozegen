@@ -188,7 +188,7 @@ public final class UIMAUtils {
     }
 
     /**
-     * Creates a JCas solely meant for testing purposes.
+     * Creates a JCas.
      *
      * @param text the document text of the JCas
      * @param languageCode the language code of the {@code text}
