@@ -25,14 +25,16 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * A register of all available Gap Annotator Descriptions.
+ * A collection of all {@link DescriptionRegisterEntry}.
  *
+ * @param <T> the type of the entries
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class DescriptionRegister extends ForwardingCollection<DescriptionRegisterEntry> {
+public class DescriptionRegister<T extends DescriptionRegisterEntry>
+        extends ForwardingCollection<T> {
 
     /** This maps identifier → Entry. */
-    private final Map<String, DescriptionRegisterEntry> register;
+    protected final Map<String, T> register;
 
     /**
      * Creates a new empty DescriptionRegister.
@@ -49,7 +51,7 @@ public class DescriptionRegister extends ForwardingCollection<DescriptionRegiste
      * @return whether this collection changed
      */
     @Override
-    public boolean add(final DescriptionRegisterEntry entry) {
+    public boolean add(final T entry) {
         final boolean changed = !register.containsKey(entry.getIdentifier());
         register.put(entry.getIdentifier(), entry);
         return changed;
@@ -62,7 +64,7 @@ public class DescriptionRegister extends ForwardingCollection<DescriptionRegiste
      * @param identifier the identifier of the entry in question
      * @return the entry identified by a given {@code identifier}
      */
-    public DescriptionRegisterEntry get(final String identifier) {
+    public T get(final String identifier) {
         return register.get(identifier);
     }
 
@@ -77,31 +79,13 @@ public class DescriptionRegister extends ForwardingCollection<DescriptionRegiste
         return register.containsKey(identifier);
     }
 
-    /**
-     * Returns a live view of the set of Descriptions which support
-     * the given {@code language}.
-     *
-     * @param language the language(code)
-     * @return live view of filtered descriptions
-     */
-    public Collection<DescriptionRegisterEntry> getAnnotatorsForLanguage(
-            final String language) {
-        return Collections2.filter(register.values(),
-                new Predicate<DescriptionRegisterEntry>() {
-            @Override
-            public boolean apply(final DescriptionRegisterEntry input) {
-                return input.getSupportedLanguages().contains(language);
-            }
-        });
-    }
-
     @Override
     public void clear() {
         register.clear();
     }
 
     @Override
-    protected Collection<DescriptionRegisterEntry> delegate() {
+    protected Collection<T> delegate() {
         return register.values();
     }
 

@@ -30,20 +30,20 @@ import static org.junit.matchers.JUnitMatchers.*;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class DescriptionRegisterTest {
-    DescriptionRegisterEntry e1;
-    DescriptionRegisterEntry e2;
-    DescriptionRegisterEntry e3;
-    DescriptionRegister r;
+public class AnnotatorRegisterTest {
+    AnnotatorRegisterEntry e1;
+    AnnotatorRegisterEntry e2;
+    AnnotatorRegisterEntry e3;
+    AnnotatorRegister r;
 
     @Before
     public void setUp() {
-        r = new DescriptionRegister();
-        e1 = new DescriptionRegisterEntry("foo", GapAnnotator.class);
+        r = new AnnotatorRegister();
+        e1 = new AnnotatorRegisterEntry("foo", GapAnnotator.class);
         e1.setSupportedLanguages(Sets.newHashSet("de", "en"));
-        e2 = new DescriptionRegisterEntry("bar", GapAnnotator.class);
+        e2 = new AnnotatorRegisterEntry("bar", GapAnnotator.class);
         e2.setSupportedLanguages(Sets.newHashSet("de"));
-        e3 = new DescriptionRegisterEntry("baz", GapAnnotator.class);
+        e3 = new AnnotatorRegisterEntry("baz", GapAnnotator.class);
         e3.setSupportedLanguages(Sets.newHashSet("en"));
         Collections.addAll(r, e1, e2, e3);
     }

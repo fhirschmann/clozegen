@@ -44,9 +44,6 @@ public class DescriptionRegisterEntry {
     /** The unique identifier of this entry. */
     private String identifier;
 
-    /** The languages supported by this entry. */
-    private Set<String> supportedLanguages;
-
     /** The component class (used for creating the description). */
     private Class<? extends AnalysisComponent> componentClass;
 
@@ -65,7 +62,7 @@ public class DescriptionRegisterEntry {
     public DescriptionRegisterEntry(final String identifier,
             final Class<? extends AnalysisComponent> componentClass) {
         setIdentifier(identifier);
-        this.componentClass = componentClass;
+        setComponentClass(componentClass);
     }
 
     /**
@@ -79,7 +76,7 @@ public class DescriptionRegisterEntry {
             final Class<? extends AnalysisComponent> componentClass,
             final Object... configurationData) {
         this(identifier, componentClass);
-        this.configurationData = configurationData;
+        setConfigurationData(configurationData);
     }
 
     /**
@@ -94,9 +91,9 @@ public class DescriptionRegisterEntry {
             throws ResourceInitializationException {
         AnalysisEngineDescription desc;
         if (configurationData == null) {
-            desc = createPrimitiveDescription(componentClass);
+            desc = createPrimitiveDescription(getComponentClass());
         } else {
-            desc = createPrimitiveDescription(componentClass, configurationData);
+            desc = createPrimitiveDescription(getComponentClass(), configurationData);
 
         }
         return desc;
@@ -111,7 +108,7 @@ public class DescriptionRegisterEntry {
      */
     public AnalysisEngineDescription getDescription()
             throws ResourceInitializationException {
-        return getDescriptionFor(configurationData);
+        return getDescriptionFor(getConfigurationData());
     }
 
     /**
@@ -126,10 +123,10 @@ public class DescriptionRegisterEntry {
     public AnalysisEngineDescription getDescription(
             final Object[] additionalConfigurationData)
             throws ResourceInitializationException {
-        List<Object> data = Lists.newArrayList(configurationData);
+        List<Object> data = Lists.newArrayList(getConfigurationData());
         data.addAll(Arrays.asList(additionalConfigurationData));
 
-        return getDescriptionFor(configurationData);
+        return getDescriptionFor(getConfigurationData());
     }
 
     /**
@@ -172,21 +169,40 @@ public class DescriptionRegisterEntry {
     }
 
     /**
-     * Returns the supported languages of the UIMA Description of this entry.
+     * Returns the component class of this entry.
      *
-     * @return the supported languages
+     * @return the component class
      */
-    public Set<String> getSupportedLanguages() {
-        return supportedLanguages;
+    public Class<? extends AnalysisComponent> getComponentClass() {
+        return componentClass;
     }
 
     /**
-     * Sets the supported languages of the UIMA Description of this entry.
+     * Sets the component class for this entry.
      *
-     * @param supportedLanguages the supported languages
+     * @param componentClass the component class to set
      */
-    public void setSupportedLanguages(final Set<String> supportedLanguages) {
-        this.supportedLanguages = supportedLanguages;
+    public void setComponentClass(
+            final Class<? extends AnalysisComponent> componentClass) {
+        this.componentClass = componentClass;
+    }
+
+    /**
+     * Returns the configuration data for this entry.
+     *
+     * @return the configuration data for this entry
+     */
+    public Object[] getConfigurationData() {
+        return configurationData;
+    }
+
+    /**
+     * Sets the configuration data for this entry.
+     *
+     * @param configurationData the configuration data to set
+     */
+    public void setConfigurationData(final Object[] configurationData) {
+        this.configurationData = configurationData;
     }
 
     @Override

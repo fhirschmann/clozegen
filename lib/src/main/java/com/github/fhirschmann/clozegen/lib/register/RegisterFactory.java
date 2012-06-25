@@ -20,6 +20,7 @@ package com.github.fhirschmann.clozegen.lib.register;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
+import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormatWriter;
 import com.google.common.collect.Sets;
 import de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
@@ -52,11 +53,12 @@ public final class RegisterFactory {
      * @return a new {@link DescriptionRegister}
      * @throws ResourceInitializationException on errors
      */
-    public static DescriptionRegister createDefaultDescriptionRegister()
+    public static AnnotatorRegister createDefaultDescriptionRegister()
             throws ResourceInitializationException {
-        DescriptionRegister register = new DescriptionRegister();
+        AnnotatorRegister register = new AnnotatorRegister();
 
-        DescriptionRegisterEntry entry = new DescriptionRegisterEntry("prepositions",
+        AnnotatorRegisterEntry entry =
+                    new AnnotatorRegisterEntry("prepositions",
                 GapAnnotator.class,
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
@@ -70,6 +72,15 @@ public final class RegisterFactory {
         entry.setName("Preposition Gap Generator");
         entry.setSupportedLanguages(Sets.newHashSet("en"));
         register.add(entry);
+
+        return register;
+    }
+
+    public static DescriptionRegister createDefaultWriterRegister() {
+        DescriptionRegister register = new DescriptionRegister();
+
+        DescriptionRegisterEntry entry = new DescriptionRegisterEntry(
+                "clz", IntermediateFormatWriter.class);
 
         return register;
     }
