@@ -12,6 +12,7 @@
         <menu ref="parent" inherit="top" />
         <menu name="Documentation">
             <item name="Overview" href="overview.html"/>
+            <item name="Tutorial" href="tutorial.html"/>
             <item name="Writing Generators" href="generators.html"/>
             <item name="Constraints" href="constraints.html"/>
             <item name="Wiring it up" href="wire.html"/>

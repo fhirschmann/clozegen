@@ -1,0 +1,132 @@
+Tutorial
+
+    This tutorial will walk you through the integration of a new
+    gap generator into the ClozeGen framework.
+
+* Writing a generator
+
+** Background
+
+    A generator is a class which implements the
+    {{{/apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html}GapGenerator}} interface. The method specified
+    in this interface then gets called for each word in a sentence
+    matched by a constraint. Right now,
+    you should only worry about the actual implementation of
+    your generator.
+
+** Simple generator
+
+    Let's suppose we want to write a generator for creating gaps for
+    articles. This generator should find all occurences of
+    <<<a>>>, <<<an>>> and <<<the>>> and provide all articles as
+    distractors. Because there is already an
+    adapter available for this scenario,
+    our generator will implement the associated interface:
+    
+%{snippet|id=stupidart|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/StupidArticleGapGenerator.java}
+
+    This generator takes only one input token: The word for which
+    a gap should be generated. Please note that it doesn't matter
+    how you name your <<<initialize(...)>>> method, but for consistency
+    reasons, you should name it <<<initialize(...)>>>. In this
+    case, we are implementing the
+    {{{/apidocs/com/github/fhirschmann/clozegen/lib/generators/api/SingleTokenInputGapGenerator.html}SingleTokenInputGapGenerator}}
+    interface, so the name and signature of our initialization
+    function is predetermined.
+    
+    When {{{/apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html#generate(int)}generate}}
+    is called, the generator can return a gap or indicate the
+    absence thereof. Please see the corresponding
+    {{{/apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html#generate(int)}interface}}
+    for further details. In this case, the gap will simply
+    have 3 answer options: <<<a>>>, <<<an>>>, <<<the>>>.
+    
+    The next step in the process is writing a constraint
+    (if neccessary) and wiring it up.
+    
+* Writing constraints
+
+    ClozeGen provides a facility called <<<Constraint>>> which,
+    when used, will call a Gap Generator for each word in a
+    sentence matched by a <<<Constraint>>>. The following examples
+    can also be found in in {{{/apidocs/com/github/fhirschmann/clozegen/lib/examples/ConstraintExample.html}lib.examples.ConstraintExample}}.
+
+** Using generic Constraint Resources
+
+    Chances are that there are already generic constraint
+    resources for the task you're trying to accomplish available.
+    You should check {{{/apidocs/com/github/fhirschmann/clozegen/lib/constraints/resources/package-summary.html}lib.constraints.resources}}
+    in order to find out. Let's assume you want a constraint
+    which matches all articles, then you'd simply use 
+    {{{http://localhost:8080/apidocs/com/github/fhirschmann/clozegen/lib/constraints/resources/TypeConstraintResource.html}TypeConstraintResource}}
+    like so:
+
+%{snippet|id=constex1|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/ConstraintExample.java}
+
+    Since the argument to <<<PARAM_TYPE>>> is <<<ART.class.getName()>>>,
+    the adapter for the generator (and thus the generator itself,
+    given it is wired up correctly in the adapter) will be
+    called for each article.
+    
+    Once you have your constraint requirements figured out,
+    you can continue with wiring it up.
+
+** Writing new Constraint Resources
+
+    Of course, it is also possible to write new constraints.
+    If you wish to do so, you have to write a class which
+    extends {{{apidocs/com/github/fhirschmann/clozegen/lib/constraints/api/ConstraintResource.html}ConstraintResource}}. The
+    <<<getConstraint(JCas jcas)>>> method then needs to return a valid
+    {{{http://uima.apache.org/d/uimaj-2.4.0/apidocs/org/apache/uima/cas/class-use/FSMatchConstraint.html}FSMatchConstraint}}. Writing
+    such constraints is out of the scope of this manual, so you
+    should consult the UIMA manual for this task. There are however
+    {{{/apidocs/com/github/fhirschmann/clozegen/lib/constraints/resources/package-summary.html}Constraint Resources}} available which
+    might be a good point to start.
+
+* Wiring it up
+
+    Now that you have finished writing your generator and have
+    selected (or written) an adapter, it is time to wire it all up.
+    This is pretty straightforward and involves creating
+    a description for
+    {{{/apidocs/com/github/fhirschmann/clozegen/lib/components/GapAnnotator.html}GapAnnotator}} like so:
+
+%{snippet|id=wireex1|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/StupidArticleExample.java}
+
+    In the example above, the
+    {{{/apidocs/com/github/fhirschmann/clozegen/lib/components/GapAnnotator.html}GapAnnotator}} will work on articles as specified
+    by the argument to <<<CONSTRAINT_KEY>>> and call
+    <<<StupidArticleGapGenerator.generate(...)>>> for each
+    word matched by the constraint. In order to visualize
+    the outcome of this experiment, a
+    {{{/apidocs/com/github/fhirschmann/clozegen/lib/components/DebugWriter.html}DebugWriter}} was added
+    to the pipeline.
+
+    The above example will yield the following output:
+
+---
+[DocumentMetaData] (0,29) He studies at the university.
+[Sentence] (0,29) He studies at the university.
+[PR] (0,2) He [PP]
+[Lemma] (0,2) He
+[Token] (0,2) He
+[Lemma] (3,10) studies
+[V] (3,10) studies [VVZ]
+[Token] (3,10) studies
+[PP] (11,13) at [IN]
+[Lemma] (11,13) at
+[Token] (11,13) at
+[Lemma] (14,17) the
+[GapAnnotation] (14,17) the [the][an, a, the]
+[Token] (14,17) the
+[ART] (14,17) the [DT]
+[NN] (18,28) university [NN]
+[Lemma] (18,28) university
+[Token] (18,28) university
+[PUNC] (28,29) . [SENT]
+[Lemma] (28,29) .
+[Token] (28,29) .
+---
+    As you can see, the article in the sentence
+    was annotated with a 
+    {{{/apidocs/com/github/fhirschmann/clozegen/lib/type/GapAnnotation.html}GapAnnotation}}.

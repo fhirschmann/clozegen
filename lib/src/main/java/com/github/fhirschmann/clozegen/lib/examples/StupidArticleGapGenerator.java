@@ -17,7 +17,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.examples;
 
-// START SNIPPET: stupidart
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.SingleTokenInputGapGenerator;
 import com.google.common.base.Optional;
@@ -28,6 +27,7 @@ import com.google.common.base.Optional;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
+// START SNIPPET: stupidart
 public class StupidArticleGapGenerator implements SingleTokenInputGapGenerator {
     /** The valid answer for this gap. */
     private String validAnswer;

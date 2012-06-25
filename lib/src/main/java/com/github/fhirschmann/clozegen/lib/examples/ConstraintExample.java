@@ -59,8 +59,8 @@ public final class ConstraintExample {
                 createExternalResourceDescription(
                     TypeConstraintResource.class,
                     TypeConstraintResource.PARAM_TYPE, ART.class.getName()),
-                GapAnnotator.ADAPTER_KEY,
                 // END SNIPPET: constex1
+                GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(DummyAdapter.class));
         return desc;
     }
@@ -78,13 +78,11 @@ public final class ConstraintExample {
      */
     public static AnalysisEngineDescription example2()
             throws ResourceInitializationException {
-        // START SNIPPET: constex2
         AnalysisEngineDescription desc = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraintResource.class),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(DummyAdapter.class));
-        // END SNIPPET: constex2
         return desc;
     }
 
@@ -101,7 +99,6 @@ public final class ConstraintExample {
      */
     public static AnalysisEngineDescription example3()
             throws ResourceInitializationException {
-    // START SNIPPET: constex2
         AnalysisEngineDescription desc = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
                 createExternalResourceDescription(
@@ -110,10 +107,8 @@ public final class ConstraintExample {
                     TypeConstraintResource.PARAM_TYPE, POS.class.getName()),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(DummyAdapter.class));
-        // END SNIPPET: constex3
         return desc;
     }
-    // END SNIPPET: constex3
 
     /**
      * Runs all examples.
@@ -128,6 +123,6 @@ public final class ConstraintExample {
         pipeline.addStep(example2());
         pipeline.addStep(example3());
         pipeline.addStep(DebugWriter.class);
-        pipeline.run(UIMAUtils.createTestJCas());
+        pipeline.run(UIMAUtils.createJCas("He studies at the university.", "en"));
     }
 }
