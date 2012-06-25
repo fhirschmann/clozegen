@@ -76,11 +76,18 @@ public final class RegisterFactory {
         return register;
     }
 
-    public static DescriptionRegister createDefaultWriterRegister() {
-        DescriptionRegister register = new DescriptionRegister();
+    /**
+     * Creates a new {@link WriterRegister} prefilled with known descriptions
+     * for exporting cloze tests.
+     *
+     * @return a new {@link WriterRegister}
+     */
+    public static WriterRegister createDefaultWriterRegister() {
+        WriterRegister register = new WriterRegister();
 
-        DescriptionRegisterEntry entry = new DescriptionRegisterEntry(
+        WriterRegisterEntry entry = new WriterRegisterEntry(
                 "clz", IntermediateFormatWriter.class);
+        register.add(entry);
 
         return register;
     }
