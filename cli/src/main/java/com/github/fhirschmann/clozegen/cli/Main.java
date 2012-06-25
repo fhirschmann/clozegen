@@ -68,7 +68,7 @@ public class Main {
                 printHelp();
             } else if (line.hasOption("list")) {
                 for (DescriptionRegisterEntry entry : RegisterFactory.
-                        createDefaultDescriptionRegister()) {
+                        createDefaultAnnotatorRegister()) {
                     System.out.println(String.format("[%s] %s",
                             entry.getIdentifier(), entry.getName()));
                 }

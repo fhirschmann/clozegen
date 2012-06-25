@@ -53,7 +53,7 @@ public final class RegisterFactory {
      * @return a new {@link DescriptionRegister}
      * @throws ResourceInitializationException on errors
      */
-    public static AnnotatorRegister createDefaultDescriptionRegister()
+    public static AnnotatorRegister createDefaultAnnotatorRegister()
             throws ResourceInitializationException {
         AnnotatorRegister register = new AnnotatorRegister();
 

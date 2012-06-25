@@ -32,9 +32,9 @@ public class ClozeTestGenerator {
     private Pipeline pipeline;
 
     /**
-     * The description register.
+     * The annotator register.
      */
-    private DescriptionRegister descriptionRegister;
+    private DescriptionRegister annotatorRegister;
 
     /**
      * The reader register.
@@ -119,7 +119,7 @@ public class ClozeTestGenerator {
      */
     public void activate(final Entry<String, Integer> generator)
             throws ResourceInitializationException {
-        getPipeline().addStep(getDescriptionRegister().
+        getPipeline().addStep(getAnnotatorRegister().
                 get(generator.getKey()).getDescription());
     }
 
@@ -149,29 +149,29 @@ public class ClozeTestGenerator {
     }
 
     /**
-     * Returns the description register. This register holds all information
+     * Returns the annotator register. This register holds all information
      * used to construct an analysis engine in order to generate gaps.
      *
      * <p>
      * If no register has been set, a new default one will be created.
      * </p>
      *
-     * @return the descriptionRegister
+     * @return the annotatorRegister
      * @throws ResourceInitializationException on errors during initialization
      */
-    public DescriptionRegister getDescriptionRegister()
+    public DescriptionRegister getAnnotatorRegister()
             throws ResourceInitializationException {
-        if (descriptionRegister == null) {
-            setDescriptionRegister(RegisterFactory.createDefaultDescriptionRegister());
+        if (annotatorRegister == null) {
+            setAnnotatorRegister(RegisterFactory.createDefaultAnnotatorRegister());
         }
-        return descriptionRegister;
+        return annotatorRegister;
     }
 
     /**
-     * @param descriptionRegister the descriptionRegister to set
+     * @param annotatorRegister the annotatorRegister to set
      */
-    public void setDescriptionRegister(final DescriptionRegister descriptionRegister) {
-        this.descriptionRegister = descriptionRegister;
+    public void setAnnotatorRegister(final DescriptionRegister annotatorRegister) {
+        this.annotatorRegister = annotatorRegister;
     }
 
     /**
