@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.imf;
 
+import com.github.fhirschmann.clozegen.lib.components.api.OutputFileWriter;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.google.common.io.Closeables;
 import java.io.BufferedWriter;
@@ -26,7 +27,6 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
@@ -34,16 +34,11 @@ import org.uimafit.descriptor.ConfigurationParameter;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class IntermediateFormatWriter extends JCasConsumer_ImplBase {
-    /** The output file to write to. */
-    public static final String PARAM_OUTPUT_FILE = "OutputFile";
-    @ConfigurationParameter(name = PARAM_OUTPUT_FILE, mandatory = true)
-    private String outputFile;
-
+public class IntermediateFormatWriter extends OutputFileWriter {
     private BufferedWriter outputBuffer;
 
     @Override
-	public void initialize(final UimaContext context) throws
+    public void initialize(final UimaContext context) throws
             ResourceInitializationException {
         super.initialize(context);
 

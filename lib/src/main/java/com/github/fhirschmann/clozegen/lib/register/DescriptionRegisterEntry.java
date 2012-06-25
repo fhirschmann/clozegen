@@ -121,7 +121,7 @@ public class DescriptionRegisterEntry {
      * @throws ResourceInitializationException on errors constructing the description
      */
     public AnalysisEngineDescription getDescription(
-            final Object[] additionalConfigurationData)
+            final Object... additionalConfigurationData)
             throws ResourceInitializationException {
         List<Object> data = Lists.newArrayList(getConfigurationData());
         data.addAll(Arrays.asList(additionalConfigurationData));

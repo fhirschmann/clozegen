@@ -17,25 +17,23 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
-import java.util.Set;
+import com.github.fhirschmann.clozegen.lib.components.api.OutputFileWriter;
 import org.apache.uima.analysis_component.AnalysisComponent;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.resource.ResourceInitializationException;
 
 /**
- * An entry of an {@link AnnotatorRegister}.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class AnnotatorRegisterEntry extends DescriptionRegisterEntry {
-    /** The languages supported by this entry. */
-    private Set<String> supportedLanguages;
-
+public class WriterRegisterEntry extends DescriptionRegisterEntry {
     /**
      * Creates a new register entry.
      *
      * @param identifier the identifier of this entry
      * @param componentClass the component class for the primitive description
      */
-    public AnnotatorRegisterEntry(final String identifier,
+    public WriterRegisterEntry(final String identifier,
             final Class<? extends AnalysisComponent> componentClass) {
         super(identifier, componentClass);
     }
@@ -47,27 +45,21 @@ public class AnnotatorRegisterEntry extends DescriptionRegisterEntry {
      * @param componentClass the component class for the primitive description
      * @param configurationData the configuration data for the primitive description
      */
-    public AnnotatorRegisterEntry(final String identifier,
+    public WriterRegisterEntry(final String identifier,
             final Class<? extends AnalysisComponent> componentClass,
             final Object... configurationData) {
         super(identifier, componentClass, configurationData);
     }
 
     /**
-     * Returns the supported languages of the UIMA Description of this entry.
+     * Creates a new writer description which will write to {@code outputFile}.
      *
-     * @return the supported languages
+     * @param outputFile the file to write to
+     * @return a new writer description
+     * @throws ResourceInitializationException on errors during initialization
      */
-    public Set<String> getSupportedLanguages() {
-        return supportedLanguages;
-    }
-
-    /**
-     * Sets the supported languages of the UIMA Description of this entry.
-     *
-     * @param supportedLanguages the supported languages
-     */
-    public void setSupportedLanguages(final Set<String> supportedLanguages) {
-        this.supportedLanguages = supportedLanguages;
+    public AnalysisEngineDescription getWriterDescription(final String outputFile)
+            throws ResourceInitializationException {
+        return getDescription(OutputFileWriter.PARAM_OUTPUT_FILE, outputFile);
     }
 }
