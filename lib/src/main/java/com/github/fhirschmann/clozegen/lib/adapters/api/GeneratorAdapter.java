@@ -31,7 +31,7 @@ import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintProvider;
 public interface GeneratorAdapter {
     /**
      * This method gets called for each word in a sentence which matches
-     * {@link ConstraintProvider#getConstraint()}.
+     * {@link ConstraintProvider#getConstraint(org.apache.uima.jcas.JCas)}.
      *
      * @param annotationList the list of annotations in the current sentence
      * @param offset the offset (index) of the word to generate a gap for

@@ -29,7 +29,7 @@ import org.apache.uima.collection.CollectionReader;
 public interface ReaderRegisterEntry {
     /**
      * Returns a new {@link CollectionReader} based on the input {@code url} and
-     * {@link languageCode}.
+     * {@code languageCode}.
      *
      * @param file the input file
      * @param languageCode the language of the input file

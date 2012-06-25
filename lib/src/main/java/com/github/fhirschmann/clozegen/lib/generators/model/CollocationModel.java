@@ -59,7 +59,7 @@ public class CollocationModel extends MultisetModel {
     private MapMultiset<String, String> tails;
 
     /**
-     * Creates a new empty {@link CollectionModel}.
+     * Creates a new empty {@link CollocationModel}.
      */
     public CollocationModel() {
         super();

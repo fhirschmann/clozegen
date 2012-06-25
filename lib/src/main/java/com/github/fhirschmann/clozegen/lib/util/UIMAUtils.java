@@ -94,7 +94,7 @@ public final class UIMAUtils {
      *
      * @param aJCas The {@link JCas} this Annotation belongs to
      * @param gap the gap to create the annotation for
-     * @see UIMAUtils#createGapAnnotation(JCas, Set)}
+     * @see UIMAUtils#createGapAnnotation(JCas, Set, Set)
      * @return a new {@link GapAnnotation}
      */
     public static GapAnnotation createGapAnnotation(final JCas aJCas, final Gap gap) {
@@ -103,7 +103,7 @@ public final class UIMAUtils {
 
     /**
      * Copy the bounds ({@link Annotation#getBegin()} and {@link Annotation#getEnd()})
-     * from the {@code source</code> annotation to the <code>destination}
+     * from the {@code source} annotation to the {@code destination} annotation.
      * annotation.
      *
      * @param source the source annotation
@@ -115,7 +115,7 @@ public final class UIMAUtils {
     }
 
     /**
-     * Returns a List of {@code T</code> of the <code>num} neighbors.
+     * Returns a List of {@code T} of the {@code num} neighbors.
      *
      * @param <T> the annotation type
      * @param clazz the class of the annotation type
@@ -213,7 +213,8 @@ public final class UIMAUtils {
             throws ResourceInitializationException {
         return CollectionReaderFactory.createCollectionReader(
                 BrownCorpusReader.class,
-                BrownCorpusReader.PARAM_PATH, Resources.getResource("brown_tei_test").getPath(),
+                BrownCorpusReader.PARAM_PATH,
+                Resources.getResource("brown_tei_test").getPath(),
                 BrownCorpusReader.PARAM_PATTERNS, new String[] {"[+]*.xml"});
     }
 }

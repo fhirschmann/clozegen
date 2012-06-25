@@ -27,7 +27,7 @@ import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.util.FSCollectionFactory;
 
 /**
- * Logs annotation document by displaying its token's types, names, the text
+ * Logs a {@link JCas} (document) by displaying its token's types, names, the text
  * covered, and in case of GapAnnotations, the valid and invalid answer options.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>

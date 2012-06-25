@@ -45,7 +45,7 @@ public abstract class ConstraintBasedAnnotator extends
      * A constraint which limits the words {@link GapProcessor#process(JCas, List, int)}
      * is called for.
      *
-     * @see com.github.fhirschmann.clozegen.lib.constraint
+     * @see com.github.fhirschmann.clozegen.lib.constraints
      */
     public static final String CONSTRAINT_KEY = "Constraint";
     @ExternalResource(key = CONSTRAINT_KEY, mandatory = true)

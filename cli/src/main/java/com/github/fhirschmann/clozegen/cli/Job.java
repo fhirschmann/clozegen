@@ -24,6 +24,7 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.resource.ResourceInitializationException;
 
 /**
+ * Represents a CLI Job.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */

@@ -31,7 +31,7 @@ import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintProvider;
 public interface GapProcessor {
     /**
      * Called for each annotation which is matched by
-     * {@link ConstraintProvider#getConstraint()}.
+     * {@link ConstraintProvider#getConstraint(JCas)}.
      *
      * @param jcas the JCas
      * @param annotationList the list of annotations in a sentence

@@ -31,9 +31,9 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
 import static com.google.common.base.Preconditions.checkArgument;
 
 /**
- * Represents a DescriptionRegisterEntry of a {@link Register}.
+ * Represents an entry of a {@link DescriptionRegister}.
  *
- * @see Register
+ * @see DescriptionRegister
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */

@@ -67,9 +67,8 @@ public class ConstraintExample {
      * Example 2.
      *
      * <p>
-     * This example demonstrates the usage of {@link TypeConstraintResource} in
-     * conjunction with a predefined {@link Constraint}, which will restrict
-     * {@link GapAnnotator} to prepositions only.
+     * This example demonstrates the usage of a custom {@link ConstraintResource}
+     * which will restrict {@link GapAnnotator} to prepositions only
      * </p>
      *
      * @return an analysis engine description

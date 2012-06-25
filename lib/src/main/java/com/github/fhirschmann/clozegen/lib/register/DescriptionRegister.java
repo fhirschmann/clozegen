@@ -31,7 +31,7 @@ import java.util.Map;
  */
 public class DescriptionRegister extends ForwardingCollection<DescriptionRegisterEntry> {
 
-    /** The map identifier → Entry. */
+    /** This maps identifier → Entry. */
     private final Map<String, DescriptionRegisterEntry> register;
 
     /**
@@ -84,8 +84,10 @@ public class DescriptionRegister extends ForwardingCollection<DescriptionRegiste
      * @param language the language(code)
      * @return live view of filtered descriptions
      */
-    public Collection<DescriptionRegisterEntry> getAnnotatorsForLanguage(final String language) {
-        return Collections2.filter(register.values(), new Predicate<DescriptionRegisterEntry>() {
+    public Collection<DescriptionRegisterEntry> getAnnotatorsForLanguage(
+            final String language) {
+        return Collections2.filter(register.values(),
+                new Predicate<DescriptionRegisterEntry>() {
             @Override
             public boolean apply(final DescriptionRegisterEntry input) {
                 return input.getSupportedLanguages().contains(language);

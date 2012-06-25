@@ -30,6 +30,7 @@ import com.google.common.collect.Maps;
 import java.util.Map;
 
 /**
+ * Command line entry class. All parsing should be done in this class.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
