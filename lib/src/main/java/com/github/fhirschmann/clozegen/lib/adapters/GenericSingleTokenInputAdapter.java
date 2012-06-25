@@ -17,14 +17,11 @@
  */
 package com.github.fhirschmann.clozegen.lib.adapters;
 
-import com.github.fhirschmann.clozegen.lib.adapters.api.AbstractResource;
-import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
+import com.github.fhirschmann.clozegen.lib.adapters.api.AbstractGenericGeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.SingleTokenInputGapGenerator;
 import java.util.List;
 import org.apache.uima.jcas.tcas.Annotation;
-import static com.google.common.base.Preconditions.checkNotNull;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
  * This adapter calls a {@link SingleTokenInputGapGenerator} with the covered text of the
@@ -33,37 +30,7 @@ import org.uimafit.descriptor.ConfigurationParameter;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class GenericSingleTokenInputAdapter
-        extends AbstractResource implements GeneratorAdapter {
-    /**
-     * The class of the generator to use. This will be passed to
-     * {@link Class#forName(java.lang.String)}.
-     */
-    public static final String PARAM_GENERATOR_CLASS = "GeneratorClass";
-    @ConfigurationParameter(name = PARAM_GENERATOR_CLASS, mandatory = true)
-    private String generatorClass;
-
-    /**
-     * The underlying generator.
-     */
-    private SingleTokenInputGapGenerator generator;
-
-    @Override
-    public boolean initialize() {
-        try {
-            @SuppressWarnings("rawtypes")
-            Class clazz = Class.forName(checkNotNull(generatorClass));
-            generator = (SingleTokenInputGapGenerator) clazz.newInstance();
-        } catch (InstantiationException ex) {
-            getLogger().error(ex);
-        } catch (IllegalAccessException ex) {
-            getLogger().error(ex);
-        } catch (ClassNotFoundException ex) {
-            getLogger().error(ex);
-        }
-
-        return true;
-    }
-
+        extends AbstractGenericGeneratorAdapter<SingleTokenInputGapGenerator> {
     @Override
     public GapGenerator generator(
             final List<Annotation> annotationList, final int offset) {
