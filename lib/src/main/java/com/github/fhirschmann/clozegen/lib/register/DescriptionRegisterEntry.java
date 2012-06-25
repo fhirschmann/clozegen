@@ -48,7 +48,7 @@ public class DescriptionRegisterEntry {
     private Class<? extends AnalysisComponent> componentClass;
 
     /** The configuration data (used for creating the description). */
-    private Object[] configurationData;
+    private List<Object> configurationData;
 
     /** The pattern {@code identifier} must match. */
     public static final Pattern PATTERN = Pattern.compile("[A-Za-z0-9_]*");
@@ -63,6 +63,7 @@ public class DescriptionRegisterEntry {
             final Class<? extends AnalysisComponent> componentClass) {
         setIdentifier(identifier);
         setComponentClass(componentClass);
+        configurationData = Lists.newArrayList();
     }
 
     /**
@@ -76,7 +77,7 @@ public class DescriptionRegisterEntry {
             final Class<? extends AnalysisComponent> componentClass,
             final Object... configurationData) {
         this(identifier, componentClass);
-        setConfigurationData(configurationData);
+        setConfigurationData(Arrays.asList(configurationData));
     }
 
     /**
@@ -87,13 +88,15 @@ public class DescriptionRegisterEntry {
      * @return the description
      * @throws ResourceInitializationException on errors constructing the description
      */
-    private AnalysisEngineDescription getDescriptionFor(final Object[] configurationData)
+    private AnalysisEngineDescription getDescriptionFor(
+            final List<Object> configurationData)
             throws ResourceInitializationException {
         AnalysisEngineDescription desc;
         if (configurationData == null) {
             desc = createPrimitiveDescription(getComponentClass());
         } else {
-            desc = createPrimitiveDescription(getComponentClass(), configurationData);
+            desc = createPrimitiveDescription(
+                    getComponentClass(), configurationData.toArray());
 
         }
         return desc;
@@ -126,7 +129,7 @@ public class DescriptionRegisterEntry {
         List<Object> data = Lists.newArrayList(getConfigurationData());
         data.addAll(Arrays.asList(additionalConfigurationData));
 
-        return getDescriptionFor(getConfigurationData());
+        return getDescriptionFor(data);
     }
 
     /**
@@ -192,7 +195,7 @@ public class DescriptionRegisterEntry {
      *
      * @return the configuration data for this entry
      */
-    public Object[] getConfigurationData() {
+    public List<Object> getConfigurationData() {
         return configurationData;
     }
 
@@ -201,7 +204,7 @@ public class DescriptionRegisterEntry {
      *
      * @param configurationData the configuration data to set
      */
-    public void setConfigurationData(final Object[] configurationData) {
+    public void setConfigurationData(final List<Object> configurationData) {
         this.configurationData = configurationData;
     }
 
