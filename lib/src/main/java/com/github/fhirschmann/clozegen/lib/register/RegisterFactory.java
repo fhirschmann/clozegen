@@ -24,16 +24,9 @@ import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormatWriter;
 import com.google.common.collect.Sets;
 import de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
-import static com.google.common.base.Preconditions.checkNotNull;
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
-import java.io.File;
-import org.apache.uima.collection.CollectionReader_ImplBase;
 
 /**
  *
@@ -93,68 +86,19 @@ public final class RegisterFactory {
     }
 
     /**
-     * Convenience method for creating {@link CollectionReader} patterns which
-     * should work on only one input file.
+     * Creates a new {@link ReaderRegister} prefilled with known descriptions
+     * for creating input readers.
      *
-     * @param file the file in question
-     * @return a new pattern
+     * @return a new reader register
      */
-    public static String[] createPatterns(final File file) {
-        String[] patterns = new String[] {String.format("[+]%s",
-                checkNotNull(file).getName())};
-        return patterns;
-    }
-
-    /**
-     * Creates a new standard {@link CollectionReader} based upon the input
-     * parameters.
-     *
-     * @param clazz the collection reader class
-     * @param file the input file
-     * @param languageCode the language code
-     * @return a new collection reader
-     * @throws ResourceInitializationException on errors during initialization
-     */
-    public static CollectionReader createDefaultReader(
-            final Class<? extends CollectionReader_ImplBase> clazz,
-            final File file, final String languageCode)
-            throws ResourceInitializationException {
-        return createCollectionReader(
-            checkNotNull(clazz),
-            ResourceCollectionReaderBase.PARAM_LANGUAGE, checkNotNull(languageCode),
-            ResourceCollectionReaderBase.PARAM_PATH, checkNotNull(file).getParent(),
-            ResourceCollectionReaderBase.PARAM_PATTERNS, createPatterns(file));
-    }
-
-    /**
-     * Creates a new standard {@link ReaderRegisterEntry}.
-     *
-     * @param clazz the collection reader class
-     * @return a new register entry
-     */
-    public static ReaderRegisterEntry createDefaultReaderRegisterEntry(
-            final Class<? extends CollectionReader_ImplBase> clazz) {
-        return new ReaderRegisterEntry() {
-            @Override
-            public CollectionReader get(final File file, final String languageCode) {
-                try {
-                    return createDefaultReader(clazz, file, languageCode);
-                } catch (ResourceInitializationException ex) {
-                    LOGGER.log(Level.SEVERE, null, ex);
-                    return null;
-                }
-            }
-        };
-    }
-
     public static ReaderRegister createDefaultReaderRegister() {
         ReaderRegister register = new ReaderRegister();
 
-        ReaderRegisterEntry txt = createDefaultReaderRegisterEntry(TextReader.class);
+        ReaderRegisterEntry txt = new ReaderRegisterEntry(TextReader.class);
         register.put("txt", txt);
         register.put("text", txt);
 
-        ReaderRegisterEntry pdf = createDefaultReaderRegisterEntry(PdfReader.class);
+        ReaderRegisterEntry pdf = new ReaderRegisterEntry(PdfReader.class);
         register.put("pdf", pdf);
 
         return register;

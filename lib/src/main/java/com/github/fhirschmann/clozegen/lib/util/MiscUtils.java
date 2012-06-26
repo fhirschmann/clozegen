@@ -18,8 +18,11 @@
 package com.github.fhirschmann.clozegen.lib.util;
 
 import com.google.common.base.Joiner;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
+ * Miscellaneous utility functions.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -34,4 +37,15 @@ public final class MiscUtils {
      * Joins a string using a single whitespace.
      */
     public static final Joiner WS_JOINER = Joiner.on(" ");
+
+    /**
+     * Returns the file extension of {@code filename}.
+     *
+     * @param filename the filename in question
+     * @return the filename's extension
+     */
+    public static String getFileExtension(final String filename) {
+        checkArgument(filename.contains("."), "Filename does not contain a period.");
+        return checkNotNull(filename).substring(filename.lastIndexOf(".") + 1);
+    }
 }

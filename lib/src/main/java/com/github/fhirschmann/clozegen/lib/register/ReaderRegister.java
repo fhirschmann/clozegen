@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.ForwardingMap;
@@ -25,7 +26,7 @@ import java.io.File;
 import java.util.Map;
 import org.apache.uima.collection.CollectionReader;
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.apache.uima.resource.ResourceInitializationException;
 
 /**
  * A register of mappings from file extensions to {@link ReaderRegisterEntry}.
@@ -50,14 +51,15 @@ public class ReaderRegister extends ForwardingMap<String, ReaderRegisterEntry> {
      *
      * @param input the input file
      * @param languageCode the language of the input file
+     * @throws ResourceInitializationException on errors during initialization
      * @return a new {@link CollectionReader}
      */
     public CollectionReader getReaderForFile(final String input,
-            final String languageCode) {
-        String inExt = input.substring(checkNotNull(input).lastIndexOf(".") + 1);
-        checkArgument(register.containsKey(inExt), "Input file type is unknown!");
+            final String languageCode) throws ResourceInitializationException {
+        String inExt = MiscUtils.getFileExtension(input);
+        checkArgument(register.containsKey(inExt), "Unknown input file type: " + inExt);
         File file = new File(input);
-        return get(inExt).get(file, languageCode);
+        return get(inExt).getReader(file, languageCode);
     }
 
     @Override

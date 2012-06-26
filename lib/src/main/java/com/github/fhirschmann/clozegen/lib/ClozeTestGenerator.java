@@ -191,6 +191,7 @@ public class ClozeTestGenerator {
             throws ResourceInitializationException {
         writerRegister = firstNonNull(writerRegister,
                 RegisterFactory.createDefaultWriterRegister());
+        System.out.println(writerRegister.toString());
         return writerRegister;
     }
 
@@ -214,6 +215,7 @@ public class ClozeTestGenerator {
     public ReaderRegister getReaderRegister() {
         readerRegister = firstNonNull(readerRegister,
                 RegisterFactory.createDefaultReaderRegister());
+        System.out.println(readerRegister.toString());
         return readerRegister;
     }
 
