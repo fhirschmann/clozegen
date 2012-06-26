@@ -18,10 +18,15 @@
 package com.github.fhirschmann.clozegen.cli;
 
 import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
+import com.github.fhirschmann.clozegen.lib.util.Resources2;
+import com.google.common.io.Resources;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 import org.apache.uima.UIMAException;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.springframework.util.ResourceUtils;
 
 /**
  * Represents a CLI Job.
@@ -34,6 +39,10 @@ public class Job {
         ClozeTestGenerator gen = new ClozeTestGenerator();
 
         gen.activate(generators);
-        gen.run(input, output, "en");
+
+        File inputFile = new File(input);
+
+        //URL inURL = Thread.currentThread().getContextClassLoader().getResource(input);
+        gen.run(inputFile.toURI().toURL(), output, "en");
     }
 }

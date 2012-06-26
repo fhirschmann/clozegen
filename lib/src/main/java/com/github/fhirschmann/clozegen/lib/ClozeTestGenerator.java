@@ -15,6 +15,9 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static com.google.common.base.Objects.firstNonNull;
+import static com.google.common.base.Preconditions.checkNotNull;
+import java.net.URL;
+import java.util.logging.Logger;
 
 /**
  * Cloze Test Generator.
@@ -49,6 +52,12 @@ public class ClozeTestGenerator {
     private WriterRegister writerRegister;
 
     /**
+     * The logger for this class.
+     */
+    public static final Logger LOGGER = Logger.
+            getLogger(ClozeTestGenerator.class.getName());
+
+    /**
      * Runs the cloze test generation process.
      *
      * <p>
@@ -62,10 +71,12 @@ public class ClozeTestGenerator {
      * @throws UIMAException on UIMA errors
      * @throws IOException on errors reading or writing files
      */
-    public void run(final String input, final String output, final String languageCode)
+    public void run(final URL input, final String output, final String languageCode)
             throws UIMAException, IOException {
+        LOGGER.fine(String.format("Processing in: %s, out: %s",
+                checkNotNull(input).getFile(), output));
         CollectionReader reader = getReaderRegister().
-                getReaderForFile(input, languageCode);
+                getReaderForFile(checkNotNull(input), languageCode);
 
         AnalysisEngineDescription writer = getWriterRegister().getWriterForFile(output);
         getPipeline().addStep(writer);
@@ -198,7 +209,6 @@ public class ClozeTestGenerator {
             throws ResourceInitializationException {
         writerRegister = firstNonNull(writerRegister,
                 RegisterFactory.createDefaultWriterRegister());
-        System.out.println(writerRegister.toString());
         return writerRegister;
     }
 
@@ -222,7 +232,6 @@ public class ClozeTestGenerator {
     public ReaderRegister getReaderRegister() {
         readerRegister = firstNonNull(readerRegister,
                 RegisterFactory.createDefaultReaderRegister());
-        System.out.println(readerRegister.toString());
         return readerRegister;
     }
 

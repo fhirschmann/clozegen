@@ -26,6 +26,7 @@ import java.io.File;
 import java.util.Map;
 import org.apache.uima.collection.CollectionReader;
 import static com.google.common.base.Preconditions.checkArgument;
+import java.net.URL;
 import org.apache.uima.resource.ResourceInitializationException;
 
 /**
@@ -54,12 +55,11 @@ public class ReaderRegister extends ForwardingMap<String, ReaderRegisterEntry> {
      * @throws ResourceInitializationException on errors during initialization
      * @return a new {@link CollectionReader}
      */
-    public CollectionReader getReaderForFile(final String input,
+    public CollectionReader getReaderForFile(final URL input,
             final String languageCode) throws ResourceInitializationException {
-        String inExt = MiscUtils.getFileExtension(input);
+        String inExt = MiscUtils.getFileExtension(input.getFile());
         checkArgument(register.containsKey(inExt), "Unknown input file type: " + inExt);
-        File file = new File(input);
-        return get(inExt).getReader(file, languageCode);
+        return get(inExt).getReader(input, languageCode);
     }
 
     @Override

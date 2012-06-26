@@ -17,14 +17,15 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
-import java.io.File;
 import org.apache.uima.collection.CollectionReader;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.Lists;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -52,12 +53,12 @@ public class ReaderRegisterEntry {
      * Convenience method for creating {@link CollectionReader} patterns which
      * should work on only one input file.
      *
-     * @param file the file in question
+     * @param filename the filename in question
      * @return a new pattern
      */
-    public static String[] createPatterns(final File file) {
+    public static String[] createPatterns(final String filename) {
         String[] patterns = new String[] {String.format("[+]%s",
-                checkNotNull(file).getName())};
+                checkNotNull(filename))};
         return patterns;
     }
 
@@ -65,20 +66,39 @@ public class ReaderRegisterEntry {
      * Returns a new {@link CollectionReader} based on the input {@code url} and
      * {@code languageCode}.
      *
-     * @param file the input file
+     * @param url the input file
      * @param languageCode the language of the input file
      * @param additionalConfigurationData any additional configuration data
      * @throws ResourceInitializationException on errors during initialization
      * @return a new collection reader
      */
-    public CollectionReader getReader(final File file, final String languageCode,
+    public CollectionReader getReader(final URL url, final String languageCode,
             final Object... additionalConfigurationData)
+            throws ResourceInitializationException {
+        return getReader(MiscUtils.pathFromURL(url),
+                createPatterns(MiscUtils.filenameFromURL(url)),
+                languageCode, additionalConfigurationData);
+    }
+
+    /**
+     * Returns a new {@link CollectionReader} based on the input {@code path},
+     * {@code patterns} and {@code languageCode}.
+     *
+     * @param path the path of the file
+     * @param patterns the patterns
+     * @param languageCode the language of the input file
+     * @param additionalConfigurationData any additional configuration data
+     * @throws ResourceInitializationException on errors during initialization
+     * @return a new collection reader
+     */
+    public CollectionReader getReader(final String path, final String[] patterns,
+            final String languageCode, final Object... additionalConfigurationData)
             throws ResourceInitializationException {
         List<Object> data = Lists.newArrayList();
         Collections.addAll(data,
             ResourceCollectionReaderBase.PARAM_LANGUAGE, checkNotNull(languageCode),
-            ResourceCollectionReaderBase.PARAM_PATH, checkNotNull(file).getParent(),
-            ResourceCollectionReaderBase.PARAM_PATTERNS, createPatterns(file));
+            ResourceCollectionReaderBase.PARAM_PATH, checkNotNull(path),
+            ResourceCollectionReaderBase.PARAM_PATTERNS, checkNotNull(patterns));
         Collections.addAll(data, additionalConfigurationData);
         return createCollectionReader(getReaderClass(), data.toArray());
     }
@@ -87,14 +107,14 @@ public class ReaderRegisterEntry {
      * Returns a new {@link CollectionReader} based on the input {@code url} and
      * {@code languageCode}.
      *
-     * @param file the input file
+     * @param url the input file
      * @param languageCode the language of the input file
      * @throws ResourceInitializationException on errors during initialization
      * @return a new collection reader
      */
-    public CollectionReader getReader(final File file, final String languageCode)
+    public CollectionReader getReader(final URL url, final String languageCode)
             throws ResourceInitializationException {
-        return getReader(checkNotNull(file), checkNotNull(languageCode), new Object[] {});
+        return getReader(checkNotNull(url), checkNotNull(languageCode), new Object[] {});
     }
 
     /**

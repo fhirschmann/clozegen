@@ -20,6 +20,7 @@ package com.github.fhirschmann.clozegen.lib.util;
 import com.google.common.base.Joiner;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkArgument;
+import java.net.URL;
 
 /**
  * Miscellaneous utility functions.
@@ -45,7 +46,32 @@ public final class MiscUtils {
      * @return the filename's extension
      */
     public static String getFileExtension(final String filename) {
+        checkNotNull(filename);
         checkArgument(filename.contains("."), "Filename does not contain a period.");
-        return checkNotNull(filename).substring(filename.lastIndexOf(".") + 1);
+        return filename.substring(filename.lastIndexOf(".") + 1);
+    }
+
+    /**
+     * Returns the filename without the absolut path to the file.
+     *
+     * @param url the url in question
+     * @return filename
+     */
+    public static String filenameFromURL(final URL url) {
+        checkNotNull(url);
+        return url.getFile().substring(pathFromURL(url).length());
+    }
+
+    /**
+     * Returns the path to a file without the filename.
+     *
+     * @param url the url in question
+     * @return the path to the file
+     */
+    public static String pathFromURL(final URL url) {
+        checkNotNull(url);
+        checkArgument(url.getFile().contains(System.getProperty("file.separator")),
+                "Path does not contain a file separator.");
+        return url.getFile().substring(0, url.getFile().lastIndexOf("/") + 1);
     }
 }
