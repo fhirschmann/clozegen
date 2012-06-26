@@ -36,10 +36,8 @@ public class ReadMultisetTest {
 
     @Before
     public void setUp() {
-        trigrams = Resources.getResource(
-                "com/github/fhirschmann/clozegen/lib/frequency/trigrams.txt");
-        bigrams = Resources.getResource(
-                "com/github/fhirschmann/clozegen/lib/frequency/bigrams.txt");
+        trigrams = Resources.getResource("frequencies/multiset/trigrams.txt");
+        bigrams = Resources.getResource("frequencies/multiset/bigrams.txt");
     }
 
     @Test

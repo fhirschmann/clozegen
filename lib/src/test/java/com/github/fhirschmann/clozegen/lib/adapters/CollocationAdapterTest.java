@@ -51,7 +51,8 @@ public class CollocationAdapterTest {
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
                 CollocationAdapter.class,
-                CollocationAdapter.PARAM_PATH, "frequencies/en/prepositions/trigrams.txt"));
+                CollocationAdapter.PARAM_PATH,
+                "frequencies/collocation_prep/trigrams.txt"));
 
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
         pipeline.addStep(test);

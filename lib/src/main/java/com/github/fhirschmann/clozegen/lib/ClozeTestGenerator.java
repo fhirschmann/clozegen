@@ -106,26 +106,33 @@ public class ClozeTestGenerator {
     /**
      * Activate the given {@code generators}.
      *
+     * <p>
+     * The argument to this function is a map with entries which map
+     * from an identifier in {@link AnnotatorRegister} to an Integer
+     * (the answer count).
+     * </p>
+     *
      * @param generators the generators to activate
      * @throws ResourceInitializationException on errors during initialization
      */
     public void activate(final Map<String, Integer> generators)
             throws ResourceInitializationException {
         for (Entry<String, Integer> entry : generators.entrySet()) {
-            activate(entry);
+            activate(entry.getKey(), entry.getValue());
         }
     }
 
     /**
      * Activate the given {@code generator}.
      *
-     * @param generator the generator to activate
+     * @param generatorIdentifier the generator to activate
+     * @param answerCount the answer options to generate
      * @throws ResourceInitializationException on errors during initialization
      */
-    public void activate(final Entry<String, Integer> generator)
+    public void activate(final String generatorIdentifier, final int answerCount)
             throws ResourceInitializationException {
         getPipeline().addStep(getAnnotatorRegister().
-                get(generator.getKey()).getDescription());
+                get(generatorIdentifier).getDescription());
     }
 
     /**
