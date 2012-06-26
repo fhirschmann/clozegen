@@ -65,7 +65,7 @@ public class ClozeTestGeneratorTest {
                 GenericSingleTokenInputAdapter.PARAM_GENERATOR_CLASS,
                 "com.github.fhirschmann.clozegen.lib.generators.DummyGapGenerator"));
 
-        entry.setSupportedLanguages(Sets.newHashSet("en"))t
+        entry.setSupportedLanguages(Sets.newHashSet("en"));
         gen.getAnnotatorRegister().add(entry);
         gen.activate("test", 1);
         File outFile = File.createTempFile("ctgt", ".clz");
