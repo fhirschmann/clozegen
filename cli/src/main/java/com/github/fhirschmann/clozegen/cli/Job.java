@@ -41,8 +41,8 @@ public class Job {
         gen.activate(generators);
 
         File inputFile = new File(input);
+        File outputFile = new File(output);
 
-        //URL inURL = Thread.currentThread().getContextClassLoader().getResource(input);
-        gen.run(inputFile.toURI().toURL(), output, "en");
+        gen.run(inputFile.toURI().toURL(), outputFile.toURI().toURL(), "en");
     }
 }

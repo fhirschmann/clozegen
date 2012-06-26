@@ -51,6 +51,7 @@ public abstract class AbstractGenericGeneratorAdapter<T> extends AbstractResourc
         try {
             @SuppressWarnings("rawtypes")
             Class clazz = Class.forName(checkNotNull(generatorClass));
+            checkNotNull(clazz);
             generator = (T) clazz.newInstance();
         } catch (InstantiationException ex) {
             getLogger().error(ex);

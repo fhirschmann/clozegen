@@ -71,14 +71,14 @@ public class ClozeTestGenerator {
      * @throws UIMAException on UIMA errors
      * @throws IOException on errors reading or writing files
      */
-    public void run(final URL input, final String output, final String languageCode)
+    public void run(final URL input, final URL output, final String languageCode)
             throws UIMAException, IOException {
-        LOGGER.fine(String.format("Processing in: %s, out: %s",
-                checkNotNull(input).getFile(), output));
+        checkNotNull(input);
+        checkNotNull(output);
         CollectionReader reader = getReaderRegister().
-                getReaderForFile(checkNotNull(input), languageCode);
+                getReaderForFile(input, languageCode);
 
-        AnalysisEngineDescription writer = getWriterRegister().getWriterForFile(output);
+        AnalysisEngineDescription writer = getWriterRegister().getWriterFor(output);
         getPipeline().addStep(writer);
 
         run(reader);
