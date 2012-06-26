@@ -21,6 +21,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Sets;
 import java.util.Set;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * A gap object contains valid and invalid answers.
@@ -74,7 +75,7 @@ public class Gap {
      * @param invalidAnswers the invalid answers to set
      */
     public void addInvalidAnswers(final Set<String> invalidAnswers) {
-        this.invalidAnswers.addAll(invalidAnswers);
+        this.invalidAnswers.addAll(checkNotNull(invalidAnswers));
     }
 
     /**
@@ -101,7 +102,7 @@ public class Gap {
      * @param validAnswers the valid answers to set
      */
     public void addValidAnswers(final Set<String> validAnswers) {
-        this.validAnswers.addAll(validAnswers);
+        this.validAnswers.addAll(checkNotNull(validAnswers));
     }
 
     /**
@@ -119,7 +120,7 @@ public class Gap {
      * @param validAnswer the valid answer to set
      */
     public void addValidAnswer(final String validAnswer) {
-        addValidAnswers(new String[] {validAnswer});
+        addValidAnswers(new String[] {checkNotNull(validAnswer)});
     }
 
     /**

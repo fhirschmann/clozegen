@@ -21,6 +21,7 @@ import com.github.fhirschmann.clozegen.lib.components.api.OutputFileWriter;
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.ResourceInitializationException;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  *
@@ -60,6 +61,7 @@ public class WriterRegisterEntry extends DescriptionRegisterEntry {
      */
     public AnalysisEngineDescription getWriterDescription(final String outputFile)
             throws ResourceInitializationException {
-        return getDescription(OutputFileWriter.PARAM_OUTPUT_FILE, outputFile);
+        return getDescription(OutputFileWriter.PARAM_OUTPUT_FILE,
+                checkNotNull(outputFile));
     }
 }

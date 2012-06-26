@@ -25,6 +25,7 @@ import java.io.File;
 import java.util.Map;
 import org.apache.uima.collection.CollectionReader;
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * A register of mappings from file extensions to {@link ReaderRegisterEntry}.
@@ -53,7 +54,7 @@ public class ReaderRegister extends ForwardingMap<String, ReaderRegisterEntry> {
      */
     public CollectionReader getReaderForFile(final String input,
             final String languageCode) {
-        String inExt = input.substring(input.lastIndexOf(".") + 1);
+        String inExt = input.substring(checkNotNull(input).lastIndexOf(".") + 1);
         checkArgument(register.containsKey(inExt), "Input file type is unknown!");
         File file = new File(input);
         return get(inExt).get(file, languageCode);

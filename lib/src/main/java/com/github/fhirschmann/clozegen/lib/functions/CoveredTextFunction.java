@@ -20,6 +20,7 @@ package com.github.fhirschmann.clozegen.lib.functions;
 import com.google.common.base.Function;
 import javax.annotation.Nullable;
 import org.apache.uima.jcas.tcas.Annotation;
+import static com.google.common.base.Objects.firstNonNull;
 
 /**
  * A function which returns the text covered by an

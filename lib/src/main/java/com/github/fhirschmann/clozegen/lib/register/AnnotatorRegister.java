@@ -20,6 +20,7 @@ package com.github.fhirschmann.clozegen.lib.register;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import java.util.Collection;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * A register of gap annotators.
@@ -40,7 +41,7 @@ public class AnnotatorRegister extends DescriptionRegister<AnnotatorRegisterEntr
                 new Predicate<AnnotatorRegisterEntry>() {
             @Override
             public boolean apply(final AnnotatorRegisterEntry input) {
-                return input.getSupportedLanguages().contains(language);
+                return input.getSupportedLanguages().contains(checkNotNull(language));
             }
         });
     }

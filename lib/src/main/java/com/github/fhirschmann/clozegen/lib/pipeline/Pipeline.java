@@ -56,7 +56,6 @@ import org.uimafit.factory.JCasFactory;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class Pipeline {
-
     /**
      * The list of steps elements.
      */

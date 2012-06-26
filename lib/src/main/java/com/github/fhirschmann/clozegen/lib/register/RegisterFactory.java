@@ -101,7 +101,7 @@ public final class RegisterFactory {
      */
     public static String[] createPatterns(final File file) {
         String[] patterns = new String[] {String.format("[+]%s",
-                checkNotNull(file.getName()))};
+                checkNotNull(file).getName())};
         return patterns;
     }
 
@@ -120,9 +120,9 @@ public final class RegisterFactory {
             final File file, final String languageCode)
             throws ResourceInitializationException {
         return createCollectionReader(
-            clazz,
-            ResourceCollectionReaderBase.PARAM_LANGUAGE, languageCode,
-            ResourceCollectionReaderBase.PARAM_PATH, file.getParent(),
+            checkNotNull(clazz),
+            ResourceCollectionReaderBase.PARAM_LANGUAGE, checkNotNull(languageCode),
+            ResourceCollectionReaderBase.PARAM_PATH, checkNotNull(file).getParent(),
             ResourceCollectionReaderBase.PARAM_PATTERNS, createPatterns(file));
     }
 

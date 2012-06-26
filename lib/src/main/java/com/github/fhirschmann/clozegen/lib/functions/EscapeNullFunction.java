@@ -19,6 +19,7 @@ package com.github.fhirschmann.clozegen.lib.functions;
 
 import com.google.common.base.Function;
 import javax.annotation.Nullable;
+import static com.google.common.base.Objects.firstNonNull;
 
 /**
  * Replaces {@code null} with {@code "NULL"}.
@@ -28,10 +29,6 @@ import javax.annotation.Nullable;
 public class EscapeNullFunction implements Function<String, String> {
     @Override
     public String apply(@Nullable final String input) {
-        if (input == null) {
-            return "NULL";
-        } else {
-            return input;
-        }
+        return firstNonNull(input, "NULL");
     }
 }

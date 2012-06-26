@@ -14,6 +14,7 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static com.google.common.base.Objects.firstNonNull;
 
 /**
  * Cloze Test Generator.
@@ -113,7 +114,6 @@ public class ClozeTestGenerator {
         for (Entry<String, Integer> entry : generators.entrySet()) {
             activate(entry);
         }
-
     }
 
     /**
@@ -140,9 +140,7 @@ public class ClozeTestGenerator {
      * @throws ResourceInitializationException on errors during initialization
      */
     public Pipeline getPipeline() throws ResourceInitializationException {
-        if (pipeline == null) {
-            setPipeline(PipelineFactory.createDefaultPipeline());
-        }
+        pipeline = firstNonNull(pipeline, PipelineFactory.createDefaultPipeline());
         return pipeline;
     }
 
@@ -166,9 +164,8 @@ public class ClozeTestGenerator {
      */
     public AnnotatorRegister getAnnotatorRegister()
             throws ResourceInitializationException {
-        if (annotatorRegister == null) {
-            setAnnotatorRegister(RegisterFactory.createDefaultAnnotatorRegister());
-        }
+        annotatorRegister = firstNonNull(annotatorRegister,
+                RegisterFactory.createDefaultAnnotatorRegister());
         return annotatorRegister;
     }
 
@@ -192,9 +189,8 @@ public class ClozeTestGenerator {
      */
     public WriterRegister getWriterRegister()
             throws ResourceInitializationException {
-        if (writerRegister == null) {
-            setWriterRegister(RegisterFactory.createDefaultWriterRegister());
-        }
+        writerRegister = firstNonNull(writerRegister,
+                RegisterFactory.createDefaultWriterRegister());
         return writerRegister;
     }
 
@@ -216,9 +212,8 @@ public class ClozeTestGenerator {
      * @return the readerRegister
      */
     public ReaderRegister getReaderRegister() {
-        if (readerRegister == null) {
-            return RegisterFactory.createDefaultReaderRegister();
-        }
+        readerRegister = firstNonNull(readerRegister,
+                RegisterFactory.createDefaultReaderRegister());
         return readerRegister;
     }
 

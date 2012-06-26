@@ -20,6 +20,7 @@ package com.github.fhirschmann.clozegen.lib.util;
 import org.apache.uima.UIMAException;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.factory.JCasFactory;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Additional utility functions for {@link JCas}.
@@ -44,8 +45,8 @@ public final class JCasFactory2 {
     public static JCas createTestJCas(final String text, final String language)
             throws UIMAException {
         JCas jcas = JCasFactory.createJCas();
-        jcas.setDocumentText(text);
-        jcas.setDocumentLanguage(language);
+        jcas.setDocumentText(checkNotNull(text));
+        jcas.setDocumentLanguage(checkNotNull(language));
         return jcas;
     }
 }

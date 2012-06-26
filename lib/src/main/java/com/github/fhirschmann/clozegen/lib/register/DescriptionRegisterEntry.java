@@ -97,7 +97,6 @@ public class DescriptionRegisterEntry {
         } else {
             desc = createPrimitiveDescription(
                     getComponentClass(), configurationData.toArray());
-
         }
         return desc;
     }

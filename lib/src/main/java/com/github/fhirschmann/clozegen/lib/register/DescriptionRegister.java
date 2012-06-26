@@ -23,6 +23,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import java.util.Collection;
 import java.util.Map;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * A collection of all {@link DescriptionRegisterEntry}.
@@ -52,7 +53,7 @@ public class DescriptionRegister<T extends DescriptionRegisterEntry>
      */
     @Override
     public boolean add(final T entry) {
-        final boolean changed = !register.containsKey(entry.getIdentifier());
+        boolean changed = !register.containsKey(checkNotNull(entry).getIdentifier());
         register.put(entry.getIdentifier(), entry);
         return changed;
     }
@@ -65,7 +66,7 @@ public class DescriptionRegister<T extends DescriptionRegisterEntry>
      * @return the entry identified by a given {@code identifier}
      */
     public T get(final String identifier) {
-        return register.get(identifier);
+        return register.get(checkNotNull(identifier));
     }
 
     /**
@@ -76,7 +77,7 @@ public class DescriptionRegister<T extends DescriptionRegisterEntry>
      * @return true if this register contains an entry for a given identifier
      */
     public boolean containsIdentifier(final String identifier) {
-        return register.containsKey(identifier);
+        return register.containsKey(checkNotNull(identifier));
     }
 
     @Override
