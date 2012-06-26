@@ -48,6 +48,8 @@ public class PrivateConstructorTest {
         set.add(RegisterFactory.class);
         set.add(IntermediateFormat.class);
         set.add(JCasFactory2.class);
+        set.add(Preconditions2.class);
+        set.add(Resources2.class);
 
         for (Class<? extends Object> clazz : set) {
             Constructor<?>[] cons = clazz.getDeclaredConstructors();
