@@ -18,7 +18,7 @@
 package com.github.fhirschmann.clozegen.lib;
 
 import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
-import com.github.fhirschmann.clozegen.lib.adapters.TokenInputAdapter;
+import com.github.fhirschmann.clozegen.lib.adapters.GenericSingleTokenInputAdapter;
 import com.github.fhirschmann.clozegen.lib.components.CollocationWriter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
@@ -65,8 +65,8 @@ public class Test {
                     TypeConstraintResource.PARAM_TYPE, NN.class.getName()),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
-                TokenInputAdapter.class,
-                TokenInputAdapter.PARAM_GENERATOR_CLASS,
+                GenericSingleTokenInputAdapter.class,
+                GenericSingleTokenInputAdapter.PARAM_GENERATOR_CLASS,
                 "com.github.fhirschmann.clozegen.lib.generators.StupidArticleGapGenerator"));
 
         AnalysisEngineDescription writer = createPrimitiveDescription(
@@ -76,7 +76,7 @@ public class Test {
                 CollocationWriter.PARAM_OUTPUT_PATH, "/home/fabian/test.txt");
 
         ExternalResourceDescription gen = createExternalResourceDescription(
-                TokenInputAdapter.class);
+                GenericSingleTokenInputAdapter.class);
 
 
         //pipeline.addStep(test);
