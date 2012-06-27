@@ -48,10 +48,7 @@ public class StupidArticleExample {
                     TypeConstraintResource.class,
                     TypeConstraintResource.PARAM_TYPE, ART.class.getName()),
                 GapAnnotator.ADAPTER_KEY,
-                createExternalResourceDescription(
-                GenericSingleTokenInputAdapter.class,
-                GenericSingleTokenInputAdapter.PARAM_GENERATOR_CLASS,
-                "com.github.fhirschmann.clozegen.lib.examples.StupidArticleGapGenerator"));
+                createExternalResourceDescription(StupidArticleAdapter.class));
 
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
 

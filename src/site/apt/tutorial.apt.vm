@@ -1,7 +1,10 @@
 Tutorial
 
     This tutorial will walk you through the integration of a new
-    gap generator into the ClozeGen framework.
+    gap generator into the ClozeGen framework. All of the snippets
+    below can be found in the
+    {{{/apidocs/com/github/fhirschmann/clozegen/lib/examples/}examples}}
+    directory.
 
 * Writing a generator
 
@@ -14,14 +17,12 @@ Tutorial
     you should only worry about the actual implementation of
     your generator.
 
-** Simple generator
+** Implementation
 
     Let's suppose we want to write a generator for creating gaps for
     articles. This generator should find all occurences of
     <<<a>>>, <<<an>>> and <<<the>>> and provide all articles as
-    distractors. Because there is already an
-    adapter available for this scenario,
-    our generator will implement the associated interface:
+    distractors.
     
 %{snippet|id=stupidart|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/StupidArticleGapGenerator.java}
 
@@ -41,17 +42,46 @@ Tutorial
     for further details. In this case, the gap will simply
     have 3 answer options: <<<a>>>, <<<an>>>, <<<the>>>.
     
-    The next step in the process is writing a constraint
-    (if neccessary) and wiring it up.
+    Now that we have a generator, we need to feed with with
+    some input data. This is done using an adapter.
+    
+* Writing an adapter
+
+** Background
+
+    An adapter has all of the annotations of a sentence in which
+    the article is present at its disposal. It will act
+    as a middleman between these annotations and the generator
+    and selectively filter the annotations or tokens
+    passed to the generator.
+    
+    Please note that it is possible to use generic adapters by passing
+    the class name of your generator to <<<GenericSingleTokenInputAdapter>>>
+    for example. However, this is not the preferred method in
+    ClozeGen.
+    
+** Implementation
+    
+    The following adapter will simply pass the article in
+    question to the generator:
+    
+%{snippet|id=stupidartad|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/StupidArticleAdapter.java}
+
+    Please note that an adapter needs to be a descendant of
+    UIMA's <<<Resource_ImplBase>>>.
     
 * Writing constraints
 
+** Background
+
     ClozeGen provides a facility called <<<Constraint>>> which,
     when used, will call a Gap Generator for each word in a
-    sentence matched by a <<<Constraint>>>. The following examples
-    can also be found in in {{{/apidocs/com/github/fhirschmann/clozegen/lib/examples/ConstraintExample.html}lib.examples.ConstraintExample}}.
+    sentence matched by a <<<Constraint>>>. When wiring up your
+    gap generator, you will need to provide such a constraint.
 
-** Using generic Constraint Resources
+** Implementation
+
+*** Generic
 
     Chances are that there are already generic constraint
     resources for the task you're trying to accomplish available.
@@ -71,7 +101,7 @@ Tutorial
     Once you have your constraint requirements figured out,
     you can continue with wiring it up.
 
-** Writing new Constraint Resources
+*** Writing new Constraint Resources
 
     Of course, it is also possible to write new constraints.
     If you wish to do so, you have to write a class which
@@ -85,15 +115,14 @@ Tutorial
 
 * Wiring it up
 
-    Now that you have finished writing your generator and have
-    selected (or written) an adapter, it is time to wire it all up.
+    Now it's time to put all the pieces together.
     This is pretty straightforward and involves creating
     a description for
     {{{/apidocs/com/github/fhirschmann/clozegen/lib/components/GapAnnotator.html}GapAnnotator}} like so:
 
 %{snippet|id=wireex1|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/StupidArticleExample.java}
 
-    In the example above, the
+    In the snippet above, the
     {{{/apidocs/com/github/fhirschmann/clozegen/lib/components/GapAnnotator.html}GapAnnotator}} will work on articles as specified
     by the argument to <<<CONSTRAINT_KEY>>> and call
     <<<StupidArticleGapGenerator.generate(...)>>> for each
