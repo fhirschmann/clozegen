@@ -39,6 +39,9 @@ public class ReaderRegisterEntry {
     /** The class of the collection reader of this entry. */
     private Class<? extends CollectionReader> readerClass;
 
+    /** The name of this entry. */
+    private String name;
+
     /**
      * Create a new {@link ReaderRegisterEntry} based on the given
      * {@code readerClass}.
@@ -129,6 +132,20 @@ public class ReaderRegisterEntry {
      */
     public void setReaderClass(final Class<? extends CollectionReader> readerClass) {
         this.readerClass = readerClass;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(final String name) {
+        this.name = name;
     }
 
     @Override

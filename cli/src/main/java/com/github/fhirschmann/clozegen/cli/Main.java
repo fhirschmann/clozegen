@@ -17,14 +17,19 @@
  */
 package com.github.fhirschmann.clozegen.cli;
 
+import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
 import com.github.fhirschmann.clozegen.lib.register.DescriptionRegisterEntry;
+import com.github.fhirschmann.clozegen.lib.register.ReaderRegisterEntry;
 import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
+import com.github.fhirschmann.clozegen.lib.register.WriterRegisterEntry;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import static com.google.common.base.Preconditions.checkArgument;
 import com.google.common.collect.Maps;
+import java.io.File;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Command line entry class. All parsing should be done in this class.
@@ -63,7 +68,12 @@ public class Main {
         CommandLineParser parser = new PosixParser();
         options.addOption("g", "generators", true, "generators to activate");
         options.addOption("h", "help", false, "print help message and exit");
-        options.addOption("l", "list", false, "print all available gap generators");
+        options.addOption(null, "list-generators", false,
+                "list all available gap generators");
+        options.addOption(null, "list-input-methods", false,
+                "list all available input methods");
+        options.addOption(null, "list-output-methods", false,
+                "list all available output methods");
         options.addOption("d", "debug", false, "enable debug mode");
         boolean debug = true;
 
@@ -80,16 +90,30 @@ public class Main {
 
             if (line.hasOption("help")) {
                 printHelp();
-            } else if (line.hasOption("list")) {
-                for (DescriptionRegisterEntry entry : RegisterFactory.
-                        createDefaultAnnotatorRegister()) {
+                System.exit(0);
+            }
+
+            ClozeTestGenerator gen = new ClozeTestGenerator();
+
+            if (line.hasOption("list-generators")) {
+                for (DescriptionRegisterEntry entry : gen.getAnnotatorRegister()) {
                     System.out.println(String.format("[%s] %s",
+                            entry.getIdentifier(), entry.getName()));
+                }
+            } else if (line.hasOption("list-input-methods")) {
+                for (Entry<String, ReaderRegisterEntry> entry : gen.
+                        getReaderRegister().entrySet()) {
+                    System.out.println(String.format("[.%s] %s",
+                            entry.getKey(), entry.getValue().getName()));
+                }
+            } else if (line.hasOption("list-output-methods")) {
+                for (WriterRegisterEntry entry : gen.getWriterRegister()) {
+                    System.out.println(String.format("[.%s] %s",
                             entry.getIdentifier(), entry.getName()));
                 }
             } else {
                 checkArgument(line.getArgs().length == 2,
                         "Exactly two arguments are required!");
-                Job job = new Job();
 
                 Map<String, Integer> generators = Maps.newHashMap();
 
@@ -98,7 +122,12 @@ public class Main {
                             line.getOptionValue("generators")));
                 }
 
-                job.run(generators, line.getArgs()[0], line.getArgs()[1]);
+                gen.activate(generators);
+
+                File inputFile = new File(line.getArgs()[0]);
+                File outputFile = new File(line.getArgs()[1]);
+
+                gen.run(inputFile.toURI().toURL(), outputFile.toURI().toURL(), "en");
             }
 
         } catch (Exception exp) {

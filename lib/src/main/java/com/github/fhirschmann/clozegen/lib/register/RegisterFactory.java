@@ -80,6 +80,7 @@ public final class RegisterFactory {
 
         WriterRegisterEntry entry = new WriterRegisterEntry(
                 "clz", IntermediateFormatWriter.class);
+        entry.setName("Intermediate Format Writer");
         register.add(entry);
 
         return register;
@@ -95,10 +96,12 @@ public final class RegisterFactory {
         ReaderRegister register = new ReaderRegister();
 
         ReaderRegisterEntry txt = new ReaderRegisterEntry(TextReader.class);
+        txt.setName("Plain-Text Reader");
         register.put("txt", txt);
         register.put("text", txt);
 
         ReaderRegisterEntry pdf = new ReaderRegisterEntry(PdfReader.class);
+        pdf.setName("PDF Reader");
         register.put("pdf", pdf);
 
         return register;
