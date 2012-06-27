@@ -29,7 +29,7 @@ import org.apache.uima.jcas.tcas.Annotation;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class GenericSingleTokenInputAdapter
+public class TokenInputAdapter
         extends AbstractGenericGeneratorAdapter<SingleTokenInputGapGenerator> {
     @Override
     public GapGenerator generator(

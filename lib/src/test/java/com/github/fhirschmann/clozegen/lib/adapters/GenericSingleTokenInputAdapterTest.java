@@ -54,8 +54,8 @@ public class GenericSingleTokenInputAdapterTest {
                     TypeConstraintResource.PARAM_TYPE, Token.class.getName()),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
-                GenericSingleTokenInputAdapter.class,
-                GenericSingleTokenInputAdapter.PARAM_GENERATOR_CLASS,
+                TokenInputAdapter.class,
+                TokenInputAdapter.PARAM_GENERATOR_CLASS,
                 "com.github.fhirschmann.clozegen.lib.generators.DummyGapGenerator"));
 
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
