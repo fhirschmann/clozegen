@@ -17,7 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.adapters;
 
-import com.github.fhirschmann.clozegen.lib.adapters.api.AbstractGenericGeneratorAdapter;
+import com.github.fhirschmann.clozegen.lib.adapters.api.GenericAdapter;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.SingleTokenInputGapGenerator;
 import java.util.List;
@@ -30,7 +30,7 @@ import org.apache.uima.jcas.tcas.Annotation;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class GenericSingleTokenInputAdapter
-        extends AbstractGenericGeneratorAdapter<SingleTokenInputGapGenerator> {
+        extends GenericAdapter<SingleTokenInputGapGenerator> {
     @Override
     public GapGenerator generator(
             final List<Annotation> annotationList, final int offset) {

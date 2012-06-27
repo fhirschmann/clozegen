@@ -21,14 +21,14 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Extending classes will be provided a {@link AbstractGenericGeneratorAdapter#generator}
- * instance of {@link AbstractGenericGeneratorAdapter#PARAM_GENERATOR_CLASS}.
+ * Extending classes will be provided a {@link GenericAdapter#generator}
+ * instance of {@link GenericAdapter#PARAM_GENERATOR_CLASS}.
  *
  * @param <T> the generator interface
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public abstract class AbstractGenericGeneratorAdapter<T> extends AbstractResource
+public abstract class GenericAdapter<T> extends AbstractResource
         implements GeneratorAdapter {
     /**
      * <em>[mandatory]</em>
