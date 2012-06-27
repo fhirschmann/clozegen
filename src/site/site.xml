@@ -10,12 +10,14 @@
     </skin>
     <body>
         <menu ref="parent" inherit="top" />
-        <menu name="Documentation">
+        <menu name="User Manual">
+            <item name="Command Line Interface" href="cli.html"/>
+            <item name="Graphical User Interface" href="gui.html"/>
+        </menu>
+        <menu name="Developer Manual">
             <item name="Overview" href="overview.html"/>
             <item name="Tutorial" href="tutorial.html"/>
-            <item name="Writing Generators" href="generators.html"/>
-            <item name="Constraints" href="constraints.html"/>
-            <item name="Wiring it up" href="wire.html"/>
+            <item name="Build Process" href="build.html"/>
         </menu>
         <menu ref="reports" inherit="bottom" />
         <!-- <menu ref="modules" /> -->

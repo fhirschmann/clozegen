@@ -1,0 +1,59 @@
+Build Process Description
+
+    As you have probably guessed by now, Clozegen uses
+    {{{http://maven.apache.org}maven}} for its infrastructure.
+    This document will briefly describe how to get started and
+    how to package ClozeGen.
+
+* Setup
+
+    This is pretty straightforward. You should first
+    activate the
+    {{{http://code.google.com/p/dkpro-core-asl/}DKPro}} repository
+    by following the steps on
+    {{{http://code.google.com/p/dkpro-core-asl/wiki/UkpMavenRepository}their site}}.
+    Once you have done so, you can check out ClozeGen
+    via git:
+    
+---
+git clone https://github.com/fhirschmann/clozegen.git
+---
+
+    and import it as maven project in your development environment.
+    Besides the parent project, you should now have three
+    additional (child) projects:
+    
+    * build tools
+    
+    This project is a resource-only facility which provides,
+    for example, the checkstyle settings used for ClozeGen.
+    
+    * clozegen-lib
+    
+    This is where most of the programming happens. It contains
+    all most of the stuff described in the manual.
+    
+    * clozegen-cli
+    
+    This is, as the name may suggest, the command line interface
+    to ClozeGen.
+    
+    * clozegen-gui
+    
+    Similarily, this is the Graphical User Interface
+
+* Packaging
+
+    ClozeGen has the <<<maven-assembly-plugin>>> set up
+    such that you can create single-file jars ready
+    for deployment. Pick your desired user interface
+    and build a jar with dependencies:
+
+---
+cd cli
+mvn package
+---
+
+    After executing the commands above, you'll end up with
+    a jar in <<<cli/target/clozegen-cli-1.0-SNAPSHOT-jar-with-dependencies.jar>>>
+    (depending on the user interface you picked).
