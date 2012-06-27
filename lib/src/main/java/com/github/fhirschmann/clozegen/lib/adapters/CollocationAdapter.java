@@ -41,7 +41,9 @@ public class CollocationAdapter
         List<String> tokens = UIMAUtils.getAdjacentTokens(POS.class,
                 annotationList, offset, 1);
 
-        GapGenerator generator = new CollocationGapGenerator(tokens, model);
+        CollocationGapGenerator generator = new CollocationGapGenerator();
+        generator.initialize(tokens);
+        generator.initialize(model);
         return generator;
     }
 }

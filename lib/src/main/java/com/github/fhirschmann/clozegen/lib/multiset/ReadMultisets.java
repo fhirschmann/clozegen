@@ -55,7 +55,6 @@ public final class ReadMultisets {
      * @param charset the charset of the file
      * @return the parsed frequencies
      * @throws IOException on errors reading from the file
-     * @throws URISyntaxException on errors during URI conversion
      */
     public static Multiset<String> parseMultiset(final URL url, final Charset charset)
             throws IOException {

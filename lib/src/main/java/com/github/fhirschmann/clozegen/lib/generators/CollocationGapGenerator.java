@@ -17,9 +17,10 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators;
 
+import com.github.fhirschmann.clozegen.lib.generators.api.CollocationModelBasedGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.model.CollocationModel;
-import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
+import com.github.fhirschmann.clozegen.lib.generators.api.ListInputGapGenerator;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
@@ -33,11 +34,16 @@ import com.google.common.collect.Sets;
 import java.util.List;
 import java.util.Set;
 import static com.google.common.base.Preconditions.checkNotNull;
-import com.google.common.collect.Lists;
 import org.javatuples.Triplet;
 
 /**
  * Generates gaps based on collocations.
+ *
+ * <p>
+ * The argument to {@link CollocationGapGenerator#initialize(java.util.List)}
+ * must have an odd number of elements and the element in the middle of the
+ * list is the word a gap is generated for.
+ * </p>
  *
  * <p>This implementation is based on the paper
  * <i>Automatic Generation of Cloze Items for Prepositions</i> [1]
@@ -50,7 +56,8 @@ import org.javatuples.Triplet;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CollocationGapGenerator implements GapGenerator {
+public class CollocationGapGenerator
+        implements ListInputGapGenerator, CollocationModelBasedGapGenerator {
     /**
      * The model for this generator.
      */
@@ -61,35 +68,19 @@ public class CollocationGapGenerator implements GapGenerator {
      */
     private Triplet<String, String, String> triplet;
 
-    /**
-     * Creates a new collocation-based gap generator. The {@code tuple}
-     * must have an odd number of elements and the element in the middle of the
-     * list is the word a gap is generated for.
-     *
-     * @param tuple the tuple of words
-     * @param model the model for this generator
-     */
-    public CollocationGapGenerator(final List<String> tuple,
-            final CollocationModel model) {
-        this.model = checkNotNull(model);
-        triplet = CollectionUtils.triListJoin(tuple);
+    @Override
+    public void initialize(final List<String> list) {
+        triplet = CollectionUtils.triListJoin(list);
     }
 
-    /**
-     * Creates a new collocation-based gap generator.
-     *
-     * @param head a in (head, x, tail)
-     * @param x x in (head, x, tail)
-     * @param tail tail in (head, x, tail)
-     * @param model the model for this generator
-     */
-    public CollocationGapGenerator(final String head, final String x, final String tail,
-            final CollocationModel model) {
-        this(Lists.newArrayList(head, x, tail), model);
+    @Override
+    public void initialize(final CollocationModel model) {
+        this.model = checkNotNull(model);
     }
 
     @Override
     public Optional<Gap> generate(final int count) {
+        checkNotNull(model);
         Gap gap = new Gap();
         gap.addValidAnswers(triplet.getValue1());
 

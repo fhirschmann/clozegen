@@ -22,10 +22,13 @@ import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.model.CollocationModel;
 import com.google.common.base.Optional;
 import com.google.common.collect.LinkedHashMultiset;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.matchers.JUnitMatchers.*;
 
 /**
  *
@@ -48,26 +51,32 @@ public class CollocationGapGeneratorTest {
 
     @Test
     public void testGenerate() {
-        generator = new CollocationGapGenerator("as", "in", "the", model);
+        generator = new CollocationGapGenerator();
+        generator.initialize(model);
+        generator.initialize(Lists.newArrayList("as", "in", "the"));
         Gap gap = new Gap();
         gap.addValidAnswers("in");
         gap.addInvalidAnswers("by");
-        assertEquals(Optional.of(gap), generator.generate(2));
+        assertThat(generator.generate(2), is(Optional.of(gap)));
     }
 
     @Test
     public void testTrigramConstraint() {
         model.getMultiset().add("as of the");
-        generator = new CollocationGapGenerator("as", "in", "the", model);
+        generator = new CollocationGapGenerator();
+        generator.initialize(model);
+        generator.initialize(Lists.newArrayList("as", "in", "the"));
         Gap gap = new Gap();
         gap.addValidAnswers("in");
         gap.addInvalidAnswers("by");
-        assertEquals(Optional.of(gap), generator.generate(2));
+        assertThat(generator.generate(2), is(Optional.of(gap)));
     }
 
     @Test
     public void testNull() {
-        generator = new CollocationGapGenerator("xx", "yy", "zz", model);
-        assertEquals(Optional.absent(), generator.generate(2));
+        generator = new CollocationGapGenerator();
+        generator.initialize(model);
+        generator.initialize(Lists.newArrayList("xx", "yy ", "zz"));
+        assertFalse(generator.generate(2).isPresent());
     }
 }

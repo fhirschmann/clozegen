@@ -58,17 +58,6 @@ public class Test {
                 CollocationAdapter.class,
                 CollocationAdapter.PARAM_PATH, "frequencies/en/prepositions/trigrams.txt"));
 
-        AnalysisEngineDescription test3 = createPrimitiveDescription(GapAnnotator.class,
-                GapAnnotator.CONSTRAINT_KEY,
-                createExternalResourceDescription(
-                    TypeConstraintResource.class,
-                    TypeConstraintResource.PARAM_TYPE, NN.class.getName()),
-                GapAnnotator.ADAPTER_KEY,
-                createExternalResourceDescription(
-                GenericSingleTokenInputAdapter.class,
-                GenericSingleTokenInputAdapter.PARAM_GENERATOR_CLASS,
-                "com.github.fhirschmann.clozegen.lib.generators.StupidArticleGapGenerator"));
-
         AnalysisEngineDescription writer = createPrimitiveDescription(
                 CollocationWriter.class,
                 CollocationWriter.CONSTRAINT_KEY,
@@ -79,9 +68,8 @@ public class Test {
                 GenericSingleTokenInputAdapter.class);
 
 
-        //pipeline.addStep(test);
+        pipeline.addStep(test);
         //pipeline.addStep(test2);
-        pipeline.addStep(test3);
         pipeline.addStep(writer);
         pipeline.addStep(DebugWriter.class);
         pipeline.run(j);
