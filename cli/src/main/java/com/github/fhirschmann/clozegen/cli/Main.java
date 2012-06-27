@@ -62,9 +62,15 @@ public class Main {
     /**
      * Runs the command line interface.
      *
+     * <p>
+     * You will need to pass a {@link ClozeTestGenerator} to this method. This
+     * will allow you to, for example, add new input readers.
+     * </p>
+     *
+     * @param gen the {@link ClozeTestGenerator} to use
      * @param args the arguments to the CLI
      */
-    public void run(final String[] args) {
+    public void run(final ClozeTestGenerator gen, final String[] args) {
         CommandLineParser parser = new PosixParser();
         options.addOption("g", "generators", true, "generators to activate");
         options.addOption("h", "help", false, "print help message and exit");
@@ -92,8 +98,6 @@ public class Main {
                 printHelp();
                 System.exit(0);
             }
-
-            ClozeTestGenerator gen = new ClozeTestGenerator();
 
             if (line.hasOption("list-generators")) {
                 for (DescriptionRegisterEntry entry : gen.getAnnotatorRegister()) {
@@ -147,6 +151,7 @@ public class Main {
      */
     public static void main(final String[] argv) {
         Main main = new Main();
-        main.run(argv);
+        ClozeTestGenerator gen = new ClozeTestGenerator();
+        main.run(gen, argv);
     }
 }
