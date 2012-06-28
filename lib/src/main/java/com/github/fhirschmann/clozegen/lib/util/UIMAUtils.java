@@ -133,7 +133,7 @@ public final class UIMAUtils {
 
         // Get the neighbors of our T tag
         final List<T> adjacent = CollectionUtils.getNullPaddedAdjacentTo(
-                tList, tList.indexOf(annotationList.get(offset)), 1);
+                tList, tList.indexOf(annotationList.get(offset)), num);
 
         return adjacent;
     }
@@ -157,7 +157,6 @@ public final class UIMAUtils {
         final List<T> adjacent = getAdjacentAnnotations(
                 clazz, annotationList, offset, num);
 
-        // The tokens of the trigram (A, p, B)
         final List<String> tokens = Lists.newArrayList(Collections2.transform(
                 adjacent, Functions.compose(
                 new EscapeNullFunction(), new CoveredTextFunction())));

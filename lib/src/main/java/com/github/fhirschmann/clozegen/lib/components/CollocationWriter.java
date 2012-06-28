@@ -33,8 +33,10 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
+ * Extracts collocation and writes them to a file.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -49,16 +51,69 @@ public class CollocationWriter extends ConstraintBasedConsumer {
     private String path;
 
     /**
-     * <em>[mandatory]</em>
+     * <em>[optional,default=1]</em>
      *
      * The number of neighbors on each side to include in the ngram.
+     *
+     * <p>
+     * For example, setting this to {@code 2} will extract
+     * <i>can't think of anything yet</i> from the sentence
+     * <i>He can't think of anything yet.</i> (given that we are matching
+     * prepositions), whereas setting{@code PARAM_N} to {@code 3} (the default)
+     * will result in <i>think of anything</i> being extracted. Setting
+     * this to {@code 0} will of course yield unigrams.
+     * </p>
      */
     public static final String PARAM_N = "N";
     @ConfigurationParameter(name = PARAM_N, mandatory = false, defaultValue = "3")
     private int n;
 
     /**
-     * <em>[mandatory]</em>
+     * <em>[optional,default=true]</em>
+     *
+     * Indicates whether or not to include the head of a word.
+     *
+     * <p>
+     * For example, setting this to {@code false} will not include any word
+     * that comes before the word matched by {@link CollocationWriter#CONSTRAINT_KEY}.
+     * In this case, given {@link CollocationWriter#PARAM_N} is set to {@code 1}
+     * (the default), <i>of anything</i> will be extracted from the sentence
+     * <i>He can't think of anything.</i> given that we are matching prepositions.
+     * </p>
+     *
+     * <p>
+     * This should not be set to {@code false} in addition to setting
+     * {@link CollocationWriter#PARAM_INCLUDE_TAIL} to {@code false}.
+     * </p>
+     */
+    public static final String PARAM_INCLUDE_HEAD = "IncludeHead";
+    @ConfigurationParameter(name = PARAM_INCLUDE_HEAD, mandatory = false, defaultValue = "true")
+    private boolean includeHead;
+
+    /**
+     * <em>[optional,default=true]</em>
+     *
+     * Indicates whether or not to include the tail of a word.
+     *
+     * <p>
+     * For example, setting this to {@code false} will not include any word
+     * that comes after the word matched by {@link CollocationWriter#CONSTRAINT_KEY}.
+     * In this case, given {@link CollocationWriter#PARAM_N} is set to {@code 1}
+     * (the default), <i>think of</i> will be extracted from the sentence
+     * <i>He can't think of anything.</i> given that we are matching prepositions.
+     * </p>
+     *
+     * <p>
+     * This should not be set to {@code false} in addition to setting
+     * {@link CollocationWriter#PARAM_INCLUDE_HEAD} to {@code false}.
+     * </p>
+     */
+    public static final String PARAM_INCLUDE_TAIL = "IncludeTail";
+    @ConfigurationParameter(name = PARAM_INCLUDE_TAIL, mandatory = false, defaultValue = "true")
+    private boolean includeTail;
+
+    /**
+     * <em>[optional,default=1]</em>
      *
      * The minimum number of occurrences an n-gram must yield in order to be included.
      */
@@ -84,7 +139,17 @@ public class CollocationWriter extends ConstraintBasedConsumer {
             final int index) {
         List<String> tokens = UIMAUtils.getAdjacentTokens(POS.class,
                 annotationList, index, n);
-        ms.add(MiscUtils.WS_JOINER.join(tokens));
+
+        List<String> result;
+        if (!includeHead) {
+            result = tokens.subList((tokens.size() - 1) / 2, tokens.size());
+        } else if (!includeTail) {
+            result = tokens.subList(0, (tokens.size() - 1) / 2 + 1);
+        } else {
+            result = tokens;
+        }
+
+        ms.add(MiscUtils.WS_JOINER.join(result));
     }
 
     @Override

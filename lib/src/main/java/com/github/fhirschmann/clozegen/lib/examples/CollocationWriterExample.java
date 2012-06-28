@@ -45,12 +45,14 @@ public class CollocationWriterExample {
         CollectionReader cr = CollectionReaderFactory.createCollectionReader(
                 BrownCorpusReader.class,
                 BrownCorpusReader.PARAM_PATH,
-                DKProContext.getContext().getWorkspace("brown_tei").getAbsolutePath(),
+                DKProContext.getContext().getWorkspace("brown_tei_small").getAbsolutePath(),
                 BrownCorpusReader.PARAM_PATTERNS, new String[] {"[+]*.xml"});
 
         AnalysisEngineDescription trigrams = createPrimitiveDescription(
                 CollocationWriter.class,
-                CollocationWriter.PARAM_MIN_FREQUENCY, 2,
+                CollocationWriter.PARAM_MIN_FREQUENCY, 0,
+                CollocationWriter.PARAM_N, 1,
+                CollocationWriter.PARAM_INCLUDE_TAIL, false,
                 CollocationWriter.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraintResource.class),
                 CollocationWriter.PARAM_OUTPUT_PATH, "target/test.txt");

@@ -32,6 +32,7 @@ import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -84,5 +85,6 @@ public class Test {
         pipeline.addStep(writer);
         pipeline.addStep(DebugWriter.class);
         pipeline.run(j);
+        FrequencyDistribution fd = new FrequencyDistribution();
     }
 }
