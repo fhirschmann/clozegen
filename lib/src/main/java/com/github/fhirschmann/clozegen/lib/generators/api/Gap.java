@@ -22,6 +22,7 @@ import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Sets;
 import java.util.Set;
 import static com.google.common.base.Preconditions.checkNotNull;
+import java.util.Collection;
 
 /**
  * A gap object contains valid and invalid answers.
@@ -74,7 +75,7 @@ public class Gap {
      *
      * @param invalidAnswers the invalid answers to set
      */
-    public void addInvalidAnswers(final Set<String> invalidAnswers) {
+    public void addInvalidAnswers(final Collection<String> invalidAnswers) {
         this.invalidAnswers.addAll(checkNotNull(invalidAnswers));
     }
 
@@ -101,7 +102,7 @@ public class Gap {
      *
      * @param validAnswers the valid answers to set
      */
-    public void addValidAnswers(final Set<String> validAnswers) {
+    public void addValidAnswers(final Collection<String> validAnswers) {
         this.validAnswers.addAll(checkNotNull(validAnswers));
     }
 
@@ -163,12 +164,27 @@ public class Gap {
     /**
      * Convenience method for generating gaps.
      *
+     * @param validAnswer the valid answers of this gap
+     * @param invalidAnswers the invalid answers of this gap
+     * @return a new gap based upon the parameters provided
+     */
+    public static Gap with(final String validAnswer,
+            final Collection<String> invalidAnswers) {
+        Gap gap = Gap.with(validAnswer);
+        gap.addInvalidAnswers(invalidAnswers);
+
+        return gap;
+    }
+
+    /**
+     * Convenience method for generating gaps.
+     *
      * @param invalidAnswers set of invalid answers
      * @param validAnswers set of valid answers
      * @return a new gap based upon the parameters provided
      */
-    public static Gap with(final Set<String> validAnswers,
-            final Set<String> invalidAnswers) {
+    public static Gap with(final Collection<String> validAnswers,
+            final Collection<String> invalidAnswers) {
         Gap gap = new Gap();
         gap.addValidAnswers(validAnswers);
         gap.addInvalidAnswers(invalidAnswers);
