@@ -39,6 +39,7 @@ import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
 import static org.junit.matchers.JUnitMatchers.*;
 import org.junit.BeforeClass;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
@@ -48,12 +49,13 @@ import static org.uimafit.factory.ExternalResourceFactory.createExternalResource
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class ClozeTestGeneratorTest {
-    @Test
-    public void testRun1()
-            throws ResourceInitializationException, UIMAException, IOException {
-        ClozeTestGenerator gen = new ClozeTestGenerator();
-        AnnotatorRegisterEntry entry =
-                    new AnnotatorRegisterEntry("test",
+    private ClozeTestGenerator gen;
+    private AnnotatorRegisterEntry entry;
+
+    @Before
+    public void setUp() throws ResourceInitializationException {
+        gen = new ClozeTestGenerator();
+        entry = new AnnotatorRegisterEntry("test",
                 GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
                 createExternalResourceDescription(
@@ -64,9 +66,12 @@ public class ClozeTestGeneratorTest {
                 GenericSingleTokenInputAdapter.class,
                 GenericSingleTokenInputAdapter.PARAM_GENERATOR_CLASS,
                 "com.github.fhirschmann.clozegen.lib.generators.DummyGapGenerator"));
-
         entry.setSupportedLanguages(Sets.newHashSet("en"));
         gen.getAnnotatorRegister().add(entry);
+    }
+
+    @Test
+    public void testRun1() throws UIMAException, IOException {
         gen.activate("test", 1);
         File outFile = File.createTempFile("ctgt", ".clz");
         gen.run(Resources.getResource("clozetest/input.txt"),
@@ -76,6 +81,19 @@ public class ClozeTestGeneratorTest {
                 Resources.getResource("clozetest/output.clz"), Charsets.UTF_8);
         for (int i = 0; i < actual.size(); i++) {
             assertThat(actual.get(i), is(expected.get(i)));
+        }
+    }
+
+    @Test
+    public void testRun2() throws ResourceInitializationException, IOException,
+            UIMAException {
+        gen.activate("test", 1);
+        List<String> expected = Resources.readLines(
+                Resources.getResource("clozetest/output.clz"), Charsets.UTF_8);
+        String result = gen.run(Resources.getResource("clozetest/input.txt"), "en");
+        int i = 0;
+        for (String line : result.split(System.getProperty("line.separator"))) {
+            assertThat(line, is(expected.get(i++)));
         }
     }
 }

@@ -72,8 +72,9 @@ public class Main {
      */
     public void run(final ClozeTestGenerator gen, final String[] args) {
         CommandLineParser parser = new PosixParser();
-        options.addOption("g", "generators", true, "generators to activate");
         options.addOption("h", "help", false, "print help message and exit");
+        options.addOption("g", "generators", true, "generators to activate");
+        options.addOption("l", "language", true, "language of the input file");
         options.addOption(null, "list-generators", false,
                 "list all available gap generators");
         options.addOption(null, "list-input-methods", false,
@@ -131,7 +132,9 @@ public class Main {
                 File inputFile = new File(line.getArgs()[0]);
                 File outputFile = new File(line.getArgs()[1]);
 
-                gen.run(inputFile.toURI().toURL(), outputFile.toURI().toURL(), "en");
+                gen.run(inputFile.toURI().toURL(), outputFile.toURI().toURL(),
+                        line.hasOption("language")
+                        ? line.getOptionValue("language") : "en");
             }
 
         } catch (Exception exp) {
