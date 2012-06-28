@@ -28,6 +28,10 @@ import java.net.URL;
  * Please see {@link ReadMultisets#parseMultiset(URL)} for information on
  * the file format.
  *
+ * <p>
+ * Please note that the frequency file needs to be sorted already!
+ * </p>
+ *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class MultisetModel implements URLBasedModel {

@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.lib;
 
 import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
+import com.github.fhirschmann.clozegen.lib.adapters.FrequencyAdapter;
 import com.github.fhirschmann.clozegen.lib.adapters.GenericSingleTokenInputAdapter;
 import com.github.fhirschmann.clozegen.lib.components.CollocationWriter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
@@ -36,6 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
+import org.apache.uima.resource.Resource;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
@@ -58,6 +60,15 @@ public class Test {
                 CollocationAdapter.class,
                 CollocationAdapter.PARAM_PATH, "frequencies/en/prepositions/trigrams.txt"));
 
+        AnalysisEngineDescription testx = createPrimitiveDescription(GapAnnotator.class,
+                GapAnnotator.PARAM_ANSWER_COUNT, 5,
+                GapAnnotator.CONSTRAINT_KEY,
+                createExternalResourceDescription(PrepositionConstraintResource.class),
+                GapAnnotator.ADAPTER_KEY,
+                createExternalResourceDescription(
+                FrequencyAdapter.class,
+                FrequencyAdapter.PARAM_PATH, "frequencies/en/prepositions/unigrams.txt"));
+
         AnalysisEngineDescription writer = createPrimitiveDescription(
                 CollocationWriter.class,
                 CollocationWriter.CONSTRAINT_KEY,
@@ -68,7 +79,7 @@ public class Test {
                 GenericSingleTokenInputAdapter.class);
 
 
-        pipeline.addStep(test);
+        pipeline.addStep(testx);
         //pipeline.addStep(test2);
         pipeline.addStep(writer);
         pipeline.addStep(DebugWriter.class);

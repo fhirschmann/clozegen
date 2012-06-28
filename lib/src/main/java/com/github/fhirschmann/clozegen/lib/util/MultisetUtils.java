@@ -59,8 +59,6 @@ public final class MultisetUtils {
         final LinkedHashMultiset<E> sms = sortMultiSet(multiset);
         int newlimit = limit;
 
-
-
         if (newlimit > multiset.elementSet().size()) {
             throw new IllegalArgumentException(
                     "The multiset does not contain that many keys.");
