@@ -73,6 +73,14 @@ public class CollectionUtilsTest {
     }
 
     @Test
+    public void testNullPaddingRight2() {
+        List<Integer> list2 = Lists.newArrayList(1, 2, 3, 4);
+        assertEquals(
+                Lists.newArrayList(1, 2, 3, 4, null),
+                CollectionUtils.<Integer>getNullPaddedAdjacentTo(list2, 2, 2));
+    }
+
+    @Test
     public void testNullPaddingRight3() {
         assertEquals(
                 Lists.newArrayList(2, 3, 4, 5, null, null, null),
