@@ -63,11 +63,13 @@ public class FrequencyGapGenerator
             int tokenCount = model.getMultiset().count(token);
             Multiset<String> ms = HashMultiset.create();
 
+            // compute a multiset with counts(x) = |count(x) - count(token)|
             for (Entry<String> entry : model.getMultiset().entrySet()) {
                 ms.add(entry.getElement(), Math.abs(entry.getCount() - tokenCount));
             }
 
             if (ms.elementSet().size() < count - 1) {
+                // not enough data to create as many answer options as requested
                 return Optional.absent();
             } else {
                 return Optional.of(
@@ -75,6 +77,7 @@ public class FrequencyGapGenerator
                         MultisetUtils.sortedElementList(ms)).subList(0, count - 1)));
             }
         } else {
+            // we have no knowledge of the word in question
             return Optional.absent();
         }
     }
