@@ -64,10 +64,10 @@ public class Pipeline extends ForwardingList<AnalysisEngine> {
     /**
      * The list of steps elements.
      */
-    private final List<AnalysisEngine> steps;
+    private List<AnalysisEngine> steps;
 
     /**
-     * The index of the steps which should survive reset.
+     * The index of the steps which should survive a reset.
      */
     private List<Integer> persistent;
 
@@ -130,8 +130,32 @@ public class Pipeline extends ForwardingList<AnalysisEngine> {
      *
      * @param index the index
      */
-    public void addPersistent(final int index) {
+    public void markPersistent(final int index) {
         persistent.add(index);
+    }
+
+    /**
+     * Marks the most recently added step as persistent.
+     */
+    public void markPersistent() {
+        persistent.add(steps.size() - 1);
+    }
+
+    /**
+     * Resets this pipeline.
+     *
+     * <p>
+     * All persistent steps will survive the reset.
+     * </p>
+     */
+    public void reset() {
+        List<AnalysisEngine> newlist = Lists.newArrayList();
+
+        for (Integer index : persistent) {
+            newlist.add(steps.get(index.intValue()));
+        }
+
+        steps = newlist;
     }
 
     /**
