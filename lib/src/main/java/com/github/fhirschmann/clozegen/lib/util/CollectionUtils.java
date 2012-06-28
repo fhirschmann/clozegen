@@ -89,7 +89,8 @@ public final class CollectionUtils {
 
     /**
      * Check if two lists have the same distinct values.
-     * This is a Convenience method to work around UIMA's insufficient type system.
+     *
+     * This is a convenience method to work around UIMA's insufficient type system.
      *
      * @param <T> the type of both lists
      * @param list1 list to compare
