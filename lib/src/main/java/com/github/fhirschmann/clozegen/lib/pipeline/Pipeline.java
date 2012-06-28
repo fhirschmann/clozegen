@@ -83,9 +83,10 @@ public class Pipeline extends ForwardingList<AnalysisEngine> {
      * Adds a step to the pipeline.
      *
      * @param step the step to be added
+     * @return true if this pipeline has changed as a result of the call
      * @throws ResourceInitializationException on errors during initialization
      */
-    public void add(final AnalysisEngineDescription step)
+    public boolean add(final AnalysisEngineDescription step)
             throws ResourceInitializationException {
         AnalysisEngine engine;
         if (step.isPrimitive()) {
@@ -94,19 +95,20 @@ public class Pipeline extends ForwardingList<AnalysisEngine> {
             engine = AnalysisEngineFactory.createAggregate(step);
         }
 
-        steps.add(engine);
+        return steps.add(engine);
     }
 
     /**
      * Adds a step to the pipeline.
      *
      * @param step the step to be added
+     * @return true if this pipeline has changed as a result of the call
      * @throws ResourceInitializationException on errors during initialization
      */
-    public void add(final Class<? extends AnalysisComponent> step)
+    public boolean add(final Class<? extends AnalysisComponent> step)
             throws ResourceInitializationException {
 
-        add((AnalysisEngineDescription) createPrimitiveDescription(step));
+        return add((AnalysisEngineDescription) createPrimitiveDescription(step));
     }
 
     /**
