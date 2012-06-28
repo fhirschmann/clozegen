@@ -105,7 +105,11 @@
                     <instrumentation>
                         <excludes>
                             <exclude>**/type/*.class</exclude>
-                            <exclude>**/examples/*.class</exclude>
+                            <!--
+                              <exclude>**/examples/*.class</exclude>
+                            -->
+                            <exclude>**/gui/**/*.class</exclude>
+                            <exclude>**/cli/**/Main.class</exclude>
                         </excludes>
                     </instrumentation>
                 </configuration>
