@@ -29,6 +29,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static com.google.common.base.Preconditions.checkArgument;
+import javax.annotation.Nullable;
 
 /**
  * Represents an entry of a {@link DescriptionRegister}.
@@ -89,7 +90,7 @@ public class DescriptionRegisterEntry {
      * @throws ResourceInitializationException on errors constructing the description
      */
     private AnalysisEngineDescription getDescriptionFor(
-            final List<Object> configurationData)
+            @Nullable final List<Object> configurationData)
             throws ResourceInitializationException {
         AnalysisEngineDescription desc;
         if (configurationData == null) {
