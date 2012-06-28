@@ -13,4 +13,12 @@
         <artifactId>clozegen</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <dependencies>
+        <dependency>
+            <groupId>com.github.fhirschmann.clozegen</groupId>
+            <artifactId>clozegen-lib</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
 </project>

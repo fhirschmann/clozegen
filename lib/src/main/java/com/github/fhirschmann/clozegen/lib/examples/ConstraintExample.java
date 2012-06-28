@@ -119,10 +119,10 @@ public final class ConstraintExample {
     public static void main(final String[] args) throws Exception {
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
 
-        pipeline.addStep(example1());
-        pipeline.addStep(example2());
-        pipeline.addStep(example3());
-        pipeline.addStep(DebugWriter.class);
+        pipeline.add(example1());
+        pipeline.add(example2());
+        pipeline.add(example3());
+        pipeline.add(DebugWriter.class);
         pipeline.run(UIMAUtils.createJCas("He studies at the university.", "en"));
     }
 }

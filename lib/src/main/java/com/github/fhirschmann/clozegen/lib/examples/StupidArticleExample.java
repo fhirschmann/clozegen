@@ -52,8 +52,8 @@ public class StupidArticleExample {
 
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
 
-        pipeline.addStep(desc);
-        pipeline.addStep(DebugWriter.class);
+        pipeline.add(desc);
+        pipeline.add(DebugWriter.class);
         pipeline.run(UIMAUtils.createJCas("He studies at the university.", "en"));
     }
 }

@@ -80,10 +80,10 @@ public class Test {
                 GenericSingleTokenInputAdapter.class);
 
 
-        pipeline.addStep(testx);
-        //pipeline.addStep(test2);
-        pipeline.addStep(writer);
-        pipeline.addStep(DebugWriter.class);
+        pipeline.add(testx);
+        //pipeline.add(test2);
+        pipeline.add(writer);
+        pipeline.add(DebugWriter.class);
         pipeline.run(j);
         FrequencyDistribution fd = new FrequencyDistribution();
     }

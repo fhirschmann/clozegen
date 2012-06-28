@@ -57,7 +57,7 @@ public class CollocationWriterExample {
                 createExternalResourceDescription(PrepositionConstraintResource.class),
                 CollocationWriter.PARAM_OUTPUT_PATH, "target/test.txt");
 
-        pipeline.addStep(trigrams);
+        pipeline.add(trigrams);
         pipeline.run(cr);
         // END SNIPPET: colwrex1a
     }

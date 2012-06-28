@@ -222,6 +222,10 @@
             <id>0x0b</id>
             <url>http://mvn.0x0b.de</url>
         </repository>
+        <repository>
+            <id>dkpro</id>
+            <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases</url>
+        </repository>
     </repositories>
 
     <licenses>

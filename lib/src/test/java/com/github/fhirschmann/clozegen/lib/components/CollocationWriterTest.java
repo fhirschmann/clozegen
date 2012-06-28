@@ -46,7 +46,7 @@ public class CollocationWriterTest {
                 CollocationWriter.PARAM_OUTPUT_PATH, "target/cwtest.txt");
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
 
-        pipeline.addStep(trigrams);
+        pipeline.add(trigrams);
         pipeline.run(UIMAUtils.createTestReader());
     }
 }

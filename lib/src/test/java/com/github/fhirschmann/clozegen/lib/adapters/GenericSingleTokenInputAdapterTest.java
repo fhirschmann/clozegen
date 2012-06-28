@@ -59,8 +59,8 @@ public class GenericSingleTokenInputAdapterTest {
                 "com.github.fhirschmann.clozegen.lib.generators.DummyGapGenerator"));
 
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
-        pipeline.addStep(test);
-        pipeline.addStep(DebugWriter.class);
+        pipeline.add(test);
+        pipeline.add(DebugWriter.class);
         JCas jcas = JCasFactory2.createTestJCas("This is just a test.", "en");
         pipeline.run(jcas);
         Annotation an = jcas.getAnnotationIndex(GapAnnotation.type).iterator().next();

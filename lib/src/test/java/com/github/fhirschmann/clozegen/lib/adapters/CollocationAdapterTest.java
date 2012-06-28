@@ -55,9 +55,9 @@ public class CollocationAdapterTest {
                 "frequencies/collocation_prep/trigrams.txt"));
 
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
-        pipeline.addStep(test);
+        pipeline.add(test);
         JCas jcas = JCasFactory2.createTestJCas("I can't think of anything.", "en");
-        pipeline.addStep(DebugWriter.class);
+        pipeline.add(DebugWriter.class);
         pipeline.run(jcas);
         Annotation an = jcas.getAnnotationIndex(GapAnnotation.type).iterator().next();
         assertThat(an.getCoveredText(), is("of"));

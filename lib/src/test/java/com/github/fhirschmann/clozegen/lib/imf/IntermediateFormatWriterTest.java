@@ -49,7 +49,7 @@ public class IntermediateFormatWriterTest {
         annotation.addToIndexes();
         Pipeline pipeline = new Pipeline();
         File file = new File("/home/fabian/test.txt");
-        pipeline.addStep(createPrimitiveDescription(
+        pipeline.add(createPrimitiveDescription(
                 IntermediateFormatWriter.class,
                 IntermediateFormatWriter.PARAM_OUTPUT_FILE, file.getAbsolutePath()));
         pipeline.run(jcas);

@@ -43,7 +43,7 @@ public final class PipelineFactory {
             throws ResourceInitializationException {
         Pipeline pipeline = new Pipeline();
         final AnalysisEngine segmenter = createPrimitive(BreakIteratorSegmenter.class);
-        pipeline.addStep(segmenter);
+        pipeline.add(segmenter);
 
         // Produces some wird reflection errors in uimafit
         //AnalysisEngine tagger = createPrimitive(StanfordPosTagger.class,
@@ -51,7 +51,7 @@ public final class PipelineFactory {
         //        "bidirectional-distsim-wsj-0-18");
 
         final AnalysisEngine tagger = createPrimitive(TreeTaggerPosLemmaTT4J.class);
-        pipeline.addStep(tagger);
+        pipeline.add(tagger);
 
         return pipeline;
     }

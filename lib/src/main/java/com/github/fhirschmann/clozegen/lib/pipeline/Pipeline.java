@@ -19,6 +19,7 @@ package com.github.fhirschmann.clozegen.lib.pipeline;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.util.List;
@@ -42,32 +43,40 @@ import org.uimafit.factory.JCasFactory;
  * descriptions and engine components dynamically.
  * </p>
  * <p>
+ * You can add as many steps as you like, however, you should not remove
+ * any steps from this pipeline, because the persistence mechanism might then
+ * fail.
+ * <p>
  * An example scenario might look like this:
  * <pre>
  * JCas jCas = new JCasFactory.createJCas();
  * jCas.setDocumentText("This is test sentence. This is another sentence.");
  * jCas.setDocumentLanguage("en");
  * Pipeline steps = new Pipeline();
- * steps.addStep(StanfordSegmenter.class);
+ * steps.add(StanfordSegmenter.class);
  * steps.run(jCas);
  * </pre>
  * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class Pipeline {
+public class Pipeline extends ForwardingList<AnalysisEngine> {
     /**
      * The list of steps elements.
      */
-    private final List<AnalysisEngine> steps = Lists.newArrayList();
+    private final List<AnalysisEngine> steps;
 
     /**
-     * Adds a step to the pipeline.
-     *
-     * @param step the steps step to be added
+     * The index of the steps which should survive reset.
      */
-    public void addStep(final AnalysisEngine step) {
-        steps.add(step);
+    private List<Integer> persistent;
+
+    /**
+     * Creates a new pipeline.
+     */
+    public Pipeline() {
+        steps = Lists.newArrayList();
+        persistent = Lists.newArrayList();
     }
 
     /**
@@ -76,7 +85,7 @@ public class Pipeline {
      * @param step the step to be added
      * @throws ResourceInitializationException on errors during initialization
      */
-    public void addStep(final AnalysisEngineDescription step)
+    public void add(final AnalysisEngineDescription step)
             throws ResourceInitializationException {
         AnalysisEngine engine;
         if (step.isPrimitive()) {
@@ -94,10 +103,33 @@ public class Pipeline {
      * @param step the step to be added
      * @throws ResourceInitializationException on errors during initialization
      */
-    public void addStep(final Class<? extends AnalysisComponent> step)
+    public void add(final Class<? extends AnalysisComponent> step)
             throws ResourceInitializationException {
 
-        addStep((AnalysisEngineDescription) createPrimitiveDescription(step));
+        add((AnalysisEngineDescription) createPrimitiveDescription(step));
+    }
+
+    /**
+     * @return the indices of persistent steps
+     */
+    public List<Integer> getPersistent() {
+        return persistent;
+    }
+
+    /**
+     * @param persistent the indices of persistent steps
+     */
+    public void setPersistent(final List<Integer> persistent) {
+        this.persistent = persistent;
+    }
+
+    /**
+     * Marks the step with index {@code index} as persistent.
+     *
+     * @param index the index
+     */
+    public void addPersistent(final int index) {
+        persistent.add(index);
     }
 
     /**
@@ -156,5 +188,10 @@ public class Pipeline {
             str.addValue(a.getAnalysisEngineMetaData().getName());
         }
         return str.toString();
+    }
+
+    @Override
+    protected List<AnalysisEngine> delegate() {
+        return steps;
     }
 }

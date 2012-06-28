@@ -79,7 +79,7 @@ public class ClozeTestGenerator {
                 getReaderForFile(input, languageCode);
 
         AnalysisEngineDescription writer = getWriterRegister().getWriterFor(output);
-        getPipeline().addStep(writer);
+        getPipeline().add(writer);
 
         run(reader);
     }
@@ -142,7 +142,7 @@ public class ClozeTestGenerator {
      */
     public void activate(final String generatorIdentifier, final int answerCount)
             throws ResourceInitializationException {
-        getPipeline().addStep(getAnnotatorRegister().
+        getPipeline().add(getAnnotatorRegister().
                 get(generatorIdentifier).getDescription());
     }
 
