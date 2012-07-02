@@ -85,6 +85,5 @@ public class Test {
         pipeline.add(writer);
         pipeline.add(DebugWriter.class);
         pipeline.run(j);
-        FrequencyDistribution fd = new FrequencyDistribution();
     }
 }

@@ -110,6 +110,7 @@
                             -->
                             <exclude>**/gui/**/*.class</exclude>
                             <exclude>**/cli/**/Main.class</exclude>
+                            <exclude>**/Test.class</exclude>
                         </excludes>
                     </instrumentation>
                 </configuration>
