@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.lib.components;
 
 import com.github.fhirschmann.clozegen.lib.components.api.ConstraintBasedConsumer;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.CoveredTextConstraintResource;
 import com.github.fhirschmann.clozegen.lib.multiset.WriteMultisets;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
@@ -34,6 +35,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
 import static com.google.common.base.Preconditions.checkArgument;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Extracts collocation and writes them to a file.
@@ -49,6 +51,25 @@ public class CollocationWriter extends ConstraintBasedConsumer {
     public static final String PARAM_OUTPUT_PATH = "OutputPath";
     @ConfigurationParameter(name = PARAM_OUTPUT_PATH, mandatory = true)
     private String path;
+
+    /**
+     * <em>[optional,default=true]</em>
+     *
+     * This setting indicates if we are working on POS-Tags.
+     *
+     * <p>
+     * When this is set to true, collocations will be based on the text
+     * covered by POS tags. You should only need to set this to false
+     * if you want to work on a non-POS-tagged text, in which case
+     * we will only work on tokens. This will normally be done in
+     * conjunction with a {@link CoveredTextConstraintResource}.
+     * </p>
+     *
+     */
+    public static final String WORK_ON_POS_TAGS = "WorkOnPosTags";
+    @ConfigurationParameter(name = WORK_ON_POS_TAGS, mandatory = false,
+            defaultValue = "true")
+    private boolean workOnPosTags;
 
     /**
      * <em>[optional,default=1]</em>
@@ -137,8 +158,8 @@ public class CollocationWriter extends ConstraintBasedConsumer {
     @Override
     public void process(final JCas jcas, final List<Annotation> annotationList,
             final int index) {
-        List<String> tokens = UIMAUtils.getAdjacentTokens(POS.class,
-                annotationList, index, n);
+        List<String> tokens = UIMAUtils.getAdjacentTokens(
+                workOnPosTags ? POS.class : Token.class, annotationList, index, n);
 
         List<String> result;
         if (!includeHead) {

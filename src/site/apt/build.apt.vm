@@ -31,7 +31,7 @@ git clone https://github.com/fhirschmann/clozegen.git
     * clozegen-lib
     
     This is where most of the programming happens. It contains
-    all most of the stuff described in the manual.
+    most of the stuff described in the manual.
     
     * clozegen-cli
     
