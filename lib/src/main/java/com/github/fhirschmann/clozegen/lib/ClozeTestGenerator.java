@@ -20,6 +20,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static com.google.common.base.Objects.firstNonNull;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkArgument;
 import com.google.common.io.Files;
 import java.io.File;
 import java.net.URL;
@@ -30,7 +31,8 @@ import java.util.logging.Logger;
  * Cloze Test Generator.
  *
  * <p>
- * This is the main entry point for the cloze test generation process.
+ * This is the main entry point for the cloze test generation process. You should
+ * never call one of the {@code run} methods twice.
  * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
@@ -59,10 +61,24 @@ public class ClozeTestGenerator {
     private WriterRegister writerRegister;
 
     /**
+     * Indicates whether this instance of {@link ClozeTestGenerator} is clean.
+     * An instance is not clean if one of the {@code run} methods has been
+     * called in the past.
+     */
+    private boolean clean;
+
+    /**
      * The logger for this class.
      */
     public static final Logger LOGGER = Logger.
             getLogger(ClozeTestGenerator.class.getName());
+
+    /**
+     * Creates a new {@link ClozeTestGenerator} instance.
+     */
+    public ClozeTestGenerator() {
+        clean = true;
+    }
 
     /**
      * Runs the cloze test generation process.
@@ -80,9 +96,10 @@ public class ClozeTestGenerator {
      */
     public void run(final URL input, final URL output, final String languageCode)
             throws UIMAException, IOException {
+        checkArgument(clean, "You cannot call run twice.");
         checkNotNull(input);
         checkNotNull(output);
-        CollectionReader reader = getReaderRegister().
+        CollectionReader reader = Registers.readers().
                 getReaderForFile(input, languageCode);
         run(reader, output);
     }
@@ -104,6 +121,7 @@ public class ClozeTestGenerator {
      */
     public String run(final URL input, final String languageCode)
             throws IOException, UIMAException {
+        checkArgument(clean, "You cannot call run twice.");
         File file = File.createTempFile("clozegen", ".clz");
         run(input, file.toURI().toURL(), languageCode);
         List<String> lines = Files.readLines(file, Charsets.UTF_8);
@@ -127,7 +145,8 @@ public class ClozeTestGenerator {
      */
     public void run(final CollectionReader reader, final URL output)
             throws ResourceInitializationException, UIMAException, IOException {
-        AnalysisEngineDescription writer = getWriterRegister().getWriterFor(output);
+        checkArgument(clean, "You cannot call run twice.");
+        AnalysisEngineDescription writer = Registers.writers().getWriterFor(output);
         getPipeline().add(writer);
         run(reader);
     }
@@ -190,7 +209,7 @@ public class ClozeTestGenerator {
      */
     public void activate(final String generatorIdentifier, final int answerCount)
             throws ResourceInitializationException {
-        getPipeline().add(getAnnotatorRegister().
+        getPipeline().add(Registers.annotators().
                 get(generatorIdentifier).getDescription(
                 GapAnnotator.PARAM_ANSWER_COUNT, answerCount));
     }
@@ -216,78 +235,5 @@ public class ClozeTestGenerator {
      */
     public void setPipeline(final Pipeline pipeline) {
         this.pipeline = pipeline;
-    }
-
-    /**
-     * Returns the annotator register. This register holds all information
-     * used to construct an analysis engine in order to generate gaps.
-     *
-     * <p>
-     * If no register has been set, a new default one will be created.
-     * </p>
-     *
-     * @return the annotator Register
-     * @throws ResourceInitializationException on errors during initialization
-     */
-    public AnnotatorRegister getAnnotatorRegister()
-            throws ResourceInitializationException {
-        annotatorRegister = firstNonNull(annotatorRegister,
-                RegisterFactory.createDefaultAnnotatorRegister());
-        return annotatorRegister;
-    }
-
-    /**
-     * @param annotatorRegister the annotator register to set
-     */
-    public void setAnnotatorRegister(final AnnotatorRegister annotatorRegister) {
-        this.annotatorRegister = annotatorRegister;
-    }
-
-    /**
-     * Returns the writer register. This register holds all information
-     * used to construct a consumer which writes the cloze test to a file.
-     *
-     * <p>
-     * If no register has been set, a new default one will be created.
-     * </p>
-     *
-     * @return the writer register
-     * @throws ResourceInitializationException on errors during initialization
-     */
-    public WriterRegister getWriterRegister()
-            throws ResourceInitializationException {
-        writerRegister = firstNonNull(writerRegister,
-                RegisterFactory.createDefaultWriterRegister());
-        return writerRegister;
-    }
-
-    /**
-     * @param writerRegister the writer register to set
-     */
-    public void setWriterRegister(final WriterRegister writerRegister) {
-        this.writerRegister = writerRegister;
-    }
-
-    /**
-     * Returns the reader register. This register maps file extensions to UIMA
-     * readers. You can safely add new mappings to this register.
-     *
-     * <p>
-     * If no register has been set, a new default one will be created.
-     * </p>
-     *
-     * @return the readerRegister
-     */
-    public ReaderRegister getReaderRegister() {
-        readerRegister = firstNonNull(readerRegister,
-                RegisterFactory.createDefaultReaderRegister());
-        return readerRegister;
-    }
-
-    /**
-     * @param readerRegister the readerRegister to set
-     */
-    public void setReaderRegister(final ReaderRegister readerRegister) {
-        this.readerRegister = readerRegister;
     }
 }

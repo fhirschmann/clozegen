@@ -21,6 +21,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import java.util.Collection;
 import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.common.collect.Sets;
+import java.util.Set;
 
 /**
  * A register of gap annotators.
@@ -44,5 +46,19 @@ public class AnnotatorRegister extends DescriptionRegister<AnnotatorRegisterEntr
                 return input.getSupportedLanguages().contains(checkNotNull(language));
             }
         });
+    }
+
+    /**
+     * Returns a set of all language codes present in any of the registered
+     * annotators.
+     *
+     * @return a set of language codes
+     */
+    public Set<String> getPresentLanguageCodes() {
+        Set<String> set = Sets.newHashSet();
+        for (AnnotatorRegisterEntry entry : this) {
+            set.addAll(entry.getSupportedLanguages());
+        }
+        return set;
     }
 }

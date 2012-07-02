@@ -89,4 +89,9 @@ public class AnnotatorRegisterEntry extends DescriptionRegisterEntry {
     public void setSupportedLanguage(final String supportedLanguage) {
         setSupportedLanguages(new String[] {supportedLanguage});
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", getIdentifier(), getName());
+    }
 }
