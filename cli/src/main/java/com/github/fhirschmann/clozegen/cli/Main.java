@@ -18,6 +18,7 @@
 package com.github.fhirschmann.clozegen.cli;
 
 import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
+import com.github.fhirschmann.clozegen.lib.plugins.Plugins;
 import com.github.fhirschmann.clozegen.lib.register.*;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Level;
@@ -47,6 +48,7 @@ public class Main {
     public Main() {
         formatter = new HelpFormatter();
         options = new Options();
+        Plugins.load();
     }
 
     /**
