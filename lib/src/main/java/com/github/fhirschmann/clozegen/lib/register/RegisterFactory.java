@@ -51,7 +51,7 @@ public final class RegisterFactory {
         AnnotatorRegister register = new AnnotatorRegister();
 
         AnnotatorRegisterEntry entry =
-                    new AnnotatorRegisterEntry("prepositions",
+                    new AnnotatorRegisterEntry("preps",
                 GapAnnotator.class,
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
@@ -62,7 +62,7 @@ public final class RegisterFactory {
                 createExternalResourceDescription(
                 PrepositionConstraintResource.class));
 
-        entry.setName("Preposition Gap Generator");
+        entry.setName("Preposition Gap Generator (Collocations)");
         entry.setSupportedLanguages(Sets.newHashSet("en"));
         register.add(entry);
 

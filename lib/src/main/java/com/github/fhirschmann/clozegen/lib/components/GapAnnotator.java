@@ -49,6 +49,11 @@ public class GapAnnotator extends ConstraintBasedAnnotator {
     private GeneratorAdapter adapter;
 
     /**
+     * The default number of answers to generate.
+     */
+    public static final int DEFAULT_ANSWER_COUNT = 4;
+
+    /**
      * <em>[optional]</em>
      *
      * The number of invalid answers to generate. This argument is optional
@@ -61,12 +66,14 @@ public class GapAnnotator extends ConstraintBasedAnnotator {
      */
     public static final String PARAM_ANSWER_COUNT = "AnswerCount";
     @ConfigurationParameter(name = PARAM_ANSWER_COUNT,
-            mandatory = false, defaultValue = "4")
+            mandatory = false, defaultValue = "" + DEFAULT_ANSWER_COUNT)
     private int answerCount;
 
     @Override
     public void process(final JCas jcas, final List<Annotation> annotationList,
             final int index) {
+        getLogger().info(String.format("Generating %d options for \"%s\"", answerCount,
+                annotationList.get(index).getCoveredText()));
         Optional<Gap> gap = adapter.generator(annotationList, index).
                 generate(answerCount);
 

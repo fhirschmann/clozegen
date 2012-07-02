@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.cli;
 
+import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.google.common.collect.Maps;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public final class Utils {
                 String[] opts = clazz.split("/");
                 map.put(opts[0], Integer.parseInt(opts[1]));
             } else {
-                map.put(clazz, -1);
+                map.put(clazz, GapAnnotator.DEFAULT_ANSWER_COUNT);
             }
         }
 
