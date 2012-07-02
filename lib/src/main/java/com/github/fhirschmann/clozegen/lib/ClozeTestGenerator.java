@@ -5,6 +5,7 @@ import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
 import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormatWriter;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import com.github.fhirschmann.clozegen.lib.plugins.api.Plugin;
 import com.github.fhirschmann.clozegen.lib.register.*;
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
@@ -24,7 +25,9 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.common.io.Files;
 import java.io.File;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ServiceLoader;
 import java.util.logging.Logger;
 
 /**

@@ -21,6 +21,7 @@ import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
 import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
 import com.github.fhirschmann.clozegen.lib.multiset.WriteMultisets;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
+import com.github.fhirschmann.clozegen.lib.plugins.Plugins;
 import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
 import com.github.fhirschmann.clozegen.lib.util.*;
 import com.google.common.collect.Sets;
@@ -50,6 +51,7 @@ public class PrivateConstructorTest {
         set.add(JCasFactory2.class);
         set.add(Preconditions2.class);
         set.add(Resources2.class);
+        set.add(Plugins.class);
 
         for (Class<? extends Object> clazz : set) {
             Constructor<?>[] cons = clazz.getDeclaredConstructors();

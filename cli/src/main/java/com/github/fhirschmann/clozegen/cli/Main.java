@@ -18,10 +18,7 @@
 package com.github.fhirschmann.clozegen.cli;
 
 import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
-import com.github.fhirschmann.clozegen.lib.register.DescriptionRegisterEntry;
-import com.github.fhirschmann.clozegen.lib.register.ReaderRegisterEntry;
-import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
-import com.github.fhirschmann.clozegen.lib.register.WriterRegisterEntry;
+import com.github.fhirschmann.clozegen.lib.register.*;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -101,18 +98,18 @@ public class Main {
             }
 
             if (line.hasOption("list-generators")) {
-                for (DescriptionRegisterEntry entry : gen.getAnnotatorRegister()) {
+                for (DescriptionRegisterEntry entry : Registers.annotators()) {
                     System.out.println(String.format("[%s] %s",
                             entry.getIdentifier(), entry.getName()));
                 }
             } else if (line.hasOption("list-input-methods")) {
-                for (Entry<String, ReaderRegisterEntry> entry : gen.
-                        getReaderRegister().entrySet()) {
+                for (Entry<String, ReaderRegisterEntry> entry : Registers.
+                        readers().entrySet()) {
                     System.out.println(String.format("[.%s] %s",
                             entry.getKey(), entry.getValue().getName()));
                 }
             } else if (line.hasOption("list-output-methods")) {
-                for (WriterRegisterEntry entry : gen.getWriterRegister()) {
+                for (WriterRegisterEntry entry : Registers.writers()) {
                     System.out.println(String.format("[.%s] %s",
                             entry.getIdentifier(), entry.getName()));
                 }
