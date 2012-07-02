@@ -19,6 +19,7 @@ package com.github.fhirschmann.clozegen.lib.register;
 
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
+import com.github.fhirschmann.clozegen.lib.adapters.FrequencyAdapter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormatWriter;
 import com.google.common.collect.Sets;
@@ -63,8 +64,24 @@ public final class RegisterFactory {
                 PrepositionConstraintResource.class));
 
         entry.setName("Preposition Gap Generator (Collocations)");
-        entry.setSupportedLanguages(Sets.newHashSet("en"));
+        entry.setSupportedLanguage("en");
         register.add(entry);
+
+        AnnotatorRegisterEntry entry2 =
+                new AnnotatorRegisterEntry("preps2",
+                GapAnnotator.class,
+                GapAnnotator.ADAPTER_KEY,
+                createExternalResourceDescription(
+                FrequencyAdapter.class,
+                FrequencyAdapter.PARAM_PATH,
+                "frequencies/en/prepositions/unigrams.txt"),
+                GapAnnotator.CONSTRAINT_KEY,
+                createExternalResourceDescription(
+                PrepositionConstraintResource.class));
+
+        entry2.setName("Preposition Gap Generator (Baseline)");
+        entry2.setSupportedLanguages("en");
+        register.add(entry2);
 
         return register;
     }

@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import com.google.common.collect.Sets;
 import java.util.Set;
 import org.apache.uima.analysis_component.AnalysisComponent;
 
@@ -69,5 +70,23 @@ public class AnnotatorRegisterEntry extends DescriptionRegisterEntry {
      */
     public void setSupportedLanguages(final Set<String> supportedLanguages) {
         this.supportedLanguages = supportedLanguages;
+    }
+
+    /**
+     * Sets the supported languages of the UIMA Description of this entry.
+     *
+     * @param supportedLanguages the supported languages
+     */
+    public void setSupportedLanguages(final String... supportedLanguages) {
+        this.supportedLanguages = Sets.newHashSet(supportedLanguages);
+    }
+
+    /**
+     * Sets the supported language of the UIMA Description of this entry.
+     *
+     * @param supportedLanguage the supported language
+     */
+    public void setSupportedLanguage(final String supportedLanguage) {
+        setSupportedLanguages(new String[] {supportedLanguage});
     }
 }
