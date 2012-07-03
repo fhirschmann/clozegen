@@ -15,23 +15,21 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.components.api;
+package com.github.fhirschmann.clozegen.lib.formatters;
 
-import org.uimafit.component.JCasConsumer_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
+import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
+import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
+import org.apache.uima.jcas.JCas;
+import org.uimafit.component.Resource_ImplBase;
 
 /**
- * A consumer which writes to an output file.
+ * Writes all {@link GapAnnotation}s to a file using the intermediate format.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public abstract class OutputFileWriter extends JCasConsumer_ImplBase {
-    /**
-     * <em>[mandatory]</em>
-     *
-     * The file to write to.
-     */
-    public static final String PARAM_OUTPUT_FILE = "OutputFile";
-    @ConfigurationParameter(name = PARAM_OUTPUT_FILE, mandatory = true)
-    protected String outputFile;
+public class IMFFormatter extends Resource_ImplBase implements JCasFormatter {
+    @Override
+    public String format(final JCas jcas) {
+        return IntermediateFormat.format(jcas);
+    }
 }

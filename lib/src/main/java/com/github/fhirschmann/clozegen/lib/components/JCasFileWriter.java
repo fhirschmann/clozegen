@@ -15,10 +15,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.imf;
+package com.github.fhirschmann.clozegen.lib.components;
 
+import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
 import com.github.fhirschmann.clozegen.lib.components.api.OutputFileWriter;
-import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.google.common.io.Closeables;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -27,15 +27,29 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.ExternalResource;
 
 /**
- * Writes all {@link GapAnnotation} to a file using the intermediate format.
+ * Writes a {@link JCas} to an output file using the a given
+ * {@link JCasFileWriter#FORMATTER_KEY}.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class IntermediateFormatWriter extends OutputFileWriter {
+public class JCasFileWriter extends OutputFileWriter {
+    /**
+     * The writer we will write to.
+     */
     private BufferedWriter outputBuffer;
+
+    /**
+     * <em>[mandatory]</em>
+     *
+     * The argument to this keyword should be a {@link GeneratorAdapter} which
+     * knows how to create a {@link GapGenerator}.
+     */
+    public static final String FORMATTER_KEY = "Formatter";
+    @ExternalResource(key = FORMATTER_KEY)
+    private JCasFormatter formatter;
 
     @Override
     public void initialize(final UimaContext context) throws
@@ -51,9 +65,9 @@ public class IntermediateFormatWriter extends OutputFileWriter {
 
     @Override
     public void process(final JCas aJCas) throws AnalysisEngineProcessException {
-        String imf = IntermediateFormat.format(aJCas);
+
         try {
-            outputBuffer.write(imf);
+            outputBuffer.write(formatter.format(aJCas));
             outputBuffer.flush();
         } catch (IOException ex) {
             getLogger().error(ex);

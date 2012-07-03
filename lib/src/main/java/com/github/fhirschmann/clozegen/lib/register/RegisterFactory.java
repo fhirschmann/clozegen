@@ -20,8 +20,9 @@ package com.github.fhirschmann.clozegen.lib.register;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
 import com.github.fhirschmann.clozegen.lib.adapters.FrequencyAdapter;
+import com.github.fhirschmann.clozegen.lib.components.JCasFileWriter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
-import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormatWriter;
+import com.github.fhirschmann.clozegen.lib.formatters.IMFFormatter;
 import com.google.common.collect.Sets;
 import de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
@@ -95,8 +96,11 @@ public final class RegisterFactory {
     public static WriterRegister createDefaultWriterRegister() {
         WriterRegister register = new WriterRegister();
 
-        WriterRegisterEntry entry = new WriterRegisterEntry(
-                "clz", IntermediateFormatWriter.class);
+        WriterRegisterEntry entry =
+                new WriterRegisterEntry("clz",
+                JCasFileWriter.class,
+                JCasFileWriter.FORMATTER_KEY,
+                createExternalResourceDescription(IMFFormatter.class));
         entry.setName("Intermediate Format Writer");
         register.add(entry);
 

@@ -17,21 +17,19 @@
  */
 package com.github.fhirschmann.clozegen.lib.components.api;
 
-import org.uimafit.component.JCasConsumer_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
+import org.apache.uima.jcas.JCas;
 
 /**
- * A consumer which writes to an output file.
+ * Implementing classes will know how to format a {@link JCas} as String.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public abstract class OutputFileWriter extends JCasConsumer_ImplBase {
+public interface JCasFormatter {
     /**
-     * <em>[mandatory]</em>
+     * Format the given {@code jcas} as {@link String}.
      *
-     * The file to write to.
+     * @param jcas the {@link JCas} to format
+     * @return a string representing the {@link JCas}
      */
-    public static final String PARAM_OUTPUT_FILE = "OutputFile";
-    @ConfigurationParameter(name = PARAM_OUTPUT_FILE, mandatory = true)
-    protected String outputFile;
+    String format(JCas jcas);
 }
