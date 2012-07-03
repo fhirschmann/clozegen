@@ -12,6 +12,8 @@
         <module>cli</module>
         <module>gui</module>
         <module>lib</module>
+        <module>plugins/reader/pdf</module>
+        <module>plugins/all</module>
     </modules>
 
     <properties>

@@ -23,7 +23,6 @@ import com.github.fhirschmann.clozegen.lib.adapters.FrequencyAdapter;
 import com.github.fhirschmann.clozegen.lib.components.JCasFileWriter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.formatters.IMFFormatter;
-import de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import java.util.logging.Logger;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -119,10 +118,6 @@ public final class RegisterFactory {
         txt.setName("Plain-Text Reader");
         register.put("txt", txt);
         register.put("text", txt);
-
-        ReaderRegisterEntry pdf = new ReaderRegisterEntry(PdfReader.class);
-        pdf.setName("PDF Reader");
-        register.put("pdf", pdf);
 
         return register;
     }
