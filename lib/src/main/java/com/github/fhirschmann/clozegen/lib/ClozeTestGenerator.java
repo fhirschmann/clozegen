@@ -102,7 +102,7 @@ public class ClozeTestGenerator {
         checkArgument(clean, "You cannot call run twice.");
         checkNotNull(input);
         checkNotNull(output);
-        CollectionReader reader = Registers.readers().
+        CollectionReader reader = Registers.reader().
                 getReaderForFile(input, languageCode);
         run(reader, output);
     }
@@ -149,7 +149,7 @@ public class ClozeTestGenerator {
     public void run(final CollectionReader reader, final URL output)
             throws ResourceInitializationException, UIMAException, IOException {
         checkArgument(clean, "You cannot call run twice.");
-        AnalysisEngineDescription writer = Registers.writers().getWriterFor(output);
+        AnalysisEngineDescription writer = Registers.writer().getWriterFor(output);
         getPipeline().add(writer);
         run(reader);
     }
@@ -212,7 +212,7 @@ public class ClozeTestGenerator {
      */
     public void activate(final String generatorIdentifier, final int answerCount)
             throws ResourceInitializationException {
-        getPipeline().add(Registers.annotators().
+        getPipeline().add(Registers.annotator().
                 get(generatorIdentifier).getDescription(
                 GapAnnotator.PARAM_ANSWER_COUNT, answerCount));
     }

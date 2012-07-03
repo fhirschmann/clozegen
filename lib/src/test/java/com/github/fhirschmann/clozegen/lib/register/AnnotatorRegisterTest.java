@@ -66,7 +66,7 @@ public class AnnotatorRegisterTest {
 
     @Test
     public void testGetAnnotatorsForLanguage() {
-        assertThat(r.getAnnotatorsForLanguage("de"), hasItems(e1, e2));
+        assertThat(r.forLanguage("de"), hasItems(e1, e2));
     }
 
     @Test

@@ -63,7 +63,7 @@ public class Main {
      *
      * <p>
      * You will need to pass a {@link ClozeTestGenerator} to this method. This
-     * will allow you to, for example, add new input readers.
+     * will allow you to, for example, add new input reader.
      * </p>
      *
      * @param gen the {@link ClozeTestGenerator} to use
@@ -100,18 +100,18 @@ public class Main {
             }
 
             if (line.hasOption("list-generators")) {
-                for (DescriptionRegisterEntry entry : Registers.annotators()) {
+                for (DescriptionRegisterEntry entry : Registers.annotator()) {
                     System.out.println(String.format("[%s] %s",
                             entry.getIdentifier(), entry.getName()));
                 }
             } else if (line.hasOption("list-input-methods")) {
                 for (Entry<String, ReaderRegisterEntry> entry : Registers.
-                        readers().entrySet()) {
+                        reader().entrySet()) {
                     System.out.println(String.format("[.%s] %s",
                             entry.getKey(), entry.getValue().getName()));
                 }
             } else if (line.hasOption("list-output-methods")) {
-                for (WriterRegisterEntry entry : Registers.writers()) {
+                for (WriterRegisterEntry entry : Registers.writer()) {
                     System.out.println(String.format("[.%s] %s",
                             entry.getIdentifier(), entry.getName()));
                 }

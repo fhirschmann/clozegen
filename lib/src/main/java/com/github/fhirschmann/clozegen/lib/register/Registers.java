@@ -20,61 +20,50 @@ import static com.google.common.base.Objects.firstNonNull;
 import org.apache.uima.resource.ResourceInitializationException;
 
 /**
+ * This class provides singleton instances of the available Registers.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class Registers {
-    private static AnnotatorRegister annotators;
-    private static ReaderRegister readers;
-    private static WriterRegister writers;
+    private static AnnotatorRegister annotator;
+    private static ReaderRegister reader;
+    private static WriterRegister writer;
 
     /**
      * Returns the annotator register. This register holds all information
      * used to construct an analysis engine in order to generate gaps.
      *
-     * <p>
-     * If no register has been set, a new default one will be created.
-     * </p>
-     *
      * @return the annotator Register
      * @throws ResourceInitializationException on errors during initialization
      */
-    public static AnnotatorRegister annotators() throws ResourceInitializationException {
-        annotators = firstNonNull(annotators,
+    public static AnnotatorRegister annotator() throws ResourceInitializationException {
+        annotator = firstNonNull(annotator,
                 RegisterFactory.createDefaultAnnotatorRegister());
-        return annotators;
+        return annotator;
     }
 
     /**
      * Returns the writer register. This register holds all information
      * used to construct a consumer which writes the cloze test to a file.
      *
-     * <p>
-     * If no register has been set, a new default one will be created.
-     * </p>
-     *
      * @return the writer register
      * @throws ResourceInitializationException on errors during initialization
      */
-    public static WriterRegister writers() {
-        writers = firstNonNull(writers,
+    public static WriterRegister writer() {
+        writer = firstNonNull(writer,
                 RegisterFactory.createDefaultWriterRegister());
-        return writers;
+        return writer;
     }
 
     /**
      * Returns the reader register. This register maps file extensions to UIMA
-     * readers. You can safely add new mappings to this register.
-     *
-     * <p>
-     * If no register has been set, a new default one will be created.
-     * </p>
+     * reader. You can safely add new mappings to this register.
      *
      * @return the readerRegister
      */
-    public static ReaderRegister readers() {
-        readers = firstNonNull(readers,
+    public static ReaderRegister reader() {
+        reader = firstNonNull(reader,
                 RegisterFactory.createDefaultReaderRegister());
-        return readers;
+        return reader;
     }
 }

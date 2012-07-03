@@ -37,7 +37,7 @@ public class AnnotatorRegister extends DescriptionRegister<AnnotatorRegisterEntr
      * @param language the language(code)
      * @return live view of filtered descriptions
      */
-    public Collection<AnnotatorRegisterEntry> getAnnotatorsForLanguage(
+    public Collection<AnnotatorRegisterEntry> forLanguage(
             final String language) {
         return Collections2.filter(register.values(),
                 new Predicate<AnnotatorRegisterEntry>() {
@@ -54,7 +54,7 @@ public class AnnotatorRegister extends DescriptionRegister<AnnotatorRegisterEntr
      *
      * @return a set of language codes
      */
-    public Set<String> getPresentLanguageCodes() {
+    public Set<String> languageCodes() {
         Set<String> set = Sets.newHashSet();
         for (AnnotatorRegisterEntry entry : this) {
             set.addAll(entry.getSupportedLanguages());
