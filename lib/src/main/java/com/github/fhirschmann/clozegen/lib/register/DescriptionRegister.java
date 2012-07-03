@@ -19,7 +19,6 @@ package com.github.fhirschmann.clozegen.lib.register;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
-import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import java.util.Collection;
 import java.util.Map;

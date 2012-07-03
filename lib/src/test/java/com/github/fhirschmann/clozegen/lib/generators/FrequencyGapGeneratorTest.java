@@ -21,11 +21,9 @@ import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.model.MultisetModel;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
-import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import static org.hamcrest.CoreMatchers.*;
 
 /**
@@ -39,7 +37,7 @@ public class FrequencyGapGeneratorTest {
     @Before
     public void setUp() {
         model = new MultisetModel();
-        Multiset ms = HashMultiset.create();
+        Multiset<String> ms = HashMultiset.create();
         ms.add("of", 100); // 40
 
         ms.add("in", 70); // 10

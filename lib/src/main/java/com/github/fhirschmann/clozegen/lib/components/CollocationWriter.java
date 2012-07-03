@@ -34,7 +34,6 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
-import static com.google.common.base.Preconditions.checkArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**

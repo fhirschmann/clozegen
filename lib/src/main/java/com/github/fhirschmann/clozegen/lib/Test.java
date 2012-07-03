@@ -17,30 +17,23 @@
  */
 package com.github.fhirschmann.clozegen.lib;
 
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
+
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ExternalResourceDescription;
+
 import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
 import com.github.fhirschmann.clozegen.lib.adapters.FrequencyAdapter;
 import com.github.fhirschmann.clozegen.lib.adapters.GenericSingleTokenInputAdapter;
 import com.github.fhirschmann.clozegen.lib.components.CollocationWriter;
-import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
-import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
-import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.components.DebugWriter;
-import com.github.fhirschmann.clozegen.lib.generators.model.CollocationModel;
-import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
-import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
+import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Multiset;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ExternalResourceDescription;
-import org.apache.uima.resource.Resource;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 /**
  *

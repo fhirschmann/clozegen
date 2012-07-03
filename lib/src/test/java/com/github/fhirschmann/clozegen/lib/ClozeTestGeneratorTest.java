@@ -17,14 +17,11 @@
  */
 package com.github.fhirschmann.clozegen.lib;
 
-import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
 import com.github.fhirschmann.clozegen.lib.adapters.GenericSingleTokenInputAdapter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
-import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
 import com.github.fhirschmann.clozegen.lib.register.AnnotatorRegisterEntry;
 import com.github.fhirschmann.clozegen.lib.register.Registers;
-import com.github.fhirschmann.clozegen.lib.util.Resources2;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Sets;
 import com.google.common.io.Files;
@@ -34,15 +31,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import org.apache.uima.UIMAException;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Before;
-import static org.junit.matchers.JUnitMatchers.*;
-import org.junit.BeforeClass;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 /**

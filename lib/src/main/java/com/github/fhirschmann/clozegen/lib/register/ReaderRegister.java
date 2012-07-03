@@ -22,7 +22,6 @@ import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.Maps;
-import java.io.File;
 import java.util.Map;
 import org.apache.uima.collection.CollectionReader;
 import static com.google.common.base.Preconditions.checkArgument;

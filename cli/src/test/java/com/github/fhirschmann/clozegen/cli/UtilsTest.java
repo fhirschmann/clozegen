@@ -17,12 +17,15 @@
  */
 package com.github.fhirschmann.clozegen.cli;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import java.util.Map;
+
+import org.junit.Test;
+
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.google.common.collect.Maps;
-import java.util.Map;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 
 /**
  *

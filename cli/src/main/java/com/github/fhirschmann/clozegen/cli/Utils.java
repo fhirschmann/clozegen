@@ -17,9 +17,10 @@
  */
 package com.github.fhirschmann.clozegen.cli;
 
+import java.util.Map;
+
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.google.common.collect.Maps;
-import java.util.Map;
 
 /**
  * Utility class for the CLI.

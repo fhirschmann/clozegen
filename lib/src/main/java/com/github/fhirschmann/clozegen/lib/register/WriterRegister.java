@@ -21,7 +21,6 @@ import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import static com.google.common.base.Preconditions.checkArgument;
 import org.apache.uima.resource.ResourceInitializationException;
-import static com.google.common.base.Preconditions.checkNotNull;
 import java.net.URL;
 
 /**

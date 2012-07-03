@@ -37,7 +37,7 @@ public final class Plugins {
      * Loads all available plugins.
      */
     public static void load() {
-        ServiceLoader loader = ServiceLoader.load(Plugin.class);
+        ServiceLoader<Plugin> loader = ServiceLoader.load(Plugin.class);
         for (Iterator<Plugin> it = loader.iterator(); it.hasNext();) {
             Plugin plugin = it.next();
             plugin.init();

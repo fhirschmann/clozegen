@@ -22,7 +22,6 @@ import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Lists;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Pattern;
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;

@@ -21,14 +21,12 @@ import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.MultisetModelBasedGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.SingleTokenInputGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.model.MultisetModel;
-import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.google.common.base.Optional;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multiset.Entry;
-import java.util.List;
 
 /**
  * Suggests distractors with a frequency similar to that of the input word.

@@ -17,17 +17,25 @@
  */
 package com.github.fhirschmann.clozegen;
 
+import java.lang.reflect.Constructor;
+import java.util.Set;
+
+import org.junit.Test;
+
 import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
 import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
 import com.github.fhirschmann.clozegen.lib.multiset.WriteMultisets;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.plugins.Plugins;
 import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
-import com.github.fhirschmann.clozegen.lib.util.*;
+import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
+import com.github.fhirschmann.clozegen.lib.util.JCasFactory2;
+import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
+import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
+import com.github.fhirschmann.clozegen.lib.util.Preconditions2;
+import com.github.fhirschmann.clozegen.lib.util.Resources2;
+import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.collect.Sets;
-import java.lang.reflect.Constructor;
-import java.util.Set;
-import org.junit.Test;
 
 /**
  * This is a pretty bad hack to exclude private constructors in utility classes

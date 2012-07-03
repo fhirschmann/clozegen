@@ -1,33 +1,31 @@
 package com.github.fhirschmann.clozegen.lib;
 
-import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
-import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
-import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
-import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
-import com.github.fhirschmann.clozegen.lib.plugins.api.Plugin;
-import com.github.fhirschmann.clozegen.lib.register.*;
-import com.google.common.base.Charsets;
-import com.google.common.base.Joiner;
+import static com.google.common.base.Objects.firstNonNull;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static com.google.common.base.Objects.firstNonNull;
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkArgument;
+
+import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
+import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
+import com.github.fhirschmann.clozegen.lib.register.AnnotatorRegister;
+import com.github.fhirschmann.clozegen.lib.register.Registers;
+import com.google.common.base.Charsets;
+import com.google.common.base.Joiner;
 import com.google.common.io.Files;
-import java.io.File;
-import java.net.URL;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ServiceLoader;
-import java.util.logging.Logger;
 
 /**
  * Cloze Test Generator.
@@ -44,23 +42,6 @@ public class ClozeTestGenerator {
      * The pipeline.
      */
     private Pipeline pipeline;
-
-    /**
-     * The annotator register.
-     */
-    private AnnotatorRegister annotatorRegister;
-
-    /**
-     * The reader register. This holds information about how to construct
-     * a reader which reads from an input file.
-     */
-    private ReaderRegister readerRegister;
-
-    /**
-     * The writer register. This holds information about how to construct
-     * a reader which writes to an output file.
-     */
-    private WriterRegister writerRegister;
 
     /**
      * Indicates whether this instance of {@link ClozeTestGenerator} is clean.

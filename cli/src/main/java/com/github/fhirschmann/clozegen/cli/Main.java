@@ -17,17 +17,27 @@
  */
 package com.github.fhirschmann.clozegen.cli;
 
-import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
-import com.github.fhirschmann.clozegen.lib.plugins.Plugins;
-import com.github.fhirschmann.clozegen.lib.register.*;
-import org.apache.commons.cli.*;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import static com.google.common.base.Preconditions.checkArgument;
-import com.google.common.collect.Maps;
+
 import java.io.File;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.PosixParser;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
+import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
+import com.github.fhirschmann.clozegen.lib.plugins.Plugins;
+import com.github.fhirschmann.clozegen.lib.register.DescriptionRegisterEntry;
+import com.github.fhirschmann.clozegen.lib.register.ReaderRegisterEntry;
+import com.github.fhirschmann.clozegen.lib.register.Registers;
+import com.github.fhirschmann.clozegen.lib.register.WriterRegisterEntry;
+import com.google.common.collect.Maps;
 
 /**
  * Command line entry class. All parsing should be done in this class.

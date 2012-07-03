@@ -17,18 +17,16 @@
  */
 package com.github.fhirschmann.clozegen.cli;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 import java.io.File;
 import java.io.IOException;
-import org.junit.AfterClass;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.BeforeClass;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.junit.Before;
-import static org.junit.matchers.JUnitMatchers.*;
+
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 
 /**
  *

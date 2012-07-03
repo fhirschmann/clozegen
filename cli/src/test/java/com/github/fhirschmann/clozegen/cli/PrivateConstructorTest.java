@@ -17,10 +17,12 @@
  */
 package com.github.fhirschmann.clozegen.cli;
 
-import com.google.common.collect.Sets;
 import java.lang.reflect.Constructor;
 import java.util.Set;
+
 import org.junit.Test;
+
+import com.google.common.collect.Sets;
 
 /**
  * This is a pretty bad hack to exclude private constructors in utility classes

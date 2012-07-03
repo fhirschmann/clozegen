@@ -17,7 +17,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.examples;
 
-import com.github.fhirschmann.clozegen.lib.adapters.GenericSingleTokenInputAdapter;
 import com.github.fhirschmann.clozegen.lib.components.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
@@ -25,7 +24,6 @@ import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN;
 import java.io.IOException;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
