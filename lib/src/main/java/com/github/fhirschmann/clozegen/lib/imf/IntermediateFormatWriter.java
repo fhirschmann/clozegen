@@ -53,7 +53,7 @@ public class IntermediateFormatWriter extends OutputFileWriter {
     public void process(final JCas aJCas) throws AnalysisEngineProcessException {
         String imf = IntermediateFormat.format(aJCas);
         try {
-            outputBuffer.write(String.format("%s%n", imf));
+            outputBuffer.write(imf);
             outputBuffer.flush();
         } catch (IOException ex) {
             getLogger().error(ex);
