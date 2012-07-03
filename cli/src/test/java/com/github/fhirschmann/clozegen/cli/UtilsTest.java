@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.cli;
 
+import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import org.junit.Test;
@@ -35,7 +36,7 @@ public class UtilsTest {
         Map<String, Integer> expected = Maps.newHashMap();
         expected.put("articles", 4);
         expected.put("prepositions", 2);
-        expected.put("foo", -1);
+        expected.put("foo", GapAnnotator.DEFAULT_ANSWER_COUNT);
 
         assertThat(map, is(expected));
     }

@@ -40,7 +40,7 @@ public class MainTest {
         File out = File.createTempFile("clozegen", ".clz");
         File in = File.createTempFile("clozegen", ".txt");
         Files.write("He can't think of anything.", in, Charsets.UTF_8);
-        String cmd = String.format("--generators prepositions/1 %s %s",
+        String cmd = String.format("--generators preps/1 %s %s",
                 in.getAbsolutePath(), out.getAbsolutePath());
         Main.main(cmd.split(" "));
         assertThat(Files.readLines(out, Charsets.UTF_8).get(0),
