@@ -13,7 +13,7 @@ Steps in the process:
 2. Activate one or more Gap Generators
 3. Translate the internal representation into the Intermediate Format (let the user adjust the result)
 4. Reverse the last step
-5. Export to HTML or LaTeX
+5. Export to Plain Text or LaTeX
 
 Intermediate Format
 -------------------
