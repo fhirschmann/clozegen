@@ -123,9 +123,9 @@ public final class RegisterFactory {
     public static ReaderRegister createDefaultReaderRegister() {
         ReaderRegister register = new ReaderRegister();
 
-        ReaderRegisterEntry txt = new ReaderRegisterEntry(TextReader.class);
+        ReaderRegisterEntry txt = new ReaderRegisterEntry("txt", TextReader.class);
         txt.setName("Plain-Text Reader");
-        register.put("txt", txt);
+        register.add(txt);
 
         return register;
     }

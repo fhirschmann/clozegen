@@ -30,8 +30,8 @@ import de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader;
 public class PdfReaderPlugin implements Plugin {
     @Override
     public void init() {
-        ReaderRegisterEntry pdf = new ReaderRegisterEntry(PdfReader.class);
+        ReaderRegisterEntry pdf = new ReaderRegisterEntry("pdf", PdfReader.class);
         pdf.setName("PDF Reader");
-        Registers.reader().put("pdf", pdf);
+        Registers.reader().add(pdf);
     }
 }

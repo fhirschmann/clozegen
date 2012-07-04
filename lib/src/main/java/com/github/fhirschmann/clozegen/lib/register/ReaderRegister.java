@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import com.github.fhirschmann.clozegen.lib.register.api.Register;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
@@ -33,19 +34,7 @@ import org.apache.uima.resource.ResourceInitializationException;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class ReaderRegister extends ForwardingMap<String, ReaderRegisterEntry> {
-    /**
-     * The entry register.
-     */
-    private Map<String, ReaderRegisterEntry> register;
-
-    /**
-     * Creates a new empty register.
-     */
-    public ReaderRegister() {
-        register = Maps.newHashMap();
-    }
-
+public class ReaderRegister extends Register<ReaderRegisterEntry> {
     /**
      * Returns the collection reader associated with the given input file.
      *
@@ -59,17 +48,5 @@ public class ReaderRegister extends ForwardingMap<String, ReaderRegisterEntry> {
         String inExt = MiscUtils.getFileExtension(input.getFile());
         checkArgument(register.containsKey(inExt), "Unknown input file type: " + inExt);
         return get(inExt).getReader(input, languageCode);
-    }
-
-    @Override
-    protected Map<String, ReaderRegisterEntry> delegate() {
-        return register;
-    }
-
-    @Override
-    public String toString() {
-        final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("entries", register.keySet().toString());
-        return str.toString();
     }
 }

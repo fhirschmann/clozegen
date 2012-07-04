@@ -115,10 +115,9 @@ public class Main {
                             entry.getIdentifier(), entry.getName()));
                 }
             } else if (line.hasOption("list-input-methods")) {
-                for (Entry<String, ReaderRegisterEntry> entry : Registers.
-                        reader().entrySet()) {
+                for (ReaderRegisterEntry entry : Registers.reader()) {
                     System.out.println(String.format("[.%s] %s",
-                            entry.getKey(), entry.getValue().getName()));
+                            entry.getIdentifier(), entry.getName()));
                 }
             } else if (line.hasOption("list-output-methods")) {
                 for (WriterRegisterEntry entry : Registers.writer()) {

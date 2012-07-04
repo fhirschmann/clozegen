@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import com.github.fhirschmann.clozegen.lib.register.api.RegisterEntry;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
@@ -35,20 +36,32 @@ import org.apache.uima.resource.ResourceInitializationException;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class ReaderRegisterEntry {
-    /** The class of the collection reader of this entry. */
+public class ReaderRegisterEntry implements RegisterEntry {
+    /**
+     * The class of the collection reader of this entry.
+     */
     private Class<? extends CollectionReader> readerClass;
 
-    /** The name of this entry. */
+    /**
+     * The identifier of this entry.
+    */
+    private String identifier;
+
+    /**
+     * The name of this entry.
+     */
     private String name;
 
     /**
      * Create a new {@link ReaderRegisterEntry} based on the given
      * {@code readerClass}.
      *
+     * @param identifier the identifier of this entry
      * @param readerClass the reader's class for this entry.
      */
-    public ReaderRegisterEntry(final Class<? extends CollectionReader> readerClass) {
+    public ReaderRegisterEntry(final String identifier,
+            final Class<? extends CollectionReader> readerClass) {
+        this.identifier = identifier;
         this.readerClass = checkNotNull(readerClass);
     }
 
@@ -137,6 +150,7 @@ public class ReaderRegisterEntry {
     /**
      * @return the name
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -153,5 +167,10 @@ public class ReaderRegisterEntry {
         final ToStringHelper str = Objects.toStringHelper(this);
         str.add("class", getReaderClass().getName());
         return str.toString();
+    }
+
+    @Override
+    public String getIdentifier() {
+        return identifier;
     }
 }
