@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import com.github.fhirschmann.clozegen.lib.register.api.RegisterEntry;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Lists;
@@ -37,7 +38,7 @@ import javax.annotation.Nullable;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class DescriptionRegisterEntry {
+public class DescriptionRegisterEntry implements RegisterEntry {
     /** The name of this entry. */
     private String name;
 
@@ -131,11 +132,7 @@ public class DescriptionRegisterEntry {
         return getDescriptionFor(data);
     }
 
-    /**
-     * Returns the name of this entry.
-     *
-     * @return the name
-     */
+    @Override
     public String getName() {
         return name;
     }
@@ -149,11 +146,7 @@ public class DescriptionRegisterEntry {
         this.name = name;
     }
 
-    /**
-     * Returns the identifier for this entry.
-     *
-     * @return the identifier
-     */
+    @Override
     public String getIdentifier() {
         return identifier;
     }

@@ -15,33 +15,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.register;
+package com.github.fhirschmann.clozegen.lib.register.api;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
-import com.google.common.collect.*;
+import com.google.common.collect.ForwardingCollection;
+import com.google.common.collect.Maps;
 import java.util.Collection;
 import java.util.Map;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * A collection of all {@link DescriptionRegisterEntry}.
+ * Base class for all registers.
  *
- * @param <T> the type of the entries
+ * @param <T> the entry type
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class DescriptionRegister<T extends DescriptionRegisterEntry>
-        extends ForwardingCollection<T> {
-
-    /** This maps identifier → Entry. */
+public class Register<T extends RegisterEntry> extends ForwardingCollection<T> {
+    /**
+     * This maps identifier → Entry.
+     */
     protected final Map<String, T> register;
 
     /**
-     * Creates a new empty DescriptionRegister.
+     * Creates a new empty Register.
      */
-    public DescriptionRegister() {
+    public Register() {
         super();
-        register = HashBiMap.create();
+        register = Maps.newHashMap();
     }
 
     /**
@@ -85,7 +86,7 @@ public class DescriptionRegister<T extends DescriptionRegisterEntry>
     }
 
     @Override
-    protected Collection<T> delegate() {
+    public Collection<T> delegate() {
         return register.values();
     }
 

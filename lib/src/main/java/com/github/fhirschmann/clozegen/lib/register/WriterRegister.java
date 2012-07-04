@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import com.github.fhirschmann.clozegen.lib.register.api.Register;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import static com.google.common.base.Preconditions.checkArgument;
@@ -28,7 +29,7 @@ import java.net.URL;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class WriterRegister extends DescriptionRegister<WriterRegisterEntry> {
+public class WriterRegister extends Register<WriterRegisterEntry> {
     /**
      * Returns the output writer associated with the given {@code output} file.
      *

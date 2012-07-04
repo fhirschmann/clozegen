@@ -15,20 +15,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.github.fhirschmann.clozegen.lib.register;
-
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+package com.github.fhirschmann.clozegen.lib.register.api;
 
 /**
+ * The basic elements of a RegisterEntry.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class RegisterFactoryTest {
-    @Test
-    public void testCreateDefaultRegister() throws Exception {
-        AnnotatorRegister r = RegisterFactory.createDefaultAnnotatorRegister();
-        assertThat(r.isEmpty(), is(false));
-    }
+public interface RegisterEntry {
+    /**
+     * Returns the identifier for this entry.
+     *
+     * @return the identifier
+     */
+    String getIdentifier();
+
+    /**
+     * Returns the name of this entry.
+     *
+     * @return the name
+     */
+    String getName();
 }

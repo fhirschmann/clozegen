@@ -23,6 +23,7 @@ import com.github.fhirschmann.clozegen.lib.adapters.FrequencyAdapter;
 import com.github.fhirschmann.clozegen.lib.components.JCasFileWriter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.formatters.IMFFormatter;
+import com.github.fhirschmann.clozegen.lib.formatters.PlainTextFormatter;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import java.util.logging.Logger;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -102,6 +103,14 @@ public final class RegisterFactory {
         entry.setName("Intermediate Format Writer");
         register.add(entry);
 
+        WriterRegisterEntry entry2 =
+                new WriterRegisterEntry("txt",
+                JCasFileWriter.class,
+                JCasFileWriter.FORMATTER_KEY,
+                createExternalResourceDescription(PlainTextFormatter.class));
+        entry2.setName("Plain Text Writer");
+        register.add(entry2);
+
         return register;
     }
 
@@ -117,7 +126,6 @@ public final class RegisterFactory {
         ReaderRegisterEntry txt = new ReaderRegisterEntry(TextReader.class);
         txt.setName("Plain-Text Reader");
         register.put("txt", txt);
-        register.put("text", txt);
 
         return register;
     }

@@ -17,6 +17,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import com.github.fhirschmann.clozegen.lib.register.api.Register;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import java.util.Collection;
@@ -29,7 +30,7 @@ import java.util.Set;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class AnnotatorRegister extends DescriptionRegister<AnnotatorRegisterEntry> {
+public class AnnotatorRegister extends Register<AnnotatorRegisterEntry> {
     /**
      * Returns a live view of the set of Descriptions which support
      * the given {@code language}.
