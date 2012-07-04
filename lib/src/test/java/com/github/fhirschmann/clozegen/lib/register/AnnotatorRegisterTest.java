@@ -78,4 +78,9 @@ public class AnnotatorRegisterTest {
     public void testDelegate() {
         assertThat(r.delegate(), hasItems(e1, e2, e3));
     }
+
+    @Test
+    public void testLanguageCodes() {
+        assertThat(r.languageCodes(), hasItems("de", "en"));
+    }
 }
