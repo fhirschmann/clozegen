@@ -25,6 +25,9 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.matchers.JUnitMatchers.*;
 import org.uimafit.factory.JCasFactory;
 import org.uimafit.util.FSCollectionFactory;
 import org.uimafit.util.JCasUtil;
@@ -72,15 +75,19 @@ public class IntermediateFormatTest {
                 Sets.newHashSet(FSCollectionFactory.create(gap2.getValidAnswers())));
     }
 
+    @Test
     public void testFormatParse() throws UIMAException {
-        String str = "He studies {at}{in} the university";
+        String str = "He studies {at}{at} the university";
         JCas jcas = IntermediateFormat.parse(str);
         String result = IntermediateFormat.format(jcas);
-        assertEquals(str, result);
+        assertThat(result, is(str));
+    }
 
-        String str2 = "He studies {tok1}{tok2,tok3,tok4} the {tok5}{tok6,tok7}";
-        JCas jcas2 = IntermediateFormat.parse(str2);
-        String result2 = IntermediateFormat.format(jcas2);
-        assertEquals(str2, result2);
+    @Test
+    public void testFormatParseDisabled() throws UIMAException {
+        String str = "He studies {at}{in}d the university";
+        JCas jcas = IntermediateFormat.parse(str);
+        String result = IntermediateFormat.format(jcas);
+        assertThat(result, is("He studies at the university"));
     }
 }

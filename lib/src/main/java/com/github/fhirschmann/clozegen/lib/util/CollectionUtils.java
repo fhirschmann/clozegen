@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 import com.google.common.collect.Sets;
+import java.util.Collection;
 import java.util.List;
 import org.javatuples.Triplet;
 
@@ -100,6 +101,22 @@ public final class CollectionUtils {
     public static <T> boolean listAsSetEquals(final List<T> list1,
             final List<T> list2) {
         return Sets.newHashSet(list1).equals(Sets.newHashSet(list2));
+    }
+
+    /**
+     * Returns the maximum length of any element in a Collection.
+     *
+     * @param collection the collection in question
+     * @return the length of the longest element
+     */
+    public static int getMaximumElementLength(final Collection<String> collection) {
+        int max = 0;
+        for (Object object : collection) {
+            if (object.toString().length() > max) {
+                max = object.toString().length();
+            }
+        }
+        return max;
     }
 
     /**

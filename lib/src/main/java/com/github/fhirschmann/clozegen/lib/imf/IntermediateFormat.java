@@ -66,7 +66,8 @@ public final class IntermediateFormat {
     public static final Pattern PATTERN =
             Pattern.compile(String.format(""
             + "\\%1$s" + "([^%2$s%1$s]+)" + "\\%2$s"
-            + "\\%1$s" + "([^%2$s%1$s]+)" + "\\%2$s",
+            + "\\%1$s" + "([^%2$s%1$s]+)" + "\\%2$s"
+            + "(d?)",
             OPENING_TOKEN, CLOSING_TOKEN));
 
     /** This class is not meant to be instantiated. */
@@ -125,14 +126,16 @@ public final class IntermediateFormat {
             // Replace the current match with the selected answer
             matcher.appendReplacement(buffer, answer);
 
-            final GapAnnotation gap = UIMAUtils.createGapAnnotation(jcas,
-                    validAnswers, allAnswers);
+            if (matcher.group(3).equals("")) {
+                final GapAnnotation gap = UIMAUtils.createGapAnnotation(jcas,
+                        validAnswers, allAnswers);
 
-            // the above replacement will shorten the resulting string,
-            // thus we need to keep track of the offset
-            gap.setBegin(matcher.start() - offset);
-            gap.setEnd(matcher.start() - offset + answer.length());
-            gap.addToIndexes();
+                // the above replacement will shorten the resulting string,
+                // thus we need to keep track of the offset
+                gap.setBegin(matcher.start() - offset);
+                gap.setEnd(matcher.start() - offset + answer.length());
+                gap.addToIndexes();
+            }
             offset += (matcher.group(0).length() - answer.length());
         }
         matcher.appendTail(buffer);

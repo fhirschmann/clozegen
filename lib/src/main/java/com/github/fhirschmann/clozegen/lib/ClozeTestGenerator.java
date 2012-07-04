@@ -138,6 +138,27 @@ public class ClozeTestGenerator {
      * Runs the cloze test generation process.
      *
      * <p>
+     * The pipeline will start at the given {@link JCas} and write to {@code output}.
+     * </p>
+     *
+     * @param jcas JCas the {@link JCas}
+     * @param output the output file
+     * @throws UIMAException on UIMA errors
+     * @throws IOException on errors reading or writing files
+     * @throws ResourceInitializationException on errors during initialization
+     */
+    public void run(final JCas jcas, final URL output)
+            throws ResourceInitializationException, UIMAException, IOException {
+        checkArgument(clean, "You cannot call run twice.");
+        AnalysisEngineDescription writer = Registers.writer().getWriterFor(output);
+        getPipeline().add(writer);
+        run(jcas);
+    }
+
+    /**
+     * Runs the cloze test generation process.
+     *
+     * <p>
      * The pipeline will start at the given CAS.
      * </p>
      *
