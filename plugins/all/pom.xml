@@ -5,7 +5,7 @@
 
     <groupId>com.github.fhirschmann.clozegen</groupId>
     <artifactId>clozegen-plugins-all</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <name>clozegen-plugins-all</name>
 

@@ -27,6 +27,7 @@ import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
 
 /**
+ * A resource for a constraint which matches everything.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
