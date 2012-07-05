@@ -1,1 +1,46 @@
 Graphical User Interface Manual
+
+    The graphical user interface let's you generate and edit cloze tests with
+    ease. You can start it by invoking
+
+---
+java -jar clozegen-gui-1.0-SNAPSHOT-jar-with-dependencies.jar
+---
+
+    You are then shown the following window:
+
+[./images/gui/a.png]
+
+    \
+    You can start the generation process by selecting <<Generate>>
+    from the <<File>> menu. You will now be presented the following
+    window:
+
+[./images/gui/b.png]
+
+    \
+    Needless to say, you can browse for a file from which the cloze
+    test should be generated from. This can be, for example, a plain
+    text file. Once you have found something to generate a test for,
+    activate one or more generators. Please note that if you activate
+    more than one generator for a certain word class, only the first
+    one will be used.
+
+    When you click the <<Generate>> button, you'll be receive a result
+    like the one below:
+
+[./images/gui/c.png]
+
+    \
+    The gaps which are enabled will be highlighted in green, while the
+    disabled gaps will be highlighted in red. You can enable/disable a
+    gap by moving the caret over it and pressing <<<Ctrl + T>>>,
+    selecting <<Toggle Gap>> from the <<Edit>> menu, or simply postfixing
+    the gap with a <d>:
+
+[./images/gui/d.png]
+
+    \
+    Once you're done editing your cloze test, can can save (export) it to
+    a format of your choice by pressing <<<Ctrl + S>>> or selecting <<Save>>
+    from the <<File>> menu.

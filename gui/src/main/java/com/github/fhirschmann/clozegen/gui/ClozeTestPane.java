@@ -45,7 +45,7 @@ public class ClozeTestPane extends JTextPane {
      * The painter used to highlight enabled gaps.
      */
     private static final HighlightPainter ENABLED_HP =
-            new DefaultHighlighter.DefaultHighlightPainter(new Color(211, 255, 209));
+            new DefaultHighlighter.DefaultHighlightPainter(new Color(181, 255, 166));
 
     /**
      * The painter used to highlight disabled gaps.
