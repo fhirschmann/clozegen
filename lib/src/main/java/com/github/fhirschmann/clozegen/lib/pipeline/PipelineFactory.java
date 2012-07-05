@@ -17,8 +17,9 @@
  */
 package com.github.fhirschmann.clozegen.lib.pipeline;
 
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
+//import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
@@ -45,12 +46,8 @@ public final class PipelineFactory {
         final AnalysisEngine segmenter = createPrimitive(BreakIteratorSegmenter.class);
         pipeline.add(segmenter);
 
-        // Produces some wird reflection errors in uimafit
-        //AnalysisEngine tagger = createPrimitive(StanfordPosTagger.class,
-        //        StanfordPosTagger.PARAM_VARIANT,
-        //        "bidirectional-distsim-wsj-0-18");
-
-        final AnalysisEngine tagger = createPrimitive(TreeTaggerPosLemmaTT4J.class);
+        //final AnalysisEngine tagger = createPrimitive(TreeTaggerPosLemmaTT4J.class);
+        AnalysisEngine tagger = createPrimitive(OpenNlpPosTagger.class);
         pipeline.add(tagger);
 
         return pipeline;
