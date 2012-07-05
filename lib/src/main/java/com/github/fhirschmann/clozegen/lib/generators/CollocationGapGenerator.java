@@ -89,6 +89,9 @@ public class CollocationGapGenerator
                 MultisetUtils.mergeMultiSets(model.getTails().get(triplet.getValue2()),
                 model.getHeads().get(triplet.getValue0())));
 
+        // Remove the correct answer from the candidate set
+        candidates.remove(triplet.getValue1(), candidates.count(triplet.getValue1()));
+
         // Remove candidates p* which appear in the context (A, p*, B)
         for (Entry<String> entry : candidates.entrySet()) {
             if (model.getMultiset().contains(MiscUtils.WS_JOINER.join(
@@ -96,9 +99,6 @@ public class CollocationGapGenerator
                 candidates.remove(entry.getElement(), entry.getCount());
             }
         }
-
-        // Remove the correct answer from the candidate set
-        candidates.remove(triplet.getValue0(), candidates.count(triplet.getValue0()));
 
         if (candidates.elementSet().size() > count - 2) {
             final Set<String> invalidAnswers = Sets.newHashSet(
