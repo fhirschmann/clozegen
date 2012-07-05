@@ -18,7 +18,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <netbeans.hint.license>gpl20</netbeans.hint.license>
+        <netbeans.hint.license>mit</netbeans.hint.license>
     </properties>
 
     <developers>
@@ -233,8 +233,8 @@
 
     <licenses>
         <license>
-            <name>GNU General Public License, version 2</name>
-            <url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
+            <name>MIT</name>
+            <url>http://www.opensource.org/licenses/mit-license.html</url>
         </license>
     </licenses>
 
