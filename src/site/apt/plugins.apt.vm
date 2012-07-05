@@ -1,0 +1,64 @@
+Plugins
+
+    ClozeGen provides a simple yet powerful plugin system.
+
+* Writing Plugins
+
+** Background
+
+    Clozegen is powered by three
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/register/Registers.html}Register}}:
+    
+    * The <<Annotator Register>> contains information in order to lazily create
+    AnalysisEngines which are meant to annotate words with
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/type/GapAnnotation.html}GapAnnotations}}. This would normally be your generator you created
+    in the {{{./tutorial.html}tutorial}}.
+    
+    * The <<Reader Register>> contains information in order to lazily create a
+    CollectionReader.
+    
+    * The <<Writer Register>> contains information in order to lazily create
+    JCasConsumer which write the JCas to a file.
+
+* Writing Plugins
+
+    The plugin system uses Java's
+    {{{http://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html}ServiceLoader}}.
+    
+    You should first create a class which implements the
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/plugins/api/Plugin.html}Plugin}} Interface. Once you've done so, create a file named
+    <<<src/main/resources/META-INF/services/com.github.fhirschmann.clozegen.lib.plugins.api.Plugin>>>
+    in your plugin folder and write the full Java path
+    of your plugin in it. For example, this might be
+    <<<com.me.clozegen.plugins.FooPlugin>>>.
+    
+    In your plugin's <<<init()>>> method, you may register
+    your extension with any of the three register described
+    above.
+
+* Writing an Annotator Register Plugin
+
+    Assuming you have created the generator described in the
+    {{{./tutorial.html}tutorial}}, you'd register it with
+    the annotator register like so:
+
+%{snippet|file=src/site/java/AnnotatorPlugin.java}
+
+* Writing a Reader Register Plugin
+
+    I recomment taking a look at <<<plugins/reader/pdf>>> if you
+    want to writer a reader plugin.
+
+* Writing a Writer Register Plugin
+
+    If you plan on writing a text-based format, you can use
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/components/JCasFileWriter.html}JCasFileWriter}} and pass it a
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/components/api/JCasFormatter.html}JCasFormatter}}. The code below shows the
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/formatters/PlainTextFormatter.html}PlainTextFormatter}}.
+
+%{snippet|id=PTFormatter|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/formatters/PlainTextFormatter.java}
+
+    You could now register your plugin with the writer
+    register like so:
+
+%{snippet|file=src/site/java/WriterPlugin.java}

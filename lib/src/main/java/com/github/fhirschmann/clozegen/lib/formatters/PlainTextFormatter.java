@@ -36,6 +36,7 @@ import org.uimafit.util.JCasUtil;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
+/// START SNIPPET: PTFormatter
 public class PlainTextFormatter extends Resource_ImplBase implements JCasFormatter {
     @Override
     public String format(final JCas jcas) {

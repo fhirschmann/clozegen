@@ -17,6 +17,7 @@
         <menu name="Developer Manual">
             <item name="Overview" href="overview.html"/>
             <item name="Tutorial" href="tutorial.html"/>
+            <item name="Plugins" href="plugins.html"/>
             <item name="Build Process" href="build.html"/>
         </menu>
         <menu ref="reports" inherit="bottom" />
