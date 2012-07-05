@@ -1,1 +1,82 @@
 Command Line Interface Manual
+
+    The command line interface is an ideal candidate for advanced
+    users. You can start it by invoking
+
+---
+java -jar clozegen-gui-1.0-SNAPSHOT-jar-with-dependencies.jar
+---
+
+    However, I suggest creating a script or an alias in order to
+    bypass typing the java invocation each time you use ClozeGen.
+
+---
+alias clozegen='java -jar /path/to/clozegen-cli-1.0-SNAPSHOT-jar-with-dependencies.jar'
+---
+
+    In the next section, I'll assume you have done so. Let's first get an overview
+    of what's available in the command line interface by invoking
+    <<<clozegen --help>>>:
+
+---
+usage: clozegen [options] INPUT OUTPUT
+ -d,--debug                 enable debug mode
+ -g,--generators <arg>      generators to activate
+ -h,--help                  print help message and exit
+ -l,--language <arg>        language of the input file
+    --list-generators       list all available gap generators
+    --list-input-methods    list all available input methods
+    --list-output-methods   list all available output methods
+---
+
+    * <<debug>>
+    enables the debug mode, which basically means setting
+    the log level to <<<DEBUG>>>.
+    
+    * <<generators>>
+    let's you enable one or more generators. For example,
+    <<<preps/5>>> will enable the preposition gap generator
+    and tell it to enable 5 answer options.
+    
+    * the <<list>> methods will list the supported actions.
+    
+    Let us now create a simple cloze test by first writing
+    text to some file:
+    
+---
+echo "He can't think of anything." > test.txt
+---
+
+    We can now start the generation process and produce the
+    <Intermediate Format>:
+
+---
+clozegen --generators preps test.txt test.clz
+---
+
+    Let's now look at <<<test.clz>>> and see what's inside:
+
+---
+He can't think {of}{of,in,for,about} anything.
+---
+
+    As you can see, there are now 4 answer options for the
+    preposition gap. You may also want to generate a plain-text
+    cloze test once you have finished your editing:
+
+---
+clozegen test.clz out.txt
+---
+
+    After the execution of the last command, you'll end up with something like:
+
+---
+He can't think _____[in, about, of, for] anything.
+---
+
+    Of course, you can also skip the last step and generate the plain-text
+    format immediately:
+
+---
+clozegen --generators preps test.txt out.txt
+---
