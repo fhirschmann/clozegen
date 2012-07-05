@@ -27,16 +27,6 @@
         </dependency>
         <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</artifactId>
-            <version>1.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>xom</groupId>
-            <artifactId>xom</artifactId>
-            <version>1.2.5</version>
-        </dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</artifactId>
             <version>1.3.0</version>
         </dependency>
@@ -51,21 +41,9 @@
             <version>2010111500</version>
         </dependency>
         <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.frequency-asl</artifactId>
-            <version>1.3.0</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.teaching</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.teaching.corpus</artifactId>
             <version>0.4.0</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl</artifactId>
-            <version>1.3.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
