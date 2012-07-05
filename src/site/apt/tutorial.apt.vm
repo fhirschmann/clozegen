@@ -3,7 +3,7 @@ Tutorial
     This tutorial will walk you through the integration of a new
     gap generator into the ClozeGen framework. All of the snippets
     below can be found in the
-    {{{/apidocs/com/github/fhirschmann/clozegen/lib/examples/}examples}}
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/examples/}examples}}
     directory.
 
 * Writing a generator
@@ -11,7 +11,7 @@ Tutorial
 ** Background
 
     A generator is a class which implements the
-    {{{/apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html}GapGenerator}} interface. The method specified
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html}GapGenerator}} interface. The method specified
     in this interface then gets called for each word in a sentence
     matched by a constraint. Right now,
     you should only worry about the actual implementation of
@@ -31,14 +31,14 @@ Tutorial
     how you name your <<<initialize(...)>>> method, but for consistency
     reasons, you should name it <<<initialize(...)>>>. In this
     case, we are implementing the
-    {{{/apidocs/com/github/fhirschmann/clozegen/lib/generators/api/SingleTokenInputGapGenerator.html}SingleTokenInputGapGenerator}}
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/generators/api/SingleTokenInputGapGenerator.html}SingleTokenInputGapGenerator}}
     interface, so the name and signature of our initialization
     function is predetermined.
     
-    When {{{/apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html#generate(int)}generate}}
+    When {{{./apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html#generate(int)}generate}}
     is called, the generator can return a gap or indicate the
     absence thereof. Please see the corresponding
-    {{{/apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html#generate(int)}interface}}
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html#generate(int)}interface}}
     for further details. In this case, the gap will simply
     have 3 answer options: <<<a>>>, <<<an>>>, <<<the>>>.
     
@@ -85,10 +85,10 @@ Tutorial
 
     Chances are that there are already generic constraint
     resources for the task you're trying to accomplish available.
-    You should check {{{/apidocs/com/github/fhirschmann/clozegen/lib/constraints/resources/package-summary.html}lib.constraints.resources}}
+    You should check {{{./apidocs/com/github/fhirschmann/clozegen/lib/constraints/resources/package-summary.html}lib.constraints.resources}}
     in order to find out. Let's assume you want a constraint
     which matches all articles, then you'd simply use 
-    {{{http://localhost:8080/apidocs/com/github/fhirschmann/clozegen/lib/constraints/resources/TypeConstraintResource.html}TypeConstraintResource}}
+    {{{http://localhost:8080./apidocs/com/github/fhirschmann/clozegen/lib/constraints/resources/TypeConstraintResource.html}TypeConstraintResource}}
     like so:
 
 %{snippet|id=constex1|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/ConstraintExample.java}
@@ -107,10 +107,10 @@ Tutorial
     If you wish to do so, you have to write a class which
     extends {{{apidocs/com/github/fhirschmann/clozegen/lib/constraints/api/ConstraintResource.html}ConstraintResource}}. The
     <<<getConstraint(JCas jcas)>>> method then needs to return a valid
-    {{{http://uima.apache.org/d/uimaj-2.4.0/apidocs/org/apache/uima/cas/class-use/FSMatchConstraint.html}FSMatchConstraint}}. Writing
+    {{{http://uima.apache.org/d/uimaj-2.4.0./apidocs/org/apache/uima/cas/class-use/FSMatchConstraint.html}FSMatchConstraint}}. Writing
     such constraints is out of the scope of this manual, so you
     should consult the UIMA manual for this task. There are however
-    {{{/apidocs/com/github/fhirschmann/clozegen/lib/constraints/resources/package-summary.html}Constraint Resources}} available which
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/constraints/resources/package-summary.html}Constraint Resources}} available which
     might be a good point to start.
 
 * Wiring it up
@@ -118,17 +118,17 @@ Tutorial
     Now it's time to put all the pieces together.
     This is pretty straightforward and involves creating
     a description for
-    {{{/apidocs/com/github/fhirschmann/clozegen/lib/components/GapAnnotator.html}GapAnnotator}} like so:
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/components/GapAnnotator.html}GapAnnotator}} like so:
 
 %{snippet|id=wireex1|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/StupidArticleExample.java}
 
     In the snippet above, the
-    {{{/apidocs/com/github/fhirschmann/clozegen/lib/components/GapAnnotator.html}GapAnnotator}} will work on articles as specified
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/components/GapAnnotator.html}GapAnnotator}} will work on articles as specified
     by the argument to <<<CONSTRAINT_KEY>>> and call
     <<<StupidArticleGapGenerator.generate(...)>>> for each
     word matched by the constraint. In order to visualize
     the outcome of this experiment, a
-    {{{/apidocs/com/github/fhirschmann/clozegen/lib/components/DebugWriter.html}DebugWriter}} was added
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/components/DebugWriter.html}DebugWriter}} was added
     to the pipeline.
 
     The above example will yield the following output:
@@ -158,4 +158,4 @@ Tutorial
 ---
     As you can see, the article in the sentence
     was annotated with a 
-    {{{/apidocs/com/github/fhirschmann/clozegen/lib/type/GapAnnotation.html}GapAnnotation}}.
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/type/GapAnnotation.html}GapAnnotation}}.
