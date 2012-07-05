@@ -53,8 +53,33 @@ import org.uimafit.factory.CollectionReaderFactory;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public final class UIMAUtils {
-    /** Utility class cannot be called. */
+    /**
+     * Utility class.
+     */
     private UIMAUtils() {
+    }
+
+    /**
+     * Returns true if and only if there exists an annotation in the given
+     * {@code jcas} having the same type and bounds as {@code annotaton}.
+     *
+     * @param <T> the annotation type
+     * @param jcas the JCas
+     * @param annotation the annotation in question
+     * @return true if there exists a similar annotation
+     */
+    public static <T extends Annotation> boolean hasSimilarAnnotation(
+            final JCas jcas, final T annotation) {
+        for (Annotation subject : JCasUtil.select(jcas, annotation.getClass())) {
+            if (!subject.equals(annotation)
+                    && (subject.getBegin() == annotation.getBegin())
+                    && (subject.getEnd() == annotation.getEnd())) {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
     /**

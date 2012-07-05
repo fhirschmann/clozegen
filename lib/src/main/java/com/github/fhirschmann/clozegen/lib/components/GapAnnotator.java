@@ -29,6 +29,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.descriptor.ExternalResource;
+import org.uimafit.util.JCasUtil;
 
 /**
  * This annotator annotates words with a {@link GapAnnotation}.
@@ -78,9 +79,14 @@ public class GapAnnotator extends ConstraintBasedAnnotator {
                 generate(answerCount);
 
         if (gap.isPresent()) {
+            jcas.getAnnotationIndex(GapAnnotation.type);
             GapAnnotation gapAnnotation = UIMAUtils.createGapAnnotation(jcas, gap.get());
             UIMAUtils.copyBounds(annotationList.get(index), gapAnnotation);
-            gapAnnotation.addToIndexes();
+            if (!UIMAUtils.hasSimilarAnnotation(jcas, gapAnnotation)) {
+                gapAnnotation.addToIndexes();
+            } else {
+                getLogger().warn("Similar gap not added: " + gap.get().toString());
+            }
         }
     }
 }

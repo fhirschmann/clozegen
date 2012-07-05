@@ -116,4 +116,14 @@ public class UIMAUtilsTest {
         jcas = UIMAUtils.createJCas("foo", "en");
         assertThat(jcas.getDocumentLanguage(), is("en"));
     }
+
+    @Test
+    public void testHasSimilarAnnotation() {
+        assertFalse(UIMAUtils.hasSimilarAnnotation(jcas, gap1));
+
+        gap2.setBegin(gap1.getBegin());
+        gap2.setEnd(gap1.getEnd());
+
+        assertTrue(UIMAUtils.hasSimilarAnnotation(jcas, gap1));
+    }
 }
