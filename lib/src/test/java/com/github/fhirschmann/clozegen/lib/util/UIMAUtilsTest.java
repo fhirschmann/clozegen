@@ -79,11 +79,16 @@ public class UIMAUtilsTest {
 
     @Test
     public void testCreateGapAnnotation_3args() {
-        Gap gap = new Gap();
-        gap.addInvalidAnswers("foo");
-        gap.addValidAnswers("bar");
+        Gap gap = Gap.with("bar", "foo");
         GapAnnotation an = UIMAUtils.createGapAnnotation(jcas, gap);
         assertThat(an.getValidAnswers().getHead(), is("bar"));
+    }
+
+    @Test
+    public void testCreateGap() {
+        Gap gap = Gap.with("foo", "bar");
+        assertThat(gap, is(UIMAUtils.createGap(
+                UIMAUtils.createGapAnnotation(jcas, gap))));
     }
 
     @Test

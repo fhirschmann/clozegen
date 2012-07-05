@@ -131,6 +131,22 @@ public final class UIMAUtils {
     }
 
     /**
+     * Creates a {@link Gap} from a {@link GapAnnotation}.
+     *
+     * @param annotation the annotation the generate the gap from
+     * @return a gap based on the input annotation
+     */
+    public static Gap createGap(final GapAnnotation annotation) {
+        List<String> valid = Lists.newArrayList(
+                FSCollectionFactory.create(annotation.getValidAnswers()));
+        List<String> invalid = Lists.newArrayList(
+                FSCollectionFactory.create(annotation.getAllAnswers()));
+        invalid.removeAll(valid);
+
+        return Gap.with(valid, invalid);
+    }
+
+    /**
      * Copy the bounds ({@link Annotation#getBegin()} and {@link Annotation#getEnd()})
      * from the {@code source} annotation to the {@code destination} annotation.
      * annotation.
