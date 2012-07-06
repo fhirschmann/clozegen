@@ -11,7 +11,7 @@ Plugins
     
     * The <<Annotator Register>> contains information in order to lazily create
     AnalysisEngines which are meant to annotate words with
-    {{{./apidocs/com/github/fhirschmann/clozegen/lib/type/GapAnnotation.html}GapAnnotations}}. This would normally be your generator you created
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/type/GapAnnotation.html}GapAnnotations}}. This would normally be a generator like the one you created
     in the {{{./tutorial.html}tutorial}}.
     
     * The <<Reader Register>> contains information in order to lazily create a

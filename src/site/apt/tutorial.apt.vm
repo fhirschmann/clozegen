@@ -88,7 +88,7 @@ Tutorial
     You should check {{{./apidocs/com/github/fhirschmann/clozegen/lib/constraints/resources/package-summary.html}lib.constraints.resources}}
     in order to find out. Let's assume you want a constraint
     which matches all articles, then you'd simply use 
-    {{{http://localhost:8080./apidocs/com/github/fhirschmann/clozegen/lib/constraints/resources/TypeConstraintResource.html}TypeConstraintResource}}
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/constraints/resources/TypeConstraintResource.html}TypeConstraintResource}}
     like so:
 
 %{snippet|id=constex1|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/ConstraintExample.java}
@@ -105,7 +105,7 @@ Tutorial
 
     Of course, it is also possible to write new constraints.
     If you wish to do so, you have to write a class which
-    extends {{{apidocs/com/github/fhirschmann/clozegen/lib/constraints/api/ConstraintResource.html}ConstraintResource}}. The
+    extends {{{./apidocs/com/github/fhirschmann/clozegen/lib/constraints/api/ConstraintResource.html}ConstraintResource}}. The
     <<<getConstraint(JCas jcas)>>> method then needs to return a valid
     {{{http://uima.apache.org/d/uimaj-2.4.0./apidocs/org/apache/uima/cas/class-use/FSMatchConstraint.html}FSMatchConstraint}}. Writing
     such constraints is out of the scope of this manual, so you
