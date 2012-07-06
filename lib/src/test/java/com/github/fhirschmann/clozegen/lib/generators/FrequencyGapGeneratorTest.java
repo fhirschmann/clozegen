@@ -51,20 +51,17 @@ public class FrequencyGapGeneratorTest {
         ms.add("with", 30); // 30
         ms.add("on", 10); // 50
         model.setMultiset(ms);
-
-        generator = new FrequencyGapGenerator();
-        generator.initialize(model);
     }
 
     @Test
     public void testGenerate() {
-        generator.initialize("to");
+        generator = new FrequencyGapGenerator("to", model);
         assertThat(generator.generate(3).get(), is(Gap.with("to", "in", "for")));
     }
 
     @Test
     public void testGenerate2() {
-        generator.initialize("on");
+        generator = new FrequencyGapGenerator("on", model);
         assertThat(generator.generate(3).get(), is(Gap.with("on", "with", "for")));
     }
 }

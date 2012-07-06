@@ -22,7 +22,7 @@
 package com.github.fhirschmann.clozegen.lib.examples;
 
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
-import com.github.fhirschmann.clozegen.lib.generators.api.SingleTokenInputGapGenerator;
+import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.google.common.base.Optional;
 
 /**
@@ -32,12 +32,16 @@ import com.google.common.base.Optional;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 // START SNIPPET: stupidart
-public class StupidArticleGapGenerator implements SingleTokenInputGapGenerator {
+public class StupidArticleGapGenerator implements GapGenerator {
     /** The valid answer for this gap. */
     private String validAnswer;
 
-    @Override
-    public void initialize(final String token) {
+    /**
+     * Creates a new Gap Generator.
+     *
+     * @param token the token to generate a gap for
+     */
+    public StupidArticleGapGenerator(final String token) {
         this.validAnswer = token;
     }
 

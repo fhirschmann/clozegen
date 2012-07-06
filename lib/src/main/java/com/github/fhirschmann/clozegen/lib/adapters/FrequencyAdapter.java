@@ -39,9 +39,7 @@ public class FrequencyAdapter
     @Override
     public GapGenerator generator(
             final List<Annotation> annotationList, final int offset) {
-        FrequencyGapGenerator generator = new FrequencyGapGenerator();
-        generator.initialize(model);
-        generator.initialize(annotationList.get(offset).getCoveredText());
-        return generator;
+        return new FrequencyGapGenerator(annotationList.get(offset).getCoveredText(),
+                model);
     }
 }

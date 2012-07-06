@@ -23,6 +23,7 @@ package com.github.fhirschmann.clozegen.lib.generators;
 
 import com.github.fhirschmann.clozegen.lib.generators.api.CollocationModelBasedGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
+import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.model.CollocationModel;
 import com.github.fhirschmann.clozegen.lib.generators.api.ListInputGapGenerator;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
@@ -60,8 +61,7 @@ import org.javatuples.Triplet;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CollocationGapGenerator
-        implements ListInputGapGenerator, CollocationModelBasedGapGenerator {
+public class CollocationGapGenerator implements GapGenerator {
     /**
      * The model for this generator.
      */
@@ -72,13 +72,15 @@ public class CollocationGapGenerator
      */
     private Triplet<String, String, String> triplet;
 
-    @Override
-    public void initialize(final List<String> list) {
-        triplet = CollectionUtils.triListJoin(list);
-    }
-
-    @Override
-    public void initialize(final CollocationModel model) {
+    /**
+     * Creates a new collocation-based gap generator.
+     *
+     * @param ngram a list of tokens with the word in the center position
+     * @param model the model
+     */
+    public CollocationGapGenerator(final List<String> ngram,
+            final CollocationModel model) {
+        triplet = CollectionUtils.triListJoin(ngram);
         this.model = checkNotNull(model);
     }
 

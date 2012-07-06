@@ -54,9 +54,8 @@ public class CollocationGapGeneratorTest {
 
     @Test
     public void testGenerate() {
-        generator = new CollocationGapGenerator();
-        generator.initialize(model);
-        generator.initialize(Lists.newArrayList("as", "in", "the"));
+        generator = new CollocationGapGenerator(
+                Lists.newArrayList("as", "in", "the"), model);
         Gap gap = new Gap();
         gap.addValidAnswers("in");
         gap.addInvalidAnswers("by");
@@ -66,9 +65,8 @@ public class CollocationGapGeneratorTest {
     @Test
     public void testTrigramConstraint() {
         model.getMultiset().add("as of the");
-        generator = new CollocationGapGenerator();
-        generator.initialize(model);
-        generator.initialize(Lists.newArrayList("as", "in", "the"));
+        generator = new CollocationGapGenerator(
+                Lists.newArrayList("as", "in", "the"), model);
         Gap gap = new Gap();
         gap.addValidAnswers("in");
         gap.addInvalidAnswers("by");
@@ -77,9 +75,8 @@ public class CollocationGapGeneratorTest {
 
     @Test
     public void testNull() {
-        generator = new CollocationGapGenerator();
-        generator.initialize(model);
-        generator.initialize(Lists.newArrayList("xx", "yy ", "zz"));
+        generator = new CollocationGapGenerator(
+                Lists.newArrayList("xx", "yy", "zz"), model);
         assertFalse(generator.generate(2).isPresent());
     }
 }

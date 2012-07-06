@@ -37,9 +37,7 @@ public class StupidArticleAdapter extends AbstractResource implements GeneratorA
     @Override
     public GapGenerator generator(
             final List<Annotation> annotationList, final int offset) {
-        StupidArticleGapGenerator gen = new StupidArticleGapGenerator();
-        gen.initialize(annotationList.get(offset).getCoveredText());
-        return gen;
+        return new StupidArticleGapGenerator(annotationList.get(offset).getCoveredText());
     }
 }
 /// END SNIPPET: stupidartad

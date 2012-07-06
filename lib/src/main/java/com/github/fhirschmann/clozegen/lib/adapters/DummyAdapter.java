@@ -24,7 +24,6 @@ package com.github.fhirschmann.clozegen.lib.adapters;
 import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generators.DummyGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
-import com.github.fhirschmann.clozegen.lib.generators.api.SingleTokenInputGapGenerator;
 import java.util.List;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.component.Resource_ImplBase;
@@ -40,8 +39,6 @@ public class DummyAdapter extends Resource_ImplBase implements GeneratorAdapter 
     @Override
     public GapGenerator generator(final List<Annotation> annotationList,
             final int offset) {
-        SingleTokenInputGapGenerator gen = new DummyGapGenerator();
-        gen.initialize(annotationList.get(offset).getCoveredText());
-        return gen;
+        return new DummyGapGenerator(annotationList.get(offset).getCoveredText());
     }
 }

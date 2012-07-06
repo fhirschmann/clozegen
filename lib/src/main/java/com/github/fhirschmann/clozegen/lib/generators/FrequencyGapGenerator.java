@@ -22,8 +22,8 @@
 package com.github.fhirschmann.clozegen.lib.generators;
 
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
+import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.MultisetModelBasedGapGenerator;
-import com.github.fhirschmann.clozegen.lib.generators.api.SingleTokenInputGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.model.MultisetModel;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.google.common.base.Optional;
@@ -31,14 +31,14 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multiset.Entry;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Suggests distractors with a frequency similar to that of the input word.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class FrequencyGapGenerator
-        implements SingleTokenInputGapGenerator, MultisetModelBasedGapGenerator {
+public class FrequencyGapGenerator implements GapGenerator {
     /**
      * The model to use.
      */
@@ -49,14 +49,15 @@ public class FrequencyGapGenerator
      */
     private String token;
 
-    @Override
-    public void initialize(final MultisetModel model) {
-        this.model = model;
-    }
-
-    @Override
-    public void initialize(final String token) {
-        this.token = token;
+    /**
+     * Creates a new Gap Generator.
+     *
+     * @param token the token to generate a gap for
+     * @param model the model
+     */
+    public FrequencyGapGenerator(final String token, final MultisetModel model) {
+        this.model = checkNotNull(model);
+        this.token = checkNotNull(token);
     }
 
     @Override

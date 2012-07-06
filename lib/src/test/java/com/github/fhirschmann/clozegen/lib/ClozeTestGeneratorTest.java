@@ -21,7 +21,7 @@
  */
 package com.github.fhirschmann.clozegen.lib;
 
-import com.github.fhirschmann.clozegen.lib.adapters.GenericSingleTokenInputAdapter;
+import com.github.fhirschmann.clozegen.lib.adapters.DummyAdapter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
 import com.github.fhirschmann.clozegen.lib.register.AnnotatorRegisterEntry;
@@ -60,10 +60,7 @@ public class ClozeTestGeneratorTest {
                     TypeConstraintResource.class,
                     TypeConstraintResource.PARAM_TYPE, ART.class.getName()),
                 GapAnnotator.ADAPTER_KEY,
-                createExternalResourceDescription(
-                GenericSingleTokenInputAdapter.class,
-                GenericSingleTokenInputAdapter.PARAM_GENERATOR_CLASS,
-                "com.github.fhirschmann.clozegen.lib.generators.DummyGapGenerator"));
+                createExternalResourceDescription(DummyAdapter.class));
         entry.setSupportedLanguages(Sets.newHashSet("en"));
         Registers.annotator().clear();
         Registers.annotator().add(entry);

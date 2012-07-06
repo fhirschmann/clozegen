@@ -30,7 +30,6 @@ import org.apache.uima.resource.ExternalResourceDescription;
 
 import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
 import com.github.fhirschmann.clozegen.lib.adapters.FrequencyAdapter;
-import com.github.fhirschmann.clozegen.lib.adapters.GenericSingleTokenInputAdapter;
 import com.github.fhirschmann.clozegen.lib.components.CollocationWriter;
 import com.github.fhirschmann.clozegen.lib.components.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
@@ -72,9 +71,6 @@ public class Test {
                 CollocationWriter.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraintResource.class),
                 CollocationWriter.PARAM_OUTPUT_PATH, "/home/fabian/test.txt");
-
-        ExternalResourceDescription gen = createExternalResourceDescription(
-                GenericSingleTokenInputAdapter.class);
 
 
         pipeline.add(testx);
