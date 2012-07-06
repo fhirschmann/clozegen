@@ -35,6 +35,9 @@ Plugins
     In your plugin's <<<init()>>> method, you may register
     your extension with any of the three register described
     above.
+    
+    Of course, you also need to put the plugin on your classpath.
+    This is usually done by declaring a dependency on it using maven.
 
 * Writing an Annotator Register Plugin
 
@@ -43,6 +46,11 @@ Plugins
     the annotator register like so:
 
 %{snippet|file=src/site/java/AnnotatorPlugin.java}
+
+    You might also want to take a look at
+    <<<plugins/annotator/germanarticles>>> which
+    demonstrates a complete plugin which generates
+    gaps for the German nominative articles.
 
 * Writing a Reader Register Plugin
 

@@ -20,5 +20,10 @@
             <artifactId>clozegen-plugin-reader-pdf</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>clozegen-plugin-annotator-germanarticles</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
