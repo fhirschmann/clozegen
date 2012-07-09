@@ -27,13 +27,7 @@ Tutorial
 %{snippet|id=stupidart|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/StupidArticleGapGenerator.java}
 
     This generator takes only one input token: The word for which
-    a gap should be generated. Please note that it doesn't matter
-    how you name your <<<initialize(...)>>> method, but for consistency
-    reasons, you should name it <<<initialize(...)>>>. In this
-    case, we are implementing the
-    {{{./apidocs/com/github/fhirschmann/clozegen/lib/generators/api/SingleTokenInputGapGenerator.html}SingleTokenInputGapGenerator}}
-    interface, so the name and signature of our initialization
-    function is predetermined.
+    a gap should be generated. 
     
     When {{{./apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html#generate(int)}generate}}
     is called, the generator can return a gap or indicate the
@@ -97,6 +91,13 @@ Tutorial
     the adapter for the generator (and thus the generator itself,
     given it is wired up correctly in the adapter) will be
     called for each article.
+
+    You can also work on text without the involvement of POS-Tags:
+
+%{snippet|id=constex3|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/ConstraintExample.java}
+
+    The above code would match <<<studies>>> and <<<university>>> of the type
+    <<<Token>>>.
     
     Once you have your constraint requirements figured out,
     you can continue with wiring it up.

@@ -24,6 +24,7 @@ package com.github.fhirschmann.clozegen.lib.constraints;
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.collect.Sets;
 import org.apache.uima.UIMAException;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
@@ -34,11 +35,11 @@ import static org.junit.Assert.*;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CoveredConstraintTest {
+public class CoveredTextConstraintTest {
     @Test
     public void testGetConstraint() throws UIMAException {
         JCas jcas = UIMAUtils.createJCas("He can't think of anything.", "en");
-        FSMatchConstraint constraint = new CoveredTextConstraint("He");
+        FSMatchConstraint constraint = new CoveredTextConstraint(Sets.newHashSet("He"));
         GapAnnotation annotation = UIMAUtils.createGapAnnotation(jcas, Gap.with("foo"));
         annotation.setBegin(0);
         annotation.setEnd(2);

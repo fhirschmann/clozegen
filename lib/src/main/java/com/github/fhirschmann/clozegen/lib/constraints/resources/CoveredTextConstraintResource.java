@@ -22,6 +22,8 @@
 package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
 import com.github.fhirschmann.clozegen.lib.constraints.CoveredTextConstraint;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Sets;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
@@ -35,14 +37,15 @@ import org.uimafit.descriptor.ConfigurationParameter;
  */
 public class CoveredTextConstraintResource extends TypeConstraintResource {
     /** The string to match. */
-    public static final String PARAM_STRING = "String";
-    @ConfigurationParameter(name = PARAM_STRING, mandatory = true)
-    private String string;
+    public static final String PARAM_MATCH = "Match";
+    @ConfigurationParameter(name = PARAM_MATCH, mandatory = true)
+    private String match;
 
     @Override
     public FSMatchConstraint getConstraint(final JCas jcas) {
         FSMatchConstraint typeConstraint = super.getConstraint(jcas);
         return ConstraintFactory.instance().and(typeConstraint,
-                new CoveredTextConstraint(string));
+                new CoveredTextConstraint(
+                Sets.newHashSet(Splitter.on(",").split(match))));
     }
 }

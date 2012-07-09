@@ -21,26 +21,28 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints;
 
+import java.util.Collection;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.jcas.tcas.Annotation;
 
 /**
- * A constraint which tries to match an annotation's covered text.
+ * A constraint which tries to match an annotation's covered text with any
+ * element of the given set.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 @SuppressWarnings("serial")
 public class CoveredTextConstraint implements FSMatchConstraint {
     /** The covered text to match. */
-    private String matchText;
+    private Collection<String> matchText;
 
     /**
      * Constructs a new constraint.
      *
      * @param coveredText covered text to match
      */
-    public CoveredTextConstraint(final String coveredText) {
+    public CoveredTextConstraint(final Collection<String> coveredText) {
         this.matchText = coveredText;
     }
 
@@ -48,7 +50,7 @@ public class CoveredTextConstraint implements FSMatchConstraint {
     public boolean match(final FeatureStructure fs) {
         if (fs instanceof Annotation) {
             Annotation annotation = (Annotation) fs;
-            return annotation.getCoveredText().equals(matchText);
+            return matchText.contains(annotation.getCoveredText());
         } else {
             return false;
         }

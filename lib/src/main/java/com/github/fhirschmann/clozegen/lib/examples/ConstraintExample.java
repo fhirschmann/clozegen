@@ -32,6 +32,7 @@ import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
@@ -95,7 +96,7 @@ public final class ConstraintExample {
      *
      * <p>
      * This example demonstrates the usage of {@link CoveredTextConstraintResource} by
-     * matching the word "studies" of the type {@link POS}.
+     * matching the word "studies" and "university" of the type {@link Token}.
      * </p>
      *
      * @return an analysis engine description
@@ -105,10 +106,12 @@ public final class ConstraintExample {
             throws ResourceInitializationException {
         AnalysisEngineDescription desc = createPrimitiveDescription(GapAnnotator.class,
                 GapAnnotator.CONSTRAINT_KEY,
+                // START SNIPPET: constex3
                 createExternalResourceDescription(
                     CoveredTextConstraintResource.class,
-                    CoveredTextConstraintResource.PARAM_STRING, "studies",
-                    TypeConstraintResource.PARAM_TYPE, POS.class.getName()),
+                    CoveredTextConstraintResource.PARAM_MATCH, "studies,university",
+                    TypeConstraintResource.PARAM_TYPE, Token.class.getName()),
+                // END SNIPPET: constex3
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(DummyAdapter.class));
         return desc;

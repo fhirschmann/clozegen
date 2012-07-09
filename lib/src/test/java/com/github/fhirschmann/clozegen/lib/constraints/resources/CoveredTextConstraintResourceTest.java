@@ -29,6 +29,7 @@ import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import java.io.IOException;
@@ -64,7 +65,7 @@ public class CoveredTextConstraintResourceTest {
                 createExternalResourceDescription(
                     CoveredTextConstraintResource.class,
                     CoveredTextConstraintResource.PARAM_TYPE, Token.class.getName(),
-                    CoveredTextConstraintResource.PARAM_STRING, "of"));
+                    CoveredTextConstraintResource.PARAM_MATCH, "of,anything"));
 
         JCas jcas = UIMAUtils.createJCas("He can't think of anything.", "en");
         Pipeline pipeline = new Pipeline();
@@ -72,8 +73,10 @@ public class CoveredTextConstraintResourceTest {
         pipeline.add(desc);
         pipeline.run(jcas);
 
-        GapAnnotation annotation = Iterables.getOnlyElement(
-                JCasUtil.select(jcas, GapAnnotation.class));
-        assertThat(annotation.getCoveredText(), is("of"));
+        List<GapAnnotation> annotations = Lists.newArrayList(JCasUtil.
+                select(jcas, GapAnnotation.class));
+        assertThat(annotations.get(0).getCoveredText(), is("of"));
+        assertThat(annotations.get(1).getCoveredText(), is("anything"));
+        assertThat(annotations.size(), is(2));
     }
 }
