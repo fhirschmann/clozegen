@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * The MIT License
+ *
+ * Copyright 2012 Fabian Hirschmann <fabian@hirschm.net>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,17 +31,15 @@ import org.apache.uima.jcas.JCas;
 import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 import org.junit.BeforeClass;
 import org.uimafit.factory.JCasFactory;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.matchers.JUnitMatchers.*;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PlainTextFormatterTest {
-
+public class LaTeXFormatterTest {
     @Test
     public void testFormat() throws UIMAException {
         JCas jcas = UIMAUtils.createJCas("He studies at the university.", "en");
@@ -48,7 +48,8 @@ public class PlainTextFormatterTest {
         gap.setBegin(11);
         gap.setEnd(13);
         gap.addToIndexes();
-        PlainTextFormatter formatter = new PlainTextFormatter();
-        assertThat(formatter.format(jcas), is("He studies __[at] the university."));
+        LaTeXFormatter formatter = new LaTeXFormatter();
+        assertThat(formatter.format(jcas),
+                is("He studies \\clozeitem{at}{at} the university."));
     }
 }

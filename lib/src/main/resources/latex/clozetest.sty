@@ -1,0 +1,11 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{clozetest}
+\RequirePackage{etoolbox}
+\newbool{clozesolutions}
+\boolfalse{clozesolutions}
+
+\newcommand{\clozeitem}[2]{
+    \ifbool{clozesolutions}
+    {\underline{{#1}}}
+    {\rule{5em}{0.5pt} ({#2})}
+}

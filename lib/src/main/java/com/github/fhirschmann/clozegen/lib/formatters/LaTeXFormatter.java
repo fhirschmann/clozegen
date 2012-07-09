@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * The MIT License
+ *
+ * Copyright 2012 Fabian Hirschmann <fabian@hirschm.net>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,34 +23,39 @@
  */
 package com.github.fhirschmann.clozegen.lib.formatters;
 
+import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
-import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.collect.Sets;
-import org.apache.uima.UIMAException;
+import com.google.common.base.Joiner;
 import org.apache.uima.jcas.JCas;
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.BeforeClass;
-import org.uimafit.factory.JCasFactory;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.matchers.JUnitMatchers.*;
+import org.uimafit.component.Resource_ImplBase;
+import org.uimafit.util.JCasUtil;
+import static com.google.common.base.Preconditions.checkNotNull;
+import org.uimafit.util.FSCollectionFactory;
 
 /**
+ * Formats a {@link JCa} as LaTeX.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class PlainTextFormatterTest {
+public class LaTeXFormatter extends Resource_ImplBase implements JCasFormatter {
+    @Override
+    public String format(final JCas jcas) {
+        StringBuilder sb = new StringBuilder();
+        String text = checkNotNull(jcas).getDocumentText();
+        int position = 0;
+        for (GapAnnotation gap : JCasUtil.select(jcas, GapAnnotation.class)) {
+            sb.append(text.substring(position, gap.getBegin()));
+            sb.append("\\clozeitem{");
+            sb.append(Joiner.on(", ").join(
+                    FSCollectionFactory.create(gap.getValidAnswers())));
+            sb.append("}{");
+            sb.append(Joiner.on(", ").join(
+                    FSCollectionFactory.create(gap.getAllAnswers())));
+            sb.append("}");
+            position = gap.getEnd();
+        }
+        sb.append(text.substring(position));
 
-    @Test
-    public void testFormat() throws UIMAException {
-        JCas jcas = UIMAUtils.createJCas("He studies at the university.", "en");
-        GapAnnotation gap = UIMAUtils.createGapAnnotation(jcas,
-                Sets.newHashSet("at"), Sets.newHashSet("at"));
-        gap.setBegin(11);
-        gap.setEnd(13);
-        gap.addToIndexes();
-        PlainTextFormatter formatter = new PlainTextFormatter();
-        assertThat(formatter.format(jcas), is("He studies __[at] the university."));
+        return sb.toString();
     }
 }

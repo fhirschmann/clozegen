@@ -25,13 +25,16 @@ import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
 import com.github.fhirschmann.clozegen.lib.adapters.FrequencyAdapter;
 import com.github.fhirschmann.clozegen.lib.components.JCasFileWriter;
+import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.formatters.IMFFormatter;
+import com.github.fhirschmann.clozegen.lib.formatters.LaTeXFormatter;
 import com.github.fhirschmann.clozegen.lib.formatters.PlainTextFormatter;
 import com.github.fhirschmann.clozegen.lib.reader.IntermediateFormatReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import java.util.logging.Logger;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.uimafit.component.Resource_ImplBase;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 /**
@@ -92,6 +95,28 @@ public final class RegisterFactory {
     }
 
     /**
+     * Convenience method for creating register entries based on
+     * {@link JCasFileWriter}.
+     *
+     * @param formatter the {@link JCasFormatter}
+     * @param identifier the identifier for this entry
+     * @param name the name of this entry
+     * @return a new register entry
+     */
+    public static WriterRegisterEntry createJCasFileWriterEntry(
+            final Class<? extends Resource_ImplBase> formatter,
+            final String identifier,
+            final String name) {
+        WriterRegisterEntry entry = new WriterRegisterEntry(
+                identifier,
+                JCasFileWriter.class,
+                JCasFileWriter.FORMATTER_KEY,
+                createExternalResourceDescription(formatter));
+        entry.setName(name);
+        return entry;
+    }
+
+    /**
      * Creates a new {@link WriterRegister} prefilled with known descriptions
      * for exporting cloze tests.
      *
@@ -99,22 +124,14 @@ public final class RegisterFactory {
      */
     public static WriterRegister createDefaultWriterRegister() {
         WriterRegister register = new WriterRegister();
+        register.add(createJCasFileWriterEntry(IMFFormatter.class, "clz",
+                "Intermediate Format Writer"));
 
-        WriterRegisterEntry entry =
-                new WriterRegisterEntry("clz",
-                JCasFileWriter.class,
-                JCasFileWriter.FORMATTER_KEY,
-                createExternalResourceDescription(IMFFormatter.class));
-        entry.setName("Intermediate Format Writer");
-        register.add(entry);
+        register.add(createJCasFileWriterEntry(PlainTextFormatter.class, "txt",
+                "Plain Text Writer"));
 
-        WriterRegisterEntry entry2 =
-                new WriterRegisterEntry("txt",
-                JCasFileWriter.class,
-                JCasFileWriter.FORMATTER_KEY,
-                createExternalResourceDescription(PlainTextFormatter.class));
-        entry2.setName("Plain Text Writer");
-        register.add(entry2);
+        register.add(createJCasFileWriterEntry(LaTeXFormatter.class, "tex",
+                "LaTeX Writer"));
 
         return register;
     }
@@ -136,7 +153,6 @@ public final class RegisterFactory {
                 "clz", IntermediateFormatReader.class);
         clz.setName("IntermediateFormat Reader");
         register.add(clz);
-
 
         return register;
     }
