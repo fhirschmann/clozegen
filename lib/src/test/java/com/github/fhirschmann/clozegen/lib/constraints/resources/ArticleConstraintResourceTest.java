@@ -26,54 +26,43 @@ package com.github.fhirschmann.clozegen.lib.constraints.resources;
 import com.github.fhirschmann.clozegen.lib.adapters.DummyAdapter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 import org.apache.uima.UIMAException;
-import org.apache.uima.cas.FSMatchConstraint;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 import org.junit.BeforeClass;
+import static org.hamcrest.CoreMatchers.*;
 import org.uimafit.util.JCasUtil;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.resource.Resource;
-import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CoveredTextConstraintResourceTest {
-
+public class ArticleConstraintResourceTest {
     @Test
-    public void testGetConstraint() throws UIMAException, IOException {
+    public void testGetConstraint() throws ResourceInitializationException,
+            UIMAException, IOException {
         AnalysisEngineDescription desc = ConstraintResourceUtils.create(
-                CoveredTextConstraintResource.class,
-                CoveredTextConstraintResource.PARAM_TYPE, Token.class.getName(),
-                CoveredTextConstraintResource.PARAM_MATCH, "of,anything");
-
-
-        JCas jcas = UIMAUtils.createJCas("He can't think of anything.", "en");
-        Pipeline pipeline = new Pipeline();
-        pipeline.add(BreakIteratorSegmenter.class);
+                ArticleConstraintResource.class);
+        Pipeline pipeline = PipelineFactory.createDefaultPipeline();
         pipeline.add(desc);
-        pipeline.run(jcas);
 
+
+        JCas jcas = UIMAUtils.createJCas("He studies at the university.", "en");
+        pipeline.run(jcas);
         List<GapAnnotation> annotations = Lists.newArrayList(
                 JCasUtil.select(jcas, GapAnnotation.class));
-        assertThat(annotations.get(0).getCoveredText(), is("of"));
-        assertThat(annotations.get(1).getCoveredText(), is("anything"));
-        assertThat(annotations.size(), is(2));
+        assertThat(Iterables.getOnlyElement(annotations).getCoveredText(), is("the"));
     }
 }
