@@ -37,10 +37,7 @@ import org.apache.log4j.Logger;
 
 import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
 import com.github.fhirschmann.clozegen.lib.plugins.Plugins;
-import com.github.fhirschmann.clozegen.lib.register.DescriptionRegisterEntry;
-import com.github.fhirschmann.clozegen.lib.register.ReaderRegisterEntry;
-import com.github.fhirschmann.clozegen.lib.register.Registers;
-import com.github.fhirschmann.clozegen.lib.register.WriterRegisterEntry;
+import com.github.fhirschmann.clozegen.lib.register.*;
 import com.google.common.collect.Maps;
 
 /**
@@ -114,9 +111,10 @@ public class Main {
             }
 
             if (line.hasOption("list-generators")) {
-                for (DescriptionRegisterEntry entry : Registers.annotator()) {
-                    System.out.println(String.format("[%s] %s",
-                            entry.getIdentifier(), entry.getName()));
+                for (AnnotatorRegisterEntry entry : Registers.annotator()) {
+                    System.out.println(String.format("[%s]%s %s",
+                            entry.getIdentifier(), entry.getSupportedLanguages(),
+                            entry.getName()));
                 }
             } else if (line.hasOption("list-input-methods")) {
                 for (ReaderRegisterEntry entry : Registers.reader()) {
