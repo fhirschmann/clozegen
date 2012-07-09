@@ -44,11 +44,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Extracts collocation and writes them to a file.
+ * Extracts n-grams and writes them to a file.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CollocationWriter extends ConstraintBasedConsumer {
+public class NGramWriter extends ConstraintBasedConsumer {
     /**
      * <em>[mandatory]</em>
      *
@@ -102,15 +102,15 @@ public class CollocationWriter extends ConstraintBasedConsumer {
      *
      * <p>
      * For example, setting this to {@code false} will not include any word
-     * that comes before the word matched by {@link CollocationWriter#CONSTRAINT_KEY}.
-     * In this case, given {@link CollocationWriter#PARAM_N} is set to {@code 1}
+     * that comes before the word matched by {@link NGramWriter#CONSTRAINT_KEY}.
+     * In this case, given {@link NGramWriter#PARAM_N} is set to {@code 1}
      * (the default), <i>of anything</i> will be extracted from the sentence
      * <i>He can't think of anything.</i> given that we are matching prepositions.
      * </p>
      *
      * <p>
      * This should not be set to {@code false} in addition to setting
-     * {@link CollocationWriter#PARAM_INCLUDE_TAIL} to {@code false}.
+     * {@link NGramWriter#PARAM_INCLUDE_TAIL} to {@code false}.
      * </p>
      */
     public static final String PARAM_INCLUDE_HEAD = "IncludeHead";
@@ -124,15 +124,15 @@ public class CollocationWriter extends ConstraintBasedConsumer {
      *
      * <p>
      * For example, setting this to {@code false} will not include any word
-     * that comes after the word matched by {@link CollocationWriter#CONSTRAINT_KEY}.
-     * In this case, given {@link CollocationWriter#PARAM_N} is set to {@code 1}
+     * that comes after the word matched by {@link NGramWriter#CONSTRAINT_KEY}.
+     * In this case, given {@link NGramWriter#PARAM_N} is set to {@code 1}
      * (the default), <i>think of</i> will be extracted from the sentence
      * <i>He can't think of anything.</i> given that we are matching prepositions.
      * </p>
      *
      * <p>
      * This should not be set to {@code false} in addition to setting
-     * {@link CollocationWriter#PARAM_INCLUDE_HEAD} to {@code false}.
+     * {@link NGramWriter#PARAM_INCLUDE_HEAD} to {@code false}.
      * </p>
      */
     public static final String PARAM_INCLUDE_TAIL = "IncludeTail";

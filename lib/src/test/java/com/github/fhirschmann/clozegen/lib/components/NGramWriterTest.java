@@ -45,7 +45,7 @@ import com.google.common.collect.Multiset;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CollocationWriterTest {
+public class NGramWriterTest {
     File output;
     Pipeline pipeline;
 
@@ -58,12 +58,12 @@ public class CollocationWriterTest {
     public static AnalysisEngineDescription createReader(final String output,
             final int n, final int min) throws ResourceInitializationException {
         AnalysisEngineDescription desc = createPrimitiveDescription(
-                CollocationWriter.class,
-                CollocationWriter.PARAM_N, n,
-                CollocationWriter.PARAM_MIN_FREQUENCY, min,
-                CollocationWriter.CONSTRAINT_KEY,
+                NGramWriter.class,
+                NGramWriter.PARAM_N, n,
+                NGramWriter.PARAM_MIN_FREQUENCY, min,
+                NGramWriter.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraintResource.class),
-                CollocationWriter.PARAM_OUTPUT_PATH, output);
+                NGramWriter.PARAM_OUTPUT_PATH, output);
         return desc;
     }
 
@@ -109,12 +109,12 @@ public class CollocationWriterTest {
     public void testProcessTail() throws ResourceInitializationException,
     UIMAException, IOException {
         AnalysisEngineDescription desc = createPrimitiveDescription(
-                CollocationWriter.class,
-                CollocationWriter.PARAM_N, 1,
-                CollocationWriter.PARAM_INCLUDE_HEAD, false,
-                CollocationWriter.CONSTRAINT_KEY,
+                NGramWriter.class,
+                NGramWriter.PARAM_N, 1,
+                NGramWriter.PARAM_INCLUDE_HEAD, false,
+                NGramWriter.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraintResource.class),
-                CollocationWriter.PARAM_OUTPUT_PATH, output);
+                NGramWriter.PARAM_OUTPUT_PATH, output);
 
         pipeline.add(desc);
         pipeline.run(UIMAUtils.createTestReader());
@@ -127,12 +127,12 @@ public class CollocationWriterTest {
     public void testProcessHead() throws ResourceInitializationException,
     UIMAException, IOException {
         AnalysisEngineDescription desc = createPrimitiveDescription(
-                CollocationWriter.class,
-                CollocationWriter.PARAM_N, 1,
-                CollocationWriter.PARAM_INCLUDE_TAIL, false,
-                CollocationWriter.CONSTRAINT_KEY,
+                NGramWriter.class,
+                NGramWriter.PARAM_N, 1,
+                NGramWriter.PARAM_INCLUDE_TAIL, false,
+                NGramWriter.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraintResource.class),
-                CollocationWriter.PARAM_OUTPUT_PATH, output);
+                NGramWriter.PARAM_OUTPUT_PATH, output);
 
         pipeline.add(desc);
         pipeline.run(UIMAUtils.createTestReader());

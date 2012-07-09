@@ -28,7 +28,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.uimafit.factory.CollectionReaderFactory;
 
-import com.github.fhirschmann.clozegen.lib.components.CollocationWriter;
+import com.github.fhirschmann.clozegen.lib.components.NGramWriter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 
@@ -36,7 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
 
 /**
- * This example demonstrates the usage of {@link CollocationWriterExample}.
+ * This example demonstrates the usage of {@link NGramWriter}.
  *
  * <p>
  * The brown_tei corpus is expected in $DKPRO_HOME.
@@ -44,7 +44,7 @@ import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CollocationWriterExample {
+public class NGramWriterExample {
     public static void main(String[] args) throws Exception {
         // START SNIPPET: colwrex1a
         Pipeline pipeline = new Pipeline();
@@ -56,13 +56,13 @@ public class CollocationWriterExample {
                 BrownCorpusReader.PARAM_PATTERNS, new String[] {"[+]*.xml"});
 
         AnalysisEngineDescription trigrams = createPrimitiveDescription(
-                CollocationWriter.class,
-                CollocationWriter.PARAM_MIN_FREQUENCY, 0,
-                CollocationWriter.PARAM_N, 1,
-                CollocationWriter.PARAM_INCLUDE_TAIL, false,
-                CollocationWriter.CONSTRAINT_KEY,
+                NGramWriter.class,
+                NGramWriter.PARAM_MIN_FREQUENCY, 0,
+                NGramWriter.PARAM_N, 1,
+                NGramWriter.PARAM_INCLUDE_TAIL, false,
+                NGramWriter.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraintResource.class),
-                CollocationWriter.PARAM_OUTPUT_PATH, "target/test.txt");
+                NGramWriter.PARAM_OUTPUT_PATH, "target/test.txt");
 
         pipeline.add(trigrams);
         pipeline.run(cr);
