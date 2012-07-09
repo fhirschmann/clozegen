@@ -13,6 +13,7 @@
         <menu name="User Manual">
             <item name="Command Line Interface" href="cli.html"/>
             <item name="Graphical User Interface" href="gui.html"/>
+            <item name="LaTeX" href="latex.html"/>
         </menu>
         <menu name="Developer Manual">
             <item name="Overview" href="overview.html"/>
