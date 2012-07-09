@@ -24,6 +24,7 @@
 package com.github.fhirschmann.clozegen.plugins.annotator.germanarticles;
 
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.CoveredTextConstraintResource;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
 import com.github.fhirschmann.clozegen.lib.plugins.api.Plugin;
 import com.github.fhirschmann.clozegen.lib.register.AnnotatorRegisterEntry;
@@ -49,10 +50,11 @@ public class GermanArticlePlugin implements Plugin {
                 createExternalResourceDescription(GermanArticleAdapter.class),
                 GapAnnotator.CONSTRAINT_KEY,
                 createExternalResourceDescription(
-                TypeConstraintResource.class,
-                TypeConstraintResource.PARAM_TYPE, ART.class.getName()));
+                CoveredTextConstraintResource.class,
+                CoveredTextConstraintResource.PARAM_TYPE, ART.class.getName(),
+                CoveredTextConstraintResource.PARAM_MATCH, "der,die,das"));
 
-        entry.setName("Preposition Gap Generator (Collocations)");
+        entry.setName("German nominative Article Gap Generator (der,die,das)");
         entry.setSupportedLanguage("de");
         try {
             Registers.annotator().add(entry);
