@@ -21,6 +21,6 @@
             <item name="Build Process" href="build.html"/>
         </menu>
         <menu ref="reports" inherit="bottom" />
-        <!-- <menu ref="modules" /> -->
+        <menu ref="modules" />
     </body>
 </project>
