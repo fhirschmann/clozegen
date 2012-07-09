@@ -1,0 +1,80 @@
+Writing n-grams
+
+    Since many gap generation algorithms are based on n-gram
+    frequency, it is fundamental that ClozeGen provides ways
+    of creating these.
+
+    ClozeGen comes with a
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/components/NGramWriter.html}NGramWriter}} which will be explained in this document.
+    All of the examples explained here can also be found
+    in <<<lib.examples.NGramWriterExample>>>.
+
+    Let us assume you want to write the frequency
+    of prepositions to a file. Then you could
+    use the NGramWriter as follows:
+
+%{snippet|id=ngw1|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/NGramWriterExample.java}
+
+    The resulting file will contain something like this:
+
+---
+of	628
+in	398
+for	235
+to	183
+on	144
+by	131
+with	92
+at	72
+from	60
+under	23
+---
+
+    Sometimes it's neccessary to know the adjacent words. In the
+    next example, we'll count the number of occurences of articles
+    surrounded by one word on each side (trigrams) with a minimum
+    frequency of 3:
+
+%{snippet|id=ngw2|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/NGramWriterExample.java}
+
+    In this case, the resulting file would look something like this:
+
+---
+NULL the president	11
+in the state	8
+NULL the jury	6
+NULL the city	6
+NULL the new	6
+of the republican	6
+of the state	6
+in the house	5
+---
+
+    <<<NULL>>> indicates the absence of a neighbor, which is most
+    likely caused by the sentence boundaries when generating trigrams.
+
+    In the next example, we will discard the head of the word matched
+    by a constraint. This basically mean we'll only consider the
+    word on the riht-hand side of the article:
+
+%{snippet|id=ngw3|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/NGramWriterExample.java}
+
+    The above code would result in something like:
+
+---
+the state	38
+the city	29
+the united	20
+the administration	18
+more than	18
+the president	17
+a year	15
+the legislature	15
+the house	15
+the new	14
+the first	14
+the jury	13
+the republican	13
+some of	12
+the last	12
+---

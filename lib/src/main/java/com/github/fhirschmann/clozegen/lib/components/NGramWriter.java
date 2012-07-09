@@ -34,14 +34,18 @@ import org.uimafit.descriptor.ConfigurationParameter;
 
 import com.github.fhirschmann.clozegen.lib.components.api.ConstraintBasedConsumer;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.CoveredTextConstraintResource;
+import com.github.fhirschmann.clozegen.lib.functions.LowerCaseFunction;
 import com.github.fhirschmann.clozegen.lib.multiset.WriteMultisets;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import java.util.Collection;
 
 /**
  * Extracts n-grams and writes them to a file.
@@ -150,6 +154,16 @@ public class NGramWriter extends ConstraintBasedConsumer {
     private int minFrequency;
 
     /**
+     * <em>[optional,default=false]</em>
+     *
+     * Transform all n-grams to lowercase.
+     */
+    public static final String PARAM_LOWER_CASE = "lowerCase";
+    @ConfigurationParameter(name = PARAM_LOWER_CASE,
+            mandatory = false, defaultValue = "false")
+    private boolean lowerCase;
+
+    /**
      * The {@link Multiset} used to collect the frequencies.
      */
     private Multiset<String> ms;
@@ -176,7 +190,12 @@ public class NGramWriter extends ConstraintBasedConsumer {
             result = tokens;
         }
 
-        ms.add(MiscUtils.WS_JOINER.join(result));
+
+        Collection<String> lowered = lowerCase
+                ? Collections2.transform(result, new LowerCaseFunction())
+                : result;
+
+        ms.add(MiscUtils.WS_JOINER.join(lowered));
     }
 
     @Override

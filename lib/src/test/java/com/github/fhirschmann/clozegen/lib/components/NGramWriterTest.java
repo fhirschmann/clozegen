@@ -60,7 +60,7 @@ public class NGramWriterTest {
         AnalysisEngineDescription desc = createPrimitiveDescription(
                 NGramWriter.class,
                 NGramWriter.PARAM_N, n,
-                NGramWriter.PARAM_MIN_FREQUENCY, min,
+                NGramWriter.PARAM_LOWER_CASE, min,
                 NGramWriter.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraintResource.class),
                 NGramWriter.PARAM_OUTPUT_PATH, output);

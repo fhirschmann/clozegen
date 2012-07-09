@@ -33,8 +33,8 @@ import com.google.common.base.Function;
 public class LowerCaseFunction implements Function<String, String> {
     @Override
     public String apply(@Nullable final String input) {
-        if (input == null) {
-            return null;
+        if ((input == null) || (input.equals("NULL"))) {
+            return input;
         } else {
             return input.toLowerCase();
         }
