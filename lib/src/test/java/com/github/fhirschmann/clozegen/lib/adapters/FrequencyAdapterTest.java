@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * Copyright 2012 Fabian Hirschmann <fabian@hirschm.net>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.adapters;
 
-import com.github.fhirschmann.clozegen.lib.components.DebugWriter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
@@ -34,10 +33,12 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.junit.AfterClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
-import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 /**
@@ -46,24 +47,22 @@ import static org.hamcrest.CoreMatchers.*;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CollocationAdapterTest {
+public class FrequencyAdapterTest {
     @Test
-    public void testGenerator() throws ResourceInitializationException,
-            UIMAException, IOException {
+    public void testGenerator() throws ResourceInitializationException, UIMAException, IOException {
         AnalysisEngine test = createPrimitive(GapAnnotator.class,
                 GapAnnotator.PARAM_ANSWER_COUNT, 5,
                 GapAnnotator.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraintResource.class),
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(
-                CollocationAdapter.class,
-                CollocationAdapter.PARAM_PATH,
-                "frequencies/collocation_prep/trigrams.txt"));
+                FrequencyAdapter.class,
+                FrequencyAdapter.PARAM_PATH,
+                "frequencies/collocation_prep/unigrams.txt"));
 
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
         pipeline.add(test);
         JCas jcas = UIMAUtils.createJCas("I can't think of anything.", "en");
-        pipeline.add(DebugWriter.class);
         pipeline.run(jcas);
         Annotation an = jcas.getAnnotationIndex(GapAnnotation.type).iterator().next();
         assertThat(an.getCoveredText(), is("of"));

@@ -22,35 +22,120 @@
 package com.github.fhirschmann.clozegen.lib.components;
 
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
+import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.collect.Multiset;
+import java.io.File;
 import java.io.IOException;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.junit.Before;
 import org.junit.Test;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class CollocationWriterTest {
+    File output;
+    Pipeline pipeline;
 
-    @Test
-    public void testProcess() throws ResourceInitializationException,
-            UIMAException, IOException {
-        AnalysisEngineDescription trigrams = createPrimitiveDescription(
+    @Before
+    public void setUp() throws IOException {
+        output = File.createTempFile("cwtest", ".txt");
+        pipeline = new Pipeline();
+    }
+
+    public static AnalysisEngineDescription createReader(final String output,
+            final int n, final int min) throws ResourceInitializationException {
+        AnalysisEngineDescription desc = createPrimitiveDescription(
                 CollocationWriter.class,
-                CollocationWriter.PARAM_MIN_FREQUENCY, 15,
+                CollocationWriter.PARAM_N, n,
+                CollocationWriter.PARAM_MIN_FREQUENCY, min,
                 CollocationWriter.CONSTRAINT_KEY,
                 createExternalResourceDescription(PrepositionConstraintResource.class),
-                CollocationWriter.PARAM_OUTPUT_PATH, "target/cwtest.txt");
-        Pipeline pipeline = PipelineFactory.createDefaultPipeline();
+                CollocationWriter.PARAM_OUTPUT_PATH, output);
+        return desc;
+    }
 
-        pipeline.add(trigrams);
+    @Test
+    public void testProcess0() throws ResourceInitializationException,
+            UIMAException, IOException {
+        pipeline.add(createReader(output.getAbsolutePath(), 0, 0));
         pipeline.run(UIMAUtils.createTestReader());
+        Multiset<String> ms = ReadMultisets.parseMultiset(output.toURI().toURL());
+        assertThat(ms.count("of"), is(224));
+        assertThat(ms.count("at"), is(22));
+    }
+
+    @Test
+    public void testProcessFreq() throws ResourceInitializationException,
+            UIMAException, IOException {
+        pipeline.add(createReader(output.getAbsolutePath(), 0, 23));
+        pipeline.run(UIMAUtils.createTestReader());
+        Multiset<String> ms = ReadMultisets.parseMultiset(output.toURI().toURL());
+        assertThat(ms.count("at"), is(0));
+    }
+
+    @Test
+    public void testProcess1() throws ResourceInitializationException,
+            UIMAException, IOException {
+        pipeline.add(createReader(output.getAbsolutePath(), 1, 0));
+        pipeline.run(UIMAUtils.createTestReader());
+        Multiset<String> ms = ReadMultisets.parseMultiset(output.toURI().toURL());
+        assertThat(ms.count("some of the"), is(3));
+        assertThat(ms.count("candidate in the"), is(2));
+    }
+
+    @Test
+    public void testProcess2() throws ResourceInitializationException,
+            UIMAException, IOException {
+        pipeline.add(createReader(output.getAbsolutePath(), 2, 0));
+        pipeline.run(UIMAUtils.createTestReader());
+        Multiset<String> ms = ReadMultisets.parseMultiset(output.toURI().toURL());
+        assertThat(ms.count("day schools for the deaf"), is(2));
+    }
+
+    @Test
+    public void testProcessTail() throws ResourceInitializationException,
+    UIMAException, IOException {
+        AnalysisEngineDescription desc = createPrimitiveDescription(
+                CollocationWriter.class,
+                CollocationWriter.PARAM_N, 1,
+                CollocationWriter.PARAM_INCLUDE_HEAD, false,
+                CollocationWriter.CONSTRAINT_KEY,
+                createExternalResourceDescription(PrepositionConstraintResource.class),
+                CollocationWriter.PARAM_OUTPUT_PATH, output);
+
+        pipeline.add(desc);
+        pipeline.run(UIMAUtils.createTestReader());
+        Multiset<String> ms = ReadMultisets.parseMultiset(output.toURI().toURL());
+        assertThat(ms.count("of the"), is(67));
+        assertThat(ms.count("in the"), is(41));
+    }
+
+    @Test
+    public void testProcessHead() throws ResourceInitializationException,
+    UIMAException, IOException {
+        AnalysisEngineDescription desc = createPrimitiveDescription(
+                CollocationWriter.class,
+                CollocationWriter.PARAM_N, 1,
+                CollocationWriter.PARAM_INCLUDE_TAIL, false,
+                CollocationWriter.CONSTRAINT_KEY,
+                createExternalResourceDescription(PrepositionConstraintResource.class),
+                CollocationWriter.PARAM_OUTPUT_PATH, output);
+
+        pipeline.add(desc);
+        pipeline.run(UIMAUtils.createTestReader());
+        Multiset<String> ms = ReadMultisets.parseMultiset(output.toURI().toURL());
+        assertThat(ms.count("number of"), is(4));
+        assertThat(ms.count("one of"), is(4));
     }
 }

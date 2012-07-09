@@ -46,11 +46,6 @@ import org.uimafit.factory.JCasFactory;
  * This class provides convenience methods to add steps from engines, engine
  * descriptions and engine components dynamically.
  * </p>
- * <p>
- * You can add as many steps as you like, however, you should not remove
- * any steps from this pipeline, because the persistence mechanism might then
- * fail.
- * <p>
  * An example scenario might look like this:
  * <pre>
  * JCas jCas = new JCasFactory.createJCas();
@@ -71,16 +66,10 @@ public class Pipeline extends ForwardingList<AnalysisEngine> {
     private List<AnalysisEngine> steps;
 
     /**
-     * The index of the steps which should survive a reset.
-     */
-    private List<Integer> persistent;
-
-    /**
      * Creates a new pipeline.
      */
     public Pipeline() {
         steps = Lists.newArrayList();
-        persistent = Lists.newArrayList();
     }
 
     /**
@@ -113,53 +102,6 @@ public class Pipeline extends ForwardingList<AnalysisEngine> {
             throws ResourceInitializationException {
 
         return add((AnalysisEngineDescription) createPrimitiveDescription(step));
-    }
-
-    /**
-     * @return the indices of persistent steps
-     */
-    public List<Integer> getPersistent() {
-        return persistent;
-    }
-
-    /**
-     * @param persistent the indices of persistent steps
-     */
-    public void setPersistent(final List<Integer> persistent) {
-        this.persistent = persistent;
-    }
-
-    /**
-     * Marks the step with index {@code index} as persistent.
-     *
-     * @param index the index
-     */
-    public void markPersistent(final int index) {
-        persistent.add(index);
-    }
-
-    /**
-     * Marks the most recently added step as persistent.
-     */
-    public void markPersistent() {
-        persistent.add(steps.size() - 1);
-    }
-
-    /**
-     * Resets this pipeline.
-     *
-     * <p>
-     * All persistent steps will survive the reset.
-     * </p>
-     */
-    public void reset() {
-        List<AnalysisEngine> newlist = Lists.newArrayList();
-
-        for (Integer index : persistent) {
-            newlist.add(steps.get(index.intValue()));
-        }
-
-        steps = newlist;
     }
 
     /**

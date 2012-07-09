@@ -19,38 +19,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.fhirschmann.clozegen.lib.util;
+package com.github.fhirschmann.clozegen;
 
-import org.apache.uima.UIMAException;
-import org.apache.uima.jcas.JCas;
-import org.uimafit.factory.JCasFactory;
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.junit.Test;
+
+import com.github.fhirschmann.clozegen.lib.examples.ConstraintExample;
+import com.github.fhirschmann.clozegen.lib.examples.StupidArticleExample;
 
 /**
- * Additional utility functions for {@link JCas}.
+ * These test just make sure the examples run without errors.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public final class JCasFactory2 {
-    /**
-     * Utility class.
-     */
-    private JCasFactory2() {
-    }
-
-    /**
-     * Creates a new JCas with the given {@code text} in the given {@code language}.
-     *
-     * @param text the text of the document
-     * @param language the language of the document
-     * @return a new JCas
-     * @throws UIMAException on errors during JCas creation.
-     */
-    public static JCas createTestJCas(final String text, final String language)
-            throws UIMAException {
-        JCas jcas = JCasFactory.createJCas();
-        jcas.setDocumentText(checkNotNull(text));
-        jcas.setDocumentLanguage(checkNotNull(language));
-        return jcas;
+public class ExampleTest {
+    @Test
+    public void testExamples() throws Exception {
+        ConstraintExample.main(new String[] {});
+        StupidArticleExample.main(new String[] {});
     }
 }

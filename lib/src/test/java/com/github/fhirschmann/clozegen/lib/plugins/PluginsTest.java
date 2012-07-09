@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * The MIT License
+ *
+ * Copyright 2012 Fabian Hirschmann <fabian@hirschm.net>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,35 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.fhirschmann.clozegen.lib.util;
+package com.github.fhirschmann.clozegen.lib.plugins;
 
-import java.net.URL;
-import static com.google.common.base.Preconditions.checkArgument;
+import org.junit.AfterClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 /**
- * Additional utilities dealing with Resources.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public final class Resources2 {
-    /**
-     * Utility class.
-     */
-    private Resources2() {
-    }
-
-    /**
-     * Returns a {@code URL} pointing to {@code resourceName} if the resource is found in
-     * the class path. {@code Resources.class.getClassLoader()} is used to locate the
-     * resource.
-     *
-     * @param resourceName the resource in question
-     * @return the url of the resource
-     */
-    public static URL getResource(final String resourceName) {
-        URL url = Thread.currentThread().getContextClassLoader().
-                getResource(resourceName);
-        checkArgument(url != null, "resource %s not found.", resourceName);
-        return url;
+public class PluginsTest {
+    @Test
+    public void testLoad() {
+        Plugins.load();
     }
 }

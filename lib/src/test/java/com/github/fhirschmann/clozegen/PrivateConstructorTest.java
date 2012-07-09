@@ -33,11 +33,8 @@ import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.plugins.Plugins;
 import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
-import com.github.fhirschmann.clozegen.lib.util.JCasFactory2;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
-import com.github.fhirschmann.clozegen.lib.util.Preconditions2;
-import com.github.fhirschmann.clozegen.lib.util.Resources2;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.collect.Sets;
 
@@ -60,9 +57,6 @@ public class PrivateConstructorTest {
         set.add(PipelineFactory.class);
         set.add(RegisterFactory.class);
         set.add(IntermediateFormat.class);
-        set.add(JCasFactory2.class);
-        set.add(Preconditions2.class);
-        set.add(Resources2.class);
         set.add(Plugins.class);
 
         for (Class<? extends Object> clazz : set) {

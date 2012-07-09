@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * The MIT License
+ *
+ * Copyright 2012 Fabian Hirschmann <fabian@hirschm.net>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,36 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.fhirschmann.clozegen.lib.util;
+package com.github.fhirschmann.clozegen.lib.functions;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.common.base.Function;
+import org.junit.AfterClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.BeforeClass;
+import static org.hamcrest.CoreMatchers.*;
 
 /**
- * Additional preconditions.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public final class Preconditions2 {
-    /**
-     * Checks if a file is exists and is a file.
-     *
-     * @param url the url to check
-     * @return the input url
-     * @throws URISyntaxException on errors during URI conversion
-     * @throws IOException on file errors
-     */
-    public static URL checkFile(final URL url) throws URISyntaxException, IOException {
-        File file = new File(checkNotNull(url).toURI());
-        if (!file.exists()) {
-            throw new IOException("File does not exist: " + file.getAbsolutePath());
-        }
-        if (!file.isFile()) {
-            throw new IOException("Not a file: " + file.getAbsolutePath());
-        }
-        return url;
+public class LowerCaseFunctionTest {
+    @Test
+    public void testApply() {
+        Function<String, String> lc = new LowerCaseFunction();
+        assertThat(lc.apply("Foo"), is("foo"));
     }
 }

@@ -127,6 +127,6 @@ public final class ConstraintExample {
         pipeline.add(example2());
         pipeline.add(example3());
         pipeline.add(DebugWriter.class);
-        pipeline.run(UIMAUtils.createJCas("He studies at the university.", "en"));
+        pipeline.run("He studies at the university.", "en");
     }
 }
