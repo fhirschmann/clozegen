@@ -21,19 +21,23 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import javax.annotation.Nullable;
+
+import org.apache.uima.analysis_component.AnalysisComponent;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.resource.ResourceInitializationException;
+
 import com.github.fhirschmann.clozegen.lib.register.api.RegisterEntry;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Lists;
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Pattern;
-import org.apache.uima.analysis_component.AnalysisComponent;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.resource.ResourceInitializationException;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static com.google.common.base.Preconditions.checkArgument;
-import javax.annotation.Nullable;
 
 /**
  * Represents an entry of a {@link DescriptionRegister}.

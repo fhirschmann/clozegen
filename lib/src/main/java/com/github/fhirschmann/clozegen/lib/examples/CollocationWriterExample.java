@@ -21,16 +21,19 @@
  */
 package com.github.fhirschmann.clozegen.lib.examples;
 
-import com.github.fhirschmann.clozegen.lib.components.CollocationWriter;
-import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
-import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
-import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.uimafit.factory.CollectionReaderFactory;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
+
+import com.github.fhirschmann.clozegen.lib.components.CollocationWriter;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
+import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+
+import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
+import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
 
 /**
  * This example demonstrates the usage of {@link CollocationWriterExample}.

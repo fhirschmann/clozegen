@@ -21,8 +21,9 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints.api;
 
-import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import org.uimafit.component.Resource_ImplBase;
+
+import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 
 /**
  * A constraint.

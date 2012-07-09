@@ -21,23 +21,25 @@
  */
 package com.github.fhirschmann.clozegen.lib.components;
 
-import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
-import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
-import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
-import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
-import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.collect.Multiset;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
+
 import java.io.File;
 import java.io.IOException;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Before;
 import org.junit.Test;
-import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+
+import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
+import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
+import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.collect.Multiset;
 
 /**
  *

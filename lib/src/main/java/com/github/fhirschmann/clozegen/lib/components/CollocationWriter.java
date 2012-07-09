@@ -21,6 +21,17 @@
  */
 package com.github.fhirschmann.clozegen.lib.components;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import org.apache.uima.UimaContext;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.tcas.Annotation;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.util.Level;
+import org.uimafit.descriptor.ConfigurationParameter;
+
 import com.github.fhirschmann.clozegen.lib.components.api.ConstraintBasedConsumer;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.CoveredTextConstraintResource;
 import com.github.fhirschmann.clozegen.lib.multiset.WriteMultisets;
@@ -28,16 +39,8 @@ import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import org.apache.uima.UimaContext;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Level;
-import org.uimafit.descriptor.ConfigurationParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**

@@ -21,10 +21,12 @@
  */
 package com.github.fhirschmann.clozegen.lib.multiset;
 
-import com.google.common.collect.ImmutableSet;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
-import static org.junit.Assert.*;
 import org.junit.Test;
+
+import com.google.common.collect.ImmutableSet;
 
 /**
  *

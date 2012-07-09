@@ -21,10 +21,14 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
-import com.google.common.collect.Lists;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import com.google.common.collect.Lists;
 
 /**
  *

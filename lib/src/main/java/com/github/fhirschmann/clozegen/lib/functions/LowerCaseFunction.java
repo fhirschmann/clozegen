@@ -21,8 +21,9 @@
  */
 package com.github.fhirschmann.clozegen.lib.functions;
 
-import com.google.common.base.Function;
 import javax.annotation.Nullable;
+
+import com.google.common.base.Function;
 
 /**
  * Transforms a String to lowercase if it isn't {@code null}.

@@ -21,14 +21,17 @@
  */
 package com.github.fhirschmann.clozegen.lib.multiset;
 
-import com.google.common.collect.Multiset;
-import com.google.common.io.Resources;
+import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import com.google.common.collect.Multiset;
+import com.google.common.io.Resources;
 
 /**
  *

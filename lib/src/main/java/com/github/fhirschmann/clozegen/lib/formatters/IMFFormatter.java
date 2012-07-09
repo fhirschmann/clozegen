@@ -21,10 +21,12 @@
  */
 package com.github.fhirschmann.clozegen.lib.formatters;
 
-import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
-import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.component.Resource_ImplBase;
+
+import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
+import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
+import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 
 /**
  * Writes all {@link GapAnnotation}s to a file using the intermediate format.

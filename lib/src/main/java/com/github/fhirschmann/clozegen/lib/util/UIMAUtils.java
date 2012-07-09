@@ -21,6 +21,24 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.uima.UIMAException;
+import org.apache.uima.cas.FSMatchConstraint;
+import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.NonEmptyStringList;
+import org.apache.uima.jcas.tcas.Annotation;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.uimafit.factory.CollectionReaderFactory;
+import org.uimafit.factory.JCasFactory;
+import org.uimafit.util.FSCollectionFactory;
+import org.uimafit.util.JCasUtil;
+
 import com.github.fhirschmann.clozegen.lib.components.api.GapProcessor;
 import com.github.fhirschmann.clozegen.lib.functions.CoveredTextFunction;
 import com.github.fhirschmann.clozegen.lib.functions.EscapeNullFunction;
@@ -31,25 +49,11 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.common.io.Resources;
+
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import org.apache.uima.UIMAException;
-import org.apache.uima.cas.FSMatchConstraint;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.cas.NonEmptyStringList;
-import org.apache.uima.jcas.tcas.Annotation;
-import org.uimafit.factory.JCasFactory;
-import org.uimafit.util.FSCollectionFactory;
-import org.uimafit.util.JCasUtil;
-import static com.google.common.base.Preconditions.checkNotNull;
-import com.google.common.io.Resources;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
-import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.factory.CollectionReaderFactory;
 
 /**
  * Utility functions for UIMA related stuff.

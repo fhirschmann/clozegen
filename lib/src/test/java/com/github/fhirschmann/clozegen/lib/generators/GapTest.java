@@ -21,12 +21,17 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators;
 
-import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
-import com.google.common.collect.Sets;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.matchers.JUnitMatchers.hasItem;
+import static org.junit.matchers.JUnitMatchers.hasItems;
+
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.junit.matchers.JUnitMatchers.*;
+
+import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
+import com.google.common.collect.Sets;
 
 /**
  *

@@ -21,19 +21,20 @@
  */
 package com.github.fhirschmann.clozegen.lib.components;
 
-import com.github.fhirschmann.clozegen.lib.components.api.ConstraintBasedAnnotator;
+import java.util.List;
+
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.tcas.Annotation;
+import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.ExternalResource;
+
 import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
+import com.github.fhirschmann.clozegen.lib.components.api.ConstraintBasedAnnotator;
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.base.Optional;
-import java.util.List;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.ExternalResource;
-import org.uimafit.util.JCasUtil;
 
 /**
  * This annotator annotates words with a {@link GapAnnotation}.

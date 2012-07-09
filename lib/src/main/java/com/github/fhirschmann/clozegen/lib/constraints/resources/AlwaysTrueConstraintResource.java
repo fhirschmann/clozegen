@@ -21,10 +21,11 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
-import com.github.fhirschmann.clozegen.lib.constraints.AlwaysTrueConstraint;
-import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
+
+import com.github.fhirschmann.clozegen.lib.constraints.AlwaysTrueConstraint;
+import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
 
 /**
  * A resource for a constraint which matches everything.

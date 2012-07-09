@@ -22,6 +22,7 @@
 package com.github.fhirschmann.clozegen.lib.constraints;
 
 import java.util.Collection;
+
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.jcas.tcas.Annotation;

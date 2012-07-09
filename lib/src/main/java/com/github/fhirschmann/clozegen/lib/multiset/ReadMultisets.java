@@ -21,16 +21,18 @@
  */
 package com.github.fhirschmann.clozegen.lib.multiset;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.List;
+
 import com.google.common.base.Charsets;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.io.Resources;
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.net.URISyntaxException;
-import java.nio.charset.Charset;
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Utility class for parsing frequencies from plain-text files.

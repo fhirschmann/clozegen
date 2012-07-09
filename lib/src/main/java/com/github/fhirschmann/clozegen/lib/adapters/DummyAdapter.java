@@ -21,12 +21,14 @@
  */
 package com.github.fhirschmann.clozegen.lib.adapters;
 
+import java.util.List;
+
+import org.apache.uima.jcas.tcas.Annotation;
+import org.uimafit.component.Resource_ImplBase;
+
 import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generators.DummyGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
-import java.util.List;
-import org.apache.uima.jcas.tcas.Annotation;
-import org.uimafit.component.Resource_ImplBase;
 
 /**
  * An adapter for {@link DummyGapGenerator}. Please note that

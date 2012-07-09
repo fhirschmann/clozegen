@@ -21,12 +21,13 @@
  */
 package com.github.fhirschmann.clozegen.lib.pipeline;
 
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-//import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
+
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.resource.ResourceInitializationException;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
+
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 /**
  * Utility functions for dealing with pipelines.

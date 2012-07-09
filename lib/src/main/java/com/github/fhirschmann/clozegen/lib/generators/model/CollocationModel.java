@@ -21,14 +21,16 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators.model;
 
+import java.util.Arrays;
+
+import org.javatuples.Triplet;
+
 import com.github.fhirschmann.clozegen.lib.multiset.MapMultiset;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multiset.Entry;
-import java.util.Arrays;
-import org.javatuples.Triplet;
 
 /**
  * Represents a model for the collocation-based gap generator.

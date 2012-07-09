@@ -21,14 +21,16 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.model.MultisetModel;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import static org.hamcrest.CoreMatchers.*;
 
 /**
  *

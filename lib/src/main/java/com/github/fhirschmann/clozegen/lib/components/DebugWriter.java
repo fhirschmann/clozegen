@@ -21,14 +21,17 @@
  */
 package com.github.fhirschmann.clozegen.lib.components;
 
-import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import java.util.Iterator;
+
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.util.FSCollectionFactory;
+
+import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 /**
  * Logs a {@link JCas} (document) by displaying its token's types, names, the text

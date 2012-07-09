@@ -21,10 +21,12 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
-import com.google.common.base.Joiner;
-import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.net.URL;
+
+import com.google.common.base.Joiner;
 
 /**
  * Miscellaneous utility functions.

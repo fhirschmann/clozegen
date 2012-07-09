@@ -21,15 +21,17 @@
  */
 package com.github.fhirschmann.clozegen.lib.formatters;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import org.apache.uima.jcas.JCas;
+import org.uimafit.component.Resource_ImplBase;
+import org.uimafit.util.FSCollectionFactory;
+import org.uimafit.util.JCasUtil;
+
 import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
-import org.apache.uima.jcas.JCas;
-import org.uimafit.component.Resource_ImplBase;
-import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.base.Strings;
-import org.uimafit.util.FSCollectionFactory;
-import org.uimafit.util.JCasUtil;
 
 /**
  * Formats a cloze test as plain text.

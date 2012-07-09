@@ -21,22 +21,24 @@
  */
 package com.github.fhirschmann.clozegen.lib.examples;
 
-import com.github.fhirschmann.clozegen.lib.adapters.DummyAdapter;
-import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
-import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
-import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
-import com.github.fhirschmann.clozegen.lib.components.DebugWriter;
-import com.github.fhirschmann.clozegen.lib.constraints.resources.CoveredTextConstraintResource;
-import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
-import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
-import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.resource.ResourceInitializationException;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
+
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.resource.ResourceInitializationException;
+
+import com.github.fhirschmann.clozegen.lib.adapters.DummyAdapter;
+import com.github.fhirschmann.clozegen.lib.components.DebugWriter;
+import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
+import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.CoveredTextConstraintResource;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
+import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
+import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
+
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * This example shows different ways of using constraints.

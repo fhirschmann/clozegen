@@ -21,10 +21,15 @@
  */
 package com.github.fhirschmann.clozegen.lib.multiset;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+
 import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
-import java.io.*;
 
 /**
  * Utility functions to write {@link Multiset}s.

@@ -21,20 +21,21 @@
  */
 package com.github.fhirschmann.clozegen.lib.imf;
 
-import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
-import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.collect.Sets;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.jcas.JCas;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.matchers.JUnitMatchers.*;
 import org.uimafit.factory.JCasFactory;
 import org.uimafit.util.FSCollectionFactory;
 import org.uimafit.util.JCasUtil;
+
+import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.collect.Sets;
 
 /**
  *

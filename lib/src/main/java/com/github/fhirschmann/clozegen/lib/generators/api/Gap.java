@@ -21,12 +21,14 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators.api;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.Collection;
+import java.util.Set;
+
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Sets;
-import java.util.Set;
-import static com.google.common.base.Preconditions.checkNotNull;
-import java.util.Collection;
 
 /**
  * A gap object contains valid and invalid answers.

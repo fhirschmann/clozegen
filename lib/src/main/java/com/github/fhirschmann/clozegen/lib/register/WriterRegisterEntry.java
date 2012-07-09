@@ -21,11 +21,13 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
-import com.github.fhirschmann.clozegen.lib.components.api.OutputFileWriter;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.ResourceInitializationException;
-import static com.google.common.base.Preconditions.checkNotNull;
+
+import com.github.fhirschmann.clozegen.lib.components.api.OutputFileWriter;
 
 /**
  *

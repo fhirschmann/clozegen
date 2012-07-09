@@ -21,13 +21,16 @@
  */
 package com.github.fhirschmann.clozegen.lib.register.api;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.Collection;
+import java.util.Map;
+
+import com.github.fhirschmann.clozegen.lib.register.DescriptionRegisterEntry;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.ForwardingCollection;
 import com.google.common.collect.Maps;
-import java.util.Collection;
-import java.util.Map;
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Base class for all registers.

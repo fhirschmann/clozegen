@@ -21,14 +21,16 @@
  */
 package com.github.fhirschmann.clozegen.lib.components.api;
 
-import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintProvider;
-import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import java.util.List;
+
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ExternalResource;
+
+import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintProvider;
+import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 
 /**
  * An annotator which calls {@link GapProcessor#process(JCas, List, int)} for each

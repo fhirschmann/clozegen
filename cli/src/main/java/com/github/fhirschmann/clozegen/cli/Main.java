@@ -25,7 +25,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import java.io.File;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -37,7 +36,10 @@ import org.apache.log4j.Logger;
 
 import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
 import com.github.fhirschmann.clozegen.lib.plugins.Plugins;
-import com.github.fhirschmann.clozegen.lib.register.*;
+import com.github.fhirschmann.clozegen.lib.register.AnnotatorRegisterEntry;
+import com.github.fhirschmann.clozegen.lib.register.ReaderRegisterEntry;
+import com.github.fhirschmann.clozegen.lib.register.Registers;
+import com.github.fhirschmann.clozegen.lib.register.WriterRegisterEntry;
 import com.google.common.collect.Maps;
 
 /**

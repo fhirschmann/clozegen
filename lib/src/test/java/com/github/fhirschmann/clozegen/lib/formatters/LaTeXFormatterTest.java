@@ -23,17 +23,16 @@
  */
 package com.github.fhirschmann.clozegen.lib.formatters;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import org.apache.uima.UIMAException;
+import org.apache.uima.jcas.JCas;
+import org.junit.Test;
+
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.collect.Sets;
-import org.apache.uima.UIMAException;
-import org.apache.uima.jcas.JCas;
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.junit.BeforeClass;
-import org.uimafit.factory.JCasFactory;
 
 /**
  *

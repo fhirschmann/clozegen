@@ -21,20 +21,23 @@
  */
 package com.github.fhirschmann.clozegen.lib.imf;
 
-import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
-import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
-import com.google.common.collect.Sets;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.factory.JCasFactory;
 import org.uimafit.util.FSCollectionFactory;
 import org.uimafit.util.JCasUtil;
-import static com.google.common.base.Preconditions.checkNotNull;
+
+import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Sets;
 
 /**
  * Parses and Formats the Intermediate Format.

@@ -21,13 +21,15 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.Collection;
+import java.util.Set;
+
 import com.github.fhirschmann.clozegen.lib.register.api.Register;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-import java.util.Collection;
-import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.Sets;
-import java.util.Set;
 
 /**
  * A register of gap annotators.

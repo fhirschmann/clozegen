@@ -21,11 +21,12 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators.model;
 
+import java.io.IOException;
+import java.net.URL;
+
 import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
-import java.io.IOException;
-import java.net.URL;
 
 /**
  * A simple multiset-based model. The frequencies will be loaded from a file.

@@ -21,14 +21,20 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
-import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
-import com.google.common.collect.Sets;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.matchers.JUnitMatchers.hasItem;
+import static org.junit.matchers.JUnitMatchers.hasItems;
+
 import java.util.Collections;
+
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.matchers.JUnitMatchers.*;
+
+import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
+import com.google.common.collect.Sets;
 
 /**
  *

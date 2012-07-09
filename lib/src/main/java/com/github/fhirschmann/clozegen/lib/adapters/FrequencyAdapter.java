@@ -21,13 +21,15 @@
  */
 package com.github.fhirschmann.clozegen.lib.adapters;
 
+import java.util.List;
+
+import org.apache.uima.jcas.tcas.Annotation;
+
 import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.adapters.api.URLBasedModelAdapter;
 import com.github.fhirschmann.clozegen.lib.generators.FrequencyGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.model.MultisetModel;
-import java.util.List;
-import org.apache.uima.jcas.tcas.Annotation;
 
 /**
  * An adapter for {@link FrequencyGapGenerator}.

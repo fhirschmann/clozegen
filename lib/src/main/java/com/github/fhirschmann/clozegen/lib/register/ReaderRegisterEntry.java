@@ -21,19 +21,23 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
+
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.resource.ResourceInitializationException;
+
 import com.github.fhirschmann.clozegen.lib.register.api.RegisterEntry;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
-import org.apache.uima.collection.CollectionReader;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
-import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.Lists;
-import java.net.URL;
-import java.util.Collections;
-import java.util.List;
-import org.apache.uima.resource.ResourceInitializationException;
+
+import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 
 /**
  * An entry of {@link ReaderRegister}.

@@ -21,12 +21,13 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
-import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.descriptor.ConfigurationParameter;
+
+import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
 
 
 /**

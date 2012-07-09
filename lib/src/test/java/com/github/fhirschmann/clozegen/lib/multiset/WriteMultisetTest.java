@@ -21,14 +21,17 @@
  */
 package com.github.fhirschmann.clozegen.lib.multiset;
 
-import com.google.common.collect.LinkedHashMultiset;
-import com.google.common.collect.Multiset;
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import com.google.common.collect.LinkedHashMultiset;
+import com.google.common.collect.Multiset;
 
 /**
  *

@@ -21,6 +21,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 import static com.google.common.base.Objects.firstNonNull;
+
 import org.apache.uima.resource.ResourceInitializationException;
 
 /**

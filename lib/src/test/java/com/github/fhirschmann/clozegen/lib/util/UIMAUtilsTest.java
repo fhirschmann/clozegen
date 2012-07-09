@@ -21,21 +21,28 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.matchers.JUnitMatchers.hasItems;
+
+import java.util.Collection;
+import java.util.List;
+
+import org.apache.uima.UIMAException;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.tcas.Annotation;
+import org.junit.Before;
+import org.junit.Test;
+import org.uimafit.factory.JCasFactory;
+import org.uimafit.util.FSCollectionFactory;
+
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import java.util.Collection;
-import java.util.List;
-import org.apache.uima.UIMAException;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
-import org.junit.*;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.matchers.JUnitMatchers.*;
-import org.uimafit.factory.JCasFactory;
-import org.uimafit.util.FSCollectionFactory;
 
 /**
  *

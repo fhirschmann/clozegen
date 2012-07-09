@@ -21,11 +21,16 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators;
 
-import com.github.fhirschmann.clozegen.lib.generators.api.CollocationModelBasedGapGenerator;
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.List;
+import java.util.Set;
+
+import org.javatuples.Triplet;
+
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.model.CollocationModel;
-import com.github.fhirschmann.clozegen.lib.generators.api.ListInputGapGenerator;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
@@ -36,10 +41,6 @@ import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multiset.Entry;
 import com.google.common.collect.Sets;
-import java.util.List;
-import java.util.Set;
-import static com.google.common.base.Preconditions.checkNotNull;
-import org.javatuples.Triplet;
 
 /**
  * Generates gaps based on collocations.

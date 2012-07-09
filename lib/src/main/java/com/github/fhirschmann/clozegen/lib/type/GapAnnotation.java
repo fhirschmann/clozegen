@@ -24,11 +24,10 @@
 /* First created by JCasGen Mon May 07 16:36:58 CEST 2012 */
 package com.github.fhirschmann.clozegen.lib.type;
 
-import org.apache.uima.jcas.JCas; 
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
-import org.apache.uima.jcas.cas.TOP_Type;
-
 import org.apache.uima.jcas.cas.NonEmptyStringList;
+import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.tcas.Annotation;
 
 

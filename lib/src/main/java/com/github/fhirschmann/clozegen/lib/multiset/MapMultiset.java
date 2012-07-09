@@ -21,9 +21,16 @@
  */
 package com.github.fhirschmann.clozegen.lib.multiset;
 
-import java.util.Map;
 import static com.google.common.base.Preconditions.checkNotNull;
-import com.google.common.collect.*;
+
+import java.util.Map;
+
+import com.google.common.collect.ForwardingMap;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.ImmutableMultiset;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multiset;
+import com.google.common.collect.Multisets;
 
 /**
  * Object which maps a key to a {@link Multiset}. Additionally, it provides

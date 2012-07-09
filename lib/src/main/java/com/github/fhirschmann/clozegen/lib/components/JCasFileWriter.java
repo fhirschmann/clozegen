@@ -21,17 +21,19 @@
  */
 package com.github.fhirschmann.clozegen.lib.components;
 
-import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
-import com.github.fhirschmann.clozegen.lib.components.api.OutputFileWriter;
-import com.google.common.io.Closeables;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.descriptor.ExternalResource;
+
+import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
+import com.github.fhirschmann.clozegen.lib.components.api.OutputFileWriter;
+import com.google.common.io.Closeables;
 
 /**
  * Writes a {@link JCas} to an output file using the a given

@@ -21,15 +21,17 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints;
 
-import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
-import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
-import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.collect.Sets;
+import static org.junit.Assert.assertTrue;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
+import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.collect.Sets;
 
 /**
  *

@@ -22,6 +22,7 @@
 package com.github.fhirschmann.clozegen.lib.adapters.api;
 
 import java.util.Map;
+
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
 import org.uimafit.component.Resource_ImplBase;

@@ -21,13 +21,14 @@
  */
 package com.github.fhirschmann.clozegen.lib.components.api;
 
-import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintProvider;
-import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.descriptor.ExternalResource;
+
+import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintProvider;
+import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 
 /**
  * A consumer which calls {@link GapProcessor#process(JCas, List, int)} for each

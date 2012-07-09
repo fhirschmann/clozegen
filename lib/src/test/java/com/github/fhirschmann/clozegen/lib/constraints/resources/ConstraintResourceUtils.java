@@ -23,15 +23,15 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
-import com.github.fhirschmann.clozegen.lib.adapters.DummyAdapter;
-import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.Resource;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.Resource_ImplBase;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+
+import com.github.fhirschmann.clozegen.lib.adapters.DummyAdapter;
+import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 
 /**
  *

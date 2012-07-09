@@ -21,10 +21,12 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints.api;
 
-import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
+
+import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
+
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 
 /**
  * Implementing classes will provide a constraint.

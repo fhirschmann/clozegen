@@ -21,11 +21,13 @@
  */
 package com.github.fhirschmann.clozegen.lib.adapters.api;
 
+import java.io.IOException;
+
+import org.uimafit.descriptor.ConfigurationParameter;
+
 import com.github.fhirschmann.clozegen.lib.generators.model.URLBasedModel;
 import com.google.common.io.Resources;
 import com.google.common.reflect.TypeToken;
-import java.io.IOException;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 /**
  * Extending classes will have to declare a model which extends {@link URLBasedModel} of

@@ -21,9 +21,16 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
-import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
+import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
+
+import java.util.logging.Logger;
+
+import org.apache.uima.resource.ResourceInitializationException;
+import org.uimafit.component.Resource_ImplBase;
+
 import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
 import com.github.fhirschmann.clozegen.lib.adapters.FrequencyAdapter;
+import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.components.JCasFileWriter;
 import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
@@ -31,11 +38,8 @@ import com.github.fhirschmann.clozegen.lib.formatters.IMFFormatter;
 import com.github.fhirschmann.clozegen.lib.formatters.LaTeXFormatter;
 import com.github.fhirschmann.clozegen.lib.formatters.PlainTextFormatter;
 import com.github.fhirschmann.clozegen.lib.reader.IntermediateFormatReader;
+
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import java.util.logging.Logger;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.Resource_ImplBase;
-import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 /**
  *

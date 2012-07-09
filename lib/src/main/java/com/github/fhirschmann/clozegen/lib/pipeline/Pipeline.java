@@ -21,12 +21,12 @@
  */
 package com.github.fhirschmann.clozegen.lib.pipeline;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
-import com.google.common.collect.ForwardingList;
-import com.google.common.collect.Lists;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.uimafit.pipeline.SimplePipeline.runPipeline;
+
 import java.io.IOException;
 import java.util.List;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -35,9 +35,12 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.factory.AnalysisEngineFactory;
-import static org.uimafit.pipeline.SimplePipeline.runPipeline;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import org.uimafit.factory.JCasFactory;
+
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.collect.ForwardingList;
+import com.google.common.collect.Lists;
 
 /**
  * A pipeline is a chain of AnalysisEngines arranged such that each step will be run

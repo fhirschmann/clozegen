@@ -21,13 +21,14 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
-import com.github.fhirschmann.clozegen.lib.constraints.CoveredTextConstraint;
-import com.google.common.base.Splitter;
-import com.google.common.collect.Sets;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.descriptor.ConfigurationParameter;
+
+import com.github.fhirschmann.clozegen.lib.constraints.CoveredTextConstraint;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Sets;
 
 /**
  * This is an extension to {@link TypeConstraintResource} which additionally matches

@@ -21,6 +21,21 @@
  */
 package com.github.fhirschmann.clozegen.lib;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.uima.UIMAException;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.github.fhirschmann.clozegen.lib.adapters.DummyAdapter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
@@ -33,19 +48,8 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import org.apache.uima.UIMAException;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.junit.Before;
-import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 /**
  *

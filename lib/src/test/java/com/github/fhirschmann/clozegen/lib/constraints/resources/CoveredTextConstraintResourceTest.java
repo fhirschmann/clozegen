@@ -23,32 +23,25 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
-import com.github.fhirschmann.clozegen.lib.adapters.DummyAdapter;
-import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.apache.uima.UIMAException;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.jcas.JCas;
+import org.junit.Test;
+import org.uimafit.util.JCasUtil;
+
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import org.apache.uima.UIMAException;
-import org.apache.uima.cas.FSMatchConstraint;
-import org.apache.uima.jcas.JCas;
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.junit.BeforeClass;
-import org.uimafit.util.JCasUtil;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.resource.Resource;
-import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 /**
  *

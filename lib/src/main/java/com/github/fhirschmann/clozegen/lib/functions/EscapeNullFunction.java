@@ -21,9 +21,11 @@
  */
 package com.github.fhirschmann.clozegen.lib.functions;
 
-import com.google.common.base.Function;
-import javax.annotation.Nullable;
 import static com.google.common.base.Objects.firstNonNull;
+
+import javax.annotation.Nullable;
+
+import com.google.common.base.Function;
 
 /**
  * Replaces {@code null} with {@code "NULL"}.

@@ -21,6 +21,8 @@
  */
 package com.github.fhirschmann.clozegen.lib.plugins.api;
 
+import com.github.fhirschmann.clozegen.lib.register.Registers;
+
 /**
  * Implementing classes can add entries to the registers in {@link Registers}.
  *

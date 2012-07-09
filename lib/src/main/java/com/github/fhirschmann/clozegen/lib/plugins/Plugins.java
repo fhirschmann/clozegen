@@ -21,9 +21,10 @@
  */
 package com.github.fhirschmann.clozegen.lib.plugins;
 
-import com.github.fhirschmann.clozegen.lib.plugins.api.Plugin;
 import java.util.Iterator;
 import java.util.ServiceLoader;
+
+import com.github.fhirschmann.clozegen.lib.plugins.api.Plugin;
 
 /**
  * Utility methods for dealing with plugins.

@@ -21,12 +21,14 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
-import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 import org.apache.uima.cas.ConstraintFactory;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.JCas;
+
+import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
+
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
 
 /**
  * A constraint which matches articles.

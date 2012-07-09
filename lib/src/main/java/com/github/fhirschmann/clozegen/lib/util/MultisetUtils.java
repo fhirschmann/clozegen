@@ -21,9 +21,15 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
-import com.google.common.collect.*;
 import java.util.Iterator;
 import java.util.List;
+
+import com.google.common.collect.ImmutableMultiset;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.LinkedHashMultiset;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multiset;
+import com.google.common.collect.Multisets;
 
 /**
  * Utility functions for Multisets.

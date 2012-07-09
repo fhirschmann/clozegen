@@ -21,9 +21,10 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
-import com.github.fhirschmann.clozegen.lib.generators.api.MultisetModelBasedGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.model.MultisetModel;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
 import com.google.common.base.Optional;
@@ -31,7 +32,6 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multiset.Entry;
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Suggests distractors with a frequency similar to that of the input word.

@@ -23,14 +23,16 @@
  */
 package com.github.fhirschmann.clozegen.lib.formatters;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import org.apache.uima.jcas.JCas;
+import org.uimafit.component.Resource_ImplBase;
+import org.uimafit.util.FSCollectionFactory;
+import org.uimafit.util.JCasUtil;
+
 import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.google.common.base.Joiner;
-import org.apache.uima.jcas.JCas;
-import org.uimafit.component.Resource_ImplBase;
-import org.uimafit.util.JCasUtil;
-import static com.google.common.base.Preconditions.checkNotNull;
-import org.uimafit.util.FSCollectionFactory;
 
 /**
  * Formats a {@link JCa} as LaTeX.

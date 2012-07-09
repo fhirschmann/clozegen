@@ -21,9 +21,11 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
-import com.google.common.collect.Sets;
 import java.util.Set;
+
 import org.apache.uima.analysis_component.AnalysisComponent;
+
+import com.google.common.collect.Sets;
 
 /**
  * An entry of an {@link AnnotatorRegister}.

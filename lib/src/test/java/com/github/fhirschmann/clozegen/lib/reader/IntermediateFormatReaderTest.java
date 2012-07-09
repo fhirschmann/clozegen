@@ -23,20 +23,19 @@
  */
 package com.github.fhirschmann.clozegen.lib.reader;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.jcas.JCas;
+import org.junit.Test;
+import org.uimafit.factory.JCasFactory;
+
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.register.ReaderRegisterEntry;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.io.Resources;
-import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.jcas.JCas;
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.uimafit.factory.JCasFactory;
-import static org.hamcrest.CoreMatchers.*;
 
 /**
  *

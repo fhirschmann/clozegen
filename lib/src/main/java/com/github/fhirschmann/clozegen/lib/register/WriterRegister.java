@@ -21,12 +21,15 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
+import java.net.URL;
+
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.resource.ResourceInitializationException;
+
 import com.github.fhirschmann.clozegen.lib.register.api.Register;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import static com.google.common.base.Preconditions.checkArgument;
-import org.apache.uima.resource.ResourceInitializationException;
-import java.net.URL;
 
 /**
  * A register of mappings from file extensions to {@link WriterRegisterEntry}.
