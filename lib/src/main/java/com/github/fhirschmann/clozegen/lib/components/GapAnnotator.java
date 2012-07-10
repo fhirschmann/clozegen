@@ -34,6 +34,8 @@ import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.base.Optional;
 
 /**
@@ -93,5 +95,13 @@ public class GapAnnotator extends ConstraintBasedAnnotator {
                 getLogger().warn("Similar gap not added: " + gap.get().toString());
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("answerCount", answerCount);
+        str.add("adapter", adapter.toString());
+        return str.toString();
     }
 }

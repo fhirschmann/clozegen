@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.net.URL;
 
 import com.github.fhirschmann.clozegen.lib.multiset.ReadMultisets;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
@@ -69,5 +71,12 @@ public class MultisetModel implements URLBasedModel {
      */
     public void setMultiset(final Multiset<String> multiset) {
         this.multiset = multiset;
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("multiset", multiset.toString());
+        return str.toString();
     }
 }

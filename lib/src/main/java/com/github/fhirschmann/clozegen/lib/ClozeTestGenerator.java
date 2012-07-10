@@ -46,6 +46,8 @@ import com.github.fhirschmann.clozegen.lib.register.AnnotatorRegister;
 import com.github.fhirschmann.clozegen.lib.register.Registers;
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.io.Files;
 
 /**
@@ -260,5 +262,13 @@ public class ClozeTestGenerator {
      */
     public void setPipeline(final Pipeline pipeline) {
         this.pipeline = pipeline;
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("pipeline", pipeline.toString());
+
+        return str.toString();
     }
 }

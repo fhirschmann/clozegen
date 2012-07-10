@@ -39,6 +39,8 @@ import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.ibm.icu.text.CharsetDetector;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -99,5 +101,12 @@ public class IntermediateFormatReader extends TextReader {
         } finally {
             closeQuietly(is);
         }
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("encoding", encoding);
+        return str.toString();
     }
 }

@@ -39,6 +39,8 @@ import com.github.fhirschmann.clozegen.lib.multiset.WriteMultisets;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.base.Function;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
@@ -205,5 +207,17 @@ public class NGramWriter extends ConstraintBasedConsumer {
         } catch (IOException ex) {
             getContext().getLogger().log(Level.SEVERE, ex.getMessage());
         }
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("path", path);
+        str.add("includeHead", includeHead);
+        str.add("includeTail", includeTail);
+        str.add("lowerCase", lowerCase);
+        str.add("minFrequency", minFrequency);
+        str.add("n", n);
+        return str.toString();
     }
 }

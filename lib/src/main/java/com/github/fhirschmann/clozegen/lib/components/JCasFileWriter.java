@@ -33,6 +33,8 @@ import org.uimafit.descriptor.ExternalResource;
 
 import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
 import com.github.fhirschmann.clozegen.lib.components.api.OutputFileWriter;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.io.Closeables;
 
 /**
@@ -83,5 +85,13 @@ public class JCasFileWriter extends OutputFileWriter {
     @Override
     public void collectionProcessComplete() {
         Closeables.closeQuietly(outputBuffer);
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("outputFile", outputFile);
+        str.add("formatter", formatter.toString());
+        return str.toString();
     }
 }
