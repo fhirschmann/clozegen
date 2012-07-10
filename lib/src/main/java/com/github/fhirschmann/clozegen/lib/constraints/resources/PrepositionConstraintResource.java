@@ -27,11 +27,16 @@ import org.apache.uima.cas.FSTypeConstraint;
 import org.apache.uima.jcas.JCas;
 
 import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
 
 /**
  * A constraint which matches prepositions.
+ *
+ * Please note that {@link TypeConstraintResource} could also be used
+ * for this task.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -42,5 +47,11 @@ public class PrepositionConstraintResource extends ConstraintResource {
                 createTypeConstraint();
         cons.add(PP.class.getName());
         return cons;
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        return str.toString();
     }
 }

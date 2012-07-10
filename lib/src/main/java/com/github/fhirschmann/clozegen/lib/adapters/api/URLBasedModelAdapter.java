@@ -26,6 +26,8 @@ import java.io.IOException;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import com.github.fhirschmann.clozegen.lib.generators.model.URLBasedModel;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.io.Resources;
 import com.google.common.reflect.TypeToken;
 
@@ -73,5 +75,12 @@ public class URLBasedModelAdapter<M extends URLBasedModel> extends AbstractResou
             getLogger().error(ex);
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("model", model.toString());
+        return str.toString();
     }
 }

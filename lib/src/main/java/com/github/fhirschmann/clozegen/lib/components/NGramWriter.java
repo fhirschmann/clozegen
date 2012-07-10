@@ -49,6 +49,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import java.util.Collection;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * Extracts n-grams and writes them to a file.
  *
@@ -175,6 +177,9 @@ public class NGramWriter extends ConstraintBasedConsumer {
             throws ResourceInitializationException {
         super.initialize(context);
         ms = LinkedHashMultiset.create();
+        checkArgument(includeHead || includeTail,
+                "includeHead and includeTail cannot both be false. Use N=0 instead.");
+        checkArgument(n >= 0, "N must be greater than or equal to 0.");
     }
 
     @Override

@@ -21,6 +21,8 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import java.util.Collection;
 
 import org.apache.uima.cas.FSMatchConstraint;
@@ -55,5 +57,12 @@ public class CoveredTextConstraint implements FSMatchConstraint {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("matchText", matchText.toString());
+        return str.toString();
     }
 }

@@ -21,6 +21,8 @@
  */
 package com.github.fhirschmann.clozegen.lib.components.api;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
@@ -38,4 +40,11 @@ public abstract class OutputFileWriter extends JCasConsumer_ImplBase {
     public static final String PARAM_OUTPUT_FILE = "OutputFile";
     @ConfigurationParameter(name = PARAM_OUTPUT_FILE, mandatory = true)
     protected String outputFile;
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("outputFile", outputFile.toString());
+        return str.toString();
+    }
 }

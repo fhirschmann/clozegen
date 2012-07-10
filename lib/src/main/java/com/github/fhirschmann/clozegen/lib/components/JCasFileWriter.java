@@ -90,7 +90,7 @@ public class JCasFileWriter extends OutputFileWriter {
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("outputFile", outputFile);
+        str.add("outputFile", outputFile.toString());
         str.add("formatter", formatter.toString());
         return str.toString();
     }

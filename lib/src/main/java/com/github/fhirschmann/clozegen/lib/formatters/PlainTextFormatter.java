@@ -31,6 +31,8 @@ import org.uimafit.util.JCasUtil;
 import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.base.Strings;
 
 /**
@@ -55,5 +57,11 @@ public class PlainTextFormatter extends Resource_ImplBase implements JCasFormatt
         sb.append(text.substring(position));
 
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        return str.toString();
     }
 }

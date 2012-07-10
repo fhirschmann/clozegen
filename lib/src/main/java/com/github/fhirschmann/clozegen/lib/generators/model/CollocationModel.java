@@ -58,10 +58,18 @@ import com.google.common.collect.Multiset.Entry;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class CollocationModel extends MultisetModel {
-    /** The head ngrams. */
+    /**
+     * The head ngrams.
+     *
+     * Please see the documentation above.
+     */
     private MapMultiset<String, String> heads;
 
-    /** The tail ngrams. */
+    /**
+     * The tail ngrams.
+     *
+     * Please see the documentation above.
+     */
     private MapMultiset<String, String> tails;
 
     /**

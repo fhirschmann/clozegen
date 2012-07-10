@@ -30,6 +30,8 @@ import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.util.FSCollectionFactory;
 
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
@@ -71,5 +73,11 @@ public class DebugWriter extends JCasConsumer_ImplBase {
             }
         }
         getLogger().info(sb.toString());
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        return str.toString();
     }
 }

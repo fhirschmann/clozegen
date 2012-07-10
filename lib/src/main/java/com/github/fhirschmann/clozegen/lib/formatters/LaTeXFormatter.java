@@ -31,9 +31,12 @@ import org.uimafit.util.JCasUtil;
 import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.google.common.base.Joiner;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 
 /**
- * Formats a {@link JCa} as LaTeX.
+ * Formats a {@link JCas} as LaTeX. Please see the on-line documentation
+ * for more details.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
@@ -57,5 +60,11 @@ public class LaTeXFormatter extends Resource_ImplBase implements JCasFormatter {
         sb.append(text.substring(position));
 
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        return str.toString();
     }
 }

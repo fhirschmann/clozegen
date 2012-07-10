@@ -27,6 +27,8 @@ import org.uimafit.component.Resource_ImplBase;
 import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
 import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 
 /**
  * Writes all {@link GapAnnotation}s to a file using the intermediate format.
@@ -37,5 +39,11 @@ public class IMFFormatter extends Resource_ImplBase implements JCasFormatter {
     @Override
     public String format(final JCas jcas) {
         return IntermediateFormat.format(jcas);
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        return str.toString();
     }
 }

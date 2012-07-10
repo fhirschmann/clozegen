@@ -27,6 +27,8 @@ import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.model.MultisetModel;
 import com.github.fhirschmann.clozegen.lib.util.MultisetUtils;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.base.Optional;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
@@ -83,5 +85,13 @@ public class FrequencyGapGenerator implements GapGenerator {
             // we have no knowledge of the word in question
             return Optional.absent();
         }
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("token", token.toString());
+        str.add("model", model.toString());
+        return str.toString();
     }
 }

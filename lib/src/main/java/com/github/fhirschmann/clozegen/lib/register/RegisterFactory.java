@@ -48,7 +48,9 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 public final class RegisterFactory {
     public static final Logger LOGGER = Logger.getLogger(RegisterFactory.class.getName());
 
-    /** Utility class cannot be called. */
+    /**
+     * Utility class cannot be called.
+     */
     private RegisterFactory() {
     }
 

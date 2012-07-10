@@ -23,6 +23,7 @@ package com.github.fhirschmann.clozegen.lib;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 import java.io.File;
@@ -115,5 +116,11 @@ public class ClozeTestGeneratorTest {
         for (int i = 0; i < actual.size(); i++) {
             assertThat(actual.get(i), is(expected.get(i)));
         }
+    }
+
+    @Test
+    public void testToString() throws ResourceInitializationException {
+        gen.activate("test", 1);
+        assertThat(gen.toString(), containsString("GapAnnotator"));
     }
 }

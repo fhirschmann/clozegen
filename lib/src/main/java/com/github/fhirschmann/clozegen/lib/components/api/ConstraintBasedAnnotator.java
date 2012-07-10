@@ -31,6 +31,8 @@ import org.uimafit.descriptor.ExternalResource;
 
 import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintProvider;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 
 /**
  * An annotator which calls {@link GapProcessor#process(JCas, List, int)} for each
@@ -65,5 +67,12 @@ public abstract class ConstraintBasedAnnotator extends
     @Override
     public FSMatchConstraint getConstraint(final JCas jcas) {
         return constraint.getConstraint(jcas);
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("constraint", constraint.toString());
+        return str.toString();
     }
 }

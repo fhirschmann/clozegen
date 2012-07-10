@@ -26,6 +26,8 @@ import org.apache.uima.jcas.JCas;
 
 import com.github.fhirschmann.clozegen.lib.constraints.AlwaysTrueConstraint;
 import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 
 /**
  * A resource for a constraint which matches everything.
@@ -36,5 +38,11 @@ public class AlwaysTrueConstraintResource extends ConstraintResource {
     @Override
     public FSMatchConstraint getConstraint(final JCas jcas) {
         return new AlwaysTrueConstraint();
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        return str.toString();
     }
 }

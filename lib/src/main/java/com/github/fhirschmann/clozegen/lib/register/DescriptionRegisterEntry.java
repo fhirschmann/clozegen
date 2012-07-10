@@ -47,19 +47,36 @@ import com.google.common.collect.Lists;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class DescriptionRegisterEntry implements RegisterEntry {
-    /** The name of this entry. */
+    /**
+     * The name of this entry.
+     *
+     * This is used to display its name in the User Interfaces.
+     */
     private String name;
 
-    /** The unique identifier of this entry. */
+    /**
+     * The unique identifier of this entry.
+     *
+     * This is also used the command line interface to activate an entry.
+     */
     private String identifier;
 
-    /** The component class (used for creating the description). */
+    /**
+     * The component class.
+     *
+     * This is used for creating the description.
+     */
     private Class<? extends AnalysisComponent> componentClass;
 
-    /** The configuration data (used for creating the description). */
+    /** The configuration data
+     *
+     * This is used for creating the description.
+     */
     private List<Object> configurationData;
 
-    /** The pattern {@code identifier} must match. */
+    /**
+     * The pattern {@code identifier} must match.
+     */
     public static final Pattern PATTERN = Pattern.compile("[A-Za-z0-9_]*");
 
     /**

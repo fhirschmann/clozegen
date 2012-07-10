@@ -28,24 +28,41 @@ import org.apache.uima.jcas.JCas;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.Splitter;
 
 
 /**
- * A generic constraint which matches exactly one type.
+ * A generic constraint which matches exactly one types.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class TypeConstraintResource extends ConstraintResource {
-    /** The type to match. */
+    /**
+     * The types to match.
+     *
+     * You can pass multiple types separated by a comma in which case
+     * these types will be matched disjunctively.
+     */
     public static final String PARAM_TYPE = "Types";
     @ConfigurationParameter(name = PARAM_TYPE, mandatory = true)
-    private String type;
+    private String types;
 
     @Override
     public FSMatchConstraint getConstraint(final JCas jcas) {
         FSTypeConstraint cons = ConstraintFactory.instance().
                 createTypeConstraint();
-        cons.add(type);
+        for (String type : Splitter.on(",").split(types)) {
+            cons.add(type);
+        }
         return cons;
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("types", types.toString());
+        return str.toString();
     }
 }

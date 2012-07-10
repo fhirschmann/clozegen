@@ -21,6 +21,8 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FeatureStructure;
 
@@ -34,5 +36,11 @@ public class AlwaysTrueConstraint implements FSMatchConstraint {
 	@Override
     public boolean match(final FeatureStructure fs) {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        return str.toString();
     }
 }

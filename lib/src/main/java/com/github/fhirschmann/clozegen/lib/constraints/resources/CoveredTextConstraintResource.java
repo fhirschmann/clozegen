@@ -27,6 +27,8 @@ import org.apache.uima.jcas.JCas;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import com.github.fhirschmann.clozegen.lib.constraints.CoveredTextConstraint;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Sets;
 
@@ -37,7 +39,14 @@ import com.google.common.collect.Sets;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class CoveredTextConstraintResource extends TypeConstraintResource {
-    /** The string to match. */
+    /**
+     * <em>[mandatory]</em>
+     *
+     * The strings to match.
+     *
+     * You can pass multiple strings separated by a comma in which case
+     * these strings will be matched disjunctively.
+     */
     public static final String PARAM_MATCH = "Match";
     @ConfigurationParameter(name = PARAM_MATCH, mandatory = true)
     private String match;
@@ -48,5 +57,12 @@ public class CoveredTextConstraintResource extends TypeConstraintResource {
         return ConstraintFactory.instance().and(typeConstraint,
                 new CoveredTextConstraint(
                 Sets.newHashSet(Splitter.on(",").split(match))));
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("match", match.toString());
+        return str.toString();
     }
 }

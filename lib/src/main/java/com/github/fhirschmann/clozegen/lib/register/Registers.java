@@ -29,10 +29,16 @@ import org.apache.uima.resource.ResourceInitializationException;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class Registers {
+public final class Registers {
     private static AnnotatorRegister annotator;
     private static ReaderRegister reader;
     private static WriterRegister writer;
+
+    /**
+     * Utility class.
+     */
+    private Registers() {
+    }
 
     /**
      * Returns the annotator register. This register holds all information

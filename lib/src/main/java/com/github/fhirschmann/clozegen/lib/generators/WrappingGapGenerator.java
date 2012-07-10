@@ -23,6 +23,8 @@ package com.github.fhirschmann.clozegen.lib.generators;
 
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.base.Optional;
 
 /**
@@ -49,5 +51,12 @@ public class WrappingGapGenerator implements GapGenerator {
     @Override
     public Optional<Gap> generate(final int count) {
         return Optional.fromNullable(gap);
+    }
+
+    @Override
+    public String toString() {
+        final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("gap", gap.toString());
+        return str.toString();
     }
 }

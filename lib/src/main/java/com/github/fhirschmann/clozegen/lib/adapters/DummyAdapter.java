@@ -31,9 +31,7 @@ import com.github.fhirschmann.clozegen.lib.generators.DummyGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 
 /**
- * An adapter for {@link DummyGapGenerator}. Please note that
- * {@link GenericSingleTokenInputAdapter} can also be used for
- * {@link DummyGapGenerator}.
+ * An adapter for {@link DummyGapGenerator}.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
