@@ -55,4 +55,10 @@ public class IntermediateFormatReaderTest {
                 GapAnnotation.type).iterator().next();
         assertThat(UIMAUtils.createGap(annotation), is(Gap.with("of", "at", "on", "in")));
     }
+
+    @Test
+    public void testToString() {
+        IntermediateFormatReader reader = new IntermediateFormatReader();
+        assertThat(reader.toString(), is("IntermediateFormatReader{encoding=null}"));
+    }
 }

@@ -90,8 +90,8 @@ public class FrequencyGapGenerator implements GapGenerator {
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("token", token.toString());
-        str.add("model", model.toString());
+        str.add("token", token);
+        str.add("model", model);
         return str.toString();
     }
 }

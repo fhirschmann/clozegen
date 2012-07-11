@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * The MIT License
+ *
+ * Copyright 2012 Fabian Hirschmann <fabian@hirschm.net>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,30 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.fhirschmann.clozegen.lib.functions;
+package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
+import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
+import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import org.apache.uima.UIMAException;
+import org.apache.uima.jcas.JCas;
+import org.junit.AfterClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
-import com.google.common.base.Function;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class LowerCaseFunctionTest {
+public class AlwaysTrueConstraintResourceTest {
     @Test
-    public void testApply() {
-        Function<String, String> lc = new LowerCaseFunction();
-        assertThat(lc.apply("Foo"), is("foo"));
+    public void testGetConstraint() throws UIMAException {
+        AlwaysTrueConstraintResource cs = new AlwaysTrueConstraintResource();
+        JCas jcas = UIMAUtils.createJCas("foo", "en");
+        GapAnnotation an = UIMAUtils.createGapAnnotation(jcas, Gap.with("bar"));
+        an.setBegin(0);
+        an.setEnd(3);
+        an.addToIndexes();
+        assertTrue(cs.getConstraint(jcas).match(an));
     }
 
     @Test
-    public void testApply2() {
-        Function<String, String> lc = new LowerCaseFunction();
-        assertTrue(lc.apply(null) == null);
+    public void testToString() {
+        AlwaysTrueConstraintResource cs = new AlwaysTrueConstraintResource();
+        assertThat(cs.toString(), is("AlwaysTrueConstraintResource{}"));
     }
 }

@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * The MIT License
+ *
+ * Copyright 2012 Fabian Hirschmann <fabian@hirschm.net>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,30 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.fhirschmann.clozegen.lib.functions;
+package com.github.fhirschmann.clozegen.lib.generators.model;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
+import com.google.common.io.Resources;
+import java.net.URL;
+import org.junit.AfterClass;
 import org.junit.Test;
-
-import com.google.common.base.Function;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class LowerCaseFunctionTest {
-    @Test
-    public void testApply() {
-        Function<String, String> lc = new LowerCaseFunction();
-        assertThat(lc.apply("Foo"), is("foo"));
+public class MultisetModelTest {
+    URL unigrams;
+    MultisetModel mm;
+
+    @Before
+    public void setUp() {
+    unigrams = Resources.getResource("frequencies/collocation_prep/unigrams.txt");
+    mm = new MultisetModel();
     }
 
     @Test
-    public void testApply2() {
-        Function<String, String> lc = new LowerCaseFunction();
-        assertTrue(lc.apply(null) == null);
+    public void testLoad() throws Exception {
+        mm.load(unigrams);
+        assertThat(mm.getMultiset().count("of"), is(29391));
+    }
+
+    @Test
+    public void testToString() {
+        Multiset<String> ms = HashMultiset.create();
+        ms.add("foo");
+        mm.setMultiset(ms);
+        assertThat(mm.toString(), is("MultisetModel{multiset=[foo]}"));
     }
 }

@@ -68,4 +68,10 @@ public class FrequencyAdapterTest {
         Annotation an = jcas.getAnnotationIndex(GapAnnotation.type).iterator().next();
         assertThat(an.getCoveredText(), is("of"));
     }
+
+    @Test
+    public void testToString() {
+        FrequencyAdapter fq = new FrequencyAdapter();
+        assertThat(fq.toString(), is("FrequencyAdapter{model=null}"));
+    }
 }

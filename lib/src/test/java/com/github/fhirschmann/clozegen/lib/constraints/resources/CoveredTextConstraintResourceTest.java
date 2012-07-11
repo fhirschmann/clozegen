@@ -21,8 +21,10 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
+import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertFalse;
 
 import java.io.IOException;
 import java.util.List;
@@ -66,5 +68,11 @@ public class CoveredTextConstraintResourceTest {
         assertThat(annotations.get(0).getCoveredText(), is("of"));
         assertThat(annotations.get(1).getCoveredText(), is("anything"));
         assertThat(annotations.size(), is(2));
+    }
+
+    @Test
+    public void testToString() {
+        AlwaysTrueConstraintResource cs = new AlwaysTrueConstraintResource();
+        assertThat(cs.toString(), is("AlwaysTrueConstraintResource{}"));
     }
 }

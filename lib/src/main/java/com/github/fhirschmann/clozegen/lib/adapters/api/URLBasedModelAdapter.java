@@ -80,7 +80,7 @@ public class URLBasedModelAdapter<M extends URLBasedModel> extends AbstractResou
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("model", model.toString());
+        str.add("model", model);
         return str.toString();
     }
 }

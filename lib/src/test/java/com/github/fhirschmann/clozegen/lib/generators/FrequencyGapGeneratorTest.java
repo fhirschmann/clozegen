@@ -23,12 +23,14 @@ package com.github.fhirschmann.clozegen.lib.generators;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.generators.model.MultisetModel;
+import com.google.common.base.Optional;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
@@ -65,5 +67,19 @@ public class FrequencyGapGeneratorTest {
     public void testGenerate2() {
         generator = new FrequencyGapGenerator("on", model);
         assertThat(generator.generate(3).get(), is(Gap.with("on", "with", "for")));
+    }
+
+    @Test
+    public void testAbsent() {
+        generator = new FrequencyGapGenerator("on", new MultisetModel());
+        assertFalse(generator.generate(3).isPresent());
+    }
+
+    @Test
+    public void testToString() {
+        generator = new FrequencyGapGenerator("on", new MultisetModel());
+        System.out.println(generator.toString());
+        assertThat(generator.toString(),
+                is("FrequencyGapGenerator{token=on, model=MultisetModel{multiset=[]}}"));
     }
 }

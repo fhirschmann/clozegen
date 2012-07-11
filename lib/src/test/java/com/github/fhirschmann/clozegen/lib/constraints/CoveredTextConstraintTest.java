@@ -22,6 +22,8 @@
 package com.github.fhirschmann.clozegen.lib.constraints;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.cas.FSMatchConstraint;
@@ -47,5 +49,11 @@ public class CoveredTextConstraintTest {
         annotation.setEnd(2);
         annotation.addToIndexes();
         assertTrue(constraint.match(annotation));
+    }
+
+    @Test
+    public void testToString() {
+        CoveredTextConstraint cons = new CoveredTextConstraint(Sets.newHashSet("foo"));
+        assertThat(cons.toString(), is("CoveredTextConstraint{matchText=[foo]}"));
     }
 }

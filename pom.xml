@@ -110,7 +110,7 @@
                             <exclude>**/type/*.class</exclude>
                             <exclude>**/gui/**/*.class</exclude>
                             <exclude>**/cli/**/Main.class</exclude>
-                            <exclude>**/examples/CollocationWriterExample.class</exclude>
+                            <exclude>**/examples/NGramWriterExample.class</exclude>
                             <exclude>**/Test.class</exclude>
                             <exclude>**/plugins/**</exclude>
                         </excludes>
