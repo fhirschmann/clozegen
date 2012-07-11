@@ -28,6 +28,7 @@ import java.util.Set;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 /**
@@ -185,8 +186,8 @@ public class Gap {
     /**
      * Convenience method for generating gaps.
      *
-     * @param invalidAnswers set of invalid answers
      * @param validAnswers set of valid answers
+     * @param invalidAnswers set of invalid answers
      * @return a new gap based upon the parameters provided
      */
     public static Gap with(final Collection<String> validAnswers,
@@ -194,6 +195,22 @@ public class Gap {
         Gap gap = new Gap();
         gap.addValidAnswers(validAnswers);
         gap.addInvalidAnswers(invalidAnswers);
+
+        return gap;
+    }
+
+    /**
+     * Convenience method for generating gaps.
+     *
+     * @param invalidAnswers set of invalid answers
+     * @param validAnswers set of valid answers
+     * @return a new gap based upon the parameters provided
+     */
+    public static Gap with(final Iterable<String> validAnswers,
+            final Iterable<String> invalidAnswers) {
+        Gap gap = new Gap();
+        Iterables.addAll(gap.getValidAnswers(), validAnswers);
+        Iterables.addAll(gap.getInvalidAnswers(), invalidAnswers);
 
         return gap;
     }

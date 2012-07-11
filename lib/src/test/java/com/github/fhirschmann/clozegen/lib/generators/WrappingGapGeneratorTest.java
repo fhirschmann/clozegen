@@ -23,7 +23,9 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators;
 
+import com.github.fhirschmann.clozegen.lib.QGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
+import net.java.quickcheck.generator.iterable.Iterables;
 import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -40,6 +42,14 @@ public class WrappingGapGeneratorTest {
         Gap gap = Gap.with("foo", "bar");
         WrappingGapGenerator gen = new WrappingGapGenerator(gap);
         assertThat(gen.generate(0).get(), is(gap));
+    }
+
+    @Test
+    public void testGenerateQ() {
+        for (Gap gap : Iterables.toIterable(new QGapGenerator())) {
+            WrappingGapGenerator gen = new WrappingGapGenerator(gap);
+            assertThat(gen.generate(0).get(), is(gap));
+        }
     }
 
     @Test

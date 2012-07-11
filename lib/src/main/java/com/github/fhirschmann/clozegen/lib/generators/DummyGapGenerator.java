@@ -53,7 +53,7 @@ public class DummyGapGenerator implements GapGenerator {
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("validAnswer", validAnswer.toString());
+        str.add("validAnswer", validAnswer);
         return str.toString();
     }
 }

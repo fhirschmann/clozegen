@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * The MIT License
+ *
+ * Copyright 2012 Fabian Hirschmann <fabian@hirschm.net>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,22 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.fhirschmann.clozegen;
+package com.github.fhirschmann.clozegen.lib;
 
-import org.junit.Test;
-
-import com.github.fhirschmann.clozegen.lib.examples.ConstraintExample;
-import com.github.fhirschmann.clozegen.lib.examples.StupidArticleExample;
+import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
+import com.google.common.collect.Sets;
+import java.util.Collection;
+import java.util.Set;
+import net.java.quickcheck.Generator;
+import net.java.quickcheck.generator.PrimitiveGenerators;
+import static net.java.quickcheck.generator.PrimitiveGeneratorsIterables.someStrings;
 
 /**
- * These test just make sure the examples run without errors.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class ExampleTest {
-    @Test
-    public void testExamples() throws Exception {
-        ConstraintExample.main(new String[] {});
-        StupidArticleExample.main(new String[] {});
+public class QGapGenerator implements Generator<Gap> {
+    @Override
+    public Gap next() {
+        Set<String> valid = Sets.newHashSet(someStrings(10));
+        Set<String> invalid = Sets.newHashSet(someStrings(10));
+        return Gap.with(valid, Sets.difference(invalid, valid));
     }
 }

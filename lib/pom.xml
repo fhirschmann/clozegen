@@ -66,5 +66,11 @@
             <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</artifactId>
             <version>20120616.0</version>
         </dependency>
+        <dependency>
+            <groupId>net.java</groupId>
+            <artifactId>quickcheck</artifactId>
+            <version>0.6</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

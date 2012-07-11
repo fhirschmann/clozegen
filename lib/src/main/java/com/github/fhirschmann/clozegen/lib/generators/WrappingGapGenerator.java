@@ -56,7 +56,7 @@ public class WrappingGapGenerator implements GapGenerator {
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("gap", gap.toString());
+        str.add("gap", gap);
         return str.toString();
     }
 }

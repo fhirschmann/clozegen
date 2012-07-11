@@ -120,8 +120,8 @@ public class CollocationGapGenerator implements GapGenerator {
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("tuple", triplet.toString());
-        str.add("model", model.toString());
+        str.add("tuple", triplet);
+        str.add("model", model);
         return str.toString();
     }
 }

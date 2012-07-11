@@ -19,20 +19,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.fhirschmann.clozegen.lib.generators.api;
+package com.github.fhirschmann.clozegen.lib;
 
-import com.github.fhirschmann.clozegen.lib.generators.model.CollocationModel;
+import org.junit.Test;
+
+import com.github.fhirschmann.clozegen.lib.examples.ConstraintExample;
+import com.github.fhirschmann.clozegen.lib.examples.StupidArticleExample;
 
 /**
- * Gap Generator based upon a {@link CollocationModel}.
+ * These test just make sure the examples run without errors.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public interface CollocationModelBasedGapGenerator extends GapGenerator {
-    /**
-     * Initializes the "model"-part of this gap generator.
-     *
-     * @param model the model
-     */
-    void initialize(CollocationModel model);
+public class ExampleTest {
+    @Test
+    public void testExamples() throws Exception {
+        ConstraintExample.main(new String[] {});
+        StupidArticleExample.main(new String[] {});
+    }
 }

@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.fhirschmann.clozegen;
+package com.github.fhirschmann.clozegen.lib;
 
 import java.lang.reflect.Constructor;
 import java.util.Set;

@@ -31,21 +31,38 @@ import org.junit.Test;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
+import org.junit.Before;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class MainTest {
-    @Test
-    public void testMain() throws IOException {
-        File out = File.createTempFile("clozegen", ".clz");
-        File in = File.createTempFile("clozegen", ".txt");
+    File in;
+
+    @Before
+    public void setUp() throws IOException {
+        in = File.createTempFile("clozegen", ".txt");
         Files.write("He can't think of anything.", in, Charsets.UTF_8);
+    }
+
+    @Test
+    public void testClz() throws IOException {
+        File out = File.createTempFile("clozegen", ".clz");
         String cmd = String.format("--generators preps/1 %s %s",
                 in.getAbsolutePath(), out.getAbsolutePath());
         Main.main(cmd.split(" "));
         assertThat(Files.readLines(out, Charsets.UTF_8).get(0),
                 is("He can't think {of}{of} anything."));
+    }
+
+    @Test
+    public void testTxt() throws IOException {
+        File out = File.createTempFile("clozegen", ".txt");
+        String cmd = String.format("--generators preps/1 %s %s",
+                in.getAbsolutePath(), out.getAbsolutePath());
+        Main.main(cmd.split(" "));
+        assertThat(Files.readLines(out, Charsets.UTF_8).get(0),
+                is("He can't think __[of] anything."));
     }
 }

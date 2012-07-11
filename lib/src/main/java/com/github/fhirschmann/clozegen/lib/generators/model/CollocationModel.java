@@ -111,9 +111,9 @@ public class CollocationModel extends MultisetModel {
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("tails", getTails().toString());
-        str.add("heads", getHeads().toString());
-        str.add("ngrams", getMultiset().toString());
+        str.add("tails", getTails());
+        str.add("heads", getHeads());
+        str.add("ngrams", getMultiset());
         return str.toString();
     }
 }

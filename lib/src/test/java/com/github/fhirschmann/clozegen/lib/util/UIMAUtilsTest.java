@@ -21,6 +21,7 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
+import com.github.fhirschmann.clozegen.lib.QGapGenerator;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertFalse;
@@ -43,6 +44,7 @@ import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import net.java.quickcheck.generator.iterable.Iterables;
 
 /**
  *
@@ -69,6 +71,17 @@ public class UIMAUtilsTest {
         gap2.setBegin(5);
         gap2.setEnd(7);
         gap2.addToIndexes();
+    }
+
+    @Test
+    public void testCreateGapQ() throws UIMAException {
+        for (Gap gap : Iterables.toIterable(new QGapGenerator())) {
+            JCas jcasQ = JCasFactory.createJCas();
+
+            assertThat(
+                    UIMAUtils.createGap(
+                    UIMAUtils.createGapAnnotation(jcasQ, gap)), is(gap));
+        }
     }
 
     @Test
