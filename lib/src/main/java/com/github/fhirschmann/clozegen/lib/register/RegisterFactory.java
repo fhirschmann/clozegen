@@ -31,7 +31,7 @@ import org.uimafit.component.Resource_ImplBase;
 import com.github.fhirschmann.clozegen.lib.adapters.CollocationAdapter;
 import com.github.fhirschmann.clozegen.lib.adapters.FrequencyAdapter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
-import com.github.fhirschmann.clozegen.lib.components.JCasFileWriter;
+import com.github.fhirschmann.clozegen.lib.components.api.JCasFileWriter;
 import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.formatters.IMFFormatter;

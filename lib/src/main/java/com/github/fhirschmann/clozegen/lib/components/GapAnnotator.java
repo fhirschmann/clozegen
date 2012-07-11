@@ -101,7 +101,7 @@ public class GapAnnotator extends ConstraintBasedAnnotator {
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
         str.add("answerCount", answerCount);
-        str.add("adapter", adapter.toString());
+        str.add("adapter", adapter);
         return str.toString();
     }
 }

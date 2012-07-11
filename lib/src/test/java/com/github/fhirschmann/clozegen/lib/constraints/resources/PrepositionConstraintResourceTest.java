@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * The MIT License
+ *
+ * Copyright 2012 Fabian Hirschmann <fabian@hirschm.net>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,51 +23,44 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
-import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertFalse;
-
+import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
+import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.util.List;
-
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.junit.AfterClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import org.junit.BeforeClass;
 import org.uimafit.util.JCasUtil;
-
-import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
-import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
-import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.collect.Lists;
-
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class CoveredTextConstraintResourceTest {
-
+public class PrepositionConstraintResourceTest {
     @Test
-    public void testGetConstraint() throws UIMAException, IOException {
+    public void testGetConstraint() throws ResourceInitializationException,
+            UIMAException, IOException {
         List<GapAnnotation> annotations = ConstraintResourceUtils.
                 getGapAnnotationsForConstraint(
-                "He can't think of anything.", "en",
-                CoveredTextConstraintResource.class,
-                CoveredTextConstraintResource.PARAM_TYPE, Token.class.getName(),
-                CoveredTextConstraintResource.PARAM_MATCH, "of,anything");
-
-        assertThat(annotations.size(), is(2));
-        assertThat(annotations.get(0).getCoveredText(), is("of"));
-        assertThat(annotations.get(1).getCoveredText(), is("anything"));
+                "He can't think of anything", "en",
+                PrepositionConstraintResource.class,
+                new Object[] {});
+        assertThat(Iterables.getOnlyElement(annotations).getCoveredText(), is("of"));
     }
-
     @Test
     public void testToString() {
-        CoveredTextConstraintResource cs = new CoveredTextConstraintResource();
-        assertThat(cs.toString(), is("CoveredTextConstraintResource{match=null}"));
+        PrepositionConstraintResource cs = new PrepositionConstraintResource();
+        assertThat(cs.toString(), is("PrepositionConstraintResource{}"));
     }
 }

@@ -49,16 +49,17 @@ public class ArticleConstraintResourceTest {
     @Test
     public void testGetConstraint() throws ResourceInitializationException,
             UIMAException, IOException {
-        AnalysisEngineDescription desc = ConstraintResourceUtils.create(
-                ArticleConstraintResource.class);
-        Pipeline pipeline = PipelineFactory.createDefaultPipeline();
-        pipeline.add(desc);
+        List<GapAnnotation> annotations = ConstraintResourceUtils.
+                getGapAnnotationsForConstraint(
+                "I'd like a drink.", "en",
+                ArticleConstraintResource.class,
+                new Object[] {});
+        assertThat(Iterables.getOnlyElement(annotations).getCoveredText(), is("a"));
+    }
 
-
-        JCas jcas = UIMAUtils.createJCas("He studies at the university.", "en");
-        pipeline.run(jcas);
-        List<GapAnnotation> annotations = Lists.newArrayList(
-                JCasUtil.select(jcas, GapAnnotation.class));
-        assertThat(Iterables.getOnlyElement(annotations).getCoveredText(), is("the"));
+    @Test
+    public void testToString() {
+        ArticleConstraintResource cs = new ArticleConstraintResource();
+        assertThat(cs.toString(), is("ArticleConstraintResource{}"));
     }
 }

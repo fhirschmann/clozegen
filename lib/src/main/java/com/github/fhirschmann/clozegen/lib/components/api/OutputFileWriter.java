@@ -40,11 +40,4 @@ public abstract class OutputFileWriter extends JCasConsumer_ImplBase {
     public static final String PARAM_OUTPUT_FILE = "OutputFile";
     @ConfigurationParameter(name = PARAM_OUTPUT_FILE, mandatory = true)
     protected String outputFile;
-
-    @Override
-    public String toString() {
-        final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("outputFile", outputFile.toString());
-        return str.toString();
-    }
 }

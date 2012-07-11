@@ -66,11 +66,4 @@ public abstract class ConstraintBasedConsumer extends JCasConsumer_ImplBase impl
     public FSMatchConstraint getConstraint(final JCas jcas) {
         return constraint.getConstraint(jcas);
     }
-
-    @Override
-    public String toString() {
-        final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("constraint", constraint.toString());
-        return str.toString();
-    }
 }

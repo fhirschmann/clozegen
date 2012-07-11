@@ -140,4 +140,13 @@ public class NGramWriterTest {
         assertThat(ms.count("number of"), is(4));
         assertThat(ms.count("one of"), is(4));
     }
+
+    @Test
+    public void testToString() {
+        NGramWriter writer = new NGramWriter();
+        System.out.println(writer.toString());
+        assertThat(writer.toString(),
+                is("NGramWriter{path=null, includeHead=false, "
+                + "includeTail=false, lowerCase=false, minFrequency=0, n=0}"));
+    }
 }

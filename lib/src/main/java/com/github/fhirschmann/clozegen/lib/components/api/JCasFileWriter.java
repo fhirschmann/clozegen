@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.fhirschmann.clozegen.lib.components;
+package com.github.fhirschmann.clozegen.lib.components.api;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -90,8 +90,8 @@ public class JCasFileWriter extends OutputFileWriter {
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("outputFile", outputFile.toString());
-        str.add("formatter", formatter.toString());
+        str.add("outputFile", outputFile);
+        str.add("formatter", formatter);
         return str.toString();
     }
 }

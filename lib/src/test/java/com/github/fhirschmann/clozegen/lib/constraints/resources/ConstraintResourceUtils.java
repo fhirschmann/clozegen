@@ -30,6 +30,17 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import com.github.fhirschmann.clozegen.lib.adapters.DummyAdapter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
+import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintResource;
+import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
+import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
+import com.google.common.collect.Lists;
+import java.io.IOException;
+import java.util.List;
+import org.apache.uima.UIMAException;
+import org.apache.uima.jcas.JCas;
+import org.uimafit.util.JCasUtil;
 
 /**
  *
@@ -45,7 +56,20 @@ public class ConstraintResourceUtils {
                 GapAnnotator.CONSTRAINT_KEY,
                 createExternalResourceDescription(resource, data));
         return desc;
-
     }
 
+    public static List<GapAnnotation> getGapAnnotationsForConstraint(
+            final String text, final String language,
+            Class<? extends ConstraintResource> constraint, final Object... data)
+            throws ResourceInitializationException, UIMAException, IOException {
+        AnalysisEngineDescription desc = ConstraintResourceUtils.create(constraint, data);
+        Pipeline pipeline = PipelineFactory.createDefaultPipeline();
+        pipeline.add(desc);
+
+        JCas jcas = UIMAUtils.createJCas(text, language);
+        pipeline.run(jcas);
+        List<GapAnnotation> annotations = Lists.newArrayList(
+                JCasUtil.select(jcas, GapAnnotation.class));
+        return annotations;
+    }
 }

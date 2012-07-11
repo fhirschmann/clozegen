@@ -62,7 +62,7 @@ public class TypeConstraintResource extends ConstraintResource {
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("types", types.toString());
+        str.add("types", types);
         return str.toString();
     }
 }

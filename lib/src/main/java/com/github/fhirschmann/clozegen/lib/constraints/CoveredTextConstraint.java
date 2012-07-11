@@ -62,7 +62,7 @@ public class CoveredTextConstraint implements FSMatchConstraint {
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("matchText", matchText.toString());
+        str.add("matchText", matchText);
         return str.toString();
     }
 }

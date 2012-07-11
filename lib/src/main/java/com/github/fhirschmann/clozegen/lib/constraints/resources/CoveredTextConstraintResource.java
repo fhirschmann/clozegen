@@ -62,7 +62,7 @@ public class CoveredTextConstraintResource extends TypeConstraintResource {
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
-        str.add("match", match.toString());
+        str.add("match", match);
         return str.toString();
     }
 }

@@ -22,6 +22,7 @@
 package com.github.fhirschmann.clozegen.lib.constraints;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -49,6 +50,12 @@ public class CoveredTextConstraintTest {
         annotation.setEnd(2);
         annotation.addToIndexes();
         assertTrue(constraint.match(annotation));
+    }
+
+    @Test
+    public void testGetConstraint2() {
+        FSMatchConstraint constraint = new CoveredTextConstraint(Sets.newHashSet("He"));
+        assertFalse(constraint.match(null));
     }
 
     @Test
