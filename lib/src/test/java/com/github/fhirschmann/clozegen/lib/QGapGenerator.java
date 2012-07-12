@@ -23,13 +23,14 @@
  */
 package com.github.fhirschmann.clozegen.lib;
 
+import static net.java.quickcheck.generator.PrimitiveGeneratorsIterables.someStrings;
+
+import java.util.Set;
+
+import net.java.quickcheck.Generator;
+
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.google.common.collect.Sets;
-import java.util.Collection;
-import java.util.Set;
-import net.java.quickcheck.Generator;
-import net.java.quickcheck.generator.PrimitiveGenerators;
-import static net.java.quickcheck.generator.PrimitiveGeneratorsIterables.someStrings;
 
 /**
  *

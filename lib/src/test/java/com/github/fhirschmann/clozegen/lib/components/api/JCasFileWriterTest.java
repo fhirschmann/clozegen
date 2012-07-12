@@ -23,22 +23,22 @@
  */
 package com.github.fhirschmann.clozegen.lib.components.api;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.github.fhirschmann.clozegen.lib.formatters.IMFFormatter;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
-import java.io.File;
-import java.io.IOException;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 /**
  *

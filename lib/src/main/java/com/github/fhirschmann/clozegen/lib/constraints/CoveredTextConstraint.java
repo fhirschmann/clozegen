@@ -21,13 +21,14 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
 import java.util.Collection;
 
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.jcas.tcas.Annotation;
+
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 
 /**
  * A constraint which tries to match an annotation's covered text with any

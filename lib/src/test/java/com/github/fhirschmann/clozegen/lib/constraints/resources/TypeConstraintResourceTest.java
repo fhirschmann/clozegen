@@ -23,16 +23,20 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints.resources;
 
-import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
-import com.google.common.collect.Iterables;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 import java.io.IOException;
 import java.util.List;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.is;
+
+import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
+import com.google.common.collect.Iterables;
+
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN;
 
 /**
  *

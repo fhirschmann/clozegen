@@ -21,10 +21,11 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
 import org.apache.uima.cas.FSMatchConstraint;
 import org.apache.uima.cas.FeatureStructure;
+
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
 
 /**
  * A constraint which matches everything.

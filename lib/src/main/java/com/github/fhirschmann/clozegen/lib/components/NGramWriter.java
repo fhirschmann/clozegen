@@ -21,8 +21,11 @@
  */
 package com.github.fhirschmann.clozegen.lib.components;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.uima.UimaContext;
@@ -38,7 +41,6 @@ import com.github.fhirschmann.clozegen.lib.functions.LowerCaseFunction;
 import com.github.fhirschmann.clozegen.lib.multiset.WriteMultisets;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Collections2;
@@ -47,9 +49,6 @@ import com.google.common.collect.Multiset;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import java.util.Collection;
-
-import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * Extracts n-grams and writes them to a file.

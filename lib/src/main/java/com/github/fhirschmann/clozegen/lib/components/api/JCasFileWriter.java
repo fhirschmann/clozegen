@@ -31,13 +31,11 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.descriptor.ExternalResource;
 
-import com.github.fhirschmann.clozegen.lib.components.api.JCasFormatter;
-import com.github.fhirschmann.clozegen.lib.components.api.OutputFileWriter;
+import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
+import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.io.Closeables;
-import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
-import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
 
 /**
  * Writes a {@link JCas} to an output file using the a given

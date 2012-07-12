@@ -21,8 +21,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.components.api;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
 import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 

@@ -31,7 +31,6 @@ import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.ForwardingCollection;
 import com.google.common.collect.Maps;
-import com.github.fhirschmann.clozegen.lib.register.api.Register;
 
 /**
  * Base class for all registers.

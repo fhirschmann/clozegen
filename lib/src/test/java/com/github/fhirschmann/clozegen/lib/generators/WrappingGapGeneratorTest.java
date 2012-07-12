@@ -23,14 +23,14 @@
  */
 package com.github.fhirschmann.clozegen.lib.generators;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import net.java.quickcheck.generator.iterable.Iterables;
+
+import org.junit.Test;
+
 import com.github.fhirschmann.clozegen.lib.QGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
-import net.java.quickcheck.generator.iterable.Iterables;
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.BeforeClass;
-import static org.hamcrest.CoreMatchers.is;
 
 /**
  *

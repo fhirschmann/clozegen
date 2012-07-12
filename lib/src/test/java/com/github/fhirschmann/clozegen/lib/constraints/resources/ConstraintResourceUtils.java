@@ -24,9 +24,15 @@ package com.github.fhirschmann.clozegen.lib.constraints.resources;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
+import java.io.IOException;
+import java.util.List;
+
+import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.Resource;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.uimafit.util.JCasUtil;
 
 import com.github.fhirschmann.clozegen.lib.adapters.DummyAdapter;
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
@@ -36,11 +42,6 @@ import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
 import com.google.common.collect.Lists;
-import java.io.IOException;
-import java.util.List;
-import org.apache.uima.UIMAException;
-import org.apache.uima.jcas.JCas;
-import org.uimafit.util.JCasUtil;
 
 /**
  *

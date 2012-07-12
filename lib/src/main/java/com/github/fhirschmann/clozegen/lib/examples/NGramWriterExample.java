@@ -26,17 +26,16 @@ import static org.uimafit.factory.ExternalResourceFactory.createExternalResource
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.factory.CollectionReaderFactory;
 
 import com.github.fhirschmann.clozegen.lib.components.NGramWriter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.ArticleConstraintResource;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
-import com.github.fhirschmann.clozegen.lib.functions.LowerCaseFunction;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
-import org.apache.uima.resource.ResourceInitializationException;
 
 /**
  * This example demonstrates the usage of {@link NGramWriter}.

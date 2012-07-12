@@ -23,13 +23,10 @@
  */
 package com.github.fhirschmann.clozegen.lib.register.api;
 
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.BeforeClass;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
 
 /**
  *
@@ -38,7 +35,7 @@ import static org.junit.Assert.assertThat;
 public class RegisterTest {
     @Test
     public void testToString() {
-        Register reg = new Register();
+        Register<RegisterEntry> reg = new Register<RegisterEntry>();
         RegisterEntry entry = new RegisterEntry() {
 
             @Override

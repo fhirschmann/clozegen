@@ -31,8 +31,6 @@ import org.uimafit.descriptor.ExternalResource;
 
 import com.github.fhirschmann.clozegen.lib.constraints.api.ConstraintProvider;
 import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
 
 /**
  * An annotator which calls {@link GapProcessor#process(JCas, List, int)} for each

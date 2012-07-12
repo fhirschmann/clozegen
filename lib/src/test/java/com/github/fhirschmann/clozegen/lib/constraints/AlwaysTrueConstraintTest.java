@@ -23,12 +23,10 @@
  */
 package com.github.fhirschmann.clozegen.lib.constraints;
 
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.BeforeClass;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
 
 /**
  *

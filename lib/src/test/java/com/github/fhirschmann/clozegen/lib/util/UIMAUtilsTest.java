@@ -21,7 +21,6 @@
  */
 package com.github.fhirschmann.clozegen.lib.util;
 
-import com.github.fhirschmann.clozegen.lib.QGapGenerator;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertFalse;
@@ -32,6 +31,8 @@ import static org.junit.matchers.JUnitMatchers.hasItems;
 import java.util.Collection;
 import java.util.List;
 
+import net.java.quickcheck.generator.iterable.Iterables;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -40,11 +41,11 @@ import org.junit.Test;
 import org.uimafit.factory.JCasFactory;
 import org.uimafit.util.FSCollectionFactory;
 
+import com.github.fhirschmann.clozegen.lib.QGapGenerator;
 import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import net.java.quickcheck.generator.iterable.Iterables;
 
 /**
  *
