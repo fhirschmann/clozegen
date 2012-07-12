@@ -40,6 +40,7 @@ import javax.swing.text.Highlighter.HighlightPainter;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
+@SuppressWarnings("serial")
 public class ClozeTestPane extends JTextPane {
     /**
      * The painter used to highlight enabled gaps.

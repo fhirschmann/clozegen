@@ -23,7 +23,6 @@ package com.github.fhirschmann.clozegen.plugins.annotator.germanarticles;
 
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.CoveredTextConstraintResource;
-import com.github.fhirschmann.clozegen.lib.constraints.resources.TypeConstraintResource;
 import com.github.fhirschmann.clozegen.lib.plugins.api.Plugin;
 import com.github.fhirschmann.clozegen.lib.register.AnnotatorRegisterEntry;
 import com.github.fhirschmann.clozegen.lib.register.Registers;

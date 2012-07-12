@@ -25,7 +25,6 @@ import com.github.fhirschmann.clozegen.lib.register.ReaderRegisterEntry;
 import com.github.fhirschmann.clozegen.lib.register.Registers;
 import com.github.fhirschmann.clozegen.lib.register.WriterRegisterEntry;
 import java.io.File;
-import java.util.Map.Entry;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 

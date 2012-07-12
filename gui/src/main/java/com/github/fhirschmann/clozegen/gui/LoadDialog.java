@@ -21,12 +21,10 @@
  */
 package com.github.fhirschmann.clozegen.gui;
 
-import com.github.fhirschmann.clozegen.lib.register.AnnotatorRegister;
 import com.github.fhirschmann.clozegen.lib.register.AnnotatorRegisterEntry;
 import com.github.fhirschmann.clozegen.lib.register.Registers;
 import com.google.common.collect.Maps;
 import java.io.File;
-import java.io.FileFilter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
@@ -40,6 +38,7 @@ import org.apache.uima.resource.ResourceInitializationException;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
+@SuppressWarnings("serial")
 public class LoadDialog extends javax.swing.JDialog {
     /**
      * The language which was selected in the dialog.

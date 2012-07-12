@@ -37,6 +37,7 @@ import org.apache.uima.jcas.JCas;
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
+@SuppressWarnings("serial")
 public class Main extends javax.swing.JFrame {
     /**
      * Creates a new Main Form.
