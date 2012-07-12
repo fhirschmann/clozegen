@@ -31,6 +31,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.ForwardingCollection;
 import com.google.common.collect.Maps;
+import com.github.fhirschmann.clozegen.lib.register.api.Register;
 
 /**
  * Base class for all registers.
@@ -77,7 +78,7 @@ public class Register<T extends RegisterEntry> extends ForwardingCollection<T> {
     }
 
     /**
-     * Indicates whether this {@link DescriptionRegister} contains an entry identified
+     * Indicates whether this {@link Register} contains an entry identified
      * by {@code identifier}.
      *
      * @param identifier the identifier in question

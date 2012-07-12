@@ -29,7 +29,7 @@ Tutorial
     This generator takes only one input token: The word for which
     a gap should be generated. 
     
-    When {{{./apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html#generate(int)}generate}}
+    When {{{./apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html#generateint}generate}}
     is called, the generator can return a gap or indicate the
     absence thereof. Please see the corresponding
     {{{./apidocs/com/github/fhirschmann/clozegen/lib/generators/api/GapGenerator.html#generate(int)}interface}}

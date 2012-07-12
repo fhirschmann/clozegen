@@ -46,19 +46,22 @@ import com.google.common.collect.Sets;
  * Generates gaps based on collocations.
  *
  * <p>
- * The argument to {@link CollocationGapGenerator#initialize(java.util.List)}
+ * The argument to
+ * {@link CollocationGapGenerator#CollocationGapGenerator(List, CollocationModel)}
  * must have an odd number of elements and the element in the middle of the
  * list is the word a gap is generated for.
  * </p>
  *
  * <p>This implementation is based on the paper
  * <i>Automatic Generation of Cloze Items for Prepositions</i> [1]
- * by Lee et all.
+ * by Lee et all. Instead of head and tail phrases, n-grams are used.
+ * </p>
  *
  * <p>[1] <b>J. Lee and S. Seneff</b>.<br/>
  * Automatic generation of cloze items for prepositions.<br/>
  * <i>In Eight Annual Conference of the International Speech Communication
  * Association, 2007</i>.
+ * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */

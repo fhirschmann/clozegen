@@ -38,6 +38,7 @@ import com.github.fhirschmann.clozegen.lib.formatters.IMFFormatter;
 import com.github.fhirschmann.clozegen.lib.formatters.LaTeXFormatter;
 import com.github.fhirschmann.clozegen.lib.formatters.PlainTextFormatter;
 import com.github.fhirschmann.clozegen.lib.reader.IntermediateFormatReader;
+import com.github.fhirschmann.clozegen.lib.register.api.Register;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 
@@ -55,10 +56,10 @@ public final class RegisterFactory {
     }
 
     /**
-     * Creates a new {@link DescriptionRegister} prefilled with known descriptions
+     * Creates a new {@link Register} prefilled with known descriptions
      * for gap generation.
      *
-     * @return a new {@link DescriptionRegister}
+     * @return a new {@link Register}
      * @throws ResourceInitializationException on errors
      */
     public static AnnotatorRegister createDefaultAnnotatorRegister()

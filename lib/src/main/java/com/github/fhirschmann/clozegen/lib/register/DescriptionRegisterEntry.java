@@ -38,11 +38,10 @@ import com.github.fhirschmann.clozegen.lib.register.api.RegisterEntry;
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Lists;
+import com.github.fhirschmann.clozegen.lib.register.api.Register;
 
 /**
- * Represents an entry of a {@link DescriptionRegister}.
- *
- * @see DescriptionRegister
+ * Represents an entry of a {@link Register}.
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
