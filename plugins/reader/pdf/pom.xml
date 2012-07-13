@@ -13,6 +13,7 @@
         <groupId>com.github.fhirschmann</groupId>
         <artifactId>clozegen</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../../pom.xml</relativePath>
     </parent>
 
     <dependencies>
