@@ -5,3 +5,5 @@
 nbactions.xml
 target/
 nbproject/
+/models/en/frequencies/en/.ropeproject/
+/models/en/src/main/resources/frequencies/en/.ropeproject/

@@ -15,6 +15,7 @@
         <module>plugins/reader/pdf</module>
         <module>plugins/annotator/germanarticles</module>
         <module>plugins/all</module>
+        <module>models/en</module>
     </modules>
 
     <properties>
