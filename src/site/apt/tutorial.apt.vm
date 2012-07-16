@@ -2,9 +2,8 @@ Tutorial
 
     This tutorial will walk you through the integration of a new
     gap generator into the ClozeGen framework. All of the snippets
-    below can be found in the
-    {{{./apidocs/com/github/fhirschmann/clozegen/lib/examples/}examples}}
-    directory.
+    below can be found in the <<<lib.examples>>> directory of the
+    ClozeGen distribution.
 
 * Writing a generator
 
@@ -48,11 +47,6 @@ Tutorial
     as a middleman between these annotations and the generator
     and selectively filter the annotations or tokens
     passed to the generator.
-    
-    Please note that it is possible to use generic adapters by passing
-    the class name of your generator to <<<GenericSingleTokenInputAdapter>>>
-    for example. However, this is not the preferred method in
-    ClozeGen.
     
 ** Implementation
     

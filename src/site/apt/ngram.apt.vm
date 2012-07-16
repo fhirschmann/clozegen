@@ -1,8 +1,8 @@
 Writing n-grams
 
     Since many gap generation algorithms are based on n-gram
-    frequency, it is fundamental that ClozeGen provides ways
-    of creating these.
+    frequencies, it is fundamental that ClozeGen provides a way
+    in order to create them.
 
     ClozeGen comes with a
     {{{./apidocs/com/github/fhirschmann/clozegen/lib/components/NGramWriter.html}NGramWriter}} which will be explained in this document.
@@ -55,7 +55,7 @@ in the house	5
 
     In the next example, we will discard the head of the word matched
     by a constraint. This basically mean we'll only consider the
-    word on the riht-hand side of the article:
+    word on the right-hand side of the article:
 
 %{snippet|id=ngw3|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/examples/NGramWriterExample.java}
 

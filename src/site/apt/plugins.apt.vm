@@ -55,7 +55,7 @@ Plugins
 * Writing a Reader Register Plugin
 
     I recomment taking a look at <<<plugins/reader/pdf>>> if you
-    want to writer a reader plugin.
+    want to write a reader plugin.
 
 * Writing a Writer Register Plugin
 
@@ -65,6 +65,9 @@ Plugins
     {{{./apidocs/com/github/fhirschmann/clozegen/lib/formatters/PlainTextFormatter.html}PlainTextFormatter}}.
 
 %{snippet|id=PTFormatter|file=lib/src/main/java/com/github/fhirschmann/clozegen/lib/formatters/PlainTextFormatter.java}
+    In the code above, all words for which gap annotations exists are
+    deleted. In addition, all available answer options are put on the
+    right-hand side of the gaps.
 
     You could now register your plugin with the writer
     register like so:

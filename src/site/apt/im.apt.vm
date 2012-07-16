@@ -1,0 +1,27 @@
+Intermediate Format
+    
+    The intermediate is a plain-text representation of cloze
+    tests. Gaps are modelled as a set of two adjacent pairs of
+    curly brackets, where the first set contains the valid
+    answers and the second set contains the invalid answers.
+
+    Consider the following Sentence:
+
+---
+He can't think {of}{on, in, at} anything.
+---
+
+    The word <<<of>>> will be the only valid answer and
+    the words <<<on>>>, <<<in>>>, <<<at>>> will form
+    the invalid answers. The resulting gap will have
+    the union of these sets as distractors.
+
+    Please note that you can disable a gap by postfixing
+    it with a <<<d>>> as in <disable> like so:
+
+---
+He can't think {of}{on, in, at}d anything.
+---
+
+    In this case, no gap will be created and a random
+    valid answer will be chosen.

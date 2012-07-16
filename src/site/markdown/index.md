@@ -2,19 +2,19 @@ About ClozeGen
 ==============
 
 ClozeGen is a toolkit for the generation of
-[Cloze Test](http://en.wikipedia.org/wiki/Cloze_test)
-from arbitrary text.
+[Cloze Tests](http://en.wikipedia.org/wiki/Cloze_test)
+from arbitrary text based upon 
+[DKPro](http://code.google.com/p/dkpro-core-asl/),
+[UIMAfit](http://code.google.com/p/uimafit/),
+and [UIMA](http://uima.apache.org).
 
-This framework is mainly meant to be used by developers wishing to
-implement state-of-the-art cloze test generation algorithms
-not worrying about the underlying framework
-[UIMA](http://uima.apache.org) or user interfaces.
+Its targeted audience is twofold: Developers will find
+a simple yet powerful platform to develop, test and deploy
+their algorithms for gap generation. Users will find an
+easy-to-use application for the generation of cloze tests
+featuring two user interfaces.
 
-In addition to providing the means to wire up generation
-algorithms, developers benefit from a graphical user
-interface as well as a command line interface for the
-cloze test generation process.
-
-ClozeGen supports multiple import formats (plain text and pdf
-as of now) and multiple output formats (intermediate format,
-plain text, latex).
+Please note that ClozeGen is as of now not a complete collection
+for the generation of cloze tests because it does not yet
+ship with a variety of gap generation algorithms. Right now,
+it can only generate gaps for prepositions.

@@ -11,6 +11,7 @@
     <body>
         <menu ref="parent" inherit="top" />
         <menu name="User Manual">
+            <item name="Intermediate Format" href="im.html"/>
             <item name="Command Line Interface" href="cli.html"/>
             <item name="Graphical User Interface" href="gui.html"/>
             <item name="LaTeX" href="latex.html"/>
