@@ -1,0 +1,27 @@
+About ClozeGen
+
+    ClozeGen is a toolkit for the generation of
+    {{{http://en.wikipedia.org/wiki/Cloze_test}Cloze Tests}}
+    from arbitrary text based upon 
+    {{{http://code.google.com/p/dkpro-core-asl/}DKPro}},
+    {{{http://code.google.com/p/uimafit/}UIMAfit}}
+    and {{{http://uima.apache.org}UIMA}}.
+
+    Its targeted audience is twofold: Developers will find
+    a simple yet powerful platform to develop, test and deploy
+    their algorithms for gap generation. Users will find an
+    easy-to-use application for the generation of cloze tests
+    featuring two user interfaces.
+
+    Please note that ClozeGen is as of now not a complete collection
+    for the generation of cloze tests because it does not yet
+    ship with a variety of gap generation algorithms. Right now,
+    it can only generate gaps for prepositions.
+
+* Requirements
+
+    ClozeGen has the following requirements:
+
+    * Java 1.6 or higher
+
+    * Maven 3 or higher (for developers only)

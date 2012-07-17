@@ -8,7 +8,7 @@ of ClozeGen:
 
 Steps in the process:
 
-1. Read an input `text` (from plain text, pdf, ...)
+1. Read an input `text` (from plain text, pdf)
 2. Translate `text` into the internal representation ([UIMA](http://uima.apache.org))
 2. Activate one or more Gap Generators
 3. Translate the internal representation into the Intermediate Format (let the user adjust the result)
