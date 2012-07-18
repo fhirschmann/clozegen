@@ -49,4 +49,10 @@ public class PlainTextFormatterTest {
         PlainTextFormatter formatter = new PlainTextFormatter();
         assertThat(formatter.format(jcas), is("He studies __[at] the university."));
     }
+
+    @Test
+    public void testToString() {
+        PlainTextFormatter formatter = new PlainTextFormatter();
+        assertThat(formatter.toString(), is("PlainTextFormatter{}"));
+    }
 }

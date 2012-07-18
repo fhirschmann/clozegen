@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * The MIT License
+ *
+ * Copyright 2012 Fabian Hirschmann <fabian@hirschm.net>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,40 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.fhirschmann.clozegen.lib.formatters;
+package com.github.fhirschmann.clozegen.lib.generators;
 
+import org.junit.AfterClass;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-
-import org.apache.uima.UIMAException;
-import org.apache.uima.jcas.JCas;
-import org.junit.Test;
-
-import com.github.fhirschmann.clozegen.lib.type.GapAnnotation;
-import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
-import com.google.common.collect.Sets;
+import org.junit.BeforeClass;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class LaTeXFormatterTest {
-    @Test
-    public void testFormat() throws UIMAException {
-        JCas jcas = UIMAUtils.createJCas("He studies at the university.", "en");
-        GapAnnotation gap = UIMAUtils.createGapAnnotation(jcas,
-                Sets.newHashSet("at"), Sets.newHashSet("at"));
-        gap.setBegin(11);
-        gap.setEnd(13);
-        gap.addToIndexes();
-        LaTeXFormatter formatter = new LaTeXFormatter();
-        assertThat(formatter.format(jcas),
-                is("He studies \\clozeitem{at}{at} the university."));
-    }
-
+public class DummyGapGeneratorTest {
     @Test
     public void testToString() {
-        LaTeXFormatter formatter = new LaTeXFormatter();
-        assertThat(formatter.toString(), is("LaTeXFormatter{}"));
+        DummyGapGenerator generator = new DummyGapGenerator("foo");
+        assertThat(generator.toString(), is("DummyGapGenerator{validAnswer=foo}"));
     }
 }

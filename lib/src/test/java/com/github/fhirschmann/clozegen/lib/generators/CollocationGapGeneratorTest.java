@@ -81,4 +81,17 @@ public class CollocationGapGeneratorTest {
                 Lists.newArrayList("xx", "yy", "zz"), model);
         assertFalse(generator.generate(2).isPresent());
     }
+
+    @Test
+    public void testToString() {
+        generator = new CollocationGapGenerator(
+                Lists.newArrayList("xx", "yy", "zz"), model);
+        System.out.println(generator.toString());
+        assertThat(generator.toString(), is(
+                "CollocationGapGenerator{tuple=[xx, yy, zz], "
+                + "model=CollocationModel{"
+                + "tails={a=[by x 55], the=[of x 11, in x 20]}, "
+                + "heads={as=[of x 11, by x 55, in x 20]}, "
+                + "ngrams=[as in the x 20, as of the x 11, as by a x 55]}}"));
+    }
 }
