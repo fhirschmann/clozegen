@@ -39,9 +39,11 @@ usage: clozegen [options] INPUT OUTPUT
     and tell it to enable 5 answer options.
     
     * the <<list>> methods will list the supported actions.
-    
+
+* Example
+
     Let us now create a simple cloze test by first writing
-    text to some file:
+    a test sentence to a file:
     
 ---
 echo "He can't think of anything." > test.txt

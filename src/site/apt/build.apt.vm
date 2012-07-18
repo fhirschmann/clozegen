@@ -55,5 +55,5 @@ mvn package
 ---
 
     After executing the commands above, you'll end up with
-    a jar in <<<cli/target/clozegen-cli-1.0-SNAPSHOT-jar-with-dependencies.jar>>>
+    a jar in <<<cli/target/clozegen-cli-1.0-SNAPSHOT--with-dependencies.jar>>>
     (depending on the user interface you picked).
