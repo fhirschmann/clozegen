@@ -48,7 +48,14 @@ import com.google.common.collect.Maps;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class Main {
+    /**
+     * The formatter for help messages (--help).
+     */
     private HelpFormatter formatter;
+
+    /**
+     * The available options (-g, --list-...).
+     */
     private Options options;
 
     static {
