@@ -1,6 +1,6 @@
 About ClozeGen
 
-    ClozeGen is a toolkit for the generation of
+    ClozeGen is a toolkit for the generation of language-independent
     {{{http://en.wikipedia.org/wiki/Cloze_test}Cloze Tests}}
     from arbitrary text based upon 
     {{{http://code.google.com/p/dkpro-core-asl/}DKPro}},
