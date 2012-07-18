@@ -236,6 +236,8 @@ public class ClozeTestGenerator {
      */
     public void activate(final String generatorIdentifier, final int answerCount)
             throws ResourceInitializationException {
+        checkArgument(Registers.annotator().containsIdentifier(generatorIdentifier),
+                "Unknown Generator: " + generatorIdentifier);
         getPipeline().add(Registers.annotator().
                 get(generatorIdentifier).getDescription(
                 GapAnnotator.PARAM_ANSWER_COUNT, answerCount));
