@@ -23,16 +23,15 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
-import com.github.fhirschmann.clozegen.lib.reader.IntermediateFormatReader;
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
+
 import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.github.fhirschmann.clozegen.lib.reader.IntermediateFormatReader;
+
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 
 /**
  *

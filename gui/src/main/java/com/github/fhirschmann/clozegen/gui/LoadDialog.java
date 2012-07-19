@@ -21,18 +21,21 @@
  */
 package com.github.fhirschmann.clozegen.gui;
 
-import com.github.fhirschmann.clozegen.lib.register.AnnotatorRegisterEntry;
-import com.github.fhirschmann.clozegen.lib.register.Registers;
-import com.google.common.collect.Maps;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+
 import org.apache.uima.resource.ResourceInitializationException;
+
+import com.github.fhirschmann.clozegen.lib.register.AnnotatorRegisterEntry;
+import com.github.fhirschmann.clozegen.lib.register.Registers;
+import com.google.common.collect.Maps;
 
 /**
  *

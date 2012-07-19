@@ -21,12 +21,14 @@
  */
 package com.github.fhirschmann.clozegen.gui;
 
+import java.io.File;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+
 import com.github.fhirschmann.clozegen.lib.register.ReaderRegisterEntry;
 import com.github.fhirschmann.clozegen.lib.register.Registers;
 import com.github.fhirschmann.clozegen.lib.register.WriterRegisterEntry;
-import java.io.File;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
 
 /**
  * {@link FileFilter} utility functions.

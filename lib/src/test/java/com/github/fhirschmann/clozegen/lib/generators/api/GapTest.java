@@ -30,7 +30,6 @@ import static org.junit.matchers.JUnitMatchers.hasItems;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.fhirschmann.clozegen.lib.generators.api.Gap;
 import com.google.common.collect.Sets;
 
 /**

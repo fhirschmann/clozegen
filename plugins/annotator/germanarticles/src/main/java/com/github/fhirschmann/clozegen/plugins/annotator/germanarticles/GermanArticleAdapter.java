@@ -21,11 +21,13 @@
  */
 package com.github.fhirschmann.clozegen.plugins.annotator.germanarticles;
 
+import java.util.List;
+
+import org.apache.uima.jcas.tcas.Annotation;
+
 import com.github.fhirschmann.clozegen.lib.adapters.api.AbstractResource;
 import com.github.fhirschmann.clozegen.lib.adapters.api.GeneratorAdapter;
 import com.github.fhirschmann.clozegen.lib.generators.api.GapGenerator;
-import java.util.List;
-import org.apache.uima.jcas.tcas.Annotation;
 
 /**
  * An adapter for {@link GermanArticleAdapter}.

@@ -21,16 +21,21 @@
  */
 package com.github.fhirschmann.clozegen.gui;
 
-import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
-import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
-import com.github.fhirschmann.clozegen.lib.plugins.Plugins;
 import java.awt.Component;
 import java.io.File;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.*;
+
+import javax.swing.JFileChooser;
+import javax.swing.SwingWorker;
+import javax.swing.UIManager;
+
 import org.apache.uima.jcas.JCas;
+
+import com.github.fhirschmann.clozegen.lib.ClozeTestGenerator;
+import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
+import com.github.fhirschmann.clozegen.lib.plugins.Plugins;
 
 /**
  * The main GUI entry point.

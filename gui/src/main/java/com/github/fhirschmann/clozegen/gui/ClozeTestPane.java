@@ -21,20 +21,22 @@
  */
 package com.github.fhirschmann.clozegen.gui;
 
-import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
-import com.google.common.collect.Ranges;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
+
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter.HighlightPainter;
+
+import com.github.fhirschmann.clozegen.lib.imf.IntermediateFormat;
+import com.google.common.collect.Ranges;
 
 /**
  *

@@ -21,16 +21,20 @@
  */
 package com.github.fhirschmann.clozegen.plugins.annotator.germanarticles;
 
+import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.apache.uima.resource.ResourceInitializationException;
+
 import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.CoveredTextConstraintResource;
 import com.github.fhirschmann.clozegen.lib.plugins.api.Plugin;
 import com.github.fhirschmann.clozegen.lib.register.AnnotatorRegisterEntry;
 import com.github.fhirschmann.clozegen.lib.register.Registers;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.uima.resource.ResourceInitializationException;
-import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 /**
  * A plugin for the {@link GermanArticleGapGenerator}.

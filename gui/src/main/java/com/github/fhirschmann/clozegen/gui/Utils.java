@@ -24,6 +24,7 @@ package com.github.fhirschmann.clozegen.gui;
 import java.awt.Component;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 
 /**

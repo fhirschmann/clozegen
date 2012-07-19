@@ -32,6 +32,7 @@ import com.github.fhirschmann.clozegen.lib.multiset.WriteMultisets;
 import com.github.fhirschmann.clozegen.lib.pipeline.PipelineFactory;
 import com.github.fhirschmann.clozegen.lib.plugins.Plugins;
 import com.github.fhirschmann.clozegen.lib.register.RegisterFactory;
+import com.github.fhirschmann.clozegen.lib.register.Registers;
 import com.github.fhirschmann.clozegen.lib.register.api.Register;
 import com.github.fhirschmann.clozegen.lib.util.CollectionUtils;
 import com.github.fhirschmann.clozegen.lib.util.MiscUtils;
@@ -60,6 +61,7 @@ public class PrivateConstructorTest {
         set.add(IntermediateFormat.class);
         set.add(Plugins.class);
         set.add(Register.class);
+        set.add(Registers.class);
 
         for (Class<? extends Object> clazz : set) {
             Constructor<?>[] cons = clazz.getDeclaredConstructors();

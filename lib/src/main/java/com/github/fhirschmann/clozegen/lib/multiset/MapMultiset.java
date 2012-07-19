@@ -107,7 +107,7 @@ public class MapMultiset<K, V> extends ForwardingMap<K, Multiset<V>> {
     public Multiset<V> get(final Object key) {
         Multiset<V> multiset;
 
-		final K kKey = (K) checkNotNull(key);
+        final K kKey = (K) checkNotNull(key);
 
         if (containsKey(kKey)) {
             multiset = super.get(key);

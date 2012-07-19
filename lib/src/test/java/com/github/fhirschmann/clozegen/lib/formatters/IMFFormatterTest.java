@@ -23,11 +23,10 @@
  */
 package com.github.fhirschmann.clozegen.lib.formatters;
 
-import org.junit.AfterClass;
-import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.BeforeClass;
+
+import org.junit.Test;
 
 /**
  *

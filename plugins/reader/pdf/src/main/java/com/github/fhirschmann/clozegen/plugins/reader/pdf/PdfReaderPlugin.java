@@ -24,6 +24,7 @@ package com.github.fhirschmann.clozegen.plugins.reader.pdf;
 import com.github.fhirschmann.clozegen.lib.plugins.api.Plugin;
 import com.github.fhirschmann.clozegen.lib.register.ReaderRegisterEntry;
 import com.github.fhirschmann.clozegen.lib.register.Registers;
+
 import de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader;
 
 /**
