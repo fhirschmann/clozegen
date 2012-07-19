@@ -2,16 +2,28 @@ About ClozeGen
 
     ClozeGen is a toolkit for the generation of language-independent
     {{{http://en.wikipedia.org/wiki/Cloze_test}Cloze Tests}}
-    from arbitrary text based upon 
+    from based upon 
     {{{http://code.google.com/p/dkpro-core-asl/}DKPro}},
     {{{http://code.google.com/p/uimafit/}UIMAfit}}
-    and {{{http://uima.apache.org}UIMA}}.
+    and {{{http://uima.apache.org}UIMA}}. Cloze tests or
+    fill-in-the-gap tests are multiple choice tests consisting
+    of text with certain words removed. For example,
+
+---
+I can' think ____[on, of, about, in] anything.
+---
+
+    is a cloze test item with four answer choices.
+
+* Targeted audience
 
     Its targeted audience is twofold: Developers will find
     a simple yet powerful platform to develop, test and deploy
     their algorithms for gap generation. Users will find an
     easy-to-use application for the generation of cloze tests
-    featuring two user interfaces.
+    featuring two user interfaces, namely the
+    {{{./gui.html}Graphical User Interface}} and the
+    {{{./cli.html}Command Line Interface}}.
 
     Please note that ClozeGen is as of now not a complete collection
     for the generation of cloze tests because it does not yet

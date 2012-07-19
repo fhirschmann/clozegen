@@ -20,8 +20,8 @@ git clone https://github.com/fhirschmann/clozegen.git
 ---
 
     and import it as maven project in your development environment.
-    Besides the parent project, you should now have three
-    additional (child) projects:
+    Besides the parent project, you should now have at least
+    four additional (child) projects:
     
     * build tools
     
@@ -44,7 +44,7 @@ git clone https://github.com/fhirschmann/clozegen.git
 
 * Packaging
 
-    ClozeGen has the <<<maven-assembly-plugin>>> set up
+    ClozeGen has the <<<maven-shade-plugin>>> set up
     such that you can create single-file jars ready
     for deployment. Pick your desired user interface
     and build a jar with dependencies:
@@ -55,5 +55,6 @@ mvn package
 ---
 
     After executing the commands above, you'll end up with
-    a jar in <<<cli/target/clozegen-cli-1.0-SNAPSHOT--with-dependencies.jar>>>
-    (depending on the user interface you picked).
+    a jar in <<<cli/target/clozegen-cli-1.0-SNAPSHOT-with-dependencies.jar>>>
+    (depending on the user interface you picked) which you can
+    start with <<<java -jar>>>.

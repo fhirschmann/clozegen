@@ -5,6 +5,24 @@ Tutorial
     below can be found in the <<<lib.examples>>> directory of the
     ClozeGen distribution.
 
+    Albeit not strictly neccessary, knowledge of the
+    {{{./overview.html}architecture}} of ClozeGen might help.
+
+* The big picture
+
+[./images/arch2.png]   
+
+    The figure above visualizes the interplay of the components
+    we are going to develop now.
+
+    The development process is made up of three basic steps:
+
+    * Writing a generator
+
+    * Writing a constraint
+
+    * Wiring it up
+
 * Writing a generator
 
 ** Background
@@ -58,7 +76,7 @@ Tutorial
     Please note that an adapter needs to be a descendant of
     UIMA's <<<Resource_ImplBase>>>.
     
-* Writing constraints
+* Writing a constraint
 
 ** Background
 
@@ -154,3 +172,7 @@ Tutorial
     As you can see, the article in the sentence
     was annotated with a 
     {{{./apidocs/com/github/fhirschmann/clozegen/lib/type/GapAnnotation.html}GapAnnotation}}.
+
+    If you'd like to integrate you gap generation
+    algorithm into the ClozeGen interfaces, you
+    need to {{{./plugins.html}register with the annotator register}}.

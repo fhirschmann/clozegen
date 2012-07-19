@@ -4,14 +4,14 @@ Command Line Interface Manual
     users. You can start it by invoking
 
 ---
-java -jar clozegen-gui-1.0-SNAPSHOT-jar-with-dependencies.jar
+java -jar clozegen-gui-1.0-SNAPSHOT-with-dependencies.jar
 ---
 
     However, I suggest creating a script or an alias in order to
     bypass typing the java invocation each time you use ClozeGen.
 
 ---
-alias clozegen='java -jar /path/to/clozegen-cli-1.0-SNAPSHOT-jar-with-dependencies.jar'
+alias clozegen='java -jar /path/to/clozegen-cli-1.0-SNAPSHOT-with-dependencies.jar'
 ---
 
     In the next section, I'll assume you have done so. Let's first get an overview
@@ -28,6 +28,8 @@ usage: clozegen [options] INPUT OUTPUT
     --list-input-methods    list all available input methods
     --list-output-methods   list all available output methods
 ---
+
+    Most options are self-explanatory:
 
     * <<debug>>
     enables the debug mode, which basically means setting
@@ -62,6 +64,8 @@ clozegen --generators preps test.txt test.clz
 He can't think {of}{of,in,for,about} anything.
 ---
 
+%{include|type=warning|message-box=If you end up with no gaps, make sure you have enabled a generator and have set the correct language for your input text.}
+
     As you can see, there are now 4 answer options for the
     preposition gap. You may also want to generate a plain-text
     cloze test once you have finished your editing:
@@ -82,3 +86,4 @@ He can't think _____[in, about, of, for] anything.
 ---
 clozegen --generators preps test.txt out.txt
 ---
+
