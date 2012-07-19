@@ -1,7 +1,7 @@
 Architecture
 ============
 
-The following pictures shows the architectural overview
+The following picture shows the architectural overview
 of ClozeGen:
 
 ![Architecutre](images/arch.png "Architectural Overview")

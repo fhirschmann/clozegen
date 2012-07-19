@@ -1,0 +1,20 @@
+Miscellaneous
+
+    Below you'll find some points you might want to consider when
+    working with ClozeGen.
+
+    * DebugWriter
+
+    In order to display the results of a pipeline run, you can
+    use the
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/components/DebugWriter.html}DebugWriter}}.
+
+    * WrappingGapGenerator
+
+    If you already have some kind of algorithm for gap generation and
+    do not wish to use to modify it in order to work with ClozeGen,
+    you can use
+    {{{,/apidocs/com/github/fhirschmann/clozegen/lib/generators/WrappingGapGenerator.html}WrappingGapGenerator}}
+    and simply pass it a
+    {{{./apidocs/com/github/fhirschmann/clozegen/lib/generators/api/Gap.html}Gap}}
+    upon instantiation
