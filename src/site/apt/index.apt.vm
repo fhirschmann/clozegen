@@ -5,7 +5,8 @@ About ClozeGen
     from based upon 
     {{{http://code.google.com/p/dkpro-core-asl/}DKPro}},
     {{{http://code.google.com/p/uimafit/}UIMAfit}}
-    and {{{http://uima.apache.org}UIMA}}. Cloze tests or
+    and {{{http://uima.apache.org}UIMA}} licenses under the terms
+    of the MIT license. Cloze tests or
     fill-in-the-gap tests are multiple choice tests consisting
     of text with certain words removed. For example,
 
