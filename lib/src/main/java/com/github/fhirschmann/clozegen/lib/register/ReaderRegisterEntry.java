@@ -173,6 +173,8 @@ public class ReaderRegisterEntry implements RegisterEntry {
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);
+        str.add("identifier", identifier);
+        str.add("name", name);
         str.add("class", getReaderClass().getName());
         return str.toString();
     }

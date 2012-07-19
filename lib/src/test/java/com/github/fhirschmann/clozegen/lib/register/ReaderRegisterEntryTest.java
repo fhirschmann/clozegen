@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * The MIT License
+ *
+ * Copyright 2012 Fabian Hirschmann <fabian@hirschm.net>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,51 +23,46 @@
  */
 package com.github.fhirschmann.clozegen.lib.register;
 
+import com.github.fhirschmann.clozegen.lib.reader.IntermediateFormatReader;
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import org.junit.AfterClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
-
 import org.junit.Before;
-import org.junit.Test;
-
-import com.github.fhirschmann.clozegen.lib.components.GapAnnotator;
+import org.junit.BeforeClass;
 
 /**
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
-public class DescriptionRegisterEntryTest {
-    private DescriptionRegisterEntry e1;
-    private DescriptionRegisterEntry e2;
-    private DescriptionRegisterEntry e3;
+public class ReaderRegisterEntryTest {
+    private ReaderRegisterEntry entry;
 
     @Before
     public void setUp() {
-        e1 = new DescriptionRegisterEntry("foo", GapAnnotator.class);
-        e2 = new DescriptionRegisterEntry("bar", GapAnnotator.class);
-        e3 = new DescriptionRegisterEntry("foo", GapAnnotator.class);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetIdentifier() {
-        new DescriptionRegisterEntry("foo bar", GapAnnotator.class);
+        entry = new ReaderRegisterEntry("txt", TextReader.class);
+        entry.setName("name");
     }
 
     @Test
-    public void testHashCode() {
-        assertThat(e1.hashCode(), is(not(e2.hashCode())));
-        assertThat(e1.hashCode(), is(e3.hashCode()));
+    public void testGetName() {
+        assertThat(entry.getName(), is("name"));
     }
 
     @Test
-    public void testEquals() {
-        assertThat(e1, is(not(e2)));
-        assertThat(e1, is(e3));
+    public void testSetReaderClass() {
+        entry.setReaderClass(IntermediateFormatReader.class);
+        assertThat(entry.getReaderClass().getName(),
+              is("com.github.fhirschmann.clozegen.lib.reader.IntermediateFormatReader"));
     }
 
     @Test
     public void testToString() {
-        assertThat(e1.toString(),
-                is("DescriptionRegisterEntry{identifier=foo, name=null}"));
+        System.out.println(entry.toString());
+        assertThat(entry.toString(), is("ReaderRegisterEntry{identifier=txt, name=name, "
+                + "class=de.tudarmstadt.ukp.dkpro.core.io.text.TextReader}"));
     }
 }

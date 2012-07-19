@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.fhirschmann.clozegen.lib.generators;
+package com.github.fhirschmann.clozegen.lib.generators.api;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

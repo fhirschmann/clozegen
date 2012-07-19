@@ -199,23 +199,6 @@ public class Gap {
         return gap;
     }
 
-    /**
-     * Convenience method for generating gaps.
-     *
-     * @param invalidAnswers set of invalid answers
-     * @param validAnswers set of valid answers
-     * @return a new gap based upon the parameters provided
-     */
-    public static Gap with(final Iterable<String> validAnswers,
-            final Iterable<String> invalidAnswers) {
-        Gap gap = new Gap();
-        Iterables.addAll(gap.getValidAnswers(), validAnswers);
-        Iterables.addAll(gap.getInvalidAnswers(), invalidAnswers);
-
-        return gap;
-    }
-
-
     @Override
     public String toString() {
         final ToStringHelper str = Objects.toStringHelper(this);

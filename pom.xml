@@ -38,13 +38,11 @@
     </scm>
 
     <build>
-
         <pluginManagement>
             <plugins>
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.0-beta-3</version>
-
                     <dependencies>
                         <dependency>
                             <groupId>org.tinyjee.dim</groupId>
@@ -54,7 +52,7 @@
                     </dependencies>
                 </plugin>
             </plugins>
-        </pluginManagement> 
+        </pluginManagement>
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
@@ -128,7 +126,7 @@
                             <exclude>**/type/*.class</exclude>
                             <exclude>**/gui/**/*.class</exclude>
                             <exclude>**/cli/**/Main.class</exclude>
-                            <exclude>**/examples/NGramWriterExample.class</exclude>
+                            <exclude>**/examples/*.class</exclude>
                             <exclude>**/Test.class</exclude>
                             <exclude>**/plugins/**</exclude>
                         </excludes>
