@@ -10,20 +10,32 @@
     </skin>
     <body>
         <menu ref="parent" inherit="top" />
-        <menu name="User Manual">
-            <item name="Intermediate Format" href="im.html"/>
-            <item name="Command Line Interface" href="cli.html"/>
-            <item name="Graphical User Interface" href="gui.html"/>
-            <item name="LaTeX" href="latex.html"/>
+
+        <menu name="ClozeGen">
+            <item name="Home" href="index.html"/>
+            <item name="Github" href="http://github.com/fhirschmann/clozegen"/>
         </menu>
-        <menu name="Developer Manual">
-            <item name="Overview" href="overview.html"/>
-            <item name="Build Process" href="build.html"/>
-            <item name="Tutorial" href="tutorial.html"/>
-            <item name="Writing n-grams" href="ngram.html"/>
-            <item name="Plugins" href="plugins.html"/>
-            <item name="Miscellaneous" href="misc.html"/>
+
+        <menu name="Manual">
+            <item name="Glossary" href="glossary.html"/>
+
+            <item name="User Manual" href="#">
+                <item name="Intermediate Format" href="im.html"/>
+                <item name="Command Line Interface" href="cli.html"/>
+                <item name="Graphical User Interface" href="gui.html"/>
+                <item name="LaTeX" href="latex.html"/>
+            </item>
+
+            <item name="Developer Manual" href="#">
+                <item name="Overview" href="overview.html"/>
+                <item name="Build Process" href="build.html"/>
+                <item name="Tutorial" href="tutorial.html"/>
+                <item name="Writing n-grams" href="ngram.html"/>
+                <item name="Plugins" href="plugins.html"/>
+                <item name="Miscellaneous" href="misc.html"/>
+            </item>
         </menu>
+
         <menu ref="reports" inherit="bottom" />
         <!-- <menu ref="modules" /> -->
     </body>

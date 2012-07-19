@@ -1,3 +1,7 @@
+    ---
+    Home
+    ---
+
 About ClozeGen
 
     ClozeGen is a toolkit for the generation of language-independent
@@ -5,10 +9,10 @@ About ClozeGen
     from based upon 
     {{{http://code.google.com/p/dkpro-core-asl/}DKPro}},
     {{{http://code.google.com/p/uimafit/}UIMAfit}}
-    and {{{http://uima.apache.org}UIMA}} licenses under the terms
+    and {{{http://uima.apache.org}UIMA}} licensed under the terms
     of the MIT license. Cloze tests or
     fill-in-the-gap tests are multiple choice tests consisting
-    of text with certain words removed. For example,
+    of a portion of text with certain words removed. For example,
 
 ---
 I can' think ____[on, of, about, in] anything.
@@ -16,7 +20,7 @@ I can' think ____[on, of, about, in] anything.
 
     is a cloze test item with four answer choices.
 
-* Targeted audience
+* Target audience
 
     Its targeted audience is twofold: Developers will find
     a simple yet powerful platform to develop, test and deploy
@@ -30,6 +34,41 @@ I can' think ____[on, of, about, in] anything.
     for the generation of cloze tests because it does not yet
     ship with a variety of gap generation algorithms. Right now,
     it can only generate gaps for prepositions.
+
+* Features
+
+    Below you can find an incomplete list of features
+    provided by ClozeGen.
+
+** Developer Perspective
+
+    * Flexible framework to {{{./tutorial.html}integrate}} gap generators into
+
+    * Constraint-based
+
+    * Simple yet powerful {{{./plugins.html}plugin system}}
+
+    * NGram extraction {{{./ngram.html}tool}}
+    
+    * Fully maveinzed
+
+** User Perspective
+
+    * Two user interfaces
+
+    * Use of an {{{./im.html}Intermediate Format}}
+
+    * Read from multiple formats (as of now: text, pdf, clz)
+
+    * Export to multiple formats (as of now: text, clz)
+
+* Quality Assurance
+
+    * Developed using
+    {{{http://checkstyle.sf.net}checkstyle}} in order to
+    guarantee strict obedience of conventions
+
+    * Over 90% {{{./cobertura.html}test coverage}}
 
 * Requirements
 

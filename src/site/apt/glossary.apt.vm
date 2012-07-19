@@ -1,0 +1,34 @@
+    ---
+    Glossary
+    ---
+
+Glossary
+
+
+*-------------------*---------------------------------------------------*
+| Adapter           | An adapter feeds a Generator with input data      |
+|                   | and calls its <<<generate(...)>>> method.         |
+*-------------------*---------------------------------------------------*
+| Annotation        | An annotation provides information for parts of   |
+|                   | a text (such as a word). In ClozeGen, this most   |
+|                   | likely refers to a GapAnnotation which annotates  |
+|                   | a word with valid and invalid answers.            |
+*-------------------*---------------------------------------------------*
+| Annotator         | An annotator creates (gap) annotations for parts  |
+|                   | of a text (such as a word).                       |
+*-------------------*---------------------------------------------------*
+| Constraint        | Matches part of a text (such as a word). In       |
+|                   | Clozegen, the matched part will be passed to an   |
+|                   | Adapter.
+*-------------------*---------------------------------------------------*
+| Generator         | A generator generates valid and invalid answers   |
+|                   | for the data it is fed via an adapter (such as    |
+|                   | a word).                                          |
+*-------------------*---------------------------------------------------*
+| Intermediate      | Please refer to {{{./im.html}the documentation}}. |
+| Format            |                                                   |
+*-------------------*---------------------------------------------------*
+| Register          | There are three registers in ClozeGen, all of     |
+|                   | which are described in the                        |
+|                   | {{{./plugins.html}plugin documentation}}.          |
+*-------------------*---------------------------------------------------*

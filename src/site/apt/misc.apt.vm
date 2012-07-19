@@ -1,3 +1,7 @@
+    ---
+    Miscellaneous
+    ---
+
 Miscellaneous
 
     Below you'll find some points you might want to consider when
@@ -17,4 +21,4 @@ Miscellaneous
     {{{./apidocs/com/github/fhirschmann/clozegen/lib/generators/WrappingGapGenerator.html}WrappingGapGenerator}}
     and simply pass it a
     {{{./apidocs/com/github/fhirschmann/clozegen/lib/generators/api/Gap.html}Gap}}
-    upon instantiation
+    upon instantiation.
