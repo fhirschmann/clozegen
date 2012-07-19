@@ -6,8 +6,19 @@
     <skin>
         <groupId>org.apache.maven.skins</groupId>
         <artifactId>maven-fluido-skin</artifactId>
-        <version>1.0</version>
+        <version>1.1</version>
     </skin>
+
+    <custom>
+        <fluidoSkin>
+            <gitHub>
+                <projectId>fhirschmann/clozegen</projectId>
+                <ribbonOrientation>right</ribbonOrientation>
+                <ribbonColor>gray</ribbonColor>
+            </gitHub>
+        </fluidoSkin>
+    </custom>
+
     <body>
         <menu ref="parent" inherit="top" />
 
@@ -21,8 +32,8 @@
 
             <item name="User Manual" href="#">
                 <item name="Intermediate Format" href="im.html"/>
-                <item name="Command Line Interface" href="cli.html"/>
-                <item name="Graphical User Interface" href="gui.html"/>
+                <item name="CLI" href="cli.html"/>
+                <item name="GUI" href="gui.html"/>
                 <item name="LaTeX" href="latex.html"/>
             </item>
 
@@ -38,5 +49,6 @@
 
         <menu ref="reports" inherit="bottom" />
         <!-- <menu ref="modules" /> -->
+
     </body>
 </project>
