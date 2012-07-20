@@ -68,7 +68,7 @@ I can' think ____[on, of, about, in] anything.
     {{{http://checkstyle.sf.net}checkstyle}} in order to
     guarantee strict obedience of conventions
 
-    * Over 90% {{{./cobertura.html}test coverage}}
+    * Over 90% {{{./cobertura/index.html}test coverage}}
 
 * Requirements
 
