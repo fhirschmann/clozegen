@@ -30,16 +30,15 @@
         <menu name="Manual">
             <item name="Glossary" href="glossary.html"/>
 
-            <item name="User Manual" href="#">
+            <item name="User Manual" href="user.html">
                 <item name="Intermediate Format" href="im.html"/>
                 <item name="CLI" href="cli.html"/>
                 <item name="GUI" href="gui.html"/>
                 <item name="LaTeX" href="latex.html"/>
             </item>
 
-            <item name="Developer Manual" href="#">
+            <item name="Developer Manual" href="dev.html">
                 <item name="Overview" href="overview.html"/>
-                <item name="Build Process" href="build.html"/>
                 <item name="Tutorial" href="tutorial.html"/>
                 <item name="Examples" href="./xref/com/github/fhirschmann/clozegen/lib/examples/package-summary.html"/>
                 <item name="Writing n-grams" href="ngram.html"/>

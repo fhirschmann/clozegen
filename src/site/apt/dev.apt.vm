@@ -1,8 +1,8 @@
     ---
-    Build Process
+    Developer Manual
     ---
 
-Build Process Description
+Developer Manual
 
     As you have probably guessed by now, Clozegen uses
     {{{http://maven.apache.org}maven}} for its infrastructure.
@@ -45,6 +45,16 @@ git clone https://github.com/fhirschmann/clozegen.git
     * clozegen-gui
     
     Similarily, this is the Graphical User Interface
+
+    []
+
+    In addition to the artifacts mentioned above, there may
+    be a number of plugins.
+
+* Quality Assurance
+
+    ClozeGen uses checkstyle. The checkstyle configuration can
+    be found in <<<./build-tools/src/main/resources/clozegen-build-tools/>>>.
 
 * Packaging
 

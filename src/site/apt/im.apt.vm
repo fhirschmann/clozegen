@@ -5,9 +5,10 @@
 Intermediate Format
     
     The intermediate is a plain-text representation of cloze
-    tests. Gaps are modelled as a set of two adjacent pairs of
-    curly brackets, where the first set contains the valid
-    answers and the second set contains the invalid answers.
+    tests (extension: .clz). Gaps are modelled as a set of
+    two adjacent pairs of curly brackets, where the first set
+    contains the valid answers and the second set contains the
+    invalid answers.
 
     The following pictures visualizes the <Intermediate Format>:
 

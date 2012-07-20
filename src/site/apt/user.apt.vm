@@ -1,0 +1,19 @@
+    ---
+    User Manual
+    ---
+
+User Manual
+
+    ClozeGen features two interfaces: The
+    {{{./gui.html}Graphical User Interface}} and
+    the {{{./cli.html}Command Line Interface}}.
+
+    You should pick the one you like and download it
+    from
+    {{{http://mvn.0x0b.de/com/github/fhirschmann/clozegen/}the maven repository}}.
+    Just navigate to <<<clozegen-gui/1.0-SNAPSHOT>>> or
+    <<<clozegen-cli/1.0-SNAPSHOT>>> and download newest file which ends with
+    <<<with-dependencies.jar>>>.
+
+    Please see the manual on the two user interface for further
+    instructions.
