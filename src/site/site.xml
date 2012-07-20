@@ -48,7 +48,6 @@
         </menu>
 
         <menu ref="reports" inherit="bottom" />
-        <menu ref="modules" />
-
+        <!-- <menu ref="modules" /> -->
     </body>
 </project>
