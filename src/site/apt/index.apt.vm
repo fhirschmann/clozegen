@@ -33,7 +33,8 @@ I can' think ____[on, of, about, in] anything.
     Please note that ClozeGen is as of now not a complete collection
     for the generation of cloze tests because it does not yet
     ship with a variety of gap generation algorithms. Right now,
-    it can only generate gaps for prepositions.
+    it can only generate gaps for prepositions with a model
+    based on the brown corpus.
 
 * Features
 
