@@ -52,6 +52,7 @@ public final class NGramWriterExample {
      *
      * <p>
      * Writes preposition unigrams.
+     * Please see the online documentation for more details.
      * </p>
      *
      * @return a description
@@ -76,6 +77,7 @@ public final class NGramWriterExample {
      *
      * <p>
      * Writes preposition trigrams which occur at least 3 times.
+     * Please see the online documentation for more details.
      * </p>
      *
      * @return a description
@@ -102,6 +104,7 @@ public final class NGramWriterExample {
      * <p>
      * Write n-grams consisting of articles and the word
      * preceeding the article which occur at least 3 times.
+     * Please see the online documentation for more details.
      * </p>
      *
      * @return a description

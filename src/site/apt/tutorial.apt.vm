@@ -7,7 +7,8 @@ Tutorial
     This tutorial will walk you through the integration of a new
     gap generator into the ClozeGen framework. All of the snippets
     below can be found in the <<<lib.examples>>> directory of the
-    ClozeGen distribution.
+    ClozeGen distribution or browsed 
+    {{{./xref/com/github/fhirschmann/clozegen/lib/examples/package-summary.html}online}}.
 
     Albeit not strictly neccessary, knowledge of the
     {{{./overview.html}architecture}} of ClozeGen might help.
@@ -180,3 +181,6 @@ Tutorial
     If you'd like to integrate you gap generation
     algorithm into the ClozeGen interfaces, you
     need to {{{./plugins.html}register with the annotator register}}.
+
+    You should also check out the
+    {{{./xref/com/github/fhirschmann/clozegen/lib/examples/package-summary.html}examples}}.

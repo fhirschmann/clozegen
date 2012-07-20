@@ -43,17 +43,20 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * This example shows different ways of using constraints.
  *
+ * <p> The output of this will be:
+ *
+ * </p>
+ *
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public final class ConstraintExample {
+
     /**
      * Example 1.
      *
-     * <p>
-     * This example demonstrates the usage of {@link TypeConstraintResource}. The argument
-     * given to {@link TypeConstraintResource} will result in {@link GapAnnotator} being
-     * constrained to articles.
-     * </p>
+     * <p> This example demonstrates the usage of {@link TypeConstraintResource}. The
+     * argument given to {@link TypeConstraintResource} will result in {@link GapAnnotator}
+     * being constrained to articles. </p>
      *
      * @return an analysis engine description
      * @throws ResourceInitializationException on errors during initialization
@@ -64,8 +67,8 @@ public final class ConstraintExample {
                 GapAnnotator.CONSTRAINT_KEY,
                 // START SNIPPET: constex1
                 createExternalResourceDescription(
-                    TypeConstraintResource.class,
-                    TypeConstraintResource.PARAM_TYPE, ART.class.getName()),
+                TypeConstraintResource.class,
+                TypeConstraintResource.PARAM_TYPE, ART.class.getName()),
                 // END SNIPPET: constex1
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(DummyAdapter.class));
@@ -75,10 +78,8 @@ public final class ConstraintExample {
     /**
      * Example 2.
      *
-     * <p>
-     * This example demonstrates the usage of a custom {@link ConstraintResource}
-     * which will restrict {@link GapAnnotator} to prepositions only
-     * </p>
+     * <p> This example demonstrates the usage of a custom {@link ConstraintResource}
+     * which will restrict {@link GapAnnotator} to prepositions only </p>
      *
      * @return an analysis engine description
      * @throws ResourceInitializationException on errors during initialization
@@ -96,10 +97,8 @@ public final class ConstraintExample {
     /**
      * Example 3.
      *
-     * <p>
-     * This example demonstrates the usage of {@link CoveredTextConstraintResource} by
-     * matching the word "studies" and "university" of the type {@link Token}.
-     * </p>
+     * <p> This example demonstrates the usage of {@link CoveredTextConstraintResource} by
+     * matching the word "studies" and "university" of the type {@link Token}. </p>
      *
      * @return an analysis engine description
      * @throws ResourceInitializationException on errors during initialization
@@ -110,9 +109,9 @@ public final class ConstraintExample {
                 GapAnnotator.CONSTRAINT_KEY,
                 // START SNIPPET: constex3
                 createExternalResourceDescription(
-                    CoveredTextConstraintResource.class,
-                    CoveredTextConstraintResource.PARAM_MATCH, "studies,university",
-                    TypeConstraintResource.PARAM_TYPE, Token.class.getName()),
+                CoveredTextConstraintResource.class,
+                CoveredTextConstraintResource.PARAM_MATCH, "studies,university",
+                TypeConstraintResource.PARAM_TYPE, Token.class.getName()),
                 // END SNIPPET: constex3
                 GapAnnotator.ADAPTER_KEY,
                 createExternalResourceDescription(DummyAdapter.class));
@@ -122,16 +121,65 @@ public final class ConstraintExample {
     /**
      * Runs all examples.
      *
+     * The output of this run will comprise of all constraint examples being visualized by
+     * the DebugWriter.
+     *
+     * <p> The output of this will be:
+     * <pre>
+     * [Sentence] (0,29) He studies at the university.
+     * [PR] (0,2) He [PRP]
+     * [Token] (0,2) He
+     * [NN] (3,10) studies [NNS]
+     * [GapAnnotation] (3,10) studies [studies][studies]
+     * [Token] (3,10) studies
+     * [PP] (11,13) at [IN]
+     * [GapAnnotation] (11,13) at [at][at]
+     * [Token] (11,13) at
+     * [GapAnnotation] (14,17) the [the][the]
+     * [Token] (14,17) the
+     * [ART] (14,17) the [DT]
+     * [NN] (18,28) university [NN]
+     * [GapAnnotation] (18,28) university [university][university]
+     * [Token] (18,28) university
+     * [PUNC] (28,29) . [.]
+     * [Token] (28,29) .
+     * [Sentence] (30,57) He can't think of anything.
+     * [PR] (30,32) He [PRP]
+     * [Token] (30,32) He
+     * [V] (33,38) can't [MD]
+     * [Token] (33,38) can't
+     * [V] (39,44) think [VB]
+     * [Token] (39,44) think
+     * [PP] (45,47) of [IN]
+     * [GapAnnotation] (45,47) of [of][of]
+     * [Token] (45,47) of
+     * [NN] (48,56) anything [NN]
+     * [Token] (48,56) anything
+     * [PUNC] (56,57) . [.]
+     * [Token] (56,57) .
+     * </pre>
+     * See the comments below to correlate the annotations.
+     * </p>
+     *
      * @param args unused
      * @throws Exception on errors
      */
     public static void main(final String[] args) throws Exception {
         Pipeline pipeline = PipelineFactory.createDefaultPipeline();
 
+        // The following line will result in the following annotations:
+        //   [GapAnnotation] (11,13) at [at][at]
+        //   [GapAnnotation] (14,17) the [the][the]
         pipeline.add(example1());
+
+        // The following line will result in the following annotation:
+        //   [GapAnnotation] (18,28) university [university][university]
         pipeline.add(example2());
+
+        // The following line will result in the following annotation:
+        //   [GapAnnotation] (45,47) of [of][of]
         pipeline.add(example3());
         pipeline.add(DebugWriter.class);
-        pipeline.run("He studies at the university.", "en");
+        pipeline.run("He studies at the university. He can't think of anything.", "en");
     }
 }

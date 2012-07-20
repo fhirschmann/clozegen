@@ -41,6 +41,7 @@
                 <item name="Overview" href="overview.html"/>
                 <item name="Build Process" href="build.html"/>
                 <item name="Tutorial" href="tutorial.html"/>
+                <item name="Examples" href="./xref/com/github/fhirschmann/clozegen/lib/examples/package-summary.html"/>
                 <item name="Writing n-grams" href="ngram.html"/>
                 <item name="Plugins" href="plugins.html"/>
                 <item name="Miscellaneous" href="misc.html"/>
