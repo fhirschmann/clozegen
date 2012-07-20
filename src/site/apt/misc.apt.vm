@@ -16,7 +16,7 @@ Miscellaneous
     * WrappingGapGenerator
 
     If you already have some kind of algorithm for gap generation and
-    do not wish to use to modify it in order to work with ClozeGen,
+    do not wish to modify it in order to work with ClozeGen,
     you can use
     {{{./apidocs/com/github/fhirschmann/clozegen/lib/generators/WrappingGapGenerator.html}WrappingGapGenerator}}
     and simply pass it a
