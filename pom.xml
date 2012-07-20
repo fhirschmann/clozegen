@@ -32,6 +32,11 @@
         </developer>
     </developers>
 
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/fhirschmann/clozegen/issues</url>
+    </issueManagement>
+
     <scm>
         <url>https://github.com/fhirschmann/clozegen</url>
         <developerConnection>scm:git:git@github.com:fhirschmann/clozegen.git</developerConnection>
