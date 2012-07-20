@@ -1,0 +1,30 @@
+    ---
+    Architectural Overview
+    ---
+
+Architectural Overview
+
+    The following picture shows the architectural overview
+    of ClozeGen:
+
+[./images/arch.png]
+
+    Steps in the process:
+
+    [[1]] Read an input `text` (from plain text, pdf)
+
+    [[2]] Translate `text` into the internal representation ([UIMA](http://uima.apache.org))
+
+    [[3]] Activate one or more Gap Annotators
+
+    [[4]] Translate the internal representation into the Intermediate Format (let the user adjust the result)
+
+    [[5]] Reverse the last step
+
+    [[6]] Export to plain-text or LaTeX
+
+    []
+
+    When developing new gap generators, you'll only have to worry
+    about the <Gap Annotation> step, which is
+    {{{./tutorial.html}explained in the tutorial}}.
