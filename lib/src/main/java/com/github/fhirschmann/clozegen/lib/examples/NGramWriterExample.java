@@ -33,6 +33,7 @@ import com.github.fhirschmann.clozegen.lib.components.NGramWriter;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.ArticleConstraintResource;
 import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionConstraintResource;
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
+import com.google.common.io.Resources;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
@@ -41,7 +42,7 @@ import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
  * This example demonstrates the usage of {@link NGramWriter}.
  *
  * <p>
- * The brown_tei corpus is expected in $DKPRO_HOME.
+ * A subset of the brown corpus will be used.
  * </p>
  *
  * @author Fabian Hirschmann <fabian@hirschm.net>
@@ -136,7 +137,7 @@ public final class NGramWriterExample {
         CollectionReader cr = CollectionReaderFactory.createCollectionReader(
                 BrownCorpusReader.class,
                 BrownCorpusReader.PARAM_PATH,
-                DKProContext.getContext().getWorkspace("brown_tei_small").getAbsolutePath(),
+                Resources.getResource("brown_tei_test"),
                 BrownCorpusReader.PARAM_PATTERNS, new String[] {"[+]*.xml"});
         Pipeline pipeline = new Pipeline();
         pipeline.add(example1());
