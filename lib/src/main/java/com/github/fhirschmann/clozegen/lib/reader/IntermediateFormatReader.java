@@ -54,20 +54,8 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public class IntermediateFormatReader extends TextReader {
-
-    /**
-     * Automatically detect encoding.
-     *
-     * @see CharsetDetector
-     */
-    public static final String ENCODING_AUTO = "auto";
-    /**
-     * Name of configuration parameter that contains the character encoding used by the
-     * input files.
-     */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
     @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true,
-    defaultValue = "UTF-8")
+            defaultValue = "UTF-8")
     private String encoding;
 
     @Override

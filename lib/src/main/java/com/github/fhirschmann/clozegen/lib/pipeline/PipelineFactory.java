@@ -35,12 +35,14 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public final class PipelineFactory {
-    /** Utility class. */
+    /**
+     * Utility class.
+     */
     private PipelineFactory() {
     }
 
     /**
-     * Creates a pipeline utilizing Stanford Segmenter and Tree Tagger.
+     * Creates a pipeline utilizing a Segmenter and POS-Tagger.
      *
      * @return a new default pipeline
      * @throws ResourceInitializationException on errors on initialization
@@ -51,7 +53,6 @@ public final class PipelineFactory {
         final AnalysisEngine segmenter = createPrimitive(BreakIteratorSegmenter.class);
         pipeline.add(segmenter);
 
-        //final AnalysisEngine tagger = createPrimitive(TreeTaggerPosLemmaTT4J.class);
         AnalysisEngine tagger = createPrimitive(OpenNlpPosTagger.class);
         pipeline.add(tagger);
 

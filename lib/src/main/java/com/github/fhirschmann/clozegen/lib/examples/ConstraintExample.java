@@ -50,13 +50,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @author Fabian Hirschmann <fabian@hirschm.net>
  */
 public final class ConstraintExample {
-
     /**
      * Example 1.
      *
      * <p> This example demonstrates the usage of {@link TypeConstraintResource}. The
-     * argument given to {@link TypeConstraintResource} will result in {@link GapAnnotator}
-     * being constrained to articles. </p>
+     * argument given to {@link TypeConstraintResource} will result in
+     * {@link GapAnnotator} being constrained to articles. </p>
      *
      * @return an analysis engine description
      * @throws ResourceInitializationException on errors during initialization

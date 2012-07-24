@@ -35,7 +35,6 @@ import com.github.fhirschmann.clozegen.lib.constraints.resources.PrepositionCons
 import com.github.fhirschmann.clozegen.lib.pipeline.Pipeline;
 import com.google.common.io.Resources;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpusReader;
 
 /**
@@ -57,7 +56,7 @@ public final class NGramWriterExample {
      * </p>
      *
      * @return a description
-     * @throws ResourceInitializationException
+     * @throws ResourceInitializationException on errors
      */
     public static AnalysisEngineDescription example1()
             throws ResourceInitializationException {
@@ -82,7 +81,7 @@ public final class NGramWriterExample {
      * </p>
      *
      * @return a description
-     * @throws ResourceInitializationException
+     * @throws ResourceInitializationException on errors
      */
     public static AnalysisEngineDescription example2()
             throws ResourceInitializationException {
@@ -109,7 +108,7 @@ public final class NGramWriterExample {
      * </p>
      *
      * @return a description
-     * @throws ResourceInitializationException
+     * @throws ResourceInitializationException on errors
      */
     public static AnalysisEngineDescription example3()
             throws ResourceInitializationException {
@@ -133,7 +132,7 @@ public final class NGramWriterExample {
      * @param args unused
      * @throws Exception on errors
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(final String[] args) throws Exception {
         CollectionReader cr = CollectionReaderFactory.createCollectionReader(
                 BrownCorpusReader.class,
                 BrownCorpusReader.PARAM_PATH,
