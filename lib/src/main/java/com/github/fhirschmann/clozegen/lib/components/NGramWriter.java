@@ -59,7 +59,7 @@ public class NGramWriter extends ConstraintBasedConsumer {
     /**
      * <em>[mandatory]</em>
      *
-     * The file to which the collocation n-grams will be written to.
+     * The file to which the n-grams will be written to.
      */
     public static final String PARAM_OUTPUT_PATH = "OutputPath";
     @ConfigurationParameter(name = PARAM_OUTPUT_PATH, mandatory = true)
@@ -71,7 +71,7 @@ public class NGramWriter extends ConstraintBasedConsumer {
      * This setting indicates if we are working on POS-Tags.
      *
      * <p>
-     * When this is set to true, collocations will be based on the text
+     * When this is set to true, n-grams will be based on the text
      * covered by POS tags. You should only need to set this to false
      * if you want to work on a non-POS-tagged text, in which case
      * we will only work on tokens. This will normally be done in
