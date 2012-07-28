@@ -29,6 +29,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * A simple multiset-based model. The frequencies will be loaded from a file.
@@ -70,7 +71,7 @@ public class MultisetModel implements URLBasedModel {
      * @param multiset the multiset to set
      */
     public void setMultiset(final Multiset<String> multiset) {
-        this.multiset = multiset;
+        this.multiset = checkNotNull(multiset);
     }
 
     @Override
