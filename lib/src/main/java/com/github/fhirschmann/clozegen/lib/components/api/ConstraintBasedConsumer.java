@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschmann.email>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ import com.github.fhirschmann.clozegen.lib.util.UIMAUtils;
  * is the same as {@link ConstraintBasedAnnotator}.
  * </p>
  *
- * @author Fabian Hirschmann <fabian@hirschm.net>
+ * @author Fabian Hirschmann <fabian@hirschmann.email>
  */
 public abstract class ConstraintBasedConsumer extends JCasConsumer_ImplBase implements
         ConstraintProvider, GapProcessor {

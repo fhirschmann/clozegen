@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschmann.email>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
  * This adapter is backed by {@link CollocationGapGenerator} and injects
  * a {@link CollocationModel} from {@link URLBasedModelAdapter#PARAM_PATH}.
  *
- * @author Fabian Hirschmann <fabian@hirschm.net>
+ * @author Fabian Hirschmann <fabian@hirschmann.email>
  */
 public class CollocationAdapter
         extends URLBasedModelAdapter<CollocationModel> implements GeneratorAdapter {

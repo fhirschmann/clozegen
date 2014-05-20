@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschmann.email>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 /**
  * This class provides singleton instances of the available Registers.
  *
- * @author Fabian Hirschmann <fabian@hirschm.net>
+ * @author Fabian Hirschmann <fabian@hirschmann.email>
  */
 public final class Registers {
     private static AnnotatorRegister annotator;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschmann.email>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Please note that the frequency file needs to be sorted already!
  * </p>
  *
- * @author Fabian Hirschmann <fabian@hirschm.net>
+ * @author Fabian Hirschmann <fabian@hirschmann.email>
  */
 public class MultisetModel implements URLBasedModel {
     /**

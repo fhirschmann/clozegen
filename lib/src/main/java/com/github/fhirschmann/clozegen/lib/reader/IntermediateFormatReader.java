@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschm.net>
+ * Copyright (c) 2012 Fabian Hirschmann <fabian@hirschmann.email>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
  *
  * <p> This is basically a copy of {@link TextReader} with one minor adjustment.
  *
- * @author Fabian Hirschmann <fabian@hirschm.net>
+ * @author Fabian Hirschmann <fabian@hirschmann.email>
  */
 public class IntermediateFormatReader extends TextReader {
     @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true,
